@@ -1,0 +1,1742 @@
+[
+ {
+  "momento": "2026-07-19T02:09:16Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "windows",
+   "por": "accion"
+  },
+  "n": 2064,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "autentico-local",
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-proceso",
+   "fallo-autenticacion"
+  ],
+  "desde": "2026-03-02T06:23:00Z",
+  "hasta": "2026-03-11T23:56:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:17Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "cloudtrail",
+   "por": "sujeto"
+  },
+  "n": 3008,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T00:03:00Z",
+  "hasta": "2026-03-11T23:43:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:18Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "syslog",
+   "por": "accion"
+  },
+  "n": 1317,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-comando",
+   "fallo-autenticacion",
+   "fallo-usuario-inexistente"
+  ],
+  "desde": "2026-03-02T00:47:39Z",
+  "hasta": "2026-03-11T23:22:56Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:20Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "windows",
+   "por": "sujeto"
+  },
+  "n": 2064,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "autentico-local",
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-proceso",
+   "fallo-autenticacion"
+  ],
+  "desde": "2026-03-02T06:23:00Z",
+  "hasta": "2026-03-11T23:56:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:20Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "cloudtrail",
+   "por": "objeto"
+  },
+  "n": 3008,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T00:03:00Z",
+  "hasta": "2026-03-11T23:43:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:21Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "syslog",
+   "por": "sujeto"
+  },
+  "n": 1317,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-comando",
+   "fallo-autenticacion",
+   "fallo-usuario-inexistente"
+  ],
+  "desde": "2026-03-02T00:47:39Z",
+  "hasta": "2026-03-11T23:22:56Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:32Z",
+  "comando": "timeline",
+  "filtros": {
+   "fuente": "windows",
+   "accion": "autentico-remoto"
+  },
+  "n": 1,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "autentico-remoto"
+  ],
+  "desde": "2026-03-07T04:12:00Z",
+  "hasta": "2026-03-07T04:12:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:32Z",
+  "comando": "contar",
+  "filtros": {
+   "sujeto": "AKIA3TBWMZ8FLQDNRV6H",
+   "por": "objeto"
+  },
+  "n": 62,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T13:03:12Z",
+  "hasta": "2026-03-11T13:46:48Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:33Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "syslog",
+   "accion": "fallo-autenticacion",
+   "por": "sujeto"
+  },
+  "n": 65,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "fallo-autenticacion"
+  ],
+  "desde": "2026-03-02T02:35:15Z",
+  "hasta": "2026-03-11T21:57:04Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:33Z",
+  "comando": "contar",
+  "filtros": {
+   "sujeto": "AKIA3TBWMZ8FLQDNRV6H",
+   "por": "ip"
+  },
+  "n": 62,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T13:03:12Z",
+  "hasta": "2026-03-11T13:46:48Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:37Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "windows",
+   "accion": "fallo-autenticacion",
+   "por": "sujeto"
+  },
+  "n": 660,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "fallo-autenticacion"
+  ],
+  "desde": "2026-03-02T06:23:00Z",
+  "hasta": "2026-03-11T23:56:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:37Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "syslog",
+   "accion": "fallo-usuario-inexistente",
+   "por": "sujeto"
+  },
+  "n": 1216,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "fallo-usuario-inexistente"
+  ],
+  "desde": "2026-03-02T00:47:39Z",
+  "hasta": "2026-03-11T23:22:56Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:38Z",
+  "comando": "contar",
+  "filtros": {
+   "sujeto": "AKIA9KLMXP2HTVCJWD5N",
+   "por": "objeto"
+  },
+  "n": 31,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T03:10:00Z",
+  "hasta": "2026-03-07T15:41:32Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:38Z",
+  "comando": "contar",
+  "filtros": {
+   "sujeto": "AKIA9KLMXP2HTVCJWD5N",
+   "por": "ip"
+  },
+  "n": 31,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T03:10:00Z",
+  "hasta": "2026-03-07T15:41:32Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:40Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "windows",
+   "accion": "fallo-autenticacion",
+   "por": "dia"
+  },
+  "n": 660,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "fallo-autenticacion"
+  ],
+  "desde": "2026-03-02T06:23:00Z",
+  "hasta": "2026-03-11T23:56:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:40Z",
+  "comando": "contar",
+  "filtros": {
+   "sujeto": "AKIA7QYCVN4RBUXWK3PD",
+   "por": "ip"
+  },
+  "n": 2915,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T00:03:00Z",
+  "hasta": "2026-03-11T23:43:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:40Z",
+  "comando": "contar",
+  "filtros": {
+   "sujeto": "AKIA7QYCVN4RBUXWK3PD",
+   "por": "region"
+  },
+  "n": 2915,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T00:03:00Z",
+  "hasta": "2026-03-11T23:43:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:46Z",
+  "comando": "timeline",
+  "filtros": {
+   "fuente": "syslog",
+   "accion": "autentico-remoto"
+  },
+  "n": 8,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto"
+  ],
+  "desde": "2026-03-02T12:00:00Z",
+  "hasta": "2026-03-11T14:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:52Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "W1101"
+  },
+  "n": 1,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "autentico-remoto"
+  ],
+  "desde": "2026-03-07T04:12:00Z",
+  "hasta": "2026-03-07T04:12:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:52Z",
+  "comando": "timeline",
+  "filtros": {
+   "fuente": "syslog",
+   "sujeto": "web-03:ubuntu"
+  },
+  "n": 5,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-comando"
+  ],
+  "desde": "2026-03-05T02:40:00Z",
+  "hasta": "2026-03-05T03:18:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:56Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "windows",
+   "sujeto": "WKS-04\\svc_backup",
+   "por": "accion"
+  },
+  "n": 666,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-proceso",
+   "fallo-autenticacion"
+  ],
+  "desde": "2026-03-02T06:23:00Z",
+  "hasta": "2026-03-11T23:56:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:57Z",
+  "comando": "timeline",
+  "filtros": {
+   "fuente": "cloudtrail",
+   "sujeto": "AKIA7QYCVN4RBUXWK3PD",
+   "ip": "10.20.4.37"
+  },
+  "n": 12,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-07T08:00:00Z",
+  "hasta": "2026-03-10T13:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:58Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "windows",
+   "sujeto": "WKS-04\\svc_backup",
+   "por": "hora"
+  },
+  "n": 666,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-proceso",
+   "fallo-autenticacion"
+  ],
+  "desde": "2026-03-02T06:23:00Z",
+  "hasta": "2026-03-11T23:56:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:09:59Z",
+  "comando": "entidad",
+  "filtros": {
+   "indicador": "190.210.8.92"
+  },
+  "n": 116,
+  "fuentes": [
+   "cloudtrail",
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "fallo-autenticacion",
+   "fallo-usuario-inexistente",
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T06:32:18Z",
+  "hasta": "2026-03-11T03:56:55Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:00Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L0358"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto"
+  ],
+  "desde": "2026-03-05T02:40:00Z",
+  "hasta": "2026-03-05T02:40:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:01Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L1053"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto"
+  ],
+  "desde": "2026-03-10T03:25:00Z",
+  "hasta": "2026-03-10T03:25:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:02Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L0060"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto"
+  ],
+  "desde": "2026-03-02T12:00:00Z",
+  "hasta": "2026-03-02T12:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:02Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L1116"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto"
+  ],
+  "desde": "2026-03-10T18:00:00Z",
+  "hasta": "2026-03-10T18:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:06Z",
+  "comando": "timeline",
+  "filtros": {
+   "fuente": "windows",
+   "accion": "ejecuto-proceso",
+   "sujeto": "WKS-04\\svc_backup"
+  },
+  "n": 4,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "ejecuto-proceso"
+  ],
+  "desde": "2026-03-07T04:13:51Z",
+  "hasta": "2026-03-07T04:19:27Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:08Z",
+  "comando": "entidad",
+  "filtros": {
+   "indicador": "10.20.4.37"
+  },
+  "n": 18,
+  "fuentes": [
+   "cloudtrail",
+   "syslog",
+   "windows"
+  ],
+  "acciones": [
+   "autentico-local",
+   "autentico-remoto",
+   "cerro-sesion",
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T11:36:16Z",
+  "hasta": "2026-03-10T13:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:09Z",
+  "comando": "timeline",
+  "filtros": {
+   "fuente": "windows",
+   "accion": "cerro-sesion",
+   "sujeto": "WKS-04\\svc_backup"
+  },
+  "n": 1,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "cerro-sesion"
+  ],
+  "desde": "2026-03-07T04:28:27Z",
+  "hasta": "2026-03-07T04:28:27Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:13Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L0320"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto"
+  ],
+  "desde": "2026-03-04T14:00:00Z",
+  "hasta": "2026-03-04T14:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:13Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L0586"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto"
+  ],
+  "desde": "2026-03-06T11:00:00Z",
+  "hasta": "2026-03-06T11:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:13Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L0972"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto"
+  ],
+  "desde": "2026-03-09T12:00:00Z",
+  "hasta": "2026-03-09T12:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:14Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L1253"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto"
+  ],
+  "desde": "2026-03-11T14:00:00Z",
+  "hasta": "2026-03-11T14:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:15Z",
+  "comando": "entidad",
+  "filtros": {
+   "indicador": "190.210.8.92"
+  },
+  "n": 116,
+  "fuentes": [
+   "cloudtrail",
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "fallo-autenticacion",
+   "fallo-usuario-inexistente",
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T06:32:18Z",
+  "hasta": "2026-03-11T03:56:55Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:16Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "C0995"
+  },
+  "n": 1,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T03:10:00Z",
+  "hasta": "2026-03-05T03:10:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:16Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "C0996"
+  },
+  "n": 1,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T03:12:00Z",
+  "hasta": "2026-03-05T03:12:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:16Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "C0997"
+  },
+  "n": 1,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T03:16:00Z",
+  "hasta": "2026-03-05T03:16:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:18Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "C1561"
+  },
+  "n": 1,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-07T08:00:00Z",
+  "hasta": "2026-03-07T08:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:18Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "C2472"
+  },
+  "n": 1,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-10T06:00:00Z",
+  "hasta": "2026-03-10T06:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:19Z",
+  "comando": "contar",
+  "filtros": {
+   "sujeto": "AKIA7QYCVN4RBUXWK3PD",
+   "ip": "10.20.4.37",
+   "por": "region"
+  },
+  "n": 12,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-07T08:00:00Z",
+  "hasta": "2026-03-10T13:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:26Z",
+  "comando": "contar",
+  "filtros": {
+   "sujeto": "AKIA3TBWMZ8FLQDNRV6H",
+   "por": "hora"
+  },
+  "n": 62,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T13:03:12Z",
+  "hasta": "2026-03-11T13:46:48Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:26Z",
+  "comando": "contar",
+  "filtros": {
+   "sujeto": "AKIA3TBWMZ8FLQDNRV6H",
+   "por": "dia"
+  },
+  "n": 62,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T13:03:12Z",
+  "hasta": "2026-03-11T13:46:48Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:27Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "windows",
+   "accion": "ejecuto-proceso",
+   "por": "objeto"
+  },
+  "n": 1302,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "ejecuto-proceso"
+  ],
+  "desde": "2026-03-02T09:40:33Z",
+  "hasta": "2026-03-11T13:38:57Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:39Z",
+  "comando": "entidad",
+  "filtros": {
+   "indicador": "WKS-04\\avarela"
+  },
+  "n": 197,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "autentico-local",
+   "cerro-sesion",
+   "ejecuto-proceso"
+  ],
+  "desde": "2026-03-02T09:43:49Z",
+  "hasta": "2026-03-11T18:52:52Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:40Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "syslog",
+   "por": "ip"
+  },
+  "n": 1317,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-comando",
+   "fallo-autenticacion",
+   "fallo-usuario-inexistente"
+  ],
+  "desde": "2026-03-02T00:47:39Z",
+  "hasta": "2026-03-11T23:22:56Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:41Z",
+  "comando": "base",
+  "filtros": {
+   "desde": "2026-03-02T00:00:00Z",
+   "hasta": "2026-03-07T00:00:00Z"
+  },
+  "n": 3194,
+  "fuentes": [
+   "cloudtrail",
+   "syslog",
+   "windows"
+  ],
+  "acciones": [
+   "autentico-local",
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-comando",
+   "ejecuto-proceso",
+   "fallo-autenticacion",
+   "fallo-usuario-inexistente",
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T00:03:00Z",
+  "hasta": "2026-03-07T00:02:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:42Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L0359"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "ejecuto-comando"
+  ],
+  "desde": "2026-03-05T02:44:00Z",
+  "hasta": "2026-03-05T02:44:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:42Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L0360"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "ejecuto-comando"
+  ],
+  "desde": "2026-03-05T02:51:00Z",
+  "hasta": "2026-03-05T02:51:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:43Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L0361"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "ejecuto-comando"
+  ],
+  "desde": "2026-03-05T02:58:00Z",
+  "hasta": "2026-03-05T02:58:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:43Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L0362"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "cerro-sesion"
+  ],
+  "desde": "2026-03-05T03:18:00Z",
+  "hasta": "2026-03-05T03:18:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:44Z",
+  "comando": "entidad",
+  "filtros": {
+   "indicador": "10.20.4.37"
+  },
+  "n": 18,
+  "fuentes": [
+   "cloudtrail",
+   "syslog",
+   "windows"
+  ],
+  "acciones": [
+   "autentico-local",
+   "autentico-remoto",
+   "cerro-sesion",
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T11:36:16Z",
+  "hasta": "2026-03-10T13:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:51Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "windows",
+   "por": "ip"
+  },
+  "n": 2064,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "autentico-local",
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-proceso",
+   "fallo-autenticacion"
+  ],
+  "desde": "2026-03-02T06:23:00Z",
+  "hasta": "2026-03-11T23:56:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:53Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L0359"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "ejecuto-comando"
+  ],
+  "desde": "2026-03-05T02:44:00Z",
+  "hasta": "2026-03-05T02:44:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:53Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L0361"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "ejecuto-comando"
+  ],
+  "desde": "2026-03-05T02:58:00Z",
+  "hasta": "2026-03-05T02:58:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:54Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "windows",
+   "por": "logon_type"
+  },
+  "n": 2064,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "autentico-local",
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-proceso",
+   "fallo-autenticacion"
+  ],
+  "desde": "2026-03-02T06:23:00Z",
+  "hasta": "2026-03-11T23:56:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:55Z",
+  "comando": "timeline",
+  "filtros": {
+   "fuente": "syslog",
+   "accion": "ejecuto-comando"
+  },
+  "n": 20,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "ejecuto-comando"
+  ],
+  "desde": "2026-03-02T12:10:24Z",
+  "hasta": "2026-03-11T14:21:24Z"
+ },
+ {
+  "momento": "2026-07-19T02:10:55Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "W0900"
+  },
+  "n": 1,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "autentico-local"
+  ],
+  "desde": "2026-03-06T09:25:51Z",
+  "hasta": "2026-03-06T09:25:51Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:01Z",
+  "comando": "contar",
+  "filtros": {
+   "sujeto": "AKIA7QYCVN4RBUXWK3PD",
+   "hasta": "2026-03-07T00:00:00Z",
+   "por": "objeto"
+  },
+  "n": 1423,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T00:03:00Z",
+  "hasta": "2026-03-06T23:52:05Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:01Z",
+  "comando": "contar",
+  "filtros": {
+   "sujeto": "AKIA9KLMXP2HTVCJWD5N",
+   "hasta": "2026-03-05T00:00:00Z",
+   "por": "objeto"
+  },
+  "n": 0,
+  "fuentes": [],
+  "acciones": [],
+  "desde": null,
+  "hasta": null
+ },
+ {
+  "momento": "2026-07-19T02:11:05Z",
+  "comando": "contar",
+  "filtros": {
+   "sujeto": "AKIA7QYCVN4RBUXWK3PD",
+   "desde": "2026-03-07T00:00:00Z",
+   "por": "objeto"
+  },
+  "n": 1492,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-07T00:03:25Z",
+  "hasta": "2026-03-11T23:43:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:05Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "cloudtrail",
+   "por": "error"
+  },
+  "n": 3008,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T00:03:00Z",
+  "hasta": "2026-03-11T23:43:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:07Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L1054"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "ejecuto-comando"
+  ],
+  "desde": "2026-03-10T03:27:20Z",
+  "hasta": "2026-03-10T03:27:20Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:07Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L1055"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "ejecuto-comando"
+  ],
+  "desde": "2026-03-10T03:29:56Z",
+  "hasta": "2026-03-10T03:29:56Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:08Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "L1056"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "ejecuto-comando"
+  ],
+  "desde": "2026-03-10T03:32:44Z",
+  "hasta": "2026-03-10T03:32:44Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:11Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "syslog",
+   "accion": "ejecuto-comando",
+   "por": "hora"
+  },
+  "n": 20,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "ejecuto-comando"
+  ],
+  "desde": "2026-03-02T12:10:24Z",
+  "hasta": "2026-03-11T14:21:24Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:11Z",
+  "comando": "timeline",
+  "filtros": {
+   "fuente": "syslog",
+   "accion": "cerro-sesion"
+  },
+  "n": 8,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "cerro-sesion"
+  ],
+  "desde": "2026-03-02T12:32:42Z",
+  "hasta": "2026-03-11T14:33:24Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:15Z",
+  "comando": "timeline",
+  "filtros": {
+   "fuente": "windows",
+   "desde": "2026-03-07T02:00:00Z",
+   "hasta": "2026-03-07T07:00:00Z"
+  },
+  "n": 19,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-proceso",
+   "fallo-autenticacion"
+  ],
+  "desde": "2026-03-07T02:13:00Z",
+  "hasta": "2026-03-07T07:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:17Z",
+  "comando": "base",
+  "filtros": {
+   "desde": "2026-03-07T04:00:00Z",
+   "hasta": "2026-03-07T05:00:00Z"
+  },
+  "n": 23,
+  "fuentes": [
+   "cloudtrail",
+   "windows"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-proceso",
+   "fallo-autenticacion",
+   "llamo-api"
+  ],
+  "desde": "2026-03-07T04:01:00Z",
+  "hasta": "2026-03-07T05:05:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:20Z",
+  "comando": "entidad",
+  "filtros": {
+   "indicador": "10.20.4.37"
+  },
+  "n": 18,
+  "fuentes": [
+   "cloudtrail",
+   "syslog",
+   "windows"
+  ],
+  "acciones": [
+   "autentico-local",
+   "autentico-remoto",
+   "cerro-sesion",
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T11:36:16Z",
+  "hasta": "2026-03-10T13:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:21Z",
+  "comando": "entidad",
+  "filtros": {
+   "indicador": "AKIA9KLMXP2HTVCJWD5N"
+  },
+  "n": 31,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T03:10:00Z",
+  "hasta": "2026-03-07T15:41:32Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:27Z",
+  "comando": "timeline",
+  "filtros": {
+   "sujeto": "AKIA9KLMXP2HTVCJWD5N"
+  },
+  "n": 31,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T03:10:00Z",
+  "hasta": "2026-03-07T15:41:32Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:28Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "windows",
+   "accion": "fallo-autenticacion",
+   "por": "substatus"
+  },
+  "n": 660,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "fallo-autenticacion"
+  ],
+  "desde": "2026-03-02T06:23:00Z",
+  "hasta": "2026-03-11T23:56:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:30Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "W1100"
+  },
+  "n": 1,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "fallo-autenticacion"
+  ],
+  "desde": "2026-03-07T04:01:00Z",
+  "hasta": "2026-03-07T04:01:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:31Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "windows",
+   "accion": "autentico-local",
+   "por": "hora"
+  },
+  "n": 50,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "autentico-local"
+  ],
+  "desde": "2026-03-02T09:36:41Z",
+  "hasta": "2026-03-11T10:26:49Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:38Z",
+  "comando": "entidad",
+  "filtros": {
+   "indicador": "10.20.4.28"
+  },
+  "n": 7,
+  "fuentes": [
+   "cloudtrail",
+   "syslog",
+   "windows"
+  ],
+  "acciones": [
+   "autentico-local",
+   "autentico-remoto",
+   "cerro-sesion",
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T12:00:00Z",
+  "hasta": "2026-03-10T10:31:44Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:38Z",
+  "comando": "entidad",
+  "filtros": {
+   "indicador": "10.20.4.10"
+  },
+  "n": 6,
+  "fuentes": [
+   "cloudtrail",
+   "syslog",
+   "windows"
+  ],
+  "acciones": [
+   "autentico-local",
+   "autentico-remoto",
+   "cerro-sesion",
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T13:08:24Z",
+  "hasta": "2026-03-11T14:33:24Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:39Z",
+  "comando": "entidad",
+  "filtros": {
+   "indicador": "10.20.4.57"
+  },
+  "n": 5,
+  "fuentes": [
+   "cloudtrail",
+   "syslog",
+   "windows"
+  ],
+  "acciones": [
+   "autentico-local",
+   "autentico-remoto",
+   "cerro-sesion",
+   "llamo-api"
+  ],
+  "desde": "2026-03-02T13:21:04Z",
+  "hasta": "2026-03-11T09:51:56Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:41Z",
+  "comando": "entidad",
+  "filtros": {
+   "indicador": "Qw7ZmT1yBnKe5RfPcHdL"
+  },
+  "n": 1,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto"
+  ],
+  "desde": "2026-03-05T02:40:00Z",
+  "hasta": "2026-03-05T02:40:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:41Z",
+  "comando": "entidad",
+  "filtros": {
+   "indicador": "8vN2qLpXeR4kTsYbMwGh"
+  },
+  "n": 7,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto"
+  ],
+  "desde": "2026-03-02T12:00:00Z",
+  "hasta": "2026-03-11T14:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:47Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "windows",
+   "accion": "ejecuto-proceso",
+   "por": "hora"
+  },
+  "n": 1302,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "ejecuto-proceso"
+  ],
+  "desde": "2026-03-02T09:40:33Z",
+  "hasta": "2026-03-11T13:38:57Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:49Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "windows",
+   "accion": "cerro-sesion",
+   "por": "hora"
+  },
+  "n": 51,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "cerro-sesion"
+  ],
+  "desde": "2026-03-02T17:58:16Z",
+  "hasta": "2026-03-11T19:34:21Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:50Z",
+  "comando": "base",
+  "filtros": {
+   "desde": "2026-03-07T00:00:00Z",
+   "hasta": "2026-03-08T00:00:00Z"
+  },
+  "n": 589,
+  "fuentes": [
+   "cloudtrail",
+   "syslog",
+   "windows"
+  ],
+  "acciones": [
+   "autentico-local",
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-proceso",
+   "fallo-autenticacion",
+   "fallo-usuario-inexistente",
+   "llamo-api"
+  ],
+  "desde": "2026-03-07T00:02:00Z",
+  "hasta": "2026-03-07T23:59:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:59Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "C0995"
+  },
+  "n": 1,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T03:10:00Z",
+  "hasta": "2026-03-05T03:10:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:59Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "C0996"
+  },
+  "n": 1,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T03:12:00Z",
+  "hasta": "2026-03-05T03:12:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:11:59Z",
+  "comando": "evento",
+  "filtros": {
+   "id": "C0997"
+  },
+  "n": 1,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T03:16:00Z",
+  "hasta": "2026-03-05T03:16:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:12:01Z",
+  "comando": "timeline",
+  "filtros": {
+   "desde": "2026-03-05T02:00:00Z",
+   "hasta": "2026-03-05T04:00:00Z"
+  },
+  "n": 28,
+  "fuentes": [
+   "cloudtrail",
+   "syslog",
+   "windows"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-comando",
+   "fallo-autenticacion",
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T01:54:00Z",
+  "hasta": "2026-03-05T03:49:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:12:21Z",
+  "comando": "entidad",
+  "filtros": {
+   "indicador": "mrivas"
+  },
+  "n": 31,
+  "fuentes": [
+   "cloudtrail"
+  ],
+  "acciones": [
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T03:10:00Z",
+  "hasta": "2026-03-07T15:41:32Z"
+ },
+ {
+  "momento": "2026-07-19T02:12:22Z",
+  "comando": "entidad",
+  "filtros": {
+   "indicador": "deploy"
+  },
+  "n": 96,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-comando",
+   "fallo-autenticacion"
+  ],
+  "desde": "2026-03-02T02:35:15Z",
+  "hasta": "2026-03-11T21:57:04Z"
+ },
+ {
+  "momento": "2026-07-19T02:12:30Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "windows",
+   "accion": "fallo-autenticacion",
+   "sujeto": "WKS-04\\svc_backup",
+   "por": "dia"
+  },
+  "n": 660,
+  "fuentes": [
+   "windows"
+  ],
+  "acciones": [
+   "fallo-autenticacion"
+  ],
+  "desde": "2026-03-02T06:23:00Z",
+  "hasta": "2026-03-11T23:56:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:12:41Z",
+  "comando": "base",
+  "filtros": {
+   "desde": "2026-03-05T02:00:00Z",
+   "hasta": "2026-03-05T04:00:00Z"
+  },
+  "n": 28,
+  "fuentes": [
+   "cloudtrail",
+   "syslog",
+   "windows"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-comando",
+   "fallo-autenticacion",
+   "llamo-api"
+  ],
+  "desde": "2026-03-05T01:54:00Z",
+  "hasta": "2026-03-05T03:49:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:12:44Z",
+  "comando": "entidad",
+  "filtros": {
+   "indicador": "ubuntu"
+  },
+  "n": 5,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-comando"
+  ],
+  "desde": "2026-03-05T02:40:00Z",
+  "hasta": "2026-03-05T03:18:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:12:44Z",
+  "comando": "contar",
+  "filtros": {
+   "fuente": "syslog",
+   "accion": "autentico-remoto",
+   "por": "hora"
+  },
+  "n": 8,
+  "fuentes": [
+   "syslog"
+  ],
+  "acciones": [
+   "autentico-remoto"
+  ],
+  "desde": "2026-03-02T12:00:00Z",
+  "hasta": "2026-03-11T14:00:00Z"
+ },
+ {
+  "momento": "2026-07-19T02:12:52Z",
+  "comando": "base",
+  "filtros": {
+   "desde": "2026-03-10T03:00:00Z",
+   "hasta": "2026-03-10T04:00:00Z"
+  },
+  "n": 22,
+  "fuentes": [
+   "cloudtrail",
+   "syslog",
+   "windows"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-comando",
+   "fallo-autenticacion",
+   "llamo-api"
+  ],
+  "desde": "2026-03-10T02:59:00Z",
+  "hasta": "2026-03-10T03:57:15Z"
+ },
+ {
+  "momento": "2026-07-19T02:12:55Z",
+  "comando": "timeline",
+  "filtros": {
+   "desde": "2026-03-10T02:30:00Z",
+   "hasta": "2026-03-10T05:00:00Z"
+  },
+  "n": 60,
+  "fuentes": [
+   "cloudtrail",
+   "syslog",
+   "windows"
+  ],
+  "acciones": [
+   "autentico-remoto",
+   "cerro-sesion",
+   "ejecuto-comando",
+   "fallo-autenticacion",
+   "fallo-usuario-inexistente",
+   "llamo-api"
+  ],
+  "desde": "2026-03-10T02:31:50Z",
+  "hasta": "2026-03-10T05:02:00Z"
+ }
+]

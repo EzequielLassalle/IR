@@ -170,33 +170,51 @@ def regla_credencial_creada(eventos: list[Evento]) -> list[Hallazgo]:
     return out
 
 
-def regla_origen_nuevo_de_credencial(eventos: list[Evento]) -> list[Hallazgo]:
-    """Una credencial usada desde una direccion sin actividad previa en todo el escenario.
+def _red(ip: str) -> str:
+    """La /24 de una direccion. Es el grano al que se compara el origen."""
+    return ".".join(ip.split(".")[:3]) + ".0/24"
 
-    No prueba robo: un cambio de red o una VPN producen lo mismo. Prueba que el origen
-    cambio, que es una afirmacion mas chica y verdadera.
+
+def regla_origen_nuevo_de_credencial(eventos: list[Evento]) -> list[Hallazgo]:
+    """Una credencial usada desde una **red** que nunca habia usado.
+
+    La primera version comparaba direcciones exactas, y era inservible: cualquier
+    automatizacion detras de un pool de IPs cambia de direccion todo el tiempo. La
+    credencial del pipeline rota entre `10.20.9.x` y disparaba la regla en cada corrida,
+    incluso en ventanas sin incidente. Volumen de alertas sin discriminacion es el modo en
+    que un detector deja de leerse.
+
+    Comparar por /24 es el grano correcto para este entorno: distingue "otra maquina de la
+    misma oficina" de "otra red". No es universal -- en una nube con rangos amplios habria
+    que comparar por ASN o por bloque asignado -- y por eso el criterio va declarado aca y
+    no escondido en un umbral.
+
+    Sigue sin probar robo: un cambio de red, una VPN o trabajo remoto legitimo producen lo
+    mismo. Prueba que el origen cambio de red.
     """
-    primera_ip: dict[str, str] = {}
     vistas: dict[str, set[str]] = defaultdict(set)
     out = []
     for e in sorted(eventos, key=lambda x: x.instante.utc):
         if e.fuente != "cloudtrail" or not e.ip:
             continue
-        cred = e.sujeto
-        if cred not in primera_ip:
-            primera_ip[cred] = e.ip
-        elif e.ip not in vistas[cred]:
+        cred, red = e.sujeto, _red(e.ip)
+        if not vistas[cred]:
+            vistas[cred].add(red)
+            continue
+        if red not in vistas[cred]:
             out.append(Hallazgo(
                 regla="credencial_origen_nuevo",
                 severidad="ALTA",
-                resumen=f"La credencial {cred} se uso desde {e.ip}, una direccion sin "
-                        f"actividad previa registrada para esa credencial.",
+                resumen=f"La credencial {cred} se uso desde {e.ip} ({red}), una red sin "
+                        f"actividad previa registrada para esa credencial. Redes "
+                        f"conocidas: {', '.join(sorted(vistas[cred]))}.",
                 cita=[e.id],
                 no_prueba="No prueba que la credencial haya sido robada: un cambio de red, "
-                          "una VPN o un equipo nuevo producen el mismo cambio de origen.",
-                atributos={"credencial": cred, "ip": e.ip},
+                          "una VPN o trabajo remoto legitimo producen el mismo cambio de "
+                          "origen. Prueba que el origen cambio de red.",
+                atributos={"credencial": cred, "ip": e.ip, "red": red},
             ))
-        vistas[cred].add(e.ip)
+        vistas[cred].add(red)
     return out
 
 

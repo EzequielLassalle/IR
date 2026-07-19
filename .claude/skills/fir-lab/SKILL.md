@@ -41,7 +41,7 @@ recomendar despues.
 │  5) Accion         someter una accion al motor · veredicto con traza     │
 │  6) Recomendacion  que propone el motor ahora · y de que depende         │
 │  7) Cronologia     lo que decidiste · su veredicto · su costo            │
-│  8) Casos          el catalogo · suite de regresion                      │
+│  8) Regresion      la suite del motor · cada prueba con su esperado      │
 │                                                                          │
 │  0) Salir                                                                │
 ╰──────────────────────────────────────────────────────────────────────────╯
@@ -109,7 +109,7 @@ Excepcion: los veredictos (`AUSENCIA-DEMOSTRADA`, `CITA-NO-SOSTIENE`, la observa
 |---|---|
 | 1.1 | `python main.py barrido` |
 | 1.3 | `python main.py verificar <archivo.json>` |
-| 1.4 | `python main.py barrido --medir` |
+| 1.4 | `python main.py medir <archivo...> [--union] [--perdidos]` |
 
 ### 1.2 — Como se lanzan los agentes
 
@@ -139,6 +139,7 @@ Conviene lanzar **varios en paralelo con encargos distintos** -- uno por fuente,
 hilo. Un agente solo se ancla en lo primero que encuentra y despues lo confirma.
 
 **El baseline a batir**: el detector deterministico saca 63,8% de recall en A y 4,3% en B.
+La union de tres agentes saca 84,1% en A. **Contra B nunca se midio**, y es lo que falta.
 
 ### El protocolo que va en el encargo
 
@@ -282,7 +283,8 @@ horas declararia "caida" cualquier actividad rutinaria.
 │  4.1)  Estado de la respuesta: que acciones ya se aplicaron              │
 │  4.2)  Cobertura: ventanas, motivos y carencias de auditoria             │
 │  4.3)  ¿Habriamos visto este hecho, de haber ocurrido?                   │
-│  4.4)  Alcance: hechos, indicios y desconocidos                          │
+│  4.4)  Alcance: hechos, indicios, sin mirar y mirado-y-vacio             │
+│  4.5)  Consultas registradas: que zonas se tocaron                       │
 │                                                                          │
 │  0)   Volver al menu anterior                                            │
 ╰──────────────────────────────────────────────────────────────────────────╯
@@ -293,6 +295,8 @@ horas declararia "caida" cualquier actividad rutinaria.
 | 4.1 | `python main.py respuesta` |
 | 4.2 | `python main.py cobertura` |
 | 4.3 | `python main.py observable <accion> <objeto> --desde T --hasta T [--sujeto S]` |
+| 4.4 | `python main.py situacion <archivo_hallazgos.json>` |
+| 4.5 | `python main.py consultas` |
 
 **El estado de la respuesta no se guarda aparte: se deriva replayando la cronologia.** Una
 sola fuente de verdad, y la respuesta a "¿este host esta aislado?" siempre viene con quien
@@ -371,8 +375,13 @@ haber mirado donde no habia nada que mirar.
 
 | Opcion | Comando |
 |---|---|
-| 6.1 | `python main.py recomendacion [--en T] [--desde T] [--hasta T]` |
+| 6.1 | `python main.py recomendacion [--hallazgos ARCHIVO] [--en T]` |
 | 6.2 | `python main.py situacion <archivo_hallazgos.json>` |
+
+**Con `--hallazgos` la recomendacion sale de una investigacion en vez del detector.** Es el
+circuito agentico completo: el agente investiga, escribe su archivo, el verificador decide
+que entra, y solo lo verificado funda acciones. Los hallazgos rechazados se listan con su
+motivo -- pegarlos, porque decir cuantos quedaron afuera y por que es parte del resultado.
 
 **La recomendacion la deriva el motor. Nunca redactarla, ampliarla ni reordenarla.** Si el
 motor propone cinco acciones, van las cinco como salieron. Agregarle una sexta "que tiene
@@ -387,9 +396,11 @@ El orden lo pone el motor -- primero lo que preserva evidencia, despues por cost
 se altera**.
 
 En `situacion` (6.2), las tres secciones se presentan completas. `SIN ESTABLECER` es la que
-mas cuesta y la que mas vale: dice donde hay cobertura y no hay hechos. Y significa
-exactamente eso, **no "nadie miro"**: esa distincion requiere registrar las consultas del
-analista y hoy no se instrumenta. Si el usuario pregunta, decirlo asi.
+mas cuesta y la que mas vale, y ahora distingue dos cosas que se ven iguales en cualquier
+informe: **SIN MIRAR** es un hueco de investigacion, **MIRADO Y VACIO** es una zona
+descartada. Sale de cruzar la cobertura con el registro de consultas.
+
+**Es lo que decide si una contencion es prematura**, asi que no se resume: se pega entera.
 
 ## 7) Cronologia
 
@@ -414,14 +425,14 @@ distinto de una mal tomada.
 
 Los asientos se agregan con `accion --registrar <actor>` y **no se editan ni se borran**.
 
-## 8) Casos
+## 8) Regresion
 
 ```
 ╭──────────────────────────────────────────────────────────────────────────╮
-│  8) CASOS                                                                │
+│  8) REGRESION                                                            │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  8.1)  Correr los ocho casos                                             │
-│  8.2)  Correr uno solo, con su concepto                                  │
+│  8.1)  Correr las nueve pruebas del motor                                │
+│  8.2)  Correr una sola, con su concepto                                  │
 │  8.3)  Correr la suite completa de verificaciones                        │
 │                                                                          │
 │  0)   Volver al menu anterior                                            │
@@ -430,16 +441,20 @@ Los asientos se agregan con `accion --registrar <actor>` y **no se editan ni se 
 
 | Opcion | Comando |
 |---|---|
-| 8.1 | `python main.py casos [--detalle]` |
-| 8.2 | `python main.py casos <N>` |
+| 8.1 | `python main.py regresion [--detalle]` |
+| 8.2 | `python main.py regresion <N>` |
 | 8.3 | `python main.py test` |
 
-Los ocho son decisiones donde **el veredicto no coincide con la intuicion**, y cada uno
-declara su `esperado`. Con la evidencia intacta, un caso que no coincide es un bug del
+**No se llama "Casos" a proposito.** En respuesta a incidentes un caso es la unidad de
+trabajo -- con duenio, severidad y estado -- y usar la palabra para una suite de tests
+garantiza que alguien abra la opcion esperando su cola y encuentre otra cosa.
+
+Las nueve son decisiones donde **el veredicto no coincide con la intuicion**, y cada una
+declara su `esperado`. Con la evidencia intacta, una prueba que no coincide es un bug del
 motor: parar todo.
 
-Estan escritos contra el escenario A. **Correrlos contra B no tiene sentido** -- son otro
-incidente -- y el catalogo no los adapta.
+Estan escritas contra el escenario A. **Correrlas contra B no tiene sentido** -- son otro
+incidente.
 
 ## Trampas
 

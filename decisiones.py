@@ -90,6 +90,8 @@ def registrar(evid: Path, actor: str, accion: str, objetivo: str, en: str,
         "cita": cita,
         "costo": costo,
         "efecto": EFECTOS.get(accion),
+        # Ejecutada pese a que el motor no la fundo. No la invalida -- la marca.
+        "override": veredicto != "FUNDADA",
     }
     registro = cargar(evid)
     registro.append(entrada)
@@ -110,8 +112,16 @@ def estado(evid: Path, en: str | None = None) -> dict[str, dict[str, str]]:
     limite = _t(en) if en else None
     out: dict[str, dict[str, str]] = {}
     for d in cargar(evid):
-        if d["veredicto"] not in ("FUNDADA",):
-            continue  # una accion que el motor no fundo no se considera aplicada
+        # **El estado lo define el acto, no el veredicto del motor.** Si el analista ejecuta
+        # una accion que el motor declaro INFUNDADA -- contener primero y justificar despues,
+        # que es lo que se hace bajo presion -- el mundo cambio igual. Filtrar por FUNDADA
+        # aca convertia al adjudicador en dueño de la realidad: el simulador sostenia que la
+        # IP no estaba bloqueada porque no le habia gustado el fundamento, y la seguia
+        # reofreciendo. Es al reves de lo que un motor de respuesta con humano en el lazo
+        # tiene que hacer.
+        #
+        # El veredicto no se pierde: viaja como atributo del asiento y se marca como
+        # override. Eso es lo que hace defendible una decision en el post-mortem.
         if limite is not None and _t(d["decidida_en"]) > limite:
             continue
         efecto = d.get("efecto")
@@ -151,7 +161,8 @@ def cronologia(evid: Path) -> list[str]:
         muestra = ", ".join(d["cita"][:6]) + (f" (+{len(d['cita']) - 6})"
                                               if len(d["cita"]) > 6 else "")
         lineas.append(f"  {d['decidida_en']}  {d['accion']} {d['objetivo']}")
-        lineas.append(f"    veredicto : {d['veredicto']}  [costo {d['costo']}]")
+        marca = "   << OVERRIDE del criterio del motor" if d.get("override") else ""
+        lineas.append(f"    veredicto : {d['veredicto']}  [costo {d['costo']}]{marca}")
         lineas.append(f"    efecto    : {d.get('efecto') or '(ninguno)'}")
         lineas.append(f"    se sabia  : {muestra or '(nada citado)'}")
         lineas.append(f"    motivo    : {d['motivo']}")
@@ -164,9 +175,11 @@ def resumen_estado(evid: Path) -> list[str]:
     actual = estado(evid)
     if not actual:
         return ["  (sin acciones aplicadas)"]
+    overrides = {d["objetivo"] for d in cargar(evid) if d.get("override")}
     lineas = []
     for efecto, objetivos in sorted(actual.items()):
         lineas.append(f"  {efecto}")
         for objetivo, momento in sorted(objetivos.items()):
-            lineas.append(f"    {objetivo:<28} desde {momento}")
+            marca = "  (override)" if objetivo in overrides else ""
+            lineas.append(f"    {objetivo:<28} desde {momento}{marca}")
     return lineas

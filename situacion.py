@@ -15,11 +15,15 @@ Tres niveles, que son los veredictos del verificador con otro nombre:
 promete de mas: lo que decide si una contencion es prematura no es lo que se sabe, es lo que
 no se miro.
 
-Limitacion honesta de esta implementacion: `desconocido` significa *"no hay hechos
-establecidos sobre esto"*, no *"nadie lo consulto"*. Distinguir las dos cosas requeriria
-registrar cada consulta que hizo el analista, y eso hoy no se instrumenta. La diferencia
-importa -- una zona mirada y vacia no es lo mismo que una zona sin mirar -- y esta anotada
-en `PENDIENTE.md`.
+El tercer nivel se parte en dos, y la distincion es la que decide si una contencion es
+prematura:
+
+  SIN MIRAR       Nadie consulto esa zona. Es un hueco de investigacion.
+  MIRADO Y VACIO  Se consulto y no quedo ningun hecho. Es una zona descartada.
+
+Los dos producen la misma lista de hallazgos y no significan lo mismo. Sale de cruzar la
+cobertura con el registro de consultas (`bitacora.py`), que es el dato que la consola ve en
+cada invocacion.
 """
 
 from __future__ import annotations
@@ -96,7 +100,8 @@ def desde_hallazgos(ruta: Path, eventos: list[Evento]) -> Situacion:
     return sit
 
 
-def huecos(eventos: list[Evento], sit: Situacion, desde: str, hasta: str) -> list[Entrada]:
+def huecos(eventos: list[Evento], sit: Situacion, desde: str, hasta: str,
+           evid=None) -> list[Entrada]:
     """Donde no hay hechos establecidos, habiendo cobertura para tenerlos.
 
     Barre el producto **fuente x accion** derivado de `ACCIONES_POR_FUENTE`, no una lista
@@ -118,22 +123,34 @@ def huecos(eventos: list[Evento], sit: Situacion, desde: str, hasta: str) -> lis
             if accion in cubiertas:
                 continue
             obs = observable(accion, "-", desde, hasta)
-            if obs.informa_la_ausencia:
+            if not obs.informa_la_ausencia:
+                continue
+            mirado = False
+            if evid is not None:
+                import bitacora
+                mirado = bitacora.toco(evid, fuente, accion, desde, hasta)
+            if mirado:
                 out.append(Entrada(
-                    DESCONOCIDO, f"{fuente}: '{accion}' sin hechos establecidos",
-                    motivo="la fuente cubre la ventana y registra esta accion: si hubo "
-                           "algo, esta en la evidencia y nadie lo establecio"))
+                    DESCONOCIDO, f"{fuente}: '{accion}' MIRADO Y VACIO",
+                    motivo="se consulto esta zona y no quedo ningun hecho establecido: "
+                           "es una zona descartada, no un hueco"))
+            else:
+                out.append(Entrada(
+                    DESCONOCIDO, f"{fuente}: '{accion}' SIN MIRAR",
+                    motivo="la fuente cubre la ventana y registra esta accion, y ninguna "
+                           "consulta la alcanzo: es un hueco de investigacion"))
     return out
 
 
-def resumen(sit: Situacion, eventos: list[Evento], desde: str, hasta: str) -> list[str]:
-    sit.desconocidos = huecos(eventos, sit, desde, hasta)
+def resumen(sit: Situacion, eventos: list[Evento], desde: str, hasta: str,
+            evid=None) -> list[str]:
+    sit.desconocidos = huecos(eventos, sit, desde, hasta, evid)
     lineas = [f"HECHOS ({len(sit.hechos)})", "-" * 78]
     lineas += [str(e) for e in sit.hechos] or ["  (ninguno)"]
     lineas += ["", f"INDICIOS ({len(sit.indicios)})", "-" * 78]
     lineas += [str(e) for e in sit.indicios] or ["  (ninguno)"]
     lineas += ["", f"SIN ESTABLECER ({len(sit.desconocidos)})", "-" * 78]
-    lineas += ["  Zonas con cobertura demostrada y sin hechos. No dice que nadie miro:",
-               "  dice que nada quedo establecido ahi.", ""]
+    lineas += ["  Zonas con cobertura demostrada y sin hechos. SIN MIRAR es un hueco de",
+               "  investigacion; MIRADO Y VACIO es una zona descartada.", ""]
     lineas += [str(e) for e in sit.desconocidos] or ["  (ninguna)"]
     return lineas

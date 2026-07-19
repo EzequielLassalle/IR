@@ -434,17 +434,17 @@ def test_ninguna_afirmacion_del_detector_es_rechazada(fuentes, verdad) -> None:
 # --------------------------------------------------------------------------------------
 
 
-def test_los_casos_del_catalogo_coinciden(fuentes, verdad) -> None:
+def test_la_suite_de_regresion_coincide(fuentes, verdad) -> None:
     """La suite de regresion del motor de acciones.
 
     Con la evidencia intacta, un caso que no coincide es un bug del motor, no una
     curiosidad del escenario.
     """
-    import casos
+    import regresion
 
-    for caso, obtenido, ok in casos.correr():
-        verificar(ok, f"caso {caso.numero} ({caso.titulo}): esperaba {caso.esperado} y "
-                      f"dio {obtenido}")
+    for prueba, obtenido, ok in regresion.correr():
+        verificar(ok, f"prueba {prueba.numero} ({prueba.titulo}): esperaba "
+                      f"{prueba.esperado} y dio {obtenido}")
 
 
 def test_toda_accion_del_catalogo_se_adjudica(fuentes, verdad) -> None:
@@ -578,6 +578,137 @@ def test_la_recomendacion_solo_propone_fundadas(fuentes, verdad) -> None:
         verificar(min(destructivas) > max(preservadoras),
                   "una accion que destruye evidencia se recomienda antes que una que la "
                   "preserva")
+
+
+def test_la_bitacora_solo_marca_lo_que_devolvio(fuentes, verdad) -> None:
+    """Una consulta cubre lo que mostro, no lo que se le pidio.
+
+    Este test existe porque la primera version del modulo hacia lo contrario y **mentia**:
+    tratbaba `entidad` y `evento` como si alcanzaran todo, con lo cual un solo pivote sobre
+    una IP marcaba las seis zonas del escenario como "mirado y vacio" -- incluida
+    `cloudtrail`, la mitad de la evidencia, que nadie habia tocado. El modulo cuya razon de
+    ser es distinguir la ausencia fundada de la no fundada estaba emitiendo afirmaciones de
+    ausencia sin fundamento.
+
+    Se verifican las tres condiciones por separado, porque relajar cualquiera reintroduce el
+    defecto: fuente, accion y ventana.
+    """
+    import tempfile
+
+    import bitacora
+    from consulta import filtrar
+    from eventos import cargar as cargar_eventos
+
+    eventos = cargar_eventos()
+    ventana = ("2026-03-09T20:00:00Z", "2026-03-10T04:00:00Z")
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+
+        # Un pivote que no devuelve nada de cloudtrail no puede cubrir cloudtrail.
+        solo_syslog = filtrar(eventos, fuente="syslog", desde=ventana[0], hasta=ventana[1])
+        bitacora.registrar(tmp, "entidad", {"indicador": "x"}, solo_syslog)
+        verificar(not bitacora.toco(tmp, "cloudtrail", "llamo-api", *ventana),
+                  "una consulta que solo devolvio syslog marca cloudtrail como mirado")
+
+        # Ni una accion que no aparecio en los resultados.
+        verificar(not bitacora.toco(tmp, "syslog", "llamo-api", *ventana),
+                  "una accion ausente de los resultados figura como mirada")
+
+        # Lo que si devolvio, si.
+        acciones_vistas = {e.accion for e in solo_syslog}
+        for accion in sorted(acciones_vistas):
+            verificar(bitacora.toco(tmp, "syslog", accion, *ventana),
+                      f"syslog/'{accion}' se devolvio y no figura como mirado")
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        # Otra ventana no cubre la del incidente.
+        otro_tramo = filtrar(eventos, fuente="cloudtrail",
+                             desde="2026-03-03T00:00:00Z", hasta="2026-03-04T00:00:00Z")
+        bitacora.registrar(tmp, "timeline", {"fuente": "cloudtrail"}, otro_tramo)
+        verificar(not bitacora.toco(tmp, "cloudtrail", "llamo-api", *ventana),
+                  "una consulta de otro tramo temporal cubre la ventana del incidente")
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        # Una consulta sin resultados no cubre nada.
+        bitacora.registrar(tmp, "timeline", {"fuente": "cloudtrail"}, [])
+        verificar(not bitacora.toco(tmp, "cloudtrail", "llamo-api", *ventana),
+                  "una consulta sin resultados figura como cobertura")
+
+
+def test_ejecutar_cambia_el_mundo_aunque_el_motor_no_funde(fuentes, verdad) -> None:
+    """El estado lo define el acto, no el veredicto.
+
+    Si el analista contiene primero y justifica despues --que es lo que se hace bajo
+    presion-- el mundo cambio igual. Filtrar el estado por FUNDADA convertia al adjudicador
+    en duenio de la realidad: el simulador sostenia que la IP no estaba bloqueada porque no
+    le habia gustado el fundamento, y la seguia reofreciendo.
+
+    El veredicto no se pierde: queda marcado como override, que es lo que hace defendible la
+    decision en el post-mortem.
+    """
+    import tempfile
+
+    import decisiones
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        decisiones.registrar(tmp, "analista", "bloquear-ip", "10.0.0.1",
+                             "2026-03-10T04:00:00Z", "INFUNDADA", "sin fundamento",
+                             [], "bajo")
+
+        actual = decisiones.estado(tmp)
+        verificar("10.0.0.1" in actual.get("ip-bloqueada", {}),
+                  "una accion ejecutada contra el criterio del motor no cambio el estado")
+
+        aplicada, _ = decisiones.ya_aplicada(tmp, "bloquear-ip", "10.0.0.1")
+        verificar(aplicada, "la accion ejecutada se sigue ofreciendo")
+
+        registro = decisiones.cargar(tmp)
+        verificar(registro[0]["override"] is True,
+                  "la decision tomada contra el criterio del motor no quedo marcada")
+
+        # Y una FUNDADA no se marca como override.
+        decisiones.registrar(tmp, "analista", "aislar-host", "H1",
+                             "2026-03-10T04:00:00Z", "FUNDADA", "ok", ["W1"], "alto")
+        verificar(decisiones.cargar(tmp)[1]["override"] is False,
+                  "una decision fundada quedo marcada como override")
+
+
+def test_el_recomendador_acepta_una_investigacion_externa(fuentes, verdad) -> None:
+    """El circuito agentico: una investigacion verificada puede fundar recomendaciones.
+
+    Sin esto, `recomendar()` siempre corria el detector interno y la mitad agentica del
+    objetivo quedaba desconectada: el archivo de un agente se podia verificar y mirar, y no
+    habia ninguna ruta por la que produjera una recomendacion.
+    """
+    from acciones import recomendar
+    from deteccion import Hallazgo
+    from eventos import cargar as cargar_eventos
+
+    eventos = cargar_eventos()
+    desde, hasta = "2026-03-09T20:00:00Z", "2026-03-10T04:00:00Z"
+
+    # Una investigacion que seniala un solo host no puede fundar acciones sobre otro.
+    solo_web03 = [Hallazgo("investigacion", "ALTA", "",
+                           [e.id for e in eventos
+                            if e.fuente == "syslog" and e.accion == "autentico-remoto"],
+                           "-")]
+    rs = recomendar(eventos, hasta, desde, hasta, hallazgos=solo_web03)
+    objetivos = {r.veredicto.objetivo for r in rs}
+    verificar(bool(rs), "una investigacion valida no funda ninguna recomendacion")
+    verificar("WKS-04" not in objetivos,
+              "una investigacion que solo seniala web-03 funda acciones sobre WKS-04")
+
+    # Sin hallazgos, cae al detector: la salida no puede ser identica a la anterior.
+    del_detector = {(r.accion.nombre, r.veredicto.objetivo)
+                    for r in recomendar(eventos, hasta, desde, hasta)}
+    de_agente = {(r.accion.nombre, r.veredicto.objetivo) for r in rs}
+    verificar(del_detector != de_agente,
+              "la recomendacion ignora los hallazgos que se le pasan: da lo mismo que el "
+              "detector")
 
 
 def main() -> int:

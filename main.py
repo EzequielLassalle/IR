@@ -40,6 +40,20 @@ DIRS = {"a": "evidencia", "b": "evidencia_b"}
 def _evid(args) -> Path:
     return AQUI / DIRS[getattr(args, "escenario", "a")]
 
+
+def _anotar(args, alcanzado=()) -> None:
+    """Persiste la consulta **y lo que devolvio**.
+
+    `alcanzado` no es opcional en la practica: la bitacora registra lo que el analista vio,
+    no lo que pidio. Una consulta cuyo filtro nombra una fuente pero no devuelve eventos de
+    ella no la marca como mirada.
+    """
+    import bitacora
+    campos = ("fuente", "accion", "sujeto", "objeto", "ip", "texto", "desde", "hasta",
+              "id", "indicador", "por")
+    bitacora.registrar(_evid(args), getattr(args, "comando", ""),
+                       {c: getattr(args, c, None) for c in campos}, alcanzado)
+
 REGLA = "-" * 78
 
 
@@ -82,6 +96,7 @@ def _filtrados(args):
 
 def cmd_timeline(args) -> int:
     evs = _filtrados(args)
+    _anotar(args, evs)
     _seccion(f"TIMELINE  ({len(evs)} eventos)")
     for e in evs[:args.tope]:
         print(f"  {e}")
@@ -93,6 +108,7 @@ def cmd_timeline(args) -> int:
 
 def cmd_contar(args) -> int:
     evs = _filtrados(args)
+    _anotar(args, evs)
     _seccion(f"CONTEO POR {args.por.upper()}  (sobre {len(evs)} eventos)")
     for valor, n in contar(evs, args.por, tope=args.tope):
         print(f"  {n:>6}  {valor}")
@@ -106,6 +122,7 @@ def cmd_evento(args) -> int:
         print(f"No existe el evento {args.id}.")
         return 1
 
+    _anotar(args, [e])
     _seccion("EVENTO")
     print(f"  id        : {e.id}")
     print(f"  instante  : {e.instante}")
@@ -161,6 +178,7 @@ def cmd_entidad(args) -> int:
     eventos = cargar(_evid(args))
     grupos = pivotear(eventos, args.indicador)
     total = sum(len(v) for v in grupos.values())
+    _anotar(args, [e for lista in grupos.values() for e in lista])
 
     _seccion(f"ENTIDAD  '{args.indicador}'  ({total} eventos)")
     if not total:
@@ -183,6 +201,7 @@ def cmd_entidad(args) -> int:
 def cmd_base(args) -> int:
     eventos = cargar(_evid(args))
     diffs = linea_base(eventos, args.desde, args.hasta)
+    _anotar(args, filtrar(eventos, desde=args.desde, hasta=args.hasta))
 
     _seccion(f"LINEA BASE  (base: antes de {args.desde} | ventana: {args.desde} .. "
              f"{args.hasta})")
@@ -249,6 +268,14 @@ def cmd_verdad(args) -> int:
     total = sum(verdad["conteo"].values())
     for etiqueta, n in sorted(verdad["etiquetas"].items(), key=lambda x: -x[1]):
         print(f"  {n:>6}  ({n / total * 100:>4.1f}%)  {etiqueta}")
+    return 0
+
+
+def cmd_consultas(args) -> int:
+    import bitacora
+    _seccion("CONSULTAS REGISTRADAS")
+    for linea in bitacora.resumen(_evid(args)):
+        print(linea)
     return 0
 
 
@@ -340,11 +367,56 @@ def cmd_accion(args) -> int:
     return 0
 
 
+def _hallazgos_de(ruta, eventos):
+    """Convierte un archivo de hallazgos en insumo del recomendador.
+
+    **Solo entran los que el verificador admite.** Un hallazgo cuya cita no sostiene lo que
+    afirma no puede fundar una accion de contencion: seria recomendar sobre prosa. Los
+    rechazados se informan con su motivo en vez de descartarse en silencio.
+    """
+    from deteccion import Hallazgo
+    from verificador import Afirmacion, verificar
+
+    datos = json.loads(Path(ruta).read_text(encoding="utf-8"))
+    crudos = datos["hallazgos"] if isinstance(datos, dict) else datos
+
+    admitidos, rechazados = [], []
+    for h in crudos:
+        try:
+            af = Afirmacion.desde_dict(h.get("afirmacion", {}))
+        except (ValueError, TypeError) as err:
+            rechazados.append((h.get("regla", "?"), str(err)))
+            continue
+        r = verificar(af, h.get("cita", []), eventos)
+        if r.admitido:
+            admitidos.append(Hallazgo(
+                regla=h.get("regla", "?"), severidad=h.get("severidad", "MEDIA"),
+                resumen=h.get("resumen", ""), cita=h.get("cita", []),
+                no_prueba=h.get("no_prueba", "")))
+        else:
+            rechazados.append((h.get("regla", "?"), f"{r.veredicto}: {r.motivo}"))
+    return admitidos, rechazados
+
+
 def cmd_recomendacion(args) -> int:
     from acciones import recomendar
 
-    rs = recomendar(cargar(_evid(args)), args.en, args.desde, args.hasta,
-                    evid=_evid(args))
+    eventos = cargar(_evid(args))
+    hallazgos = None
+    if args.hallazgos:
+        hallazgos, rechazados = _hallazgos_de(args.hallazgos, eventos)
+        _seccion(f"HALLAZGOS ADMITIDOS  ({len(hallazgos)} de "
+                 f"{len(hallazgos) + len(rechazados)})")
+        print("  Solo los verificados fundan acciones: recomendar sobre una afirmacion que")
+        print("  su cita no sostiene es recomendar sobre prosa.")
+        print()
+        for regla, motivo in rechazados:
+            print(f"  [--] {regla}: {motivo}")
+        if not rechazados:
+            print("  (ninguno rechazado)")
+
+    rs = recomendar(eventos, args.en, args.desde, args.hasta,
+                    hallazgos=hallazgos, evid=_evid(args))
     _seccion(f"RECOMENDACION  ({len(rs)} acciones fundadas al {args.en})")
     print("  Ordenadas por lo que preservan y por costo. Solo se proponen las FUNDADAS:")
     print("  una accion sin fundamento no se sugiere 'por las dudas'.\n")
@@ -358,7 +430,8 @@ def cmd_situacion(args) -> int:
     from situacion import desde_hallazgos, resumen
 
     sit = desde_hallazgos(Path(args.archivo), cargar(_evid(args)))
-    for linea in resumen(sit, cargar(_evid(args)), args.desde, args.hasta):
+    for linea in resumen(sit, cargar(_evid(args)), args.desde, args.hasta,
+                         evid=_evid(args)):
         print(linea)
     return 0
 
@@ -371,17 +444,61 @@ def cmd_cronologia(args) -> int:
     return 0
 
 
-def cmd_casos(args) -> int:
-    import casos
-    _seccion("CASOS")
+def cmd_regresion(args) -> int:
+    import regresion
+    _seccion("SUITE DE REGRESION")
     if args.numero:
-        c = next((x for x in casos.CASOS if x.numero == args.numero), None)
-        if c is None:
-            print(f"  No existe el caso {args.numero}.")
+        p = next((x for x in regresion.PRUEBAS if x.numero == args.numero), None)
+        if p is None:
+            print(f"  No existe la prueba {args.numero}.")
             return 1
-        casos.CASOS = [c]
-    for linea in casos.resumen(_evid(args), detalle=args.detalle or bool(args.numero)):
+        regresion.PRUEBAS = [p]
+    for linea in regresion.resumen(_evid(args), detalle=args.detalle or bool(args.numero)):
         print(linea)
+    return 0
+
+
+def cmd_medir(args) -> int:
+    """Contrasta al detector contra una o mas investigaciones, sobre la misma verdad.
+
+    Es el comando que faltaba para que la opcion 1.4 del skill entregue el contraste que
+    promete. Sin el, el unico numero medible era el del detector y cualquier cifra sobre un
+    agente quedaba calculada fuera del arnes -- o sea, sin forma de reproducirla.
+    """
+    from deteccion import barrer, eventos_perdidos, medir
+
+    eventos = cargar(_evid(args))
+    verdad = cargar_verdad(_evid(args))
+
+    corridas = [("detector deterministico", barrer(eventos))]
+    for ruta in args.archivos:
+        admitidos, rechazados = _hallazgos_de(ruta, eventos)
+        corridas.append((Path(ruta).stem, admitidos))
+        if rechazados:
+            print(f"  ({Path(ruta).stem}: {len(rechazados)} hallazgo(s) sin verificar, "
+                  f"excluidos)")
+
+    if args.union and len(args.archivos) > 1:
+        corridas.append(("UNION de las investigaciones",
+                         [h for _, hs in corridas[1:] for h in hs]))
+
+    _seccion("MEDICION CONTRA LA VERDAD")
+    print(f"  {'analista':<34}{'citados':>9}{'del ataque':>13}"
+          f"{'precision':>12}{'recall':>9}")
+    for nombre, hs in corridas:
+        m = medir(hs, verdad)
+        print(f"  {nombre:<34}{m.citados:>9}"
+              f"{f'{m.de_ataque}/{m.total_ataque}':>13}"
+              f"{m.precision:>11.1%}{m.recall:>9.1%}")
+
+    if args.perdidos:
+        _seccion("EVENTOS DEL ATAQUE SIN CITAR, POR CORRIDA")
+        print("  La mitad silenciosa del error: el verificador comprueba lo que se afirmo,")
+        print("  nunca lo que se callo.")
+        for nombre, hs in corridas:
+            faltan = eventos_perdidos(hs, verdad)
+            print(f"\n  {nombre} ({len(faltan)}):")
+            print("  " + (", ".join(faltan) if faltan else "(ninguno)"))
     return 0
 
 
@@ -450,6 +567,9 @@ def construir_parser() -> argparse.ArgumentParser:
     sp.set_defaults(func=cmd_verdad)
 
     sub.add_parser("respuesta").set_defaults(func=cmd_respuesta)
+
+    sp = sub.add_parser("consultas")
+    sp.set_defaults(func=cmd_consultas)
     sub.add_parser("cobertura").set_defaults(func=cmd_cobertura)
 
     sp = sub.add_parser("observable")
@@ -477,6 +597,9 @@ def construir_parser() -> argparse.ArgumentParser:
     sp.set_defaults(func=cmd_accion)
 
     sp = sub.add_parser("recomendacion")
+    sp.add_argument("--hallazgos", metavar="ARCHIVO",
+                    help="recomendar a partir de una investigacion (de un agente, por "
+                         "ejemplo) en vez del detector deterministico")
     sp.add_argument("--en", default="2026-03-10T04:00:00Z")
     sp.add_argument("--desde", default="2026-03-09T20:00:00Z")
     sp.add_argument("--hasta", default="2026-03-10T04:00:00Z")
@@ -490,10 +613,19 @@ def construir_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("cronologia").set_defaults(func=cmd_cronologia)
 
-    sp = sub.add_parser("casos")
+    sp = sub.add_parser("regresion")
     sp.add_argument("numero", nargs="?", type=int)
     sp.add_argument("--detalle", action="store_true")
-    sp.set_defaults(func=cmd_casos)
+    sp.set_defaults(func=cmd_regresion)
+
+    sp = sub.add_parser("medir")
+    sp.add_argument("archivos", nargs="*",
+                    help="archivos de hallazgos a contrastar contra el detector")
+    sp.add_argument("--union", action="store_true",
+                    help="agrega una fila con la union de las investigaciones")
+    sp.add_argument("--perdidos", action="store_true",
+                    help="lista los eventos del ataque que cada corrida no cito")
+    sp.set_defaults(func=cmd_medir)
 
     sub.add_parser("test").set_defaults(func=cmd_test)
     sub.add_parser("generar").set_defaults(func=cmd_generar)

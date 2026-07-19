@@ -11,17 +11,18 @@ python main.py evento <ID>      un evento: normalizado, semántica y crudo
 python main.py entidad <ind>    todo lo que menciona un indicador
 python main.py contar --por ip  agregación sobre lo filtrado
 python main.py base             qué hay en la ventana que no había antes
-python main.py barrido --medir  el detector determinista y su medición
+python main.py barrido          el detector determinista
+python main.py medir <arch...>  contrasta el detector contra investigaciones
 python main.py respuesta        que acciones ya se aplicaron
 python main.py cobertura        qué se recolectó y qué no
 python main.py observable       si un hecho habría sido visible
 
 python main.py accion <a> <o>   someter una acción al motor · veredicto con traza
-python main.py recomendacion    qué acciones están fundadas ahora, y de qué dependen
+python main.py recomendacion    qué acciones están fundadas ahora [--hallazgos ARCH]
 python main.py situacion <arch> hechos, indicios y lo que quedó sin establecer
 python main.py cronologia       las decisiones tomadas y con qué se sabía
-python main.py casos            el catálogo · suite de regresión
-python main.py test             las 35.093 verificaciones
+python main.py regresion        la suite del motor · cada prueba con su esperado
+python main.py test             las 34.868 verificaciones
 ```
 
 El diseño completo —decisiones, descartes y etapas pendientes— está en `DISENO.md`.
@@ -58,18 +59,29 @@ De ahí salen gratis dos cosas: la **etiqueta de verdad por evento**, que es lo 
 medir un detector contra la realidad, y la deriva de reloj aplicada de forma consistente.
 
 **El detector es el grupo de control.** `deteccion.py` son ocho reglas escritas a mano,
-estilo SIEM. Encuentra lo que las reglas fueron escritas para encontrar, ni más ni menos, y
-`--medir` lo contrasta contra la verdad:
+estilo SIEM. Encuentra lo que las reglas fueron escritas para encontrar, ni más ni menos.
+
+**Los agentes son el otro analista.** Investigan abierto con los mismos comandos, escriben
+sus hallazgos en el DSL cerrado, y el verificador decide cuáles entran. `medir` los contrasta
+sobre la misma verdad:
 
 ```
-precision : 3.3%
-recall    : 63.8%
+$ python main.py medir hallazgos_agente_*.json --union
+
+  analista                            citados   del ataque   precision   recall
+  detector deterministico                1260        44/69       3.5%    63.8%
+  hallazgos_agente_cloudtrail              24        21/69      87.5%    30.4%
+  hallazgos_agente_syslog                  99        51/69      51.5%    73.9%
+  hallazgos_agente_windows                 35        25/69      71.4%    36.2%
+  UNION de las investigaciones            114        58/69      50.9%    84.1%
 ```
 
-Ese número es el punto del laboratorio. El detector se ahoga en el ruido de internet —cita
-1.214 eventos de escaneo por cada 44 del ataque— que es exactamente lo que le pasa a una
-regla ingenua en un SOC real. Y deja **25 eventos del ataque sin citar**, que es la mitad
-silenciosa del error: un verificador comprueba lo que se afirmó, nunca lo que se calló.
+**Ese contraste es el punto del laboratorio.** El detector se ahoga en el ruido de internet
+—cita 1.260 eventos para encontrar 44— que es lo que le pasa a una regla de volumen en un
+SOC real. Los agentes citan 114 para encontrar 58.
+
+Los números salen del arnés, no de una planilla: `medir` excluye los hallazgos que el
+verificador no admite, así que lo que se mide es investigación sostenida, no prosa.
 
 ## La regla de la tela
 
@@ -105,7 +117,7 @@ porque el generador dejó una firma.
 
 ## Los invariantes
 
-`tests.py` corre **35.093 verificaciones** sobre la evidencia. La mitad son invariantes del
+`tests.py` corre **34.868 verificaciones** sobre la evidencia. La mitad son invariantes del
 generador —todo 4634 tiene su 4624, ninguna cuenta actúa antes de su 4720, el sello local de
 syslog corresponde al instante real— y la otra mitad verifica que el escenario siga siendo
 un ejercicio: que el ataque sea minoría, que las tres fuentes participen, que haya línea base
@@ -150,13 +162,31 @@ Y ninguna recomendación sale pelada. Cada una trae los hechos que la fundan con
 impacto operativo, y **qué la volvería prematura** — sin esa condición de falsedad, una
 recomendación es una orden disfrazada de consejo.
 
+## El lazo de respuesta
+
+```
+barrido (detector o agentes) → hallazgos con cita → verificación → recomendación
+        → elegís → se ejecuta y se registra → el estado cambia
+        → la recomendación siguiente es distinta
+```
+
+La última flecha es la que hace real al lazo: una acción aplicada devuelve `INAPLICABLE` en
+su repetición y desaparece de la recomendación. El estado **no se guarda aparte: se deriva
+replayando la cronología**, así que "¿este host está aislado?" siempre se contesta con quién
+lo decidió y cuándo.
+
+Y el estado lo define **el acto, no el veredicto**. Si ejecutás algo que el motor declaró
+`INFUNDADA` —contener primero y justificar después, que es lo que se hace bajo presión— el
+mundo cambia igual, y el asiento queda marcado como *override*. Un adjudicador con poder de
+veto sobre la realidad sería lo contrario de una herramienta con humano en el lazo.
+
 ## Los casos
 
 Ocho decisiones donde el veredicto no coincide con la intuición, cada una con su `esperado`.
 Suite de regresión del motor:
 
 ```
-python main.py casos --detalle
+python main.py regresion --detalle
 ```
 
 El más instructivo es el 8: revocar la credencial del pipeline sale **FUNDADA**, y es la
@@ -172,10 +202,10 @@ detector determinista con medición, verificador de citas, cobertura de tres val
 catálogo de acciones con adjudicación, recomendación, situación,
 cronología y los ocho casos.
 
-**Pendiente:** correr los agentes de investigación contra el escenario. El arnés está escrito
-—protocolo en el skill, formato de hallazgos, verificador, medición— y **ningún agente corrió
-todavía**, así que hoy la parte agéntica no está respaldada por ningún número. Es el P1 de
-`PENDIENTE.md`.
+**Pendiente:** correr los agentes contra el escenario **B**, que es el retenido. Hoy el
+método está medido sólo donde se escribió. Si el recall aguanta en B, los agentes investigan;
+si se cae como se cayó el detector (63,8% → 4,3%), el protocolo del skill estaba escrito para
+A. Ver `PENDIENTE.md`.
 
 ## Los módulos
 
@@ -192,5 +222,6 @@ todavía**, así que hoy la parte agéntica no está respaldada por ningún núm
 | `verificador.py` | Citas, vocabulario cerrado y afirmaciones de ausencia. |
 | `acciones.py` | Catálogo, adjudicación y recomendación. |
 | `situacion.py` | Hechos, indicios y lo que quedó sin establecer. |
-| `casos.py` | Los ocho casos. |
-| `tests.py` | 35.093 verificaciones. Runner propio. |
+| `regresion.py` | Las nueve pruebas del motor. |
+| `bitacora.py` | Registro de lo que se consultó: separa "sin mirar" de "mirado y vacío". |
+| `tests.py` | 34.868 verificaciones. Runner propio. |

@@ -1,0 +1,50 @@
+{"hallazgos": [
+  {"regla": "rdp_interactivo_cuenta_servicio", "severidad": "ALTA",
+   "afirmacion": {"sujeto": "WKS-04\\svc_backup", "accion": "autentico-remoto", "objeto": "WKS-04",
+                  "desde": "2026-03-07T04:00:00Z", "hasta": "2026-03-07T05:00:00Z"},
+   "resumen": "La cuenta de servicio svc_backup abrio la unica sesion RDP interactiva (4624 logon type 10) de todo el dataset, a las 04:12, fuera de la franja 08-10 en que se autentica cualquier humano del entorno.",
+   "cita": ["W1101"],
+   "no_prueba": "No prueba quien controlaba la sesion ni desde que host real: 10.20.4.37 es la unica IP asociada y tambien figura en un logon local de avarela (W0900), lo que la hace ambigua como origen. Tampoco prueba que la credencial haya sido robada; podria ser un administrador usando la cuenta de servicio a mano."},
+
+  {"regla": "powershell_nuevo_en_el_entorno", "severidad": "ALTA",
+   "afirmacion": {"sujeto": "WKS-04\\svc_backup", "accion": "ejecuto-proceso", "objeto": "powershell.exe",
+                  "desde": "2026-03-07T04:00:00Z", "hasta": "2026-03-07T05:00:00Z"},
+   "resumen": "Primera y unica ejecucion de powershell.exe en 1302 ejecuciones de proceso en diez dias, dentro de la sesion RDP de svc_backup.",
+   "cita": ["W1102"],
+   "no_prueba": "Sin el campo CommandLine (carencia 4688_command_line) no se puede afirmar nada sobre los argumentos, scripts o comandos ejecutados. Que sea nuevo no prueba que sea malicioso."},
+
+  {"regla": "net_reconocimiento", "severidad": "ALTA",
+   "afirmacion": {"sujeto": "WKS-04\\svc_backup", "accion": "ejecuto-proceso", "objeto": "net.exe",
+                  "desde": "2026-03-07T04:00:00Z", "hasta": "2026-03-07T05:00:00Z"},
+   "resumen": "Primera y unica ejecucion de net.exe del dataset, dos minutos despues de powershell.exe en la misma sesion RDP.",
+   "cita": ["W1103"],
+   "no_prueba": "Sin CommandLine no se sabe si fue 'net user', 'net view', 'net use' o un montaje de recurso legitimo de backup. La hipotesis de enumeracion de cuentas o recursos es indeterminada, no confirmada."},
+
+  {"regla": "findstr_reconocimiento", "severidad": "MEDIA",
+   "afirmacion": {"sujeto": "WKS-04\\svc_backup", "accion": "ejecuto-proceso", "objeto": "findstr.exe",
+                  "desde": "2026-03-07T04:00:00Z", "hasta": "2026-03-07T05:00:00Z"},
+   "resumen": "Primera y unica ejecucion de findstr.exe del dataset, encadenada tras net.exe en la misma sesion RDP.",
+   "cita": ["W1104"],
+   "no_prueba": "Sin CommandLine no se sabe que se buscaba ni en que archivos. No hay evidencia de lectura ni de salida de datos: el 4688 solo prueba que el binario arranco."},
+
+  {"regla": "reg_acceso_registro", "severidad": "ALTA",
+   "afirmacion": {"sujeto": "WKS-04\\svc_backup", "accion": "ejecuto-proceso", "objeto": "reg.exe",
+                  "desde": "2026-03-07T04:00:00Z", "hasta": "2026-03-07T05:00:00Z"},
+   "resumen": "Primera y unica ejecucion de reg.exe del dataset, ultimo proceso de la sesion RDP antes del cierre.",
+   "cita": ["W1105"],
+   "no_prueba": "Sin CommandLine no se distingue una consulta de una escritura ni que clave se toco. No prueba volcado de credenciales ni persistencia: no hay eventos de registro ni de servicios que lo corroboren."},
+
+  {"regla": "cierre_sesion_fuera_de_horario", "severidad": "BAJA",
+   "afirmacion": {"sujeto": "WKS-04\\svc_backup", "accion": "cerro-sesion", "objeto": "WKS-04",
+                  "desde": "2026-03-07T04:00:00Z", "hasta": "2026-03-07T05:00:00Z"},
+   "resumen": "Cierre de la sesion a las 04:28, unico cierre de sesion fuera de la franja 17-19 en que cierran todos los usuarios humanos; acota la sesion interactiva a unos 16 minutos.",
+   "cita": ["W1106"],
+   "no_prueba": "No prueba que la actividad haya terminado ahi: solo cubre lo que windows registra en WKS-04, y una persistencia instalada durante la sesion no generaria un evento de logon posterior."},
+
+  {"regla": "fallo_autenticacion_credencial_vencida", "severidad": "BAJA",
+   "afirmacion": {"sujeto": "WKS-04\\svc_backup", "accion": "fallo-autenticacion", "objeto": "WKS-04",
+                  "desde": "2026-03-02T00:00:00Z", "hasta": "2026-03-12T00:00:00Z"},
+   "resumen": "660 fallos 4625 con SubStatus 0xC000006A desde una unica IP fija (10.20.4.201), logon type 3, a ritmo plano de ~66 por dia las 24 horas: firma de credencial desactualizada en un job automatizado, no de fuerza bruta.",
+   "cita": ["W1095", "W1096", "W1097", "W1098", "W1099", "W1100", "W1107", "W1108", "W1109", "W1110", "W1111", "W1112", "W1113"],
+   "no_prueba": "No prueba que sea inofensivo ni que sea ajeno a la sesion RDP del 03-07: la cadencia no se altera ni antes ni despues de esa sesion (W1100 a las 04:01, W1107 a las 04:33), lo que descarta que el logon exitoso sea el resultado de este mismo proceso, pero no descarta que ambos compartan origen."}
+]}
