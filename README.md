@@ -25,7 +25,8 @@ python main.py regresion        la suite del motor · cada prueba con su esperad
 python main.py test             las 34.868 verificaciones
 ```
 
-El diseño completo —decisiones, descartes y etapas pendientes— está en `DISENO.md`.
+El diseño completo, con las decisiones cerradas, los descartes y lo que quedó sin
+construir, está en `DISENO.md`.
 
 ## El escenario
 
@@ -182,14 +183,14 @@ veto sobre la realidad sería lo contrario de una herramienta con humano en el l
 
 ## Los casos
 
-Ocho decisiones donde el veredicto no coincide con la intuición, cada una con su `esperado`.
+Nueve decisiones donde el veredicto no coincide con la intuición, cada una con su `esperado`.
 Suite de regresión del motor:
 
 ```
 python main.py regresion --detalle
 ```
 
-El más instructivo es el 8: revocar la credencial del pipeline sale **FUNDADA**, y es la
+El más instructivo es el par 8/9: revocar la credencial del pipeline sale **FUNDADA**, y es la
 credencial legítima de la automatización con 95 usos en la ventana. El motor dice que la
 evidencia respalda la acción, no que sea buena idea. Y el par 4/5 muestra que el volumen no
 es compromiso: la IP interna con 648 fallos no se bloquea y la del ataque, con cinco veces

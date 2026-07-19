@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+
+# Estado de sesion: se genera al operar y no describe el proyecto.
+evidencia/.decisiones.json
+evidencia/.consultas.json
+evidencia_b/.decisiones.json
+evidencia_b/.consultas.json
+
+# Material de estudio, no parte del proyecto.
+.claude/skills/fir-conceptos/

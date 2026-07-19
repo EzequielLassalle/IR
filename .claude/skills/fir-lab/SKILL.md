@@ -295,7 +295,7 @@ horas declararia "caida" cualquier actividad rutinaria.
 | 4.1 | `python main.py respuesta` |
 | 4.2 | `python main.py cobertura` |
 | 4.3 | `python main.py observable <accion> <objeto> --desde T --hasta T [--sujeto S]` |
-| 4.4 | `python main.py situacion <archivo_hallazgos.json>` |
+| 4.4 | `python main.py situacion <archivo_hallazgos.json> [--desde T] [--hasta T]` |
 | 4.5 | `python main.py consultas` |
 
 **El estado de la respuesta no se guarda aparte: se deriva replayando la cronologia.** Una
@@ -376,7 +376,7 @@ haber mirado donde no habia nada que mirar.
 | Opcion | Comando |
 |---|---|
 | 6.1 | `python main.py recomendacion [--hallazgos ARCHIVO] [--en T]` |
-| 6.2 | `python main.py situacion <archivo_hallazgos.json>` |
+| 6.2 | `python main.py situacion <archivo_hallazgos.json> [--desde T] [--hasta T]` |
 
 **Con `--hallazgos` la recomendacion sale de una investigacion en vez del detector.** Es el
 circuito agentico completo: el agente investiga, escribe su archivo, el verificador decide
@@ -401,6 +401,10 @@ informe: **SIN MIRAR** es un hueco de investigacion, **MIRADO Y VACIO** es una z
 descartada. Sale de cruzar la cobertura con el registro de consultas.
 
 **Es lo que decide si una contencion es prematura**, asi que no se resume: se pega entera.
+
+`situacion` toma `--desde/--hasta` y **por defecto juzga solo la ventana del incidente**
+(8 horas). Si no se pasan, el operador esta viendo los huecos de ese tramo y de ningun otro
+-- decirlo cuando se presente la salida, o pasar la ventana que corresponda.
 
 ## 7) Cronologia
 

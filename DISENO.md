@@ -3,12 +3,11 @@
 Documento de diseño: el razonamiento detrás de las decisiones, incluidas las que después se
 descartaron.
 
-> **El alcance vigente está en `PENDIENTE.md`, no acá.** Este documento describe el diseño
+> **El alcance vigente está en el README, no acá.** Este documento describe el diseño
 > completo tal como se pensó, que es deliberadamente más grande que lo que se construye. La
 > sección 8 (Etapas) quedó superada: el orden real de construcción es P1 → P3 → P4 → P2 →
-> P5 → P6, y dos piezas de acá abajo están **descartadas en firme** — la corriente viva con
-> el plan pendiente del atacante, y el eje "acertada" con los cuatro cuadrantes. Los motivos
-> están en `PENDIENTE.md`.
+> P5 → P6, y dos piezas de acá abajo están **descartadas en firme**. Los motivos están al
+> final de este documento.
 >
 > Se conservan escritas porque el argumento por el que se descartaron vale más que el hueco
 > que dejan, y porque si el proyecto alguna vez tiene que servir para hablar de criterio y no
@@ -371,3 +370,67 @@ evento y la métrica de recall no son opcionales.
 **Reutilización desde DFIR.** Evaluar qué se trae tal cual (normalización temporal, semántica
 de eventos, modelo de cobertura, la máquina de veredictos, integridad y custodia) y qué se
 reescribe. Decidir si se copia o se comparte.
+
+
+---
+
+# Apéndice — Decisiones cerradas y descartes
+
+Absorbido de `PENDIENTE.md`, que se eliminó al terminar el proyecto. Está acá para no
+reabrir cada decisión cada vez que alguien lee el diseño.
+
+## Qué es esto, y qué no
+
+**Respuesta agéntica con humano en el lazo, no un SOAR automatizado.** El menú ofrece
+acciones y decide una persona, o un agente recomienda y la persona ejecuta. Por eso no hay
+playbooks como objeto: es el modelo, no una carencia. Lo que sí tiene que existir, y existe,
+es que ejecutar cambie el mundo.
+
+## Decisiones cerradas
+
+- Los agentes se lanzan **desde el skill, nunca desde el código**: si Python llamara a la
+  API, la suite de regresión dejaría de ser reproducible.
+- **El escenario B no se tunea.** Se mide.
+- **La verdad no se persiste.** Se regenera desde el seed al medir, con una guarda que corta
+  si la evidencia en disco no corresponde al escenario.
+- **Cuatro veredictos**, de bordes nítidos. Lo desconocido cae en `NO-ADJUDICABLE`, nunca en
+  `INFUNDADA`.
+- **La evidencia histórica es inmutable.** Sólo cambia el estado de la respuesta.
+- **Ninguna acción entra al catálogo si no declara su efecto sobre el estado.**
+- **El estado lo define el acto, no el veredicto.** Ejecutar algo que el motor declaró
+  `INFUNDADA` cambia el mundo igual y queda marcado como *override*. Un adjudicador con poder
+  de veto sobre la realidad sería lo contrario de una herramienta con humano en el lazo.
+- **Se eliminó el sellado SHA-256.** Era forensia heredada y redundante: la guarda de semilla
+  ya comprueba que la evidencia corresponda al escenario, que es más fuerte que "no cambió
+  desde que alguien la selló".
+
+## Descartado, y por qué
+
+- **Corriente viva y plan pendiente del atacante.** Que la contención se lea en logs
+  futuros. Es la idea más linda del diseño y el pedazo más caro; el estado de respuesta
+  consigue el grueso del efecto por una fracción del costo.
+- **Eje "acertada" y los cuatro cuadrantes.** Es barato —se computa retrospectivamente contra
+  la evidencia histórica— y aun así queda afuera: es función de entrenamiento, no de
+  operación. Un SOAR dice si la acción corresponde; no puntúa al analista contra una verdad
+  que en producción nadie tiene. **Primera pieza a reincorporar** si el proyecto alguna vez
+  tiene que servir para hablar de criterio y no sólo de operación.
+- **Ejecución real.** No hay integración con nada, y se presenta como simulador.
+- **Roles y autoridad.** Es una tabla de permisos evaluando peticiones: es el simulador de
+  IAM, no agrega concepto nuevo acá.
+- **Costo operativo cuantificado.** Números declarados por el autor, sin nada contra qué
+  contrastar. Queda como texto ordinal.
+
+## Lo que falta, y no se construyó
+
+- **La alerta como entidad.** Hoy se entra al caso por el barrido. No hay alerta con
+  severidad, deduplicación ni agrupación en incidente, que es por donde arranca un SOAR.
+- **Enriquecimiento** (reputación, inventario, contexto de identidad) y **métricas
+  operativas** (MTTD, MTTR, tasa de falsos positivos).
+- **Nadie mide el producto final.** `medir` puntúa a cada analista contra la verdad, pero no
+  a las acciones que salen de él: un agente con recall alto y precisión baja arrastra la
+  recomendación hacia contener de más, y el arnés no lo detecta.
+- **`test_credenciales_usadas_dentro_de_su_ventana` es vacuo**: verifica 3.249 veces una
+  condición verdadera por construcción. Es la misma forma de error que las cinco auditorías
+  del proyecto anterior.
+- **`tiempo.py` no hace trabajo acá.** Vino de DFIR, es correcto, y `eventos.py` normaliza
+  con él. No conviene ponerlo al frente al presentar el proyecto.

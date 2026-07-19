@@ -626,7 +626,11 @@ def test_la_bitacora_solo_marca_lo_que_devolvio(fuentes, verdad) -> None:
         # Otra ventana no cubre la del incidente.
         otro_tramo = filtrar(eventos, fuente="cloudtrail",
                              desde="2026-03-03T00:00:00Z", hasta="2026-03-04T00:00:00Z")
-        bitacora.registrar(tmp, "timeline", {"fuente": "cloudtrail"}, otro_tramo)
+        # Los filtros temporales van al registro: son los que definen el alcance. Una
+        # consulta acotada al dia 3 no cubre la ventana del incidente.
+        bitacora.registrar(tmp, "timeline",
+                           {"fuente": "cloudtrail", "desde": "2026-03-03T00:00:00Z",
+                            "hasta": "2026-03-04T00:00:00Z"}, otro_tramo)
         verificar(not bitacora.toco(tmp, "cloudtrail", "llamo-api", *ventana),
                   "una consulta de otro tramo temporal cubre la ventana del incidente")
 
@@ -636,6 +640,78 @@ def test_la_bitacora_solo_marca_lo_que_devolvio(fuentes, verdad) -> None:
         bitacora.registrar(tmp, "timeline", {"fuente": "cloudtrail"}, [])
         verificar(not bitacora.toco(tmp, "cloudtrail", "llamo-api", *ventana),
                   "una consulta sin resultados figura como cobertura")
+
+
+def test_la_bitacora_no_da_por_mirado_el_producto_cartesiano(fuentes, verdad) -> None:
+    """La unidad de cobertura es el par (fuente, accion), no cada componente por su lado.
+
+    Segunda vuelta del mismo bug, y por eso este test existe aparte: guardar fuentes y
+    acciones como dos conjuntos independientes da por mirado su producto cartesiano. Una
+    consulta sin filtro de fuente que devuelve un `cerro-sesion` de syslog y algo de windows
+    marcaba `windows/cerro-sesion` como zona descartada aunque Windows no tuviera ni un
+    cierre en esa ventana -- una afirmacion de ausencia falsa disparada por la consulta mas
+    comun que hace cualquiera.
+
+    Se barre el producto completo de zonas presentes contra zonas ausentes, no un caso
+    elegido a mano.
+    """
+    import tempfile
+
+    import bitacora
+    from consulta import filtrar
+    from eventos import ACCIONES_POR_FUENTE, cargar as cargar_eventos
+
+    eventos = cargar_eventos()
+    ventana = ("2026-03-05T03:00:00Z", "2026-03-05T04:00:00Z")
+    devueltos = filtrar(eventos, desde=ventana[0], hasta=ventana[1])
+    verificar(bool(devueltos), "la ventana de prueba no devuelve eventos")
+
+    presentes = {(e.fuente, e.accion) for e in devueltos}
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        bitacora.registrar(tmp, "timeline",
+                           {"desde": ventana[0], "hasta": ventana[1]}, devueltos)
+
+        for fuente, acciones in sorted(ACCIONES_POR_FUENTE.items()):
+            for accion in sorted(acciones):
+                esperado = (fuente, accion) in presentes
+                obtenido = bitacora.toco(tmp, fuente, accion, *ventana)
+                verificar(obtenido == esperado,
+                          f"{fuente}/'{accion}': la consulta "
+                          f"{'no ' if esperado else ''}lo devolvio y toco() dice "
+                          f"{obtenido}")
+
+
+def test_la_bitacora_exige_cubrir_la_ventana_entera(fuentes, verdad) -> None:
+    """Haber mirado una hora no es haber mirado la ventana.
+
+    La cobertura se exige por contencion: el alcance de la consulta tiene que abarcar el
+    tramo pedido. Con solapamiento alcanzaba con haber mirado un minuto para declarar
+    descartadas ocho horas.
+    """
+    import tempfile
+
+    import bitacora
+    from consulta import filtrar
+    from eventos import cargar as cargar_eventos
+
+    eventos = cargar_eventos()
+    grande = ("2026-03-09T20:00:00Z", "2026-03-10T04:00:00Z")
+    chica = ("2026-03-10T00:00:00Z", "2026-03-10T01:00:00Z")
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        devueltos = filtrar(eventos, fuente="windows", accion="ejecuto-proceso",
+                            desde=chica[0], hasta=chica[1])
+        verificar(bool(devueltos), "la ventana chica de prueba no devuelve eventos")
+        bitacora.registrar(tmp, "timeline",
+                           {"fuente": "windows", "accion": "ejecuto-proceso",
+                            "desde": chica[0], "hasta": chica[1]}, devueltos)
+
+        verificar(bitacora.toco(tmp, "windows", "ejecuto-proceso", *chica),
+                  "la consulta no cubre su propia ventana")
+        verificar(not bitacora.toco(tmp, "windows", "ejecuto-proceso", *grande),
+                  "una consulta de una hora da por cubierta una ventana de ocho")
 
 
 def test_ejecutar_cambia_el_mundo_aunque_el_motor_no_funde(fuentes, verdad) -> None:

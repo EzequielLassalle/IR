@@ -27,6 +27,24 @@ descartada cuesta el alcance del incidente.
 Por eso ahora se registra **lo que la consulta devolvio** -- que fuentes, que acciones, sobre
 que tramo de tiempo -- y no lo que se pidio. Una consulta que no devuelve eventos de una
 fuente no la marca como mirada, por mas que el filtro la nombrara.
+
+## Y la segunda vuelta de la misma leccion
+
+La correccion anterior guardaba las fuentes y las acciones como **dos conjuntos
+independientes**, y eso da por mirado el producto cartesiano de ambos. Un `timeline` sin
+filtro de fuente que devolvia un `cerro-sesion` de syslog y algun evento de windows marcaba
+`windows/cerro-sesion` como zona descartada, aunque en esa ventana Windows no tuviera ni un
+cierre de sesion. Menos grave que el bug original y exactamente el mismo modo de falla, en la
+misma funcion, disparado por la consulta mas comun que hace cualquiera.
+
+**La unidad sobre la que se pregunta es el par (fuente, accion), asi que es el par lo que hay
+que guardar.** Aplanarlo en dos conjuntos es volver a afirmar cobertura que no se tiene.
+
+Y se guardan **dos tiempos distintos**, que no son lo mismo: el `alcance` es la ventana que la
+consulta abarco -- de sus filtros, o toda la evidencia si no los tenia -- y decide si el
+tramo pedido estuvo cubierto; el tramo de los resultados solo dice donde cayo lo que hubo.
+Usar el segundo para juzgar cobertura declararia sin mirar cualquier ventana donde la
+consulta no encontro nada, que es justo al reves.
 """
 
 from __future__ import annotations
@@ -61,12 +79,20 @@ def cargar(evid: Path) -> list[dict]:
     return json.loads(ruta.read_text(encoding="utf-8"))
 
 
-def registrar(evid: Path, comando: str, filtros: dict, alcanzado=()) -> None:
-    """Anota una consulta y **lo que devolvio**.
+# Ventana completa del escenario. Una consulta sin filtros temporales abarca todo.
+ALCANCE_TOTAL = ("2026-03-02T00:00:00Z", "2026-03-12T23:59:59Z")
 
-    `alcanzado` son los eventos que la consulta efectivamente mostro. De ahi salen las
-    fuentes, las acciones y el tramo temporal realmente cubierto, que es lo unico sobre lo
-    que se puede afirmar que el analista miro.
+
+def registrar(evid: Path, comando: str, filtros: dict, alcanzado=()) -> None:
+    """Anota una consulta, **las zonas que devolvio** y **la ventana que abarco**.
+
+    Las zonas se guardan como pares `fuente|accion`, que es la unidad sobre la que despues
+    se pregunta. Guardar fuentes y acciones por separado da por mirado el producto cartesiano
+    de ambas, que es afirmar cobertura que no se tiene.
+
+    El alcance sale de los filtros temporales de la consulta, no del tramo donde cayeron los
+    resultados: una consulta sobre diez dias que devolvio tres eventos de un martes **miro**
+    los diez dias, aunque solo hubiera algo el martes.
 
     Silencioso por disenio: nunca puede romper el comando que la origino.
     """
@@ -74,17 +100,15 @@ def registrar(evid: Path, comando: str, filtros: dict, alcanzado=()) -> None:
         return
     try:
         alcanzado = list(alcanzado)
-        instantes = [e.instante.utc for e in alcanzado]
         registro = cargar(evid)
         registro.append({
             "momento": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             "comando": comando,
             "filtros": {k: v for k, v in filtros.items() if v},
             "n": len(alcanzado),
-            "fuentes": sorted({e.fuente for e in alcanzado}),
-            "acciones": sorted({e.accion for e in alcanzado}),
-            "desde": min(instantes).strftime("%Y-%m-%dT%H:%M:%SZ") if instantes else None,
-            "hasta": max(instantes).strftime("%Y-%m-%dT%H:%M:%SZ") if instantes else None,
+            "zonas": sorted({f"{e.fuente}|{e.accion}" for e in alcanzado}),
+            "alcance_desde": filtros.get("desde") or ALCANCE_TOTAL[0],
+            "alcance_hasta": filtros.get("hasta") or ALCANCE_TOTAL[1],
         })
         _ruta(evid).write_text(json.dumps(registro, indent=1, ensure_ascii=False),
                                encoding="utf-8")
@@ -93,25 +117,27 @@ def registrar(evid: Path, comando: str, filtros: dict, alcanzado=()) -> None:
 
 
 def toco(evid: Path, fuente: str, accion: str, desde=None, hasta=None) -> bool:
-    """¿Alguna consulta mostro eventos de esta fuente y accion, en este tramo de tiempo?
+    """¿Alguna consulta mostro eventos de ESTE par fuente/accion, cubriendo ESTA ventana?
 
-    Las tres condiciones se exigen **juntas**. Mirar `windows` no es haber mirado
-    `cloudtrail`; mirar `creo-cuenta` no es haber mirado `llamo-api`; y haber mirado el dia 3
-    no es haber mirado la ventana del incidente. Relajar cualquiera de las tres reintroduce
-    el defecto que hacia mentir a este modulo.
+    Las dos condiciones se exigen juntas y sobre el par, no sobre sus componentes por
+    separado. Mirar `syslog/cerro-sesion` y `windows/ejecuto-proceso` en la misma consulta no
+    es haber mirado `windows/cerro-sesion`, aunque las cuatro palabras aparezcan en el
+    registro. Relajarlo reintroduce el defecto que hacia mentir a este modulo.
+
+    La ventana se exige por **contencion**: la consulta tuvo que abarcar el tramo entero.
+    Haber mirado una hora del dia 5 no es haber mirado la ventana del incidente.
     """
     ini, fin = _t(desde), _t(hasta)
+    zona = f"{fuente}|{accion}"
     for c in cargar(evid):
         if not c.get("n"):
             continue  # una consulta sin resultados no cubre nada
-        if fuente not in c.get("fuentes", []):
-            continue
-        if accion not in c.get("acciones", []):
+        if zona not in c.get("zonas", []):
             continue
         if ini is not None and fin is not None:
-            c_ini, c_fin = _t(c.get("desde")), _t(c.get("hasta"))
-            if c_ini is None or c_fin is None or c_fin < ini or c_ini > fin:
-                continue  # la consulta cubrio otro tramo del tiempo
+            a_ini, a_fin = _t(c.get("alcance_desde")), _t(c.get("alcance_hasta"))
+            if a_ini is None or a_fin is None or a_ini > ini or a_fin < fin:
+                continue  # la consulta no abarco la ventana entera
         return True
     return False
 
@@ -125,9 +151,11 @@ def resumen(evid: Path) -> list[str]:
         filtros = " ".join(f"--{k} {v}" for k, v in c["filtros"].items())
         lineas.append(f"  {c['momento']}  {c['comando']:<11} {filtros}")
         if c.get("n"):
-            lineas.append(f"  {'':<33} devolvio {c['n']} eventos de "
-                          f"{', '.join(c['fuentes'])}")
-            lineas.append(f"  {'':<33} acciones: {', '.join(c['acciones'][:6])}")
+            lineas.append(f"  {'':<33} devolvio {c['n']} eventos en "
+                          f"{len(c['zonas'])} zona(s)")
+            lineas.append(f"  {'':<33} {', '.join(c['zonas'][:5])}")
+            lineas.append(f"  {'':<33} abarco {c['alcance_desde']} .. "
+                          f"{c['alcance_hasta']}")
         else:
             lineas.append(f"  {'':<33} sin resultados: no cubre nada")
     if len(registro) > 20:
