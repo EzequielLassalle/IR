@@ -1,0 +1,5270 @@
+[
+ {
+  "_id": "L0001",
+  "linea": "Mar  1 21:47:39 web-03 sshd[23762]: Invalid user ftp from 198.51.100.143 port 57500"
+ },
+ {
+  "_id": "L0002",
+  "linea": "Mar  1 21:47:39 web-03 sshd[23762]: Failed none for invalid user ftp from 198.51.100.143 port 36404 ssh2"
+ },
+ {
+  "_id": "L0003",
+  "linea": "Mar  1 22:10:29 web-03 sshd[22049]: Invalid user postgres from 203.0.113.210 port 33926"
+ },
+ {
+  "_id": "L0004",
+  "linea": "Mar  1 22:10:29 web-03 sshd[22049]: Failed none for invalid user postgres from 203.0.113.210 port 42797 ssh2"
+ },
+ {
+  "_id": "L0005",
+  "linea": "Mar  1 22:39:27 web-03 sshd[22540]: Invalid user administrador from 198.51.100.12 port 34621"
+ },
+ {
+  "_id": "L0006",
+  "linea": "Mar  1 22:39:27 web-03 sshd[22540]: Failed none for invalid user administrador from 198.51.100.12 port 34021 ssh2"
+ },
+ {
+  "_id": "L0007",
+  "linea": "Mar  1 22:39:34 web-03 sshd[31801]: Invalid user git from 198.51.100.12 port 59922"
+ },
+ {
+  "_id": "L0008",
+  "linea": "Mar  1 22:39:34 web-03 sshd[31801]: Failed none for invalid user git from 198.51.100.12 port 36244 ssh2"
+ },
+ {
+  "_id": "L0009",
+  "linea": "Mar  1 22:39:57 web-03 sshd[29489]: Invalid user oracle from 198.51.100.12 port 41714"
+ },
+ {
+  "_id": "L0010",
+  "linea": "Mar  1 22:39:57 web-03 sshd[29489]: Failed none for invalid user oracle from 198.51.100.12 port 45295 ssh2"
+ },
+ {
+  "_id": "L0011",
+  "linea": "Mar  1 22:40:03 web-03 sshd[11797]: Invalid user test from 198.51.100.12 port 49662"
+ },
+ {
+  "_id": "L0012",
+  "linea": "Mar  1 22:40:03 web-03 sshd[11797]: Failed none for invalid user test from 198.51.100.12 port 48638 ssh2"
+ },
+ {
+  "_id": "L0013",
+  "linea": "Mar  1 23:01:59 web-03 sshd[6342]: Invalid user administrador from 198.51.100.12 port 55160"
+ },
+ {
+  "_id": "L0014",
+  "linea": "Mar  1 23:01:59 web-03 sshd[6342]: Failed none for invalid user administrador from 198.51.100.12 port 43737 ssh2"
+ },
+ {
+  "_id": "L0015",
+  "linea": "Mar  1 23:35:15 web-03 sshd[13241]: Failed password for deploy from 200.45.10.18 port 41120 ssh2"
+ },
+ {
+  "_id": "L0016",
+  "linea": "Mar  1 23:35:26 web-03 sshd[2080]: Invalid user admin from 200.45.10.18 port 57603"
+ },
+ {
+  "_id": "L0017",
+  "linea": "Mar  1 23:35:26 web-03 sshd[2080]: Failed none for invalid user admin from 200.45.10.18 port 32858 ssh2"
+ },
+ {
+  "_id": "L0018",
+  "linea": "Mar  1 23:35:37 web-03 sshd[23782]: Invalid user jenkins from 200.45.10.18 port 38284"
+ },
+ {
+  "_id": "L0019",
+  "linea": "Mar  1 23:35:37 web-03 sshd[23782]: Failed none for invalid user jenkins from 200.45.10.18 port 46655 ssh2"
+ },
+ {
+  "_id": "L0020",
+  "linea": "Mar  1 23:56:27 web-03 sshd[30837]: Failed password for deploy from 198.51.100.12 port 58127 ssh2"
+ },
+ {
+  "_id": "L0021",
+  "linea": "Mar  2 00:43:10 web-03 sshd[23518]: Invalid user administrador from 192.0.2.88 port 48045"
+ },
+ {
+  "_id": "L0022",
+  "linea": "Mar  2 00:43:10 web-03 sshd[23518]: Failed none for invalid user administrador from 192.0.2.88 port 32170 ssh2"
+ },
+ {
+  "_id": "L0023",
+  "linea": "Mar  2 00:43:16 web-03 sshd[13403]: Failed password for deploy from 192.0.2.88 port 52648 ssh2"
+ },
+ {
+  "_id": "L0024",
+  "linea": "Mar  2 00:43:39 web-03 sshd[13677]: Invalid user admin from 192.0.2.88 port 31506"
+ },
+ {
+  "_id": "L0025",
+  "linea": "Mar  2 00:43:39 web-03 sshd[13677]: Failed none for invalid user admin from 192.0.2.88 port 50446 ssh2"
+ },
+ {
+  "_id": "L0026",
+  "linea": "Mar  2 00:43:56 web-03 sshd[15490]: Invalid user postgres from 192.0.2.88 port 53821"
+ },
+ {
+  "_id": "L0027",
+  "linea": "Mar  2 00:43:56 web-03 sshd[15490]: Failed none for invalid user postgres from 192.0.2.88 port 52186 ssh2"
+ },
+ {
+  "_id": "L0028",
+  "linea": "Mar  2 01:45:09 web-03 sshd[15160]: Invalid user ftp from 198.51.100.77 port 35083"
+ },
+ {
+  "_id": "L0029",
+  "linea": "Mar  2 01:45:09 web-03 sshd[15160]: Failed none for invalid user ftp from 198.51.100.77 port 52487 ssh2"
+ },
+ {
+  "_id": "L0030",
+  "linea": "Mar  2 02:43:18 web-03 sshd[17161]: Invalid user postgres from 198.51.100.12 port 60210"
+ },
+ {
+  "_id": "L0031",
+  "linea": "Mar  2 02:43:18 web-03 sshd[17161]: Failed none for invalid user postgres from 198.51.100.12 port 50047 ssh2"
+ },
+ {
+  "_id": "L0032",
+  "linea": "Mar  2 02:43:40 web-03 sshd[29591]: Invalid user postgres from 198.51.100.12 port 34850"
+ },
+ {
+  "_id": "L0033",
+  "linea": "Mar  2 02:43:40 web-03 sshd[29591]: Failed none for invalid user postgres from 198.51.100.12 port 57821 ssh2"
+ },
+ {
+  "_id": "L0034",
+  "linea": "Mar  2 02:43:59 web-03 sshd[8019]: Invalid user git from 198.51.100.12 port 58097"
+ },
+ {
+  "_id": "L0035",
+  "linea": "Mar  2 02:43:59 web-03 sshd[8019]: Failed none for invalid user git from 198.51.100.12 port 51073 ssh2"
+ },
+ {
+  "_id": "L0036",
+  "linea": "Mar  2 02:44:22 web-03 sshd[11064]: Invalid user administrador from 198.51.100.12 port 41611"
+ },
+ {
+  "_id": "L0037",
+  "linea": "Mar  2 02:44:22 web-03 sshd[11064]: Failed none for invalid user administrador from 198.51.100.12 port 41603 ssh2"
+ },
+ {
+  "_id": "L0038",
+  "linea": "Mar  2 03:32:18 web-03 sshd[27004]: Invalid user jenkins from 190.210.8.92 port 36475"
+ },
+ {
+  "_id": "L0039",
+  "linea": "Mar  2 03:32:18 web-03 sshd[27004]: Failed none for invalid user jenkins from 190.210.8.92 port 59154 ssh2"
+ },
+ {
+  "_id": "L0040",
+  "linea": "Mar  2 03:32:31 web-03 sshd[5346]: Invalid user ftp from 190.210.8.92 port 55345"
+ },
+ {
+  "_id": "L0041",
+  "linea": "Mar  2 03:32:31 web-03 sshd[5346]: Failed none for invalid user ftp from 190.210.8.92 port 57044 ssh2"
+ },
+ {
+  "_id": "L0042",
+  "linea": "Mar  2 03:32:36 web-03 sshd[18476]: Invalid user oracle from 190.210.8.92 port 64323"
+ },
+ {
+  "_id": "L0043",
+  "linea": "Mar  2 03:32:36 web-03 sshd[18476]: Failed none for invalid user oracle from 190.210.8.92 port 41015 ssh2"
+ },
+ {
+  "_id": "L0044",
+  "linea": "Mar  2 03:32:49 web-03 sshd[3431]: Invalid user backup from 190.210.8.92 port 59078"
+ },
+ {
+  "_id": "L0045",
+  "linea": "Mar  2 03:32:49 web-03 sshd[3431]: Failed none for invalid user backup from 190.210.8.92 port 42084 ssh2"
+ },
+ {
+  "_id": "L0046",
+  "linea": "Mar  2 04:24:31 web-03 sshd[10312]: Invalid user administrador from 198.51.100.77 port 31728"
+ },
+ {
+  "_id": "L0047",
+  "linea": "Mar  2 04:24:31 web-03 sshd[10312]: Failed none for invalid user administrador from 198.51.100.77 port 59283 ssh2"
+ },
+ {
+  "_id": "L0048",
+  "linea": "Mar  2 04:24:48 web-03 sshd[8177]: Invalid user oracle from 198.51.100.77 port 42687"
+ },
+ {
+  "_id": "L0049",
+  "linea": "Mar  2 04:24:48 web-03 sshd[8177]: Failed none for invalid user oracle from 198.51.100.77 port 40452 ssh2"
+ },
+ {
+  "_id": "L0050",
+  "linea": "Mar  2 04:47:56 web-03 sshd[16191]: Failed password for deploy from 192.0.2.15 port 38259 ssh2"
+ },
+ {
+  "_id": "L0051",
+  "linea": "Mar  2 04:48:20 web-03 sshd[29439]: Invalid user ftp from 192.0.2.15 port 45998"
+ },
+ {
+  "_id": "L0052",
+  "linea": "Mar  2 04:48:20 web-03 sshd[29439]: Failed none for invalid user ftp from 192.0.2.15 port 33407 ssh2"
+ },
+ {
+  "_id": "L0053",
+  "linea": "Mar  2 04:48:34 web-03 sshd[16744]: Invalid user administrador from 192.0.2.15 port 34434"
+ },
+ {
+  "_id": "L0054",
+  "linea": "Mar  2 04:48:34 web-03 sshd[16744]: Failed none for invalid user administrador from 192.0.2.15 port 35429 ssh2"
+ },
+ {
+  "_id": "L0055",
+  "linea": "Mar  2 04:48:40 web-03 sshd[29837]: Invalid user admin from 192.0.2.15 port 57460"
+ },
+ {
+  "_id": "L0056",
+  "linea": "Mar  2 04:48:40 web-03 sshd[29837]: Failed none for invalid user admin from 192.0.2.15 port 54295 ssh2"
+ },
+ {
+  "_id": "L0057",
+  "linea": "Mar  2 06:08:15 web-03 sshd[12402]: Failed password for deploy from 203.0.113.44 port 52396 ssh2"
+ },
+ {
+  "_id": "L0058",
+  "linea": "Mar  2 06:32:16 web-03 sshd[2695]: Invalid user backup from 198.51.100.12 port 39083"
+ },
+ {
+  "_id": "L0059",
+  "linea": "Mar  2 06:32:16 web-03 sshd[2695]: Failed none for invalid user backup from 198.51.100.12 port 59547 ssh2"
+ },
+ {
+  "_id": "L0060",
+  "linea": "Mar  2 09:00:00 web-03 sshd[12863]: Accepted publickey for deploy from 10.20.4.28 port 53538 ssh2: RSA SHA256:8vN2qLpXeR4kTsYbMwGh"
+ },
+ {
+  "_id": "L0061",
+  "linea": "Mar  2 09:10:24 web-03 sudo[3307]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/docker compose up -d"
+ },
+ {
+  "_id": "L0062",
+  "linea": "Mar  2 09:12:42 web-03 sudo[3000]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/tail -n 200 /var/log/api/app.log"
+ },
+ {
+  "_id": "L0063",
+  "linea": "Mar  2 09:32:42 web-03 sshd[12863]: Disconnected from user deploy 10.20.4.28"
+ },
+ {
+  "_id": "L0064",
+  "linea": "Mar  2 20:59:18 web-03 sshd[23552]: Invalid user postgres from 198.51.100.143 port 44788"
+ },
+ {
+  "_id": "L0065",
+  "linea": "Mar  2 20:59:18 web-03 sshd[23552]: Failed none for invalid user postgres from 198.51.100.143 port 40316 ssh2"
+ },
+ {
+  "_id": "L0066",
+  "linea": "Mar  2 20:59:24 web-03 sshd[25254]: Invalid user git from 198.51.100.143 port 50545"
+ },
+ {
+  "_id": "L0067",
+  "linea": "Mar  2 20:59:24 web-03 sshd[25254]: Failed none for invalid user git from 198.51.100.143 port 62185 ssh2"
+ },
+ {
+  "_id": "L0068",
+  "linea": "Mar  2 21:46:07 web-03 sshd[26536]: Invalid user administrador from 200.45.10.18 port 61237"
+ },
+ {
+  "_id": "L0069",
+  "linea": "Mar  2 21:46:07 web-03 sshd[26536]: Failed none for invalid user administrador from 200.45.10.18 port 53942 ssh2"
+ },
+ {
+  "_id": "L0070",
+  "linea": "Mar  2 21:46:27 web-03 sshd[24682]: Invalid user oracle from 200.45.10.18 port 63111"
+ },
+ {
+  "_id": "L0071",
+  "linea": "Mar  2 21:46:27 web-03 sshd[24682]: Failed none for invalid user oracle from 200.45.10.18 port 57774 ssh2"
+ },
+ {
+  "_id": "L0072",
+  "linea": "Mar  2 21:46:49 web-03 sshd[23826]: Failed password for deploy from 200.45.10.18 port 41583 ssh2"
+ },
+ {
+  "_id": "L0073",
+  "linea": "Mar  2 21:46:59 web-03 sshd[22853]: Invalid user backup from 200.45.10.18 port 35548"
+ },
+ {
+  "_id": "L0074",
+  "linea": "Mar  2 21:46:59 web-03 sshd[22853]: Failed none for invalid user backup from 200.45.10.18 port 55480 ssh2"
+ },
+ {
+  "_id": "L0075",
+  "linea": "Mar  2 22:10:00 web-03 sshd[31776]: Failed password for deploy from 198.51.100.12 port 47722 ssh2"
+ },
+ {
+  "_id": "L0076",
+  "linea": "Mar  2 22:10:18 web-03 sshd[22348]: Failed password for deploy from 198.51.100.12 port 61289 ssh2"
+ },
+ {
+  "_id": "L0077",
+  "linea": "Mar  2 22:10:38 web-03 sshd[8139]: Failed password for deploy from 198.51.100.12 port 36232 ssh2"
+ },
+ {
+  "_id": "L0078",
+  "linea": "Mar  2 22:11:03 web-03 sshd[21716]: Invalid user backup from 198.51.100.12 port 60561"
+ },
+ {
+  "_id": "L0079",
+  "linea": "Mar  2 22:11:03 web-03 sshd[21716]: Failed none for invalid user backup from 198.51.100.12 port 44515 ssh2"
+ },
+ {
+  "_id": "L0080",
+  "linea": "Mar  2 22:56:42 web-03 sshd[17828]: Invalid user postgres from 192.0.2.200 port 35679"
+ },
+ {
+  "_id": "L0081",
+  "linea": "Mar  2 22:56:42 web-03 sshd[17828]: Failed none for invalid user postgres from 192.0.2.200 port 35040 ssh2"
+ },
+ {
+  "_id": "L0082",
+  "linea": "Mar  2 22:56:46 web-03 sshd[3396]: Invalid user admin from 192.0.2.200 port 39924"
+ },
+ {
+  "_id": "L0083",
+  "linea": "Mar  2 22:56:46 web-03 sshd[3396]: Failed none for invalid user admin from 192.0.2.200 port 42183 ssh2"
+ },
+ {
+  "_id": "L0084",
+  "linea": "Mar  2 23:26:02 web-03 sshd[30091]: Invalid user backup from 192.0.2.15 port 44173"
+ },
+ {
+  "_id": "L0085",
+  "linea": "Mar  2 23:26:02 web-03 sshd[30091]: Failed none for invalid user backup from 192.0.2.15 port 61285 ssh2"
+ },
+ {
+  "_id": "L0086",
+  "linea": "Mar  2 23:26:14 web-03 sshd[7942]: Invalid user oracle from 192.0.2.15 port 31950"
+ },
+ {
+  "_id": "L0087",
+  "linea": "Mar  2 23:26:14 web-03 sshd[7942]: Failed none for invalid user oracle from 192.0.2.15 port 62148 ssh2"
+ },
+ {
+  "_id": "L0088",
+  "linea": "Mar  2 23:26:35 web-03 sshd[22102]: Invalid user git from 192.0.2.15 port 61255"
+ },
+ {
+  "_id": "L0089",
+  "linea": "Mar  2 23:26:35 web-03 sshd[22102]: Failed none for invalid user git from 192.0.2.15 port 40999 ssh2"
+ },
+ {
+  "_id": "L0090",
+  "linea": "Mar  2 23:26:44 web-03 sshd[9383]: Invalid user jenkins from 192.0.2.15 port 30306"
+ },
+ {
+  "_id": "L0091",
+  "linea": "Mar  2 23:26:44 web-03 sshd[9383]: Failed none for invalid user jenkins from 192.0.2.15 port 48552 ssh2"
+ },
+ {
+  "_id": "L0092",
+  "linea": "Mar  2 23:49:48 web-03 sshd[15920]: Invalid user postgres from 203.0.113.44 port 56850"
+ },
+ {
+  "_id": "L0093",
+  "linea": "Mar  2 23:49:48 web-03 sshd[15920]: Failed none for invalid user postgres from 203.0.113.44 port 42422 ssh2"
+ },
+ {
+  "_id": "L0094",
+  "linea": "Mar  3 00:18:46 web-03 sshd[7036]: Invalid user administrador from 198.51.100.143 port 51027"
+ },
+ {
+  "_id": "L0095",
+  "linea": "Mar  3 00:18:46 web-03 sshd[7036]: Failed none for invalid user administrador from 198.51.100.143 port 37721 ssh2"
+ },
+ {
+  "_id": "L0096",
+  "linea": "Mar  3 00:18:47 web-03 sshd[17671]: Invalid user test from 198.51.100.143 port 40284"
+ },
+ {
+  "_id": "L0097",
+  "linea": "Mar  3 00:18:47 web-03 sshd[17671]: Failed none for invalid user test from 198.51.100.143 port 48745 ssh2"
+ },
+ {
+  "_id": "L0098",
+  "linea": "Mar  3 00:39:46 web-03 sshd[21101]: Invalid user oracle from 203.0.113.7 port 39533"
+ },
+ {
+  "_id": "L0099",
+  "linea": "Mar  3 00:39:46 web-03 sshd[21101]: Failed none for invalid user oracle from 203.0.113.7 port 60626 ssh2"
+ },
+ {
+  "_id": "L0100",
+  "linea": "Mar  3 00:40:09 web-03 sshd[14948]: Invalid user test from 203.0.113.7 port 36929"
+ },
+ {
+  "_id": "L0101",
+  "linea": "Mar  3 00:40:09 web-03 sshd[14948]: Failed none for invalid user test from 203.0.113.7 port 39101 ssh2"
+ },
+ {
+  "_id": "L0102",
+  "linea": "Mar  3 00:40:11 web-03 sshd[8144]: Failed password for deploy from 203.0.113.7 port 51864 ssh2"
+ },
+ {
+  "_id": "L0103",
+  "linea": "Mar  3 01:17:43 web-03 sshd[11551]: Invalid user oracle from 192.0.2.88 port 60699"
+ },
+ {
+  "_id": "L0104",
+  "linea": "Mar  3 01:17:43 web-03 sshd[11551]: Failed none for invalid user oracle from 192.0.2.88 port 61729 ssh2"
+ },
+ {
+  "_id": "L0105",
+  "linea": "Mar  3 01:17:56 web-03 sshd[9088]: Invalid user git from 192.0.2.88 port 43132"
+ },
+ {
+  "_id": "L0106",
+  "linea": "Mar  3 01:17:56 web-03 sshd[9088]: Failed none for invalid user git from 192.0.2.88 port 59437 ssh2"
+ },
+ {
+  "_id": "L0107",
+  "linea": "Mar  3 01:17:57 web-03 sshd[13362]: Invalid user administrador from 192.0.2.88 port 52748"
+ },
+ {
+  "_id": "L0108",
+  "linea": "Mar  3 01:17:57 web-03 sshd[13362]: Failed none for invalid user administrador from 192.0.2.88 port 51672 ssh2"
+ },
+ {
+  "_id": "L0109",
+  "linea": "Mar  3 01:18:17 web-03 sshd[22919]: Invalid user ftp from 192.0.2.88 port 63998"
+ },
+ {
+  "_id": "L0110",
+  "linea": "Mar  3 01:18:17 web-03 sshd[22919]: Failed none for invalid user ftp from 192.0.2.88 port 32480 ssh2"
+ },
+ {
+  "_id": "L0111",
+  "linea": "Mar  3 01:39:20 web-03 sshd[5395]: Invalid user backup from 203.0.113.44 port 50712"
+ },
+ {
+  "_id": "L0112",
+  "linea": "Mar  3 01:39:20 web-03 sshd[5395]: Failed none for invalid user backup from 203.0.113.44 port 55496 ssh2"
+ },
+ {
+  "_id": "L0113",
+  "linea": "Mar  3 01:39:22 web-03 sshd[1899]: Invalid user oracle from 203.0.113.44 port 51673"
+ },
+ {
+  "_id": "L0114",
+  "linea": "Mar  3 01:39:22 web-03 sshd[1899]: Failed none for invalid user oracle from 203.0.113.44 port 45059 ssh2"
+ },
+ {
+  "_id": "L0115",
+  "linea": "Mar  3 01:39:29 web-03 sshd[28075]: Invalid user test from 203.0.113.44 port 45176"
+ },
+ {
+  "_id": "L0116",
+  "linea": "Mar  3 01:39:29 web-03 sshd[28075]: Failed none for invalid user test from 203.0.113.44 port 47089 ssh2"
+ },
+ {
+  "_id": "L0117",
+  "linea": "Mar  3 01:39:37 web-03 sshd[27737]: Invalid user test from 203.0.113.44 port 33374"
+ },
+ {
+  "_id": "L0118",
+  "linea": "Mar  3 01:39:37 web-03 sshd[27737]: Failed none for invalid user test from 203.0.113.44 port 50397 ssh2"
+ },
+ {
+  "_id": "L0119",
+  "linea": "Mar  3 02:02:39 web-03 sshd[14062]: Invalid user ftp from 203.0.113.210 port 31755"
+ },
+ {
+  "_id": "L0120",
+  "linea": "Mar  3 02:02:39 web-03 sshd[14062]: Failed none for invalid user ftp from 203.0.113.210 port 53325 ssh2"
+ },
+ {
+  "_id": "L0121",
+  "linea": "Mar  3 02:02:45 web-03 sshd[16521]: Invalid user backup from 203.0.113.210 port 51283"
+ },
+ {
+  "_id": "L0122",
+  "linea": "Mar  3 02:02:45 web-03 sshd[16521]: Failed none for invalid user backup from 203.0.113.210 port 36255 ssh2"
+ },
+ {
+  "_id": "L0123",
+  "linea": "Mar  3 02:02:59 web-03 sshd[30974]: Invalid user jenkins from 203.0.113.210 port 59820"
+ },
+ {
+  "_id": "L0124",
+  "linea": "Mar  3 02:02:59 web-03 sshd[30974]: Failed none for invalid user jenkins from 203.0.113.210 port 60680 ssh2"
+ },
+ {
+  "_id": "L0125",
+  "linea": "Mar  3 02:34:07 web-03 sshd[15384]: Invalid user admin from 198.51.100.33 port 33354"
+ },
+ {
+  "_id": "L0126",
+  "linea": "Mar  3 02:34:07 web-03 sshd[15384]: Failed none for invalid user admin from 198.51.100.33 port 54177 ssh2"
+ },
+ {
+  "_id": "L0127",
+  "linea": "Mar  3 02:34:19 web-03 sshd[10633]: Invalid user postgres from 198.51.100.33 port 45474"
+ },
+ {
+  "_id": "L0128",
+  "linea": "Mar  3 02:34:19 web-03 sshd[10633]: Failed none for invalid user postgres from 198.51.100.33 port 53572 ssh2"
+ },
+ {
+  "_id": "L0129",
+  "linea": "Mar  3 02:34:43 web-03 sshd[16494]: Invalid user admin from 198.51.100.33 port 47281"
+ },
+ {
+  "_id": "L0130",
+  "linea": "Mar  3 02:34:43 web-03 sshd[16494]: Failed none for invalid user admin from 198.51.100.33 port 51115 ssh2"
+ },
+ {
+  "_id": "L0131",
+  "linea": "Mar  3 03:03:47 web-03 sshd[19012]: Invalid user oracle from 203.0.113.91 port 31708"
+ },
+ {
+  "_id": "L0132",
+  "linea": "Mar  3 03:03:47 web-03 sshd[19012]: Failed none for invalid user oracle from 203.0.113.91 port 31872 ssh2"
+ },
+ {
+  "_id": "L0133",
+  "linea": "Mar  3 03:29:55 web-03 sshd[14258]: Invalid user ftp from 190.210.8.92 port 43941"
+ },
+ {
+  "_id": "L0134",
+  "linea": "Mar  3 03:29:55 web-03 sshd[14258]: Failed none for invalid user ftp from 190.210.8.92 port 59764 ssh2"
+ },
+ {
+  "_id": "L0135",
+  "linea": "Mar  3 03:30:17 web-03 sshd[14967]: Invalid user ftp from 190.210.8.92 port 35199"
+ },
+ {
+  "_id": "L0136",
+  "linea": "Mar  3 03:30:17 web-03 sshd[14967]: Failed none for invalid user ftp from 190.210.8.92 port 34018 ssh2"
+ },
+ {
+  "_id": "L0137",
+  "linea": "Mar  3 03:30:35 web-03 sshd[15251]: Failed password for deploy from 190.210.8.92 port 35805 ssh2"
+ },
+ {
+  "_id": "L0138",
+  "linea": "Mar  3 03:30:36 web-03 sshd[19947]: Invalid user admin from 190.210.8.92 port 50250"
+ },
+ {
+  "_id": "L0139",
+  "linea": "Mar  3 03:30:36 web-03 sshd[19947]: Failed none for invalid user admin from 190.210.8.92 port 64472 ssh2"
+ },
+ {
+  "_id": "L0140",
+  "linea": "Mar  3 04:06:03 web-03 sshd[18396]: Invalid user test from 203.0.113.165 port 42281"
+ },
+ {
+  "_id": "L0141",
+  "linea": "Mar  3 04:06:03 web-03 sshd[18396]: Failed none for invalid user test from 203.0.113.165 port 51129 ssh2"
+ },
+ {
+  "_id": "L0142",
+  "linea": "Mar  3 04:35:23 web-03 sshd[17447]: Invalid user ftp from 198.51.100.143 port 40833"
+ },
+ {
+  "_id": "L0143",
+  "linea": "Mar  3 04:35:23 web-03 sshd[17447]: Failed none for invalid user ftp from 198.51.100.143 port 45731 ssh2"
+ },
+ {
+  "_id": "L0144",
+  "linea": "Mar  3 04:35:44 web-03 sshd[7709]: Invalid user ftp from 198.51.100.143 port 33082"
+ },
+ {
+  "_id": "L0145",
+  "linea": "Mar  3 04:35:44 web-03 sshd[7709]: Failed none for invalid user ftp from 198.51.100.143 port 61636 ssh2"
+ },
+ {
+  "_id": "L0146",
+  "linea": "Mar  3 04:36:07 web-03 sshd[30028]: Invalid user jenkins from 198.51.100.143 port 45473"
+ },
+ {
+  "_id": "L0147",
+  "linea": "Mar  3 04:36:07 web-03 sshd[30028]: Failed none for invalid user jenkins from 198.51.100.143 port 45393 ssh2"
+ },
+ {
+  "_id": "L0148",
+  "linea": "Mar  3 04:58:11 web-03 sshd[31944]: Invalid user oracle from 177.54.130.71 port 31663"
+ },
+ {
+  "_id": "L0149",
+  "linea": "Mar  3 04:58:11 web-03 sshd[31944]: Failed none for invalid user oracle from 177.54.130.71 port 45563 ssh2"
+ },
+ {
+  "_id": "L0150",
+  "linea": "Mar  3 04:58:15 web-03 sshd[12323]: Invalid user ftp from 177.54.130.71 port 37358"
+ },
+ {
+  "_id": "L0151",
+  "linea": "Mar  3 04:58:15 web-03 sshd[12323]: Failed none for invalid user ftp from 177.54.130.71 port 58386 ssh2"
+ },
+ {
+  "_id": "L0152",
+  "linea": "Mar  3 05:28:16 web-03 sshd[8744]: Invalid user postgres from 190.210.8.92 port 54955"
+ },
+ {
+  "_id": "L0153",
+  "linea": "Mar  3 05:28:16 web-03 sshd[8744]: Failed none for invalid user postgres from 190.210.8.92 port 52582 ssh2"
+ },
+ {
+  "_id": "L0154",
+  "linea": "Mar  3 05:28:23 web-03 sshd[19331]: Invalid user admin from 190.210.8.92 port 42028"
+ },
+ {
+  "_id": "L0155",
+  "linea": "Mar  3 05:28:23 web-03 sshd[19331]: Failed none for invalid user admin from 190.210.8.92 port 36220 ssh2"
+ },
+ {
+  "_id": "L0156",
+  "linea": "Mar  3 05:28:42 web-03 sshd[22332]: Invalid user postgres from 190.210.8.92 port 58427"
+ },
+ {
+  "_id": "L0157",
+  "linea": "Mar  3 05:28:42 web-03 sshd[22332]: Failed none for invalid user postgres from 190.210.8.92 port 54475 ssh2"
+ },
+ {
+  "_id": "L0158",
+  "linea": "Mar  3 06:00:00 web-03 sshd[22079]: Invalid user git from 203.0.113.210 port 60102"
+ },
+ {
+  "_id": "L0159",
+  "linea": "Mar  3 06:00:00 web-03 sshd[22079]: Failed none for invalid user git from 203.0.113.210 port 40591 ssh2"
+ },
+ {
+  "_id": "L0160",
+  "linea": "Mar  3 06:59:58 web-03 sshd[19883]: Invalid user git from 198.51.100.143 port 40571"
+ },
+ {
+  "_id": "L0161",
+  "linea": "Mar  3 06:59:58 web-03 sshd[19883]: Failed none for invalid user git from 198.51.100.143 port 30974 ssh2"
+ },
+ {
+  "_id": "L0162",
+  "linea": "Mar  3 07:00:04 web-03 sshd[5442]: Invalid user jenkins from 198.51.100.143 port 37846"
+ },
+ {
+  "_id": "L0163",
+  "linea": "Mar  3 07:00:04 web-03 sshd[5442]: Failed none for invalid user jenkins from 198.51.100.143 port 30729 ssh2"
+ },
+ {
+  "_id": "L0164",
+  "linea": "Mar  3 07:31:17 web-03 sshd[11282]: Invalid user oracle from 181.47.22.6 port 40432"
+ },
+ {
+  "_id": "L0165",
+  "linea": "Mar  3 07:31:17 web-03 sshd[11282]: Failed none for invalid user oracle from 181.47.22.6 port 59987 ssh2"
+ },
+ {
+  "_id": "L0166",
+  "linea": "Mar  3 07:31:23 web-03 sshd[20336]: Invalid user test from 181.47.22.6 port 45435"
+ },
+ {
+  "_id": "L0167",
+  "linea": "Mar  3 07:31:23 web-03 sshd[20336]: Failed none for invalid user test from 181.47.22.6 port 49393 ssh2"
+ },
+ {
+  "_id": "L0168",
+  "linea": "Mar  3 08:06:50 web-03 sshd[27360]: Invalid user ftp from 203.0.113.44 port 53135"
+ },
+ {
+  "_id": "L0169",
+  "linea": "Mar  3 08:06:50 web-03 sshd[27360]: Failed none for invalid user ftp from 203.0.113.44 port 48453 ssh2"
+ },
+ {
+  "_id": "L0170",
+  "linea": "Mar  3 08:07:00 web-03 sshd[27920]: Invalid user oracle from 203.0.113.44 port 43654"
+ },
+ {
+  "_id": "L0171",
+  "linea": "Mar  3 08:07:00 web-03 sshd[27920]: Failed none for invalid user oracle from 203.0.113.44 port 52996 ssh2"
+ },
+ {
+  "_id": "L0172",
+  "linea": "Mar  3 08:07:23 web-03 sshd[9061]: Invalid user oracle from 203.0.113.44 port 35384"
+ },
+ {
+  "_id": "L0173",
+  "linea": "Mar  3 08:07:23 web-03 sshd[9061]: Failed none for invalid user oracle from 203.0.113.44 port 46195 ssh2"
+ },
+ {
+  "_id": "L0174",
+  "linea": "Mar  3 08:28:28 web-03 sshd[17184]: Invalid user oracle from 200.45.10.18 port 31567"
+ },
+ {
+  "_id": "L0175",
+  "linea": "Mar  3 08:28:28 web-03 sshd[17184]: Failed none for invalid user oracle from 200.45.10.18 port 57416 ssh2"
+ },
+ {
+  "_id": "L0176",
+  "linea": "Mar  3 08:28:35 web-03 sshd[27159]: Invalid user test from 200.45.10.18 port 54202"
+ },
+ {
+  "_id": "L0177",
+  "linea": "Mar  3 08:28:35 web-03 sshd[27159]: Failed none for invalid user test from 200.45.10.18 port 54010 ssh2"
+ },
+ {
+  "_id": "L0178",
+  "linea": "Mar  3 11:30:32 web-03 sshd[21999]: Invalid user jenkins from 198.51.100.143 port 50495"
+ },
+ {
+  "_id": "L0179",
+  "linea": "Mar  3 11:30:32 web-03 sshd[21999]: Failed none for invalid user jenkins from 198.51.100.143 port 35614 ssh2"
+ },
+ {
+  "_id": "L0180",
+  "linea": "Mar  3 11:30:35 web-03 sshd[1009]: Invalid user ftp from 198.51.100.143 port 38352"
+ },
+ {
+  "_id": "L0181",
+  "linea": "Mar  3 11:30:35 web-03 sshd[1009]: Failed none for invalid user ftp from 198.51.100.143 port 42147 ssh2"
+ },
+ {
+  "_id": "L0182",
+  "linea": "Mar  3 11:30:39 web-03 sshd[19043]: Invalid user oracle from 198.51.100.143 port 59670"
+ },
+ {
+  "_id": "L0183",
+  "linea": "Mar  3 11:30:39 web-03 sshd[19043]: Failed none for invalid user oracle from 198.51.100.143 port 64137 ssh2"
+ },
+ {
+  "_id": "L0184",
+  "linea": "Mar  3 11:31:02 web-03 sshd[1451]: Invalid user git from 198.51.100.143 port 37778"
+ },
+ {
+  "_id": "L0185",
+  "linea": "Mar  3 11:31:02 web-03 sshd[1451]: Failed none for invalid user git from 198.51.100.143 port 63477 ssh2"
+ },
+ {
+  "_id": "L0186",
+  "linea": "Mar  3 11:51:43 web-03 sshd[31709]: Invalid user ftp from 198.51.100.77 port 30736"
+ },
+ {
+  "_id": "L0187",
+  "linea": "Mar  3 11:51:43 web-03 sshd[31709]: Failed none for invalid user ftp from 198.51.100.77 port 40993 ssh2"
+ },
+ {
+  "_id": "L0188",
+  "linea": "Mar  3 11:51:44 web-03 sshd[13290]: Invalid user administrador from 198.51.100.77 port 37239"
+ },
+ {
+  "_id": "L0189",
+  "linea": "Mar  3 11:51:44 web-03 sshd[13290]: Failed none for invalid user administrador from 198.51.100.77 port 37855 ssh2"
+ },
+ {
+  "_id": "L0190",
+  "linea": "Mar  3 13:19:44 web-03 sshd[10013]: Invalid user postgres from 203.0.113.165 port 63976"
+ },
+ {
+  "_id": "L0191",
+  "linea": "Mar  3 13:19:44 web-03 sshd[10013]: Failed none for invalid user postgres from 203.0.113.165 port 37544 ssh2"
+ },
+ {
+  "_id": "L0192",
+  "linea": "Mar  3 18:10:16 web-03 sshd[2564]: Invalid user admin from 181.47.22.6 port 45732"
+ },
+ {
+  "_id": "L0193",
+  "linea": "Mar  3 18:10:16 web-03 sshd[2564]: Failed none for invalid user admin from 181.47.22.6 port 39077 ssh2"
+ },
+ {
+  "_id": "L0194",
+  "linea": "Mar  3 18:49:49 web-03 sshd[1234]: Invalid user jenkins from 198.51.100.77 port 48493"
+ },
+ {
+  "_id": "L0195",
+  "linea": "Mar  3 18:49:49 web-03 sshd[1234]: Failed none for invalid user jenkins from 198.51.100.77 port 42018 ssh2"
+ },
+ {
+  "_id": "L0196",
+  "linea": "Mar  3 18:49:55 web-03 sshd[22407]: Invalid user test from 198.51.100.77 port 51918"
+ },
+ {
+  "_id": "L0197",
+  "linea": "Mar  3 18:49:55 web-03 sshd[22407]: Failed none for invalid user test from 198.51.100.77 port 60991 ssh2"
+ },
+ {
+  "_id": "L0198",
+  "linea": "Mar  3 19:38:54 web-03 sshd[31905]: Invalid user git from 190.210.8.92 port 32851"
+ },
+ {
+  "_id": "L0199",
+  "linea": "Mar  3 19:38:54 web-03 sshd[31905]: Failed none for invalid user git from 190.210.8.92 port 54204 ssh2"
+ },
+ {
+  "_id": "L0200",
+  "linea": "Mar  3 19:39:13 web-03 sshd[30580]: Invalid user ftp from 190.210.8.92 port 57021"
+ },
+ {
+  "_id": "L0201",
+  "linea": "Mar  3 19:39:13 web-03 sshd[30580]: Failed none for invalid user ftp from 190.210.8.92 port 31266 ssh2"
+ },
+ {
+  "_id": "L0202",
+  "linea": "Mar  3 19:39:15 web-03 sshd[21050]: Invalid user postgres from 190.210.8.92 port 57457"
+ },
+ {
+  "_id": "L0203",
+  "linea": "Mar  3 19:39:15 web-03 sshd[21050]: Failed none for invalid user postgres from 190.210.8.92 port 47947 ssh2"
+ },
+ {
+  "_id": "L0204",
+  "linea": "Mar  3 20:06:09 web-03 sshd[4725]: Invalid user postgres from 203.0.113.91 port 45803"
+ },
+ {
+  "_id": "L0205",
+  "linea": "Mar  3 20:06:09 web-03 sshd[4725]: Failed none for invalid user postgres from 203.0.113.91 port 58998 ssh2"
+ },
+ {
+  "_id": "L0206",
+  "linea": "Mar  3 20:06:24 web-03 sshd[16561]: Invalid user test from 203.0.113.91 port 38689"
+ },
+ {
+  "_id": "L0207",
+  "linea": "Mar  3 20:06:24 web-03 sshd[16561]: Failed none for invalid user test from 203.0.113.91 port 33737 ssh2"
+ },
+ {
+  "_id": "L0208",
+  "linea": "Mar  3 20:29:31 web-03 sshd[12220]: Invalid user git from 192.0.2.15 port 45321"
+ },
+ {
+  "_id": "L0209",
+  "linea": "Mar  3 20:29:31 web-03 sshd[12220]: Failed none for invalid user git from 192.0.2.15 port 48026 ssh2"
+ },
+ {
+  "_id": "L0210",
+  "linea": "Mar  3 21:04:50 web-03 sshd[9952]: Invalid user ftp from 192.0.2.15 port 56202"
+ },
+ {
+  "_id": "L0211",
+  "linea": "Mar  3 21:04:50 web-03 sshd[9952]: Failed none for invalid user ftp from 192.0.2.15 port 62297 ssh2"
+ },
+ {
+  "_id": "L0212",
+  "linea": "Mar  3 21:25:51 web-03 sshd[19955]: Invalid user administrador from 203.0.113.165 port 41533"
+ },
+ {
+  "_id": "L0213",
+  "linea": "Mar  3 21:25:51 web-03 sshd[19955]: Failed none for invalid user administrador from 203.0.113.165 port 45449 ssh2"
+ },
+ {
+  "_id": "L0214",
+  "linea": "Mar  3 21:25:52 web-03 sshd[25757]: Invalid user jenkins from 203.0.113.165 port 41221"
+ },
+ {
+  "_id": "L0215",
+  "linea": "Mar  3 21:25:52 web-03 sshd[25757]: Failed none for invalid user jenkins from 203.0.113.165 port 41106 ssh2"
+ },
+ {
+  "_id": "L0216",
+  "linea": "Mar  3 21:26:04 web-03 sshd[1732]: Invalid user jenkins from 203.0.113.165 port 57010"
+ },
+ {
+  "_id": "L0217",
+  "linea": "Mar  3 21:26:04 web-03 sshd[1732]: Failed none for invalid user jenkins from 203.0.113.165 port 49248 ssh2"
+ },
+ {
+  "_id": "L0218",
+  "linea": "Mar  3 21:59:09 web-03 sshd[15272]: Invalid user git from 198.51.100.33 port 60295"
+ },
+ {
+  "_id": "L0219",
+  "linea": "Mar  3 21:59:09 web-03 sshd[15272]: Failed none for invalid user git from 198.51.100.33 port 57386 ssh2"
+ },
+ {
+  "_id": "L0220",
+  "linea": "Mar  3 21:59:33 web-03 sshd[4883]: Failed password for deploy from 198.51.100.33 port 40656 ssh2"
+ },
+ {
+  "_id": "L0221",
+  "linea": "Mar  3 21:59:52 web-03 sshd[6353]: Invalid user postgres from 198.51.100.33 port 33225"
+ },
+ {
+  "_id": "L0222",
+  "linea": "Mar  3 21:59:52 web-03 sshd[6353]: Failed none for invalid user postgres from 198.51.100.33 port 30453 ssh2"
+ },
+ {
+  "_id": "L0223",
+  "linea": "Mar  3 22:00:16 web-03 sshd[18768]: Invalid user test from 198.51.100.33 port 31788"
+ },
+ {
+  "_id": "L0224",
+  "linea": "Mar  3 22:00:16 web-03 sshd[18768]: Failed none for invalid user test from 198.51.100.33 port 44328 ssh2"
+ },
+ {
+  "_id": "L0225",
+  "linea": "Mar  3 22:25:08 web-03 sshd[26202]: Failed password for deploy from 192.0.2.200 port 53786 ssh2"
+ },
+ {
+  "_id": "L0226",
+  "linea": "Mar  3 22:25:33 web-03 sshd[10806]: Invalid user backup from 192.0.2.200 port 61698"
+ },
+ {
+  "_id": "L0227",
+  "linea": "Mar  3 22:25:33 web-03 sshd[10806]: Failed none for invalid user backup from 192.0.2.200 port 33695 ssh2"
+ },
+ {
+  "_id": "L0228",
+  "linea": "Mar  3 22:25:39 web-03 sshd[22053]: Invalid user admin from 192.0.2.200 port 37338"
+ },
+ {
+  "_id": "L0229",
+  "linea": "Mar  3 22:25:39 web-03 sshd[22053]: Failed none for invalid user admin from 192.0.2.200 port 44753 ssh2"
+ },
+ {
+  "_id": "L0230",
+  "linea": "Mar  3 22:25:58 web-03 sshd[12547]: Invalid user oracle from 192.0.2.200 port 54328"
+ },
+ {
+  "_id": "L0231",
+  "linea": "Mar  3 22:25:58 web-03 sshd[12547]: Failed none for invalid user oracle from 192.0.2.200 port 63252 ssh2"
+ },
+ {
+  "_id": "L0232",
+  "linea": "Mar  3 22:57:02 web-03 sshd[26494]: Invalid user jenkins from 198.51.100.33 port 38221"
+ },
+ {
+  "_id": "L0233",
+  "linea": "Mar  3 22:57:02 web-03 sshd[26494]: Failed none for invalid user jenkins from 198.51.100.33 port 59447 ssh2"
+ },
+ {
+  "_id": "L0234",
+  "linea": "Mar  3 23:49:46 web-03 sshd[19652]: Invalid user admin from 203.0.113.210 port 33123"
+ },
+ {
+  "_id": "L0235",
+  "linea": "Mar  3 23:49:46 web-03 sshd[19652]: Failed none for invalid user admin from 203.0.113.210 port 36938 ssh2"
+ },
+ {
+  "_id": "L0236",
+  "linea": "Mar  3 23:50:03 web-03 sshd[20861]: Invalid user backup from 203.0.113.210 port 57804"
+ },
+ {
+  "_id": "L0237",
+  "linea": "Mar  3 23:50:03 web-03 sshd[20861]: Failed none for invalid user backup from 203.0.113.210 port 57215 ssh2"
+ },
+ {
+  "_id": "L0238",
+  "linea": "Mar  3 23:50:19 web-03 sshd[5967]: Invalid user jenkins from 203.0.113.210 port 45619"
+ },
+ {
+  "_id": "L0239",
+  "linea": "Mar  3 23:50:19 web-03 sshd[5967]: Failed none for invalid user jenkins from 203.0.113.210 port 45220 ssh2"
+ },
+ {
+  "_id": "L0240",
+  "linea": "Mar  3 23:50:39 web-03 sshd[27176]: Invalid user git from 203.0.113.210 port 63985"
+ },
+ {
+  "_id": "L0241",
+  "linea": "Mar  3 23:50:39 web-03 sshd[27176]: Failed none for invalid user git from 203.0.113.210 port 63699 ssh2"
+ },
+ {
+  "_id": "L0242",
+  "linea": "Mar  4 00:27:07 web-03 sshd[12606]: Invalid user oracle from 198.51.100.12 port 44528"
+ },
+ {
+  "_id": "L0243",
+  "linea": "Mar  4 00:27:07 web-03 sshd[12606]: Failed none for invalid user oracle from 198.51.100.12 port 49031 ssh2"
+ },
+ {
+  "_id": "L0244",
+  "linea": "Mar  4 00:27:24 web-03 sshd[5036]: Invalid user admin from 198.51.100.12 port 63840"
+ },
+ {
+  "_id": "L0245",
+  "linea": "Mar  4 00:27:24 web-03 sshd[5036]: Failed none for invalid user admin from 198.51.100.12 port 46891 ssh2"
+ },
+ {
+  "_id": "L0246",
+  "linea": "Mar  4 00:27:49 web-03 sshd[11523]: Invalid user admin from 198.51.100.12 port 57584"
+ },
+ {
+  "_id": "L0247",
+  "linea": "Mar  4 00:27:49 web-03 sshd[11523]: Failed none for invalid user admin from 198.51.100.12 port 33211 ssh2"
+ },
+ {
+  "_id": "L0248",
+  "linea": "Mar  4 02:25:51 web-03 sshd[13480]: Invalid user ftp from 190.210.8.92 port 52071"
+ },
+ {
+  "_id": "L0249",
+  "linea": "Mar  4 02:25:51 web-03 sshd[13480]: Failed none for invalid user ftp from 190.210.8.92 port 56347 ssh2"
+ },
+ {
+  "_id": "L0250",
+  "linea": "Mar  4 02:26:09 web-03 sshd[6967]: Invalid user ftp from 190.210.8.92 port 39124"
+ },
+ {
+  "_id": "L0251",
+  "linea": "Mar  4 02:26:09 web-03 sshd[6967]: Failed none for invalid user ftp from 190.210.8.92 port 34827 ssh2"
+ },
+ {
+  "_id": "L0252",
+  "linea": "Mar  4 02:26:26 web-03 sshd[29796]: Invalid user jenkins from 190.210.8.92 port 39329"
+ },
+ {
+  "_id": "L0253",
+  "linea": "Mar  4 02:26:26 web-03 sshd[29796]: Failed none for invalid user jenkins from 190.210.8.92 port 34393 ssh2"
+ },
+ {
+  "_id": "L0254",
+  "linea": "Mar  4 02:26:44 web-03 sshd[28205]: Invalid user postgres from 190.210.8.92 port 32756"
+ },
+ {
+  "_id": "L0255",
+  "linea": "Mar  4 02:26:44 web-03 sshd[28205]: Failed none for invalid user postgres from 190.210.8.92 port 48275 ssh2"
+ },
+ {
+  "_id": "L0256",
+  "linea": "Mar  4 02:47:43 web-03 sshd[23157]: Invalid user backup from 198.51.100.77 port 30719"
+ },
+ {
+  "_id": "L0257",
+  "linea": "Mar  4 02:47:43 web-03 sshd[23157]: Failed none for invalid user backup from 198.51.100.77 port 61770 ssh2"
+ },
+ {
+  "_id": "L0258",
+  "linea": "Mar  4 02:47:59 web-03 sshd[14887]: Invalid user oracle from 198.51.100.77 port 38479"
+ },
+ {
+  "_id": "L0259",
+  "linea": "Mar  4 02:47:59 web-03 sshd[14887]: Failed none for invalid user oracle from 198.51.100.77 port 33863 ssh2"
+ },
+ {
+  "_id": "L0260",
+  "linea": "Mar  4 03:12:10 web-03 sshd[26162]: Failed password for deploy from 203.0.113.165 port 40694 ssh2"
+ },
+ {
+  "_id": "L0261",
+  "linea": "Mar  4 03:12:20 web-03 sshd[19195]: Invalid user postgres from 203.0.113.165 port 57344"
+ },
+ {
+  "_id": "L0262",
+  "linea": "Mar  4 03:12:20 web-03 sshd[19195]: Failed none for invalid user postgres from 203.0.113.165 port 48804 ssh2"
+ },
+ {
+  "_id": "L0263",
+  "linea": "Mar  4 03:12:32 web-03 sshd[8514]: Invalid user ftp from 203.0.113.165 port 56113"
+ },
+ {
+  "_id": "L0264",
+  "linea": "Mar  4 03:12:32 web-03 sshd[8514]: Failed none for invalid user ftp from 203.0.113.165 port 45785 ssh2"
+ },
+ {
+  "_id": "L0265",
+  "linea": "Mar  4 03:34:34 web-03 sshd[29398]: Invalid user backup from 190.210.8.92 port 43166"
+ },
+ {
+  "_id": "L0266",
+  "linea": "Mar  4 03:34:34 web-03 sshd[29398]: Failed none for invalid user backup from 190.210.8.92 port 37488 ssh2"
+ },
+ {
+  "_id": "L0267",
+  "linea": "Mar  4 04:00:37 web-03 sshd[7451]: Invalid user postgres from 200.45.10.18 port 50200"
+ },
+ {
+  "_id": "L0268",
+  "linea": "Mar  4 04:00:37 web-03 sshd[7451]: Failed none for invalid user postgres from 200.45.10.18 port 62667 ssh2"
+ },
+ {
+  "_id": "L0269",
+  "linea": "Mar  4 04:54:39 web-03 sshd[3258]: Failed password for deploy from 198.51.100.33 port 58909 ssh2"
+ },
+ {
+  "_id": "L0270",
+  "linea": "Mar  4 04:54:51 web-03 sshd[8551]: Invalid user oracle from 198.51.100.33 port 30070"
+ },
+ {
+  "_id": "L0271",
+  "linea": "Mar  4 04:54:51 web-03 sshd[8551]: Failed none for invalid user oracle from 198.51.100.33 port 30610 ssh2"
+ },
+ {
+  "_id": "L0272",
+  "linea": "Mar  4 04:54:52 web-03 sshd[25698]: Invalid user admin from 198.51.100.33 port 48030"
+ },
+ {
+  "_id": "L0273",
+  "linea": "Mar  4 04:54:52 web-03 sshd[25698]: Failed none for invalid user admin from 198.51.100.33 port 51649 ssh2"
+ },
+ {
+  "_id": "L0274",
+  "linea": "Mar  4 05:19:47 web-03 sshd[30537]: Invalid user backup from 177.54.130.71 port 45444"
+ },
+ {
+  "_id": "L0275",
+  "linea": "Mar  4 05:19:47 web-03 sshd[30537]: Failed none for invalid user backup from 177.54.130.71 port 42474 ssh2"
+ },
+ {
+  "_id": "L0276",
+  "linea": "Mar  4 05:20:05 web-03 sshd[3892]: Invalid user oracle from 177.54.130.71 port 35051"
+ },
+ {
+  "_id": "L0277",
+  "linea": "Mar  4 05:20:05 web-03 sshd[3892]: Failed none for invalid user oracle from 177.54.130.71 port 46756 ssh2"
+ },
+ {
+  "_id": "L0278",
+  "linea": "Mar  4 06:43:04 web-03 sshd[29014]: Invalid user postgres from 203.0.113.91 port 33974"
+ },
+ {
+  "_id": "L0279",
+  "linea": "Mar  4 06:43:04 web-03 sshd[29014]: Failed none for invalid user postgres from 203.0.113.91 port 54359 ssh2"
+ },
+ {
+  "_id": "L0280",
+  "linea": "Mar  4 06:43:27 web-03 sshd[26753]: Invalid user administrador from 203.0.113.91 port 39644"
+ },
+ {
+  "_id": "L0281",
+  "linea": "Mar  4 06:43:27 web-03 sshd[26753]: Failed none for invalid user administrador from 203.0.113.91 port 46473 ssh2"
+ },
+ {
+  "_id": "L0282",
+  "linea": "Mar  4 06:43:31 web-03 sshd[16452]: Invalid user oracle from 203.0.113.91 port 51479"
+ },
+ {
+  "_id": "L0283",
+  "linea": "Mar  4 06:43:31 web-03 sshd[16452]: Failed none for invalid user oracle from 203.0.113.91 port 52095 ssh2"
+ },
+ {
+  "_id": "L0284",
+  "linea": "Mar  4 06:43:50 web-03 sshd[6276]: Invalid user oracle from 203.0.113.91 port 41474"
+ },
+ {
+  "_id": "L0285",
+  "linea": "Mar  4 06:43:50 web-03 sshd[6276]: Failed none for invalid user oracle from 203.0.113.91 port 45308 ssh2"
+ },
+ {
+  "_id": "L0286",
+  "linea": "Mar  4 07:33:33 web-03 sshd[6988]: Invalid user admin from 198.51.100.33 port 42567"
+ },
+ {
+  "_id": "L0287",
+  "linea": "Mar  4 07:33:33 web-03 sshd[6988]: Failed none for invalid user admin from 198.51.100.33 port 32015 ssh2"
+ },
+ {
+  "_id": "L0288",
+  "linea": "Mar  4 07:33:54 web-03 sshd[7750]: Invalid user oracle from 198.51.100.33 port 61286"
+ },
+ {
+  "_id": "L0289",
+  "linea": "Mar  4 07:33:54 web-03 sshd[7750]: Failed none for invalid user oracle from 198.51.100.33 port 44006 ssh2"
+ },
+ {
+  "_id": "L0290",
+  "linea": "Mar  4 07:34:03 web-03 sshd[8853]: Failed password for deploy from 198.51.100.33 port 45836 ssh2"
+ },
+ {
+  "_id": "L0291",
+  "linea": "Mar  4 07:56:09 web-03 sshd[21040]: Invalid user jenkins from 192.0.2.200 port 30792"
+ },
+ {
+  "_id": "L0292",
+  "linea": "Mar  4 07:56:09 web-03 sshd[21040]: Failed none for invalid user jenkins from 192.0.2.200 port 45368 ssh2"
+ },
+ {
+  "_id": "L0293",
+  "linea": "Mar  4 07:56:30 web-03 sshd[15202]: Failed password for deploy from 192.0.2.200 port 64622 ssh2"
+ },
+ {
+  "_id": "L0294",
+  "linea": "Mar  4 08:20:22 web-03 sshd[24855]: Invalid user admin from 203.0.113.44 port 51052"
+ },
+ {
+  "_id": "L0295",
+  "linea": "Mar  4 08:20:22 web-03 sshd[24855]: Failed none for invalid user admin from 203.0.113.44 port 43369 ssh2"
+ },
+ {
+  "_id": "L0296",
+  "linea": "Mar  4 08:20:45 web-03 sshd[14033]: Invalid user administrador from 203.0.113.44 port 30057"
+ },
+ {
+  "_id": "L0297",
+  "linea": "Mar  4 08:20:45 web-03 sshd[14033]: Failed none for invalid user administrador from 203.0.113.44 port 49780 ssh2"
+ },
+ {
+  "_id": "L0298",
+  "linea": "Mar  4 09:24:05 web-03 sshd[4277]: Failed password for deploy from 192.0.2.88 port 31516 ssh2"
+ },
+ {
+  "_id": "L0299",
+  "linea": "Mar  4 09:24:24 web-03 sshd[22755]: Invalid user jenkins from 192.0.2.88 port 44715"
+ },
+ {
+  "_id": "L0300",
+  "linea": "Mar  4 09:24:24 web-03 sshd[22755]: Failed none for invalid user jenkins from 192.0.2.88 port 54623 ssh2"
+ },
+ {
+  "_id": "L0301",
+  "linea": "Mar  4 09:24:34 web-03 sshd[7501]: Invalid user admin from 192.0.2.88 port 45288"
+ },
+ {
+  "_id": "L0302",
+  "linea": "Mar  4 09:24:34 web-03 sshd[7501]: Failed none for invalid user admin from 192.0.2.88 port 30236 ssh2"
+ },
+ {
+  "_id": "L0303",
+  "linea": "Mar  4 09:24:51 web-03 sshd[19187]: Invalid user test from 192.0.2.88 port 62615"
+ },
+ {
+  "_id": "L0304",
+  "linea": "Mar  4 09:24:51 web-03 sshd[19187]: Failed none for invalid user test from 192.0.2.88 port 39078 ssh2"
+ },
+ {
+  "_id": "L0305",
+  "linea": "Mar  4 10:02:20 web-03 sshd[16140]: Invalid user postgres from 198.51.100.33 port 35153"
+ },
+ {
+  "_id": "L0306",
+  "linea": "Mar  4 10:02:20 web-03 sshd[16140]: Failed none for invalid user postgres from 198.51.100.33 port 35391 ssh2"
+ },
+ {
+  "_id": "L0307",
+  "linea": "Mar  4 10:02:31 web-03 sshd[10354]: Invalid user jenkins from 198.51.100.33 port 34838"
+ },
+ {
+  "_id": "L0308",
+  "linea": "Mar  4 10:02:31 web-03 sshd[10354]: Failed none for invalid user jenkins from 198.51.100.33 port 37709 ssh2"
+ },
+ {
+  "_id": "L0309",
+  "linea": "Mar  4 10:23:20 web-03 sshd[21695]: Failed password for deploy from 203.0.113.44 port 51491 ssh2"
+ },
+ {
+  "_id": "L0310",
+  "linea": "Mar  4 10:23:39 web-03 sshd[22918]: Invalid user test from 203.0.113.44 port 49481"
+ },
+ {
+  "_id": "L0311",
+  "linea": "Mar  4 10:23:39 web-03 sshd[22918]: Failed none for invalid user test from 203.0.113.44 port 50093 ssh2"
+ },
+ {
+  "_id": "L0312",
+  "linea": "Mar  4 10:23:52 web-03 sshd[15306]: Invalid user oracle from 203.0.113.44 port 39854"
+ },
+ {
+  "_id": "L0313",
+  "linea": "Mar  4 10:23:52 web-03 sshd[15306]: Failed none for invalid user oracle from 203.0.113.44 port 39518 ssh2"
+ },
+ {
+  "_id": "L0314",
+  "linea": "Mar  4 10:24:03 web-03 sshd[31813]: Invalid user git from 203.0.113.44 port 52183"
+ },
+ {
+  "_id": "L0315",
+  "linea": "Mar  4 10:24:03 web-03 sshd[31813]: Failed none for invalid user git from 203.0.113.44 port 43311 ssh2"
+ },
+ {
+  "_id": "L0316",
+  "linea": "Mar  4 10:51:59 web-03 sshd[21588]: Invalid user admin from 198.51.100.12 port 49212"
+ },
+ {
+  "_id": "L0317",
+  "linea": "Mar  4 10:51:59 web-03 sshd[21588]: Failed none for invalid user admin from 198.51.100.12 port 43900 ssh2"
+ },
+ {
+  "_id": "L0318",
+  "linea": "Mar  4 10:52:16 web-03 sshd[13250]: Invalid user oracle from 198.51.100.12 port 36080"
+ },
+ {
+  "_id": "L0319",
+  "linea": "Mar  4 10:52:16 web-03 sshd[13250]: Failed none for invalid user oracle from 198.51.100.12 port 47565 ssh2"
+ },
+ {
+  "_id": "L0320",
+  "linea": "Mar  4 11:00:00 web-03 sshd[31652]: Accepted publickey for deploy from 10.20.4.25 port 56528 ssh2: RSA SHA256:8vN2qLpXeR4kTsYbMwGh"
+ },
+ {
+  "_id": "L0321",
+  "linea": "Mar  4 11:02:12 web-03 sudo[9216]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/tail -n 200 /var/log/api/app.log"
+ },
+ {
+  "_id": "L0322",
+  "linea": "Mar  4 11:19:33 web-03 sshd[22407]: Invalid user test from 200.45.10.18 port 50056"
+ },
+ {
+  "_id": "L0323",
+  "linea": "Mar  4 11:19:33 web-03 sshd[22407]: Failed none for invalid user test from 200.45.10.18 port 37426 ssh2"
+ },
+ {
+  "_id": "L0324",
+  "linea": "Mar  4 11:19:44 web-03 sshd[5096]: Invalid user postgres from 200.45.10.18 port 35074"
+ },
+ {
+  "_id": "L0325",
+  "linea": "Mar  4 11:19:44 web-03 sshd[5096]: Failed none for invalid user postgres from 200.45.10.18 port 53017 ssh2"
+ },
+ {
+  "_id": "L0326",
+  "linea": "Mar  4 11:19:49 web-03 sshd[26807]: Invalid user ftp from 200.45.10.18 port 51327"
+ },
+ {
+  "_id": "L0327",
+  "linea": "Mar  4 11:19:49 web-03 sshd[26807]: Failed none for invalid user ftp from 200.45.10.18 port 33212 ssh2"
+ },
+ {
+  "_id": "L0328",
+  "linea": "Mar  4 11:20:00 web-03 sshd[18457]: Invalid user ftp from 200.45.10.18 port 45025"
+ },
+ {
+  "_id": "L0329",
+  "linea": "Mar  4 11:20:00 web-03 sshd[18457]: Failed none for invalid user ftp from 200.45.10.18 port 45146 ssh2"
+ },
+ {
+  "_id": "L0330",
+  "linea": "Mar  4 11:28:12 web-03 sshd[31652]: Disconnected from user deploy 10.20.4.25"
+ },
+ {
+  "_id": "L0331",
+  "linea": "Mar  4 12:01:39 web-03 sshd[15816]: Invalid user ftp from 198.51.100.33 port 35881"
+ },
+ {
+  "_id": "L0332",
+  "linea": "Mar  4 12:01:39 web-03 sshd[15816]: Failed none for invalid user ftp from 198.51.100.33 port 36114 ssh2"
+ },
+ {
+  "_id": "L0333",
+  "linea": "Mar  4 12:01:44 web-03 sshd[27042]: Invalid user test from 198.51.100.33 port 49132"
+ },
+ {
+  "_id": "L0334",
+  "linea": "Mar  4 12:01:44 web-03 sshd[27042]: Failed none for invalid user test from 198.51.100.33 port 49587 ssh2"
+ },
+ {
+  "_id": "L0335",
+  "linea": "Mar  4 12:40:14 web-03 sshd[26906]: Invalid user jenkins from 198.51.100.77 port 34605"
+ },
+ {
+  "_id": "L0336",
+  "linea": "Mar  4 12:40:14 web-03 sshd[26906]: Failed none for invalid user jenkins from 198.51.100.77 port 40472 ssh2"
+ },
+ {
+  "_id": "L0337",
+  "linea": "Mar  4 12:40:22 web-03 sshd[11563]: Failed password for deploy from 198.51.100.77 port 63227 ssh2"
+ },
+ {
+  "_id": "L0338",
+  "linea": "Mar  4 13:49:47 web-03 sshd[5685]: Invalid user backup from 192.0.2.200 port 50974"
+ },
+ {
+  "_id": "L0339",
+  "linea": "Mar  4 13:49:47 web-03 sshd[5685]: Failed none for invalid user backup from 192.0.2.200 port 40897 ssh2"
+ },
+ {
+  "_id": "L0340",
+  "linea": "Mar  4 14:44:54 web-03 sshd[7065]: Invalid user test from 192.0.2.88 port 33077"
+ },
+ {
+  "_id": "L0341",
+  "linea": "Mar  4 14:44:54 web-03 sshd[7065]: Failed none for invalid user test from 192.0.2.88 port 56604 ssh2"
+ },
+ {
+  "_id": "L0342",
+  "linea": "Mar  4 14:44:55 web-03 sshd[2865]: Invalid user ftp from 192.0.2.88 port 58196"
+ },
+ {
+  "_id": "L0343",
+  "linea": "Mar  4 14:44:55 web-03 sshd[2865]: Failed none for invalid user ftp from 192.0.2.88 port 37796 ssh2"
+ },
+ {
+  "_id": "L0344",
+  "linea": "Mar  4 14:45:03 web-03 sshd[17202]: Invalid user admin from 192.0.2.88 port 38788"
+ },
+ {
+  "_id": "L0345",
+  "linea": "Mar  4 14:45:03 web-03 sshd[17202]: Failed none for invalid user admin from 192.0.2.88 port 55520 ssh2"
+ },
+ {
+  "_id": "L0346",
+  "linea": "Mar  4 14:45:25 web-03 sshd[10069]: Invalid user test from 192.0.2.88 port 43708"
+ },
+ {
+  "_id": "L0347",
+  "linea": "Mar  4 14:45:25 web-03 sshd[10069]: Failed none for invalid user test from 192.0.2.88 port 35912 ssh2"
+ },
+ {
+  "_id": "L0348",
+  "linea": "Mar  4 15:08:33 web-03 sshd[7624]: Invalid user postgres from 203.0.113.91 port 51218"
+ },
+ {
+  "_id": "L0349",
+  "linea": "Mar  4 15:08:33 web-03 sshd[7624]: Failed none for invalid user postgres from 203.0.113.91 port 46576 ssh2"
+ },
+ {
+  "_id": "L0350",
+  "linea": "Mar  4 15:08:58 web-03 sshd[29634]: Invalid user ftp from 203.0.113.91 port 47225"
+ },
+ {
+  "_id": "L0351",
+  "linea": "Mar  4 15:08:58 web-03 sshd[29634]: Failed none for invalid user ftp from 203.0.113.91 port 34262 ssh2"
+ },
+ {
+  "_id": "L0352",
+  "linea": "Mar  4 15:37:01 web-03 sshd[1850]: Invalid user backup from 190.210.8.92 port 54359"
+ },
+ {
+  "_id": "L0353",
+  "linea": "Mar  4 15:37:01 web-03 sshd[1850]: Failed none for invalid user backup from 190.210.8.92 port 64532 ssh2"
+ },
+ {
+  "_id": "L0354",
+  "linea": "Mar  4 15:37:03 web-03 sshd[15131]: Invalid user backup from 190.210.8.92 port 38885"
+ },
+ {
+  "_id": "L0355",
+  "linea": "Mar  4 15:37:03 web-03 sshd[15131]: Failed none for invalid user backup from 190.210.8.92 port 32263 ssh2"
+ },
+ {
+  "_id": "L0356",
+  "linea": "Mar  4 16:26:45 web-03 sshd[28637]: Invalid user administrador from 203.0.113.44 port 56220"
+ },
+ {
+  "_id": "L0357",
+  "linea": "Mar  4 16:26:45 web-03 sshd[28637]: Failed none for invalid user administrador from 203.0.113.44 port 49251 ssh2"
+ },
+ {
+  "_id": "L0358",
+  "linea": "Mar  4 23:40:00 web-03 sshd[8542]: Accepted publickey for ubuntu from 190.210.8.92 port 42299 ssh2: RSA SHA256:Qw7ZmT1yBnKe5RfPcHdL"
+ },
+ {
+  "_id": "L0359",
+  "linea": "Mar  4 23:44:00 web-03 sudo[12524]: ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/systemctl restart postgres"
+ },
+ {
+  "_id": "L0360",
+  "linea": "Mar  4 23:51:00 web-03 sudo[17483]: ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/systemctl restart postgres"
+ },
+ {
+  "_id": "L0361",
+  "linea": "Mar  4 23:58:00 web-03 sudo[15166]: ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/systemctl restart postgres"
+ },
+ {
+  "_id": "L0362",
+  "linea": "Mar  5 00:18:00 web-03 sshd[8542]: Disconnected from user ubuntu 190.210.8.92"
+ },
+ {
+  "_id": "L0363",
+  "linea": "Mar  5 05:36:34 web-03 sshd[5573]: Failed password for deploy from 190.210.8.92 port 54279 ssh2"
+ },
+ {
+  "_id": "L0364",
+  "linea": "Mar  5 05:36:45 web-03 sshd[18360]: Invalid user administrador from 190.210.8.92 port 56471"
+ },
+ {
+  "_id": "L0365",
+  "linea": "Mar  5 05:36:45 web-03 sshd[18360]: Failed none for invalid user administrador from 190.210.8.92 port 40304 ssh2"
+ },
+ {
+  "_id": "L0366",
+  "linea": "Mar  5 05:37:00 web-03 sshd[28735]: Failed password for deploy from 190.210.8.92 port 36585 ssh2"
+ },
+ {
+  "_id": "L0367",
+  "linea": "Mar  5 06:01:10 web-03 sshd[21115]: Invalid user jenkins from 198.51.100.33 port 44055"
+ },
+ {
+  "_id": "L0368",
+  "linea": "Mar  5 06:01:10 web-03 sshd[21115]: Failed none for invalid user jenkins from 198.51.100.33 port 41698 ssh2"
+ },
+ {
+  "_id": "L0369",
+  "linea": "Mar  5 06:01:28 web-03 sshd[6690]: Failed password for deploy from 198.51.100.33 port 34158 ssh2"
+ },
+ {
+  "_id": "L0370",
+  "linea": "Mar  5 06:01:43 web-03 sshd[26540]: Invalid user postgres from 198.51.100.33 port 47002"
+ },
+ {
+  "_id": "L0371",
+  "linea": "Mar  5 06:01:43 web-03 sshd[26540]: Failed none for invalid user postgres from 198.51.100.33 port 43330 ssh2"
+ },
+ {
+  "_id": "L0372",
+  "linea": "Mar  5 06:22:31 web-03 sshd[29709]: Invalid user oracle from 192.0.2.88 port 63507"
+ },
+ {
+  "_id": "L0373",
+  "linea": "Mar  5 06:22:31 web-03 sshd[29709]: Failed none for invalid user oracle from 192.0.2.88 port 45997 ssh2"
+ },
+ {
+  "_id": "L0374",
+  "linea": "Mar  5 06:22:45 web-03 sshd[6730]: Invalid user admin from 192.0.2.88 port 46924"
+ },
+ {
+  "_id": "L0375",
+  "linea": "Mar  5 06:22:45 web-03 sshd[6730]: Failed none for invalid user admin from 192.0.2.88 port 49653 ssh2"
+ },
+ {
+  "_id": "L0376",
+  "linea": "Mar  5 06:44:50 web-03 sshd[20764]: Invalid user jenkins from 192.0.2.15 port 40375"
+ },
+ {
+  "_id": "L0377",
+  "linea": "Mar  5 06:44:50 web-03 sshd[20764]: Failed none for invalid user jenkins from 192.0.2.15 port 60616 ssh2"
+ },
+ {
+  "_id": "L0378",
+  "linea": "Mar  5 06:45:02 web-03 sshd[30631]: Invalid user test from 192.0.2.15 port 59517"
+ },
+ {
+  "_id": "L0379",
+  "linea": "Mar  5 06:45:02 web-03 sshd[30631]: Failed none for invalid user test from 192.0.2.15 port 54377 ssh2"
+ },
+ {
+  "_id": "L0380",
+  "linea": "Mar  5 07:54:40 web-03 sshd[18135]: Invalid user admin from 190.210.8.92 port 56312"
+ },
+ {
+  "_id": "L0381",
+  "linea": "Mar  5 07:54:40 web-03 sshd[18135]: Failed none for invalid user admin from 190.210.8.92 port 56470 ssh2"
+ },
+ {
+  "_id": "L0382",
+  "linea": "Mar  5 07:54:57 web-03 sshd[7136]: Invalid user jenkins from 190.210.8.92 port 36437"
+ },
+ {
+  "_id": "L0383",
+  "linea": "Mar  5 07:54:57 web-03 sshd[7136]: Failed none for invalid user jenkins from 190.210.8.92 port 54158 ssh2"
+ },
+ {
+  "_id": "L0384",
+  "linea": "Mar  5 07:55:15 web-03 sshd[9573]: Invalid user oracle from 190.210.8.92 port 61914"
+ },
+ {
+  "_id": "L0385",
+  "linea": "Mar  5 07:55:15 web-03 sshd[9573]: Failed none for invalid user oracle from 190.210.8.92 port 44708 ssh2"
+ },
+ {
+  "_id": "L0386",
+  "linea": "Mar  5 07:55:26 web-03 sshd[7988]: Invalid user git from 190.210.8.92 port 48822"
+ },
+ {
+  "_id": "L0387",
+  "linea": "Mar  5 07:55:26 web-03 sshd[7988]: Failed none for invalid user git from 190.210.8.92 port 53289 ssh2"
+ },
+ {
+  "_id": "L0388",
+  "linea": "Mar  5 09:13:06 web-03 sshd[11886]: Invalid user jenkins from 181.47.22.6 port 57146"
+ },
+ {
+  "_id": "L0389",
+  "linea": "Mar  5 09:13:06 web-03 sshd[11886]: Failed none for invalid user jenkins from 181.47.22.6 port 43792 ssh2"
+ },
+ {
+  "_id": "L0390",
+  "linea": "Mar  5 09:13:31 web-03 sshd[28590]: Invalid user admin from 181.47.22.6 port 38648"
+ },
+ {
+  "_id": "L0391",
+  "linea": "Mar  5 09:13:31 web-03 sshd[28590]: Failed none for invalid user admin from 181.47.22.6 port 57556 ssh2"
+ },
+ {
+  "_id": "L0392",
+  "linea": "Mar  5 09:13:56 web-03 sshd[1328]: Invalid user jenkins from 181.47.22.6 port 63121"
+ },
+ {
+  "_id": "L0393",
+  "linea": "Mar  5 09:13:56 web-03 sshd[1328]: Failed none for invalid user jenkins from 181.47.22.6 port 43368 ssh2"
+ },
+ {
+  "_id": "L0394",
+  "linea": "Mar  5 09:37:58 web-03 sshd[28263]: Invalid user oracle from 198.51.100.143 port 50741"
+ },
+ {
+  "_id": "L0395",
+  "linea": "Mar  5 09:37:58 web-03 sshd[28263]: Failed none for invalid user oracle from 198.51.100.143 port 36356 ssh2"
+ },
+ {
+  "_id": "L0396",
+  "linea": "Mar  5 09:38:12 web-03 sshd[18867]: Invalid user backup from 198.51.100.143 port 50808"
+ },
+ {
+  "_id": "L0397",
+  "linea": "Mar  5 09:38:12 web-03 sshd[18867]: Failed none for invalid user backup from 198.51.100.143 port 42175 ssh2"
+ },
+ {
+  "_id": "L0398",
+  "linea": "Mar  5 09:38:20 web-03 sshd[17142]: Invalid user git from 198.51.100.143 port 47449"
+ },
+ {
+  "_id": "L0399",
+  "linea": "Mar  5 09:38:20 web-03 sshd[17142]: Failed none for invalid user git from 198.51.100.143 port 57777 ssh2"
+ },
+ {
+  "_id": "L0400",
+  "linea": "Mar  5 09:38:25 web-03 sshd[4689]: Invalid user admin from 198.51.100.143 port 31644"
+ },
+ {
+  "_id": "L0401",
+  "linea": "Mar  5 09:38:25 web-03 sshd[4689]: Failed none for invalid user admin from 198.51.100.143 port 44586 ssh2"
+ },
+ {
+  "_id": "L0402",
+  "linea": "Mar  5 10:10:49 web-03 sshd[31629]: Invalid user ftp from 198.51.100.33 port 34130"
+ },
+ {
+  "_id": "L0403",
+  "linea": "Mar  5 10:10:49 web-03 sshd[31629]: Failed none for invalid user ftp from 198.51.100.33 port 53704 ssh2"
+ },
+ {
+  "_id": "L0404",
+  "linea": "Mar  5 10:10:56 web-03 sshd[8955]: Invalid user test from 198.51.100.33 port 41288"
+ },
+ {
+  "_id": "L0405",
+  "linea": "Mar  5 10:10:56 web-03 sshd[8955]: Failed none for invalid user test from 198.51.100.33 port 61368 ssh2"
+ },
+ {
+  "_id": "L0406",
+  "linea": "Mar  5 10:11:12 web-03 sshd[15127]: Failed password for deploy from 198.51.100.33 port 36303 ssh2"
+ },
+ {
+  "_id": "L0407",
+  "linea": "Mar  5 10:39:22 web-03 sshd[20921]: Invalid user test from 203.0.113.7 port 36865"
+ },
+ {
+  "_id": "L0408",
+  "linea": "Mar  5 10:39:22 web-03 sshd[20921]: Failed none for invalid user test from 203.0.113.7 port 43638 ssh2"
+ },
+ {
+  "_id": "L0409",
+  "linea": "Mar  5 10:39:38 web-03 sshd[21983]: Invalid user test from 203.0.113.7 port 41335"
+ },
+ {
+  "_id": "L0410",
+  "linea": "Mar  5 10:39:38 web-03 sshd[21983]: Failed none for invalid user test from 203.0.113.7 port 49554 ssh2"
+ },
+ {
+  "_id": "L0411",
+  "linea": "Mar  5 11:03:46 web-03 sshd[12851]: Failed password for deploy from 200.45.10.18 port 30090 ssh2"
+ },
+ {
+  "_id": "L0412",
+  "linea": "Mar  5 11:04:05 web-03 sshd[4029]: Failed password for deploy from 200.45.10.18 port 57806 ssh2"
+ },
+ {
+  "_id": "L0413",
+  "linea": "Mar  5 11:04:23 web-03 sshd[3161]: Invalid user oracle from 200.45.10.18 port 54707"
+ },
+ {
+  "_id": "L0414",
+  "linea": "Mar  5 11:04:23 web-03 sshd[3161]: Failed none for invalid user oracle from 200.45.10.18 port 52916 ssh2"
+ },
+ {
+  "_id": "L0415",
+  "linea": "Mar  5 11:04:46 web-03 sshd[31946]: Invalid user administrador from 200.45.10.18 port 47816"
+ },
+ {
+  "_id": "L0416",
+  "linea": "Mar  5 11:04:46 web-03 sshd[31946]: Failed none for invalid user administrador from 200.45.10.18 port 40947 ssh2"
+ },
+ {
+  "_id": "L0417",
+  "linea": "Mar  5 11:27:34 web-03 sshd[3909]: Invalid user backup from 198.51.100.77 port 32915"
+ },
+ {
+  "_id": "L0418",
+  "linea": "Mar  5 11:27:34 web-03 sshd[3909]: Failed none for invalid user backup from 198.51.100.77 port 30615 ssh2"
+ },
+ {
+  "_id": "L0419",
+  "linea": "Mar  5 11:55:43 web-03 sshd[19828]: Failed password for deploy from 203.0.113.91 port 39029 ssh2"
+ },
+ {
+  "_id": "L0420",
+  "linea": "Mar  5 11:56:06 web-03 sshd[13184]: Invalid user ftp from 203.0.113.91 port 48843"
+ },
+ {
+  "_id": "L0421",
+  "linea": "Mar  5 11:56:06 web-03 sshd[13184]: Failed none for invalid user ftp from 203.0.113.91 port 57550 ssh2"
+ },
+ {
+  "_id": "L0422",
+  "linea": "Mar  5 11:56:15 web-03 sshd[3586]: Invalid user postgres from 203.0.113.91 port 38153"
+ },
+ {
+  "_id": "L0423",
+  "linea": "Mar  5 11:56:15 web-03 sshd[3586]: Failed none for invalid user postgres from 203.0.113.91 port 51892 ssh2"
+ },
+ {
+  "_id": "L0424",
+  "linea": "Mar  5 12:17:01 web-03 sshd[12487]: Invalid user jenkins from 198.51.100.143 port 32966"
+ },
+ {
+  "_id": "L0425",
+  "linea": "Mar  5 12:17:01 web-03 sshd[12487]: Failed none for invalid user jenkins from 198.51.100.143 port 61702 ssh2"
+ },
+ {
+  "_id": "L0426",
+  "linea": "Mar  5 12:17:24 web-03 sshd[12550]: Invalid user test from 198.51.100.143 port 54687"
+ },
+ {
+  "_id": "L0427",
+  "linea": "Mar  5 12:17:24 web-03 sshd[12550]: Failed none for invalid user test from 198.51.100.143 port 60329 ssh2"
+ },
+ {
+  "_id": "L0428",
+  "linea": "Mar  5 12:44:38 web-03 sshd[22968]: Invalid user test from 198.51.100.33 port 59916"
+ },
+ {
+  "_id": "L0429",
+  "linea": "Mar  5 12:44:38 web-03 sshd[22968]: Failed none for invalid user test from 198.51.100.33 port 59535 ssh2"
+ },
+ {
+  "_id": "L0430",
+  "linea": "Mar  5 13:13:45 web-03 sshd[28807]: Invalid user oracle from 190.210.8.92 port 37411"
+ },
+ {
+  "_id": "L0431",
+  "linea": "Mar  5 13:13:45 web-03 sshd[28807]: Failed none for invalid user oracle from 190.210.8.92 port 32294 ssh2"
+ },
+ {
+  "_id": "L0432",
+  "linea": "Mar  5 14:08:41 web-03 sshd[19152]: Invalid user admin from 198.51.100.33 port 59126"
+ },
+ {
+  "_id": "L0433",
+  "linea": "Mar  5 14:08:41 web-03 sshd[19152]: Failed none for invalid user admin from 198.51.100.33 port 47036 ssh2"
+ },
+ {
+  "_id": "L0434",
+  "linea": "Mar  5 14:39:01 web-03 sshd[5653]: Failed password for deploy from 200.45.10.18 port 58022 ssh2"
+ },
+ {
+  "_id": "L0435",
+  "linea": "Mar  5 14:39:17 web-03 sshd[18642]: Invalid user administrador from 200.45.10.18 port 63173"
+ },
+ {
+  "_id": "L0436",
+  "linea": "Mar  5 14:39:17 web-03 sshd[18642]: Failed none for invalid user administrador from 200.45.10.18 port 39751 ssh2"
+ },
+ {
+  "_id": "L0437",
+  "linea": "Mar  5 14:39:41 web-03 sshd[6606]: Invalid user postgres from 200.45.10.18 port 56368"
+ },
+ {
+  "_id": "L0438",
+  "linea": "Mar  5 14:39:41 web-03 sshd[6606]: Failed none for invalid user postgres from 200.45.10.18 port 35612 ssh2"
+ },
+ {
+  "_id": "L0439",
+  "linea": "Mar  5 14:40:04 web-03 sshd[21581]: Invalid user oracle from 200.45.10.18 port 35910"
+ },
+ {
+  "_id": "L0440",
+  "linea": "Mar  5 14:40:04 web-03 sshd[21581]: Failed none for invalid user oracle from 200.45.10.18 port 55178 ssh2"
+ },
+ {
+  "_id": "L0441",
+  "linea": "Mar  5 15:02:01 web-03 sshd[2847]: Invalid user jenkins from 181.47.22.6 port 30036"
+ },
+ {
+  "_id": "L0442",
+  "linea": "Mar  5 15:02:01 web-03 sshd[2847]: Failed none for invalid user jenkins from 181.47.22.6 port 35932 ssh2"
+ },
+ {
+  "_id": "L0443",
+  "linea": "Mar  5 15:02:12 web-03 sshd[28548]: Invalid user oracle from 181.47.22.6 port 62688"
+ },
+ {
+  "_id": "L0444",
+  "linea": "Mar  5 15:02:12 web-03 sshd[28548]: Failed none for invalid user oracle from 181.47.22.6 port 50633 ssh2"
+ },
+ {
+  "_id": "L0445",
+  "linea": "Mar  5 15:29:28 web-03 sshd[12487]: Invalid user admin from 198.51.100.77 port 50967"
+ },
+ {
+  "_id": "L0446",
+  "linea": "Mar  5 15:29:28 web-03 sshd[12487]: Failed none for invalid user admin from 198.51.100.77 port 46015 ssh2"
+ },
+ {
+  "_id": "L0447",
+  "linea": "Mar  5 15:52:20 web-03 sshd[8332]: Invalid user git from 198.51.100.77 port 58199"
+ },
+ {
+  "_id": "L0448",
+  "linea": "Mar  5 15:52:20 web-03 sshd[8332]: Failed none for invalid user git from 198.51.100.77 port 53206 ssh2"
+ },
+ {
+  "_id": "L0449",
+  "linea": "Mar  5 15:52:42 web-03 sshd[11484]: Invalid user git from 198.51.100.77 port 62839"
+ },
+ {
+  "_id": "L0450",
+  "linea": "Mar  5 15:52:42 web-03 sshd[11484]: Failed none for invalid user git from 198.51.100.77 port 31018 ssh2"
+ },
+ {
+  "_id": "L0451",
+  "linea": "Mar  5 16:17:34 web-03 sshd[6506]: Invalid user git from 198.51.100.143 port 37025"
+ },
+ {
+  "_id": "L0452",
+  "linea": "Mar  5 16:17:34 web-03 sshd[6506]: Failed none for invalid user git from 198.51.100.143 port 32645 ssh2"
+ },
+ {
+  "_id": "L0453",
+  "linea": "Mar  5 16:17:40 web-03 sshd[2081]: Invalid user jenkins from 198.51.100.143 port 54717"
+ },
+ {
+  "_id": "L0454",
+  "linea": "Mar  5 16:17:40 web-03 sshd[2081]: Failed none for invalid user jenkins from 198.51.100.143 port 53567 ssh2"
+ },
+ {
+  "_id": "L0455",
+  "linea": "Mar  5 16:40:35 web-03 sshd[19923]: Invalid user backup from 203.0.113.7 port 39052"
+ },
+ {
+  "_id": "L0456",
+  "linea": "Mar  5 16:40:35 web-03 sshd[19923]: Failed none for invalid user backup from 203.0.113.7 port 46122 ssh2"
+ },
+ {
+  "_id": "L0457",
+  "linea": "Mar  5 16:40:47 web-03 sshd[22723]: Invalid user backup from 203.0.113.7 port 64907"
+ },
+ {
+  "_id": "L0458",
+  "linea": "Mar  5 16:40:47 web-03 sshd[22723]: Failed none for invalid user backup from 203.0.113.7 port 32748 ssh2"
+ },
+ {
+  "_id": "L0459",
+  "linea": "Mar  5 16:40:48 web-03 sshd[14907]: Invalid user jenkins from 203.0.113.7 port 60906"
+ },
+ {
+  "_id": "L0460",
+  "linea": "Mar  5 16:40:48 web-03 sshd[14907]: Failed none for invalid user jenkins from 203.0.113.7 port 39065 ssh2"
+ },
+ {
+  "_id": "L0461",
+  "linea": "Mar  5 17:02:38 web-03 sshd[6155]: Invalid user admin from 203.0.113.44 port 52235"
+ },
+ {
+  "_id": "L0462",
+  "linea": "Mar  5 17:02:38 web-03 sshd[6155]: Failed none for invalid user admin from 203.0.113.44 port 61922 ssh2"
+ },
+ {
+  "_id": "L0463",
+  "linea": "Mar  5 17:40:14 web-03 sshd[15129]: Invalid user postgres from 177.54.130.71 port 63762"
+ },
+ {
+  "_id": "L0464",
+  "linea": "Mar  5 17:40:14 web-03 sshd[15129]: Failed none for invalid user postgres from 177.54.130.71 port 36032 ssh2"
+ },
+ {
+  "_id": "L0465",
+  "linea": "Mar  5 17:40:23 web-03 sshd[28288]: Invalid user administrador from 177.54.130.71 port 35385"
+ },
+ {
+  "_id": "L0466",
+  "linea": "Mar  5 17:40:23 web-03 sshd[28288]: Failed none for invalid user administrador from 177.54.130.71 port 33895 ssh2"
+ },
+ {
+  "_id": "L0467",
+  "linea": "Mar  5 17:40:39 web-03 sshd[29424]: Invalid user test from 177.54.130.71 port 59610"
+ },
+ {
+  "_id": "L0468",
+  "linea": "Mar  5 17:40:39 web-03 sshd[29424]: Failed none for invalid user test from 177.54.130.71 port 43509 ssh2"
+ },
+ {
+  "_id": "L0469",
+  "linea": "Mar  5 17:40:56 web-03 sshd[10591]: Invalid user admin from 177.54.130.71 port 63008"
+ },
+ {
+  "_id": "L0470",
+  "linea": "Mar  5 17:40:56 web-03 sshd[10591]: Failed none for invalid user admin from 177.54.130.71 port 56714 ssh2"
+ },
+ {
+  "_id": "L0471",
+  "linea": "Mar  5 18:15:05 web-03 sshd[9382]: Invalid user git from 181.47.22.6 port 61318"
+ },
+ {
+  "_id": "L0472",
+  "linea": "Mar  5 18:15:05 web-03 sshd[9382]: Failed none for invalid user git from 181.47.22.6 port 60854 ssh2"
+ },
+ {
+  "_id": "L0473",
+  "linea": "Mar  5 18:15:20 web-03 sshd[12409]: Invalid user postgres from 181.47.22.6 port 62173"
+ },
+ {
+  "_id": "L0474",
+  "linea": "Mar  5 18:15:20 web-03 sshd[12409]: Failed none for invalid user postgres from 181.47.22.6 port 33108 ssh2"
+ },
+ {
+  "_id": "L0475",
+  "linea": "Mar  5 18:15:44 web-03 sshd[19825]: Failed password for deploy from 181.47.22.6 port 49518 ssh2"
+ },
+ {
+  "_id": "L0476",
+  "linea": "Mar  5 18:15:51 web-03 sshd[10185]: Invalid user git from 181.47.22.6 port 48743"
+ },
+ {
+  "_id": "L0477",
+  "linea": "Mar  5 18:15:51 web-03 sshd[10185]: Failed none for invalid user git from 181.47.22.6 port 46412 ssh2"
+ },
+ {
+  "_id": "L0478",
+  "linea": "Mar  5 18:40:46 web-03 sshd[7463]: Invalid user admin from 192.0.2.15 port 56951"
+ },
+ {
+  "_id": "L0479",
+  "linea": "Mar  5 18:40:46 web-03 sshd[7463]: Failed none for invalid user admin from 192.0.2.15 port 51719 ssh2"
+ },
+ {
+  "_id": "L0480",
+  "linea": "Mar  5 18:41:02 web-03 sshd[25729]: Invalid user admin from 192.0.2.15 port 41236"
+ },
+ {
+  "_id": "L0481",
+  "linea": "Mar  5 18:41:02 web-03 sshd[25729]: Failed none for invalid user admin from 192.0.2.15 port 34383 ssh2"
+ },
+ {
+  "_id": "L0482",
+  "linea": "Mar  5 18:41:19 web-03 sshd[23611]: Invalid user oracle from 192.0.2.15 port 34478"
+ },
+ {
+  "_id": "L0483",
+  "linea": "Mar  5 18:41:19 web-03 sshd[23611]: Failed none for invalid user oracle from 192.0.2.15 port 53508 ssh2"
+ },
+ {
+  "_id": "L0484",
+  "linea": "Mar  5 18:41:28 web-03 sshd[29979]: Invalid user test from 192.0.2.15 port 34200"
+ },
+ {
+  "_id": "L0485",
+  "linea": "Mar  5 18:41:28 web-03 sshd[29979]: Failed none for invalid user test from 192.0.2.15 port 58036 ssh2"
+ },
+ {
+  "_id": "L0486",
+  "linea": "Mar  5 19:05:39 web-03 sshd[7601]: Invalid user test from 203.0.113.44 port 35218"
+ },
+ {
+  "_id": "L0487",
+  "linea": "Mar  5 19:05:39 web-03 sshd[7601]: Failed none for invalid user test from 203.0.113.44 port 60021 ssh2"
+ },
+ {
+  "_id": "L0488",
+  "linea": "Mar  5 19:05:45 web-03 sshd[2487]: Invalid user backup from 203.0.113.44 port 40737"
+ },
+ {
+  "_id": "L0489",
+  "linea": "Mar  5 19:05:45 web-03 sshd[2487]: Failed none for invalid user backup from 203.0.113.44 port 56997 ssh2"
+ },
+ {
+  "_id": "L0490",
+  "linea": "Mar  5 19:41:17 web-03 sshd[7272]: Invalid user admin from 198.51.100.33 port 49128"
+ },
+ {
+  "_id": "L0491",
+  "linea": "Mar  5 19:41:17 web-03 sshd[7272]: Failed none for invalid user admin from 198.51.100.33 port 46735 ssh2"
+ },
+ {
+  "_id": "L0492",
+  "linea": "Mar  5 19:41:30 web-03 sshd[1780]: Invalid user admin from 198.51.100.33 port 46271"
+ },
+ {
+  "_id": "L0493",
+  "linea": "Mar  5 19:41:30 web-03 sshd[1780]: Failed none for invalid user admin from 198.51.100.33 port 64725 ssh2"
+ },
+ {
+  "_id": "L0494",
+  "linea": "Mar  5 19:41:31 web-03 sshd[12331]: Invalid user backup from 198.51.100.33 port 31205"
+ },
+ {
+  "_id": "L0495",
+  "linea": "Mar  5 19:41:31 web-03 sshd[12331]: Failed none for invalid user backup from 198.51.100.33 port 60679 ssh2"
+ },
+ {
+  "_id": "L0496",
+  "linea": "Mar  5 20:19:01 web-03 sshd[9794]: Invalid user oracle from 192.0.2.88 port 44174"
+ },
+ {
+  "_id": "L0497",
+  "linea": "Mar  5 20:19:01 web-03 sshd[9794]: Failed none for invalid user oracle from 192.0.2.88 port 61805 ssh2"
+ },
+ {
+  "_id": "L0498",
+  "linea": "Mar  5 20:19:26 web-03 sshd[21643]: Invalid user oracle from 192.0.2.88 port 41370"
+ },
+ {
+  "_id": "L0499",
+  "linea": "Mar  5 20:19:26 web-03 sshd[21643]: Failed none for invalid user oracle from 192.0.2.88 port 56806 ssh2"
+ },
+ {
+  "_id": "L0500",
+  "linea": "Mar  5 20:19:37 web-03 sshd[7458]: Invalid user administrador from 192.0.2.88 port 54796"
+ },
+ {
+  "_id": "L0501",
+  "linea": "Mar  5 20:19:37 web-03 sshd[7458]: Failed none for invalid user administrador from 192.0.2.88 port 38320 ssh2"
+ },
+ {
+  "_id": "L0502",
+  "linea": "Mar  5 20:19:49 web-03 sshd[22022]: Invalid user test from 192.0.2.88 port 42815"
+ },
+ {
+  "_id": "L0503",
+  "linea": "Mar  5 20:19:49 web-03 sshd[22022]: Failed none for invalid user test from 192.0.2.88 port 59945 ssh2"
+ },
+ {
+  "_id": "L0504",
+  "linea": "Mar  5 20:41:37 web-03 sshd[30469]: Invalid user git from 181.47.22.6 port 46221"
+ },
+ {
+  "_id": "L0505",
+  "linea": "Mar  5 20:41:37 web-03 sshd[30469]: Failed none for invalid user git from 181.47.22.6 port 30317 ssh2"
+ },
+ {
+  "_id": "L0506",
+  "linea": "Mar  5 21:05:26 web-03 sshd[3926]: Invalid user ftp from 192.0.2.200 port 55886"
+ },
+ {
+  "_id": "L0507",
+  "linea": "Mar  5 21:05:26 web-03 sshd[3926]: Failed none for invalid user ftp from 192.0.2.200 port 30766 ssh2"
+ },
+ {
+  "_id": "L0508",
+  "linea": "Mar  5 21:05:27 web-03 sshd[12220]: Invalid user admin from 192.0.2.200 port 33616"
+ },
+ {
+  "_id": "L0509",
+  "linea": "Mar  5 21:05:27 web-03 sshd[12220]: Failed none for invalid user admin from 192.0.2.200 port 46229 ssh2"
+ },
+ {
+  "_id": "L0510",
+  "linea": "Mar  5 21:05:48 web-03 sshd[22796]: Invalid user test from 192.0.2.200 port 38117"
+ },
+ {
+  "_id": "L0511",
+  "linea": "Mar  5 21:05:48 web-03 sshd[22796]: Failed none for invalid user test from 192.0.2.200 port 31548 ssh2"
+ },
+ {
+  "_id": "L0512",
+  "linea": "Mar  5 22:04:58 web-03 sshd[25839]: Invalid user ftp from 203.0.113.210 port 46055"
+ },
+ {
+  "_id": "L0513",
+  "linea": "Mar  5 22:04:58 web-03 sshd[25839]: Failed none for invalid user ftp from 203.0.113.210 port 55191 ssh2"
+ },
+ {
+  "_id": "L0514",
+  "linea": "Mar  5 22:05:10 web-03 sshd[17266]: Invalid user administrador from 203.0.113.210 port 41484"
+ },
+ {
+  "_id": "L0515",
+  "linea": "Mar  5 22:05:10 web-03 sshd[17266]: Failed none for invalid user administrador from 203.0.113.210 port 59808 ssh2"
+ },
+ {
+  "_id": "L0516",
+  "linea": "Mar  5 22:05:33 web-03 sshd[8127]: Invalid user postgres from 203.0.113.210 port 56302"
+ },
+ {
+  "_id": "L0517",
+  "linea": "Mar  5 22:05:33 web-03 sshd[8127]: Failed none for invalid user postgres from 203.0.113.210 port 48144 ssh2"
+ },
+ {
+  "_id": "L0518",
+  "linea": "Mar  5 22:05:49 web-03 sshd[15424]: Invalid user postgres from 203.0.113.210 port 63519"
+ },
+ {
+  "_id": "L0519",
+  "linea": "Mar  5 22:05:49 web-03 sshd[15424]: Failed none for invalid user postgres from 203.0.113.210 port 39613 ssh2"
+ },
+ {
+  "_id": "L0520",
+  "linea": "Mar  5 23:40:00 web-03 sshd[16314]: Invalid user backup from 200.45.10.18 port 45116"
+ },
+ {
+  "_id": "L0521",
+  "linea": "Mar  5 23:40:00 web-03 sshd[16314]: Failed none for invalid user backup from 200.45.10.18 port 39044 ssh2"
+ },
+ {
+  "_id": "L0522",
+  "linea": "Mar  6 01:06:57 web-03 sshd[5973]: Invalid user git from 203.0.113.7 port 61758"
+ },
+ {
+  "_id": "L0523",
+  "linea": "Mar  6 01:06:57 web-03 sshd[5973]: Failed none for invalid user git from 203.0.113.7 port 59477 ssh2"
+ },
+ {
+  "_id": "L0524",
+  "linea": "Mar  6 01:07:22 web-03 sshd[27470]: Invalid user test from 203.0.113.7 port 36066"
+ },
+ {
+  "_id": "L0525",
+  "linea": "Mar  6 01:07:22 web-03 sshd[27470]: Failed none for invalid user test from 203.0.113.7 port 55014 ssh2"
+ },
+ {
+  "_id": "L0526",
+  "linea": "Mar  6 01:31:22 web-03 sshd[17425]: Invalid user administrador from 203.0.113.210 port 58060"
+ },
+ {
+  "_id": "L0527",
+  "linea": "Mar  6 01:31:22 web-03 sshd[17425]: Failed none for invalid user administrador from 203.0.113.210 port 51152 ssh2"
+ },
+ {
+  "_id": "L0528",
+  "linea": "Mar  6 01:31:43 web-03 sshd[21541]: Invalid user postgres from 203.0.113.210 port 47135"
+ },
+ {
+  "_id": "L0529",
+  "linea": "Mar  6 01:31:43 web-03 sshd[21541]: Failed none for invalid user postgres from 203.0.113.210 port 30615 ssh2"
+ },
+ {
+  "_id": "L0530",
+  "linea": "Mar  6 01:52:42 web-03 sshd[23117]: Invalid user administrador from 198.51.100.143 port 53026"
+ },
+ {
+  "_id": "L0531",
+  "linea": "Mar  6 01:52:42 web-03 sshd[23117]: Failed none for invalid user administrador from 198.51.100.143 port 34255 ssh2"
+ },
+ {
+  "_id": "L0532",
+  "linea": "Mar  6 01:52:59 web-03 sshd[18663]: Invalid user ftp from 198.51.100.143 port 44567"
+ },
+ {
+  "_id": "L0533",
+  "linea": "Mar  6 01:52:59 web-03 sshd[18663]: Failed none for invalid user ftp from 198.51.100.143 port 56621 ssh2"
+ },
+ {
+  "_id": "L0534",
+  "linea": "Mar  6 01:53:04 web-03 sshd[31561]: Invalid user administrador from 198.51.100.143 port 51056"
+ },
+ {
+  "_id": "L0535",
+  "linea": "Mar  6 01:53:04 web-03 sshd[31561]: Failed none for invalid user administrador from 198.51.100.143 port 54408 ssh2"
+ },
+ {
+  "_id": "L0536",
+  "linea": "Mar  6 01:53:16 web-03 sshd[17418]: Invalid user oracle from 198.51.100.143 port 54384"
+ },
+ {
+  "_id": "L0537",
+  "linea": "Mar  6 01:53:16 web-03 sshd[17418]: Failed none for invalid user oracle from 198.51.100.143 port 37307 ssh2"
+ },
+ {
+  "_id": "L0538",
+  "linea": "Mar  6 02:31:46 web-03 sshd[10971]: Invalid user git from 200.45.10.18 port 31988"
+ },
+ {
+  "_id": "L0539",
+  "linea": "Mar  6 02:31:46 web-03 sshd[10971]: Failed none for invalid user git from 200.45.10.18 port 47345 ssh2"
+ },
+ {
+  "_id": "L0540",
+  "linea": "Mar  6 02:31:50 web-03 sshd[23724]: Invalid user administrador from 200.45.10.18 port 55903"
+ },
+ {
+  "_id": "L0541",
+  "linea": "Mar  6 02:31:50 web-03 sshd[23724]: Failed none for invalid user administrador from 200.45.10.18 port 61011 ssh2"
+ },
+ {
+  "_id": "L0542",
+  "linea": "Mar  6 02:53:40 web-03 sshd[21261]: Invalid user administrador from 198.51.100.77 port 53288"
+ },
+ {
+  "_id": "L0543",
+  "linea": "Mar  6 02:53:40 web-03 sshd[21261]: Failed none for invalid user administrador from 198.51.100.77 port 54777 ssh2"
+ },
+ {
+  "_id": "L0544",
+  "linea": "Mar  6 02:53:42 web-03 sshd[2988]: Invalid user ftp from 198.51.100.77 port 42077"
+ },
+ {
+  "_id": "L0545",
+  "linea": "Mar  6 02:53:42 web-03 sshd[2988]: Failed none for invalid user ftp from 198.51.100.77 port 57664 ssh2"
+ },
+ {
+  "_id": "L0546",
+  "linea": "Mar  6 02:53:49 web-03 sshd[7776]: Invalid user administrador from 198.51.100.77 port 44061"
+ },
+ {
+  "_id": "L0547",
+  "linea": "Mar  6 02:53:49 web-03 sshd[7776]: Failed none for invalid user administrador from 198.51.100.77 port 52120 ssh2"
+ },
+ {
+  "_id": "L0548",
+  "linea": "Mar  6 02:54:05 web-03 sshd[24910]: Invalid user oracle from 198.51.100.77 port 35784"
+ },
+ {
+  "_id": "L0549",
+  "linea": "Mar  6 02:54:05 web-03 sshd[24910]: Failed none for invalid user oracle from 198.51.100.77 port 36810 ssh2"
+ },
+ {
+  "_id": "L0550",
+  "linea": "Mar  6 03:42:54 web-03 sshd[19463]: Invalid user jenkins from 198.51.100.143 port 50847"
+ },
+ {
+  "_id": "L0551",
+  "linea": "Mar  6 03:42:54 web-03 sshd[19463]: Failed none for invalid user jenkins from 198.51.100.143 port 41431 ssh2"
+ },
+ {
+  "_id": "L0552",
+  "linea": "Mar  6 04:04:52 web-03 sshd[21571]: Invalid user oracle from 200.45.10.18 port 58680"
+ },
+ {
+  "_id": "L0553",
+  "linea": "Mar  6 04:04:52 web-03 sshd[21571]: Failed none for invalid user oracle from 200.45.10.18 port 57729 ssh2"
+ },
+ {
+  "_id": "L0554",
+  "linea": "Mar  6 04:05:17 web-03 sshd[2189]: Invalid user administrador from 200.45.10.18 port 62694"
+ },
+ {
+  "_id": "L0555",
+  "linea": "Mar  6 04:05:17 web-03 sshd[2189]: Failed none for invalid user administrador from 200.45.10.18 port 61195 ssh2"
+ },
+ {
+  "_id": "L0556",
+  "linea": "Mar  6 04:05:33 web-03 sshd[4501]: Invalid user test from 200.45.10.18 port 44386"
+ },
+ {
+  "_id": "L0557",
+  "linea": "Mar  6 04:05:33 web-03 sshd[4501]: Failed none for invalid user test from 200.45.10.18 port 61473 ssh2"
+ },
+ {
+  "_id": "L0558",
+  "linea": "Mar  6 04:37:44 web-03 sshd[25160]: Invalid user oracle from 203.0.113.91 port 61403"
+ },
+ {
+  "_id": "L0559",
+  "linea": "Mar  6 04:37:44 web-03 sshd[25160]: Failed none for invalid user oracle from 203.0.113.91 port 48909 ssh2"
+ },
+ {
+  "_id": "L0560",
+  "linea": "Mar  6 05:04:43 web-03 sshd[25023]: Invalid user test from 203.0.113.7 port 36221"
+ },
+ {
+  "_id": "L0561",
+  "linea": "Mar  6 05:04:43 web-03 sshd[25023]: Failed none for invalid user test from 203.0.113.7 port 53056 ssh2"
+ },
+ {
+  "_id": "L0562",
+  "linea": "Mar  6 05:04:59 web-03 sshd[20269]: Invalid user ftp from 203.0.113.7 port 34407"
+ },
+ {
+  "_id": "L0563",
+  "linea": "Mar  6 05:04:59 web-03 sshd[20269]: Failed none for invalid user ftp from 203.0.113.7 port 51598 ssh2"
+ },
+ {
+  "_id": "L0564",
+  "linea": "Mar  6 05:25:50 web-03 sshd[17794]: Invalid user jenkins from 181.47.22.6 port 42490"
+ },
+ {
+  "_id": "L0565",
+  "linea": "Mar  6 05:25:50 web-03 sshd[17794]: Failed none for invalid user jenkins from 181.47.22.6 port 38642 ssh2"
+ },
+ {
+  "_id": "L0566",
+  "linea": "Mar  6 05:26:02 web-03 sshd[25741]: Invalid user administrador from 181.47.22.6 port 44016"
+ },
+ {
+  "_id": "L0567",
+  "linea": "Mar  6 05:26:02 web-03 sshd[25741]: Failed none for invalid user administrador from 181.47.22.6 port 62425 ssh2"
+ },
+ {
+  "_id": "L0568",
+  "linea": "Mar  6 05:48:56 web-03 sshd[29032]: Invalid user administrador from 192.0.2.15 port 57953"
+ },
+ {
+  "_id": "L0569",
+  "linea": "Mar  6 05:48:56 web-03 sshd[29032]: Failed none for invalid user administrador from 192.0.2.15 port 42668 ssh2"
+ },
+ {
+  "_id": "L0570",
+  "linea": "Mar  6 05:49:08 web-03 sshd[22400]: Invalid user admin from 192.0.2.15 port 60000"
+ },
+ {
+  "_id": "L0571",
+  "linea": "Mar  6 05:49:08 web-03 sshd[22400]: Failed none for invalid user admin from 192.0.2.15 port 50659 ssh2"
+ },
+ {
+  "_id": "L0572",
+  "linea": "Mar  6 05:49:21 web-03 sshd[29698]: Invalid user jenkins from 192.0.2.15 port 40827"
+ },
+ {
+  "_id": "L0573",
+  "linea": "Mar  6 05:49:21 web-03 sshd[29698]: Failed none for invalid user jenkins from 192.0.2.15 port 49071 ssh2"
+ },
+ {
+  "_id": "L0574",
+  "linea": "Mar  6 06:38:02 web-03 sshd[5489]: Invalid user administrador from 177.54.130.71 port 39122"
+ },
+ {
+  "_id": "L0575",
+  "linea": "Mar  6 06:38:02 web-03 sshd[5489]: Failed none for invalid user administrador from 177.54.130.71 port 44964 ssh2"
+ },
+ {
+  "_id": "L0576",
+  "linea": "Mar  6 07:01:52 web-03 sshd[16884]: Invalid user git from 198.51.100.143 port 61820"
+ },
+ {
+  "_id": "L0577",
+  "linea": "Mar  6 07:01:52 web-03 sshd[16884]: Failed none for invalid user git from 198.51.100.143 port 58956 ssh2"
+ },
+ {
+  "_id": "L0578",
+  "linea": "Mar  6 07:01:54 web-03 sshd[23792]: Invalid user backup from 198.51.100.143 port 52386"
+ },
+ {
+  "_id": "L0579",
+  "linea": "Mar  6 07:01:54 web-03 sshd[23792]: Failed none for invalid user backup from 198.51.100.143 port 33403 ssh2"
+ },
+ {
+  "_id": "L0580",
+  "linea": "Mar  6 07:02:19 web-03 sshd[30520]: Invalid user git from 198.51.100.143 port 64324"
+ },
+ {
+  "_id": "L0581",
+  "linea": "Mar  6 07:02:19 web-03 sshd[30520]: Failed none for invalid user git from 198.51.100.143 port 50567 ssh2"
+ },
+ {
+  "_id": "L0582",
+  "linea": "Mar  6 07:58:30 web-03 sshd[10679]: Invalid user git from 203.0.113.91 port 35731"
+ },
+ {
+  "_id": "L0583",
+  "linea": "Mar  6 07:58:30 web-03 sshd[10679]: Failed none for invalid user git from 203.0.113.91 port 44755 ssh2"
+ },
+ {
+  "_id": "L0584",
+  "linea": "Mar  6 07:58:49 web-03 sshd[3617]: Invalid user admin from 203.0.113.91 port 64130"
+ },
+ {
+  "_id": "L0585",
+  "linea": "Mar  6 07:58:49 web-03 sshd[3617]: Failed none for invalid user admin from 203.0.113.91 port 30160 ssh2"
+ },
+ {
+  "_id": "L0586",
+  "linea": "Mar  6 08:00:00 web-03 sshd[9347]: Accepted publickey for deploy from 10.20.4.44 port 53160 ssh2: RSA SHA256:8vN2qLpXeR4kTsYbMwGh"
+ },
+ {
+  "_id": "L0587",
+  "linea": "Mar  6 08:02:00 web-03 sudo[29386]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/docker compose up -d"
+ },
+ {
+  "_id": "L0588",
+  "linea": "Mar  6 08:05:06 web-03 sudo[5262]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/docker compose up -d"
+ },
+ {
+  "_id": "L0589",
+  "linea": "Mar  6 08:39:06 web-03 sshd[9347]: Disconnected from user deploy 10.20.4.44"
+ },
+ {
+  "_id": "L0590",
+  "linea": "Mar  6 10:09:03 web-03 sshd[12733]: Invalid user git from 181.47.22.6 port 62490"
+ },
+ {
+  "_id": "L0591",
+  "linea": "Mar  6 10:09:03 web-03 sshd[12733]: Failed none for invalid user git from 181.47.22.6 port 63196 ssh2"
+ },
+ {
+  "_id": "L0592",
+  "linea": "Mar  6 10:09:17 web-03 sshd[5900]: Invalid user administrador from 181.47.22.6 port 52051"
+ },
+ {
+  "_id": "L0593",
+  "linea": "Mar  6 10:09:17 web-03 sshd[5900]: Failed none for invalid user administrador from 181.47.22.6 port 40468 ssh2"
+ },
+ {
+  "_id": "L0594",
+  "linea": "Mar  6 10:09:22 web-03 sshd[1030]: Invalid user admin from 181.47.22.6 port 46549"
+ },
+ {
+  "_id": "L0595",
+  "linea": "Mar  6 10:09:22 web-03 sshd[1030]: Failed none for invalid user admin from 181.47.22.6 port 62581 ssh2"
+ },
+ {
+  "_id": "L0596",
+  "linea": "Mar  6 10:47:43 web-03 sshd[27814]: Invalid user ftp from 203.0.113.210 port 55054"
+ },
+ {
+  "_id": "L0597",
+  "linea": "Mar  6 10:47:43 web-03 sshd[27814]: Failed none for invalid user ftp from 203.0.113.210 port 52323 ssh2"
+ },
+ {
+  "_id": "L0598",
+  "linea": "Mar  6 11:28:22 web-03 sshd[5902]: Invalid user oracle from 203.0.113.210 port 46531"
+ },
+ {
+  "_id": "L0599",
+  "linea": "Mar  6 11:28:22 web-03 sshd[5902]: Failed none for invalid user oracle from 203.0.113.210 port 50630 ssh2"
+ },
+ {
+  "_id": "L0600",
+  "linea": "Mar  6 11:28:39 web-03 sshd[26431]: Invalid user ftp from 203.0.113.210 port 40780"
+ },
+ {
+  "_id": "L0601",
+  "linea": "Mar  6 11:28:39 web-03 sshd[26431]: Failed none for invalid user ftp from 203.0.113.210 port 32929 ssh2"
+ },
+ {
+  "_id": "L0602",
+  "linea": "Mar  6 11:28:56 web-03 sshd[27173]: Failed password for deploy from 203.0.113.210 port 42847 ssh2"
+ },
+ {
+  "_id": "L0603",
+  "linea": "Mar  6 12:01:10 web-03 sshd[4125]: Invalid user oracle from 190.210.8.92 port 37056"
+ },
+ {
+  "_id": "L0604",
+  "linea": "Mar  6 12:01:10 web-03 sshd[4125]: Failed none for invalid user oracle from 190.210.8.92 port 56151 ssh2"
+ },
+ {
+  "_id": "L0605",
+  "linea": "Mar  6 12:01:18 web-03 sshd[14384]: Invalid user ftp from 190.210.8.92 port 36697"
+ },
+ {
+  "_id": "L0606",
+  "linea": "Mar  6 12:01:18 web-03 sshd[14384]: Failed none for invalid user ftp from 190.210.8.92 port 55841 ssh2"
+ },
+ {
+  "_id": "L0607",
+  "linea": "Mar  6 12:01:27 web-03 sshd[6857]: Invalid user oracle from 190.210.8.92 port 54485"
+ },
+ {
+  "_id": "L0608",
+  "linea": "Mar  6 12:01:27 web-03 sshd[6857]: Failed none for invalid user oracle from 190.210.8.92 port 45485 ssh2"
+ },
+ {
+  "_id": "L0609",
+  "linea": "Mar  6 12:01:52 web-03 sshd[9755]: Invalid user admin from 190.210.8.92 port 34225"
+ },
+ {
+  "_id": "L0610",
+  "linea": "Mar  6 12:01:52 web-03 sshd[9755]: Failed none for invalid user admin from 190.210.8.92 port 36657 ssh2"
+ },
+ {
+  "_id": "L0611",
+  "linea": "Mar  6 12:26:00 web-03 sshd[12235]: Invalid user admin from 190.210.8.92 port 50007"
+ },
+ {
+  "_id": "L0612",
+  "linea": "Mar  6 12:26:00 web-03 sshd[12235]: Failed none for invalid user admin from 190.210.8.92 port 52589 ssh2"
+ },
+ {
+  "_id": "L0613",
+  "linea": "Mar  6 13:26:13 web-03 sshd[8611]: Invalid user git from 203.0.113.7 port 46777"
+ },
+ {
+  "_id": "L0614",
+  "linea": "Mar  6 13:26:13 web-03 sshd[8611]: Failed none for invalid user git from 203.0.113.7 port 47212 ssh2"
+ },
+ {
+  "_id": "L0615",
+  "linea": "Mar  6 13:26:17 web-03 sshd[29141]: Invalid user git from 203.0.113.7 port 35801"
+ },
+ {
+  "_id": "L0616",
+  "linea": "Mar  6 13:26:17 web-03 sshd[29141]: Failed none for invalid user git from 203.0.113.7 port 52458 ssh2"
+ },
+ {
+  "_id": "L0617",
+  "linea": "Mar  6 13:47:07 web-03 sshd[9542]: Invalid user postgres from 198.51.100.33 port 40251"
+ },
+ {
+  "_id": "L0618",
+  "linea": "Mar  6 13:47:07 web-03 sshd[9542]: Failed none for invalid user postgres from 198.51.100.33 port 38093 ssh2"
+ },
+ {
+  "_id": "L0619",
+  "linea": "Mar  6 13:47:19 web-03 sshd[9602]: Invalid user administrador from 198.51.100.33 port 40974"
+ },
+ {
+  "_id": "L0620",
+  "linea": "Mar  6 13:47:19 web-03 sshd[9602]: Failed none for invalid user administrador from 198.51.100.33 port 32867 ssh2"
+ },
+ {
+  "_id": "L0621",
+  "linea": "Mar  6 13:47:20 web-03 sshd[3829]: Invalid user backup from 198.51.100.33 port 55058"
+ },
+ {
+  "_id": "L0622",
+  "linea": "Mar  6 13:47:20 web-03 sshd[3829]: Failed none for invalid user backup from 198.51.100.33 port 64768 ssh2"
+ },
+ {
+  "_id": "L0623",
+  "linea": "Mar  6 16:02:55 web-03 sshd[14607]: Invalid user git from 203.0.113.91 port 50177"
+ },
+ {
+  "_id": "L0624",
+  "linea": "Mar  6 16:02:55 web-03 sshd[14607]: Failed none for invalid user git from 203.0.113.91 port 31632 ssh2"
+ },
+ {
+  "_id": "L0625",
+  "linea": "Mar  6 16:03:05 web-03 sshd[3529]: Invalid user ftp from 203.0.113.91 port 48016"
+ },
+ {
+  "_id": "L0626",
+  "linea": "Mar  6 16:03:05 web-03 sshd[3529]: Failed none for invalid user ftp from 203.0.113.91 port 64260 ssh2"
+ },
+ {
+  "_id": "L0627",
+  "linea": "Mar  6 16:03:11 web-03 sshd[27961]: Invalid user jenkins from 203.0.113.91 port 64267"
+ },
+ {
+  "_id": "L0628",
+  "linea": "Mar  6 16:03:11 web-03 sshd[27961]: Failed none for invalid user jenkins from 203.0.113.91 port 34618 ssh2"
+ },
+ {
+  "_id": "L0629",
+  "linea": "Mar  6 16:03:26 web-03 sshd[17129]: Failed password for deploy from 203.0.113.91 port 42229 ssh2"
+ },
+ {
+  "_id": "L0630",
+  "linea": "Mar  6 18:16:52 web-03 sshd[2009]: Invalid user admin from 203.0.113.165 port 41655"
+ },
+ {
+  "_id": "L0631",
+  "linea": "Mar  6 18:16:52 web-03 sshd[2009]: Failed none for invalid user admin from 203.0.113.165 port 50792 ssh2"
+ },
+ {
+  "_id": "L0632",
+  "linea": "Mar  6 18:16:57 web-03 sshd[26447]: Invalid user backup from 203.0.113.165 port 34839"
+ },
+ {
+  "_id": "L0633",
+  "linea": "Mar  6 18:16:57 web-03 sshd[26447]: Failed none for invalid user backup from 203.0.113.165 port 30600 ssh2"
+ },
+ {
+  "_id": "L0634",
+  "linea": "Mar  6 18:54:21 web-03 sshd[1614]: Invalid user admin from 192.0.2.15 port 32564"
+ },
+ {
+  "_id": "L0635",
+  "linea": "Mar  6 18:54:21 web-03 sshd[1614]: Failed none for invalid user admin from 192.0.2.15 port 39258 ssh2"
+ },
+ {
+  "_id": "L0636",
+  "linea": "Mar  6 18:54:35 web-03 sshd[2605]: Invalid user git from 192.0.2.15 port 60039"
+ },
+ {
+  "_id": "L0637",
+  "linea": "Mar  6 18:54:35 web-03 sshd[2605]: Failed none for invalid user git from 192.0.2.15 port 33364 ssh2"
+ },
+ {
+  "_id": "L0638",
+  "linea": "Mar  6 18:54:44 web-03 sshd[5824]: Failed password for deploy from 192.0.2.15 port 57536 ssh2"
+ },
+ {
+  "_id": "L0639",
+  "linea": "Mar  6 19:31:13 web-03 sshd[18464]: Invalid user ftp from 198.51.100.143 port 37279"
+ },
+ {
+  "_id": "L0640",
+  "linea": "Mar  6 19:31:13 web-03 sshd[18464]: Failed none for invalid user ftp from 198.51.100.143 port 58084 ssh2"
+ },
+ {
+  "_id": "L0641",
+  "linea": "Mar  6 19:31:16 web-03 sshd[4321]: Invalid user backup from 198.51.100.143 port 41345"
+ },
+ {
+  "_id": "L0642",
+  "linea": "Mar  6 19:31:16 web-03 sshd[4321]: Failed none for invalid user backup from 198.51.100.143 port 52676 ssh2"
+ },
+ {
+  "_id": "L0643",
+  "linea": "Mar  6 19:31:34 web-03 sshd[30984]: Invalid user jenkins from 198.51.100.143 port 43191"
+ },
+ {
+  "_id": "L0644",
+  "linea": "Mar  6 19:31:34 web-03 sshd[30984]: Failed none for invalid user jenkins from 198.51.100.143 port 33522 ssh2"
+ },
+ {
+  "_id": "L0645",
+  "linea": "Mar  6 19:58:51 web-03 sshd[22115]: Invalid user backup from 203.0.113.7 port 49941"
+ },
+ {
+  "_id": "L0646",
+  "linea": "Mar  6 19:58:51 web-03 sshd[22115]: Failed none for invalid user backup from 203.0.113.7 port 33264 ssh2"
+ },
+ {
+  "_id": "L0647",
+  "linea": "Mar  6 19:59:11 web-03 sshd[26111]: Invalid user administrador from 203.0.113.7 port 54358"
+ },
+ {
+  "_id": "L0648",
+  "linea": "Mar  6 19:59:11 web-03 sshd[26111]: Failed none for invalid user administrador from 203.0.113.7 port 49653 ssh2"
+ },
+ {
+  "_id": "L0649",
+  "linea": "Mar  6 21:09:34 web-03 sshd[5536]: Invalid user git from 198.51.100.33 port 58895"
+ },
+ {
+  "_id": "L0650",
+  "linea": "Mar  6 21:09:34 web-03 sshd[5536]: Failed none for invalid user git from 198.51.100.33 port 44209 ssh2"
+ },
+ {
+  "_id": "L0651",
+  "linea": "Mar  6 21:09:59 web-03 sshd[7087]: Invalid user backup from 198.51.100.33 port 58521"
+ },
+ {
+  "_id": "L0652",
+  "linea": "Mar  6 21:09:59 web-03 sshd[7087]: Failed none for invalid user backup from 198.51.100.33 port 56810 ssh2"
+ },
+ {
+  "_id": "L0653",
+  "linea": "Mar  6 21:10:16 web-03 sshd[22910]: Invalid user test from 198.51.100.33 port 39855"
+ },
+ {
+  "_id": "L0654",
+  "linea": "Mar  6 21:10:16 web-03 sshd[22910]: Failed none for invalid user test from 198.51.100.33 port 41126 ssh2"
+ },
+ {
+  "_id": "L0655",
+  "linea": "Mar  6 21:48:48 web-03 sshd[17970]: Failed password for deploy from 177.54.130.71 port 31091 ssh2"
+ },
+ {
+  "_id": "L0656",
+  "linea": "Mar  6 21:49:07 web-03 sshd[19826]: Invalid user git from 177.54.130.71 port 46695"
+ },
+ {
+  "_id": "L0657",
+  "linea": "Mar  6 21:49:07 web-03 sshd[19826]: Failed none for invalid user git from 177.54.130.71 port 39275 ssh2"
+ },
+ {
+  "_id": "L0658",
+  "linea": "Mar  6 22:11:07 web-03 sshd[15389]: Invalid user git from 192.0.2.200 port 30198"
+ },
+ {
+  "_id": "L0659",
+  "linea": "Mar  6 22:11:07 web-03 sshd[15389]: Failed none for invalid user git from 192.0.2.200 port 54240 ssh2"
+ },
+ {
+  "_id": "L0660",
+  "linea": "Mar  6 22:11:11 web-03 sshd[25917]: Invalid user oracle from 192.0.2.200 port 64275"
+ },
+ {
+  "_id": "L0661",
+  "linea": "Mar  6 22:11:11 web-03 sshd[25917]: Failed none for invalid user oracle from 192.0.2.200 port 57740 ssh2"
+ },
+ {
+  "_id": "L0662",
+  "linea": "Mar  6 22:11:13 web-03 sshd[25959]: Invalid user postgres from 192.0.2.200 port 43390"
+ },
+ {
+  "_id": "L0663",
+  "linea": "Mar  6 22:11:13 web-03 sshd[25959]: Failed none for invalid user postgres from 192.0.2.200 port 60906 ssh2"
+ },
+ {
+  "_id": "L0664",
+  "linea": "Mar  6 23:14:33 web-03 sshd[26280]: Invalid user admin from 192.0.2.200 port 61269"
+ },
+ {
+  "_id": "L0665",
+  "linea": "Mar  6 23:14:33 web-03 sshd[26280]: Failed none for invalid user admin from 192.0.2.200 port 31366 ssh2"
+ },
+ {
+  "_id": "L0666",
+  "linea": "Mar  6 23:58:00 web-03 sshd[24681]: Invalid user administrador from 203.0.113.165 port 40952"
+ },
+ {
+  "_id": "L0667",
+  "linea": "Mar  6 23:58:00 web-03 sshd[24681]: Failed none for invalid user administrador from 203.0.113.165 port 39956 ssh2"
+ },
+ {
+  "_id": "L0668",
+  "linea": "Mar  6 23:58:14 web-03 sshd[6819]: Failed password for deploy from 203.0.113.165 port 46298 ssh2"
+ },
+ {
+  "_id": "L0669",
+  "linea": "Mar  6 23:58:19 web-03 sshd[15899]: Invalid user oracle from 203.0.113.165 port 34095"
+ },
+ {
+  "_id": "L0670",
+  "linea": "Mar  6 23:58:19 web-03 sshd[15899]: Failed none for invalid user oracle from 203.0.113.165 port 34270 ssh2"
+ },
+ {
+  "_id": "L0671",
+  "linea": "Mar  7 00:19:19 web-03 sshd[20524]: Invalid user admin from 198.51.100.143 port 60801"
+ },
+ {
+  "_id": "L0672",
+  "linea": "Mar  7 00:19:19 web-03 sshd[20524]: Failed none for invalid user admin from 198.51.100.143 port 39148 ssh2"
+ },
+ {
+  "_id": "L0673",
+  "linea": "Mar  7 00:19:30 web-03 sshd[17786]: Invalid user jenkins from 198.51.100.143 port 63967"
+ },
+ {
+  "_id": "L0674",
+  "linea": "Mar  7 00:19:30 web-03 sshd[17786]: Failed none for invalid user jenkins from 198.51.100.143 port 62134 ssh2"
+ },
+ {
+  "_id": "L0675",
+  "linea": "Mar  7 00:19:46 web-03 sshd[7444]: Invalid user backup from 198.51.100.143 port 41813"
+ },
+ {
+  "_id": "L0676",
+  "linea": "Mar  7 00:19:46 web-03 sshd[7444]: Failed none for invalid user backup from 198.51.100.143 port 33580 ssh2"
+ },
+ {
+  "_id": "L0677",
+  "linea": "Mar  7 00:19:51 web-03 sshd[30526]: Failed password for deploy from 198.51.100.143 port 50978 ssh2"
+ },
+ {
+  "_id": "L0678",
+  "linea": "Mar  7 00:52:15 web-03 sshd[14423]: Failed password for deploy from 192.0.2.88 port 64284 ssh2"
+ },
+ {
+  "_id": "L0679",
+  "linea": "Mar  7 00:52:25 web-03 sshd[5828]: Invalid user postgres from 192.0.2.88 port 41180"
+ },
+ {
+  "_id": "L0680",
+  "linea": "Mar  7 00:52:25 web-03 sshd[5828]: Failed none for invalid user postgres from 192.0.2.88 port 34814 ssh2"
+ },
+ {
+  "_id": "L0681",
+  "linea": "Mar  7 00:52:32 web-03 sshd[25664]: Invalid user jenkins from 192.0.2.88 port 62622"
+ },
+ {
+  "_id": "L0682",
+  "linea": "Mar  7 00:52:32 web-03 sshd[25664]: Failed none for invalid user jenkins from 192.0.2.88 port 64479 ssh2"
+ },
+ {
+  "_id": "L0683",
+  "linea": "Mar  7 00:52:33 web-03 sshd[15539]: Invalid user backup from 192.0.2.88 port 30481"
+ },
+ {
+  "_id": "L0684",
+  "linea": "Mar  7 00:52:33 web-03 sshd[15539]: Failed none for invalid user backup from 192.0.2.88 port 31314 ssh2"
+ },
+ {
+  "_id": "L0685",
+  "linea": "Mar  7 04:55:35 web-03 sshd[11880]: Invalid user ftp from 203.0.113.7 port 47372"
+ },
+ {
+  "_id": "L0686",
+  "linea": "Mar  7 04:55:35 web-03 sshd[11880]: Failed none for invalid user ftp from 203.0.113.7 port 32078 ssh2"
+ },
+ {
+  "_id": "L0687",
+  "linea": "Mar  7 05:20:26 web-03 sshd[20293]: Invalid user oracle from 198.51.100.143 port 51742"
+ },
+ {
+  "_id": "L0688",
+  "linea": "Mar  7 05:20:26 web-03 sshd[20293]: Failed none for invalid user oracle from 198.51.100.143 port 50860 ssh2"
+ },
+ {
+  "_id": "L0689",
+  "linea": "Mar  7 05:20:35 web-03 sshd[16455]: Invalid user git from 198.51.100.143 port 50495"
+ },
+ {
+  "_id": "L0690",
+  "linea": "Mar  7 05:20:35 web-03 sshd[16455]: Failed none for invalid user git from 198.51.100.143 port 30059 ssh2"
+ },
+ {
+  "_id": "L0691",
+  "linea": "Mar  7 05:59:12 web-03 sshd[6454]: Invalid user ftp from 190.210.8.92 port 31867"
+ },
+ {
+  "_id": "L0692",
+  "linea": "Mar  7 05:59:12 web-03 sshd[6454]: Failed none for invalid user ftp from 190.210.8.92 port 56132 ssh2"
+ },
+ {
+  "_id": "L0693",
+  "linea": "Mar  7 05:59:14 web-03 sshd[27802]: Invalid user oracle from 190.210.8.92 port 58991"
+ },
+ {
+  "_id": "L0694",
+  "linea": "Mar  7 05:59:14 web-03 sshd[27802]: Failed none for invalid user oracle from 190.210.8.92 port 56019 ssh2"
+ },
+ {
+  "_id": "L0695",
+  "linea": "Mar  7 05:59:37 web-03 sshd[11531]: Invalid user administrador from 190.210.8.92 port 36590"
+ },
+ {
+  "_id": "L0696",
+  "linea": "Mar  7 05:59:37 web-03 sshd[11531]: Failed none for invalid user administrador from 190.210.8.92 port 55903 ssh2"
+ },
+ {
+  "_id": "L0697",
+  "linea": "Mar  7 05:59:53 web-03 sshd[3900]: Invalid user git from 190.210.8.92 port 53698"
+ },
+ {
+  "_id": "L0698",
+  "linea": "Mar  7 05:59:53 web-03 sshd[3900]: Failed none for invalid user git from 190.210.8.92 port 31863 ssh2"
+ },
+ {
+  "_id": "L0699",
+  "linea": "Mar  7 06:33:05 web-03 sshd[29168]: Invalid user administrador from 190.210.8.92 port 46319"
+ },
+ {
+  "_id": "L0700",
+  "linea": "Mar  7 06:33:05 web-03 sshd[29168]: Failed none for invalid user administrador from 190.210.8.92 port 45340 ssh2"
+ },
+ {
+  "_id": "L0701",
+  "linea": "Mar  7 06:33:22 web-03 sshd[21615]: Failed password for deploy from 190.210.8.92 port 38726 ssh2"
+ },
+ {
+  "_id": "L0702",
+  "linea": "Mar  7 06:33:47 web-03 sshd[8426]: Invalid user ftp from 190.210.8.92 port 44168"
+ },
+ {
+  "_id": "L0703",
+  "linea": "Mar  7 06:33:47 web-03 sshd[8426]: Failed none for invalid user ftp from 190.210.8.92 port 43037 ssh2"
+ },
+ {
+  "_id": "L0704",
+  "linea": "Mar  7 06:34:10 web-03 sshd[28169]: Invalid user git from 190.210.8.92 port 62729"
+ },
+ {
+  "_id": "L0705",
+  "linea": "Mar  7 06:34:10 web-03 sshd[28169]: Failed none for invalid user git from 190.210.8.92 port 49864 ssh2"
+ },
+ {
+  "_id": "L0706",
+  "linea": "Mar  7 06:57:05 web-03 sshd[24497]: Failed password for deploy from 198.51.100.143 port 54540 ssh2"
+ },
+ {
+  "_id": "L0707",
+  "linea": "Mar  7 06:57:13 web-03 sshd[14319]: Invalid user oracle from 198.51.100.143 port 45727"
+ },
+ {
+  "_id": "L0708",
+  "linea": "Mar  7 06:57:13 web-03 sshd[14319]: Failed none for invalid user oracle from 198.51.100.143 port 32157 ssh2"
+ },
+ {
+  "_id": "L0709",
+  "linea": "Mar  7 06:57:37 web-03 sshd[9784]: Invalid user ftp from 198.51.100.143 port 57135"
+ },
+ {
+  "_id": "L0710",
+  "linea": "Mar  7 06:57:37 web-03 sshd[9784]: Failed none for invalid user ftp from 198.51.100.143 port 37719 ssh2"
+ },
+ {
+  "_id": "L0711",
+  "linea": "Mar  7 07:33:58 web-03 sshd[14524]: Failed password for deploy from 200.45.10.18 port 54091 ssh2"
+ },
+ {
+  "_id": "L0712",
+  "linea": "Mar  7 07:34:23 web-03 sshd[19892]: Invalid user ftp from 200.45.10.18 port 47082"
+ },
+ {
+  "_id": "L0713",
+  "linea": "Mar  7 07:34:23 web-03 sshd[19892]: Failed none for invalid user ftp from 200.45.10.18 port 35519 ssh2"
+ },
+ {
+  "_id": "L0714",
+  "linea": "Mar  7 14:04:14 web-03 sshd[12361]: Invalid user oracle from 192.0.2.200 port 39122"
+ },
+ {
+  "_id": "L0715",
+  "linea": "Mar  7 14:04:14 web-03 sshd[12361]: Failed none for invalid user oracle from 192.0.2.200 port 43792 ssh2"
+ },
+ {
+  "_id": "L0716",
+  "linea": "Mar  7 14:04:33 web-03 sshd[27563]: Invalid user admin from 192.0.2.200 port 57699"
+ },
+ {
+  "_id": "L0717",
+  "linea": "Mar  7 14:04:33 web-03 sshd[27563]: Failed none for invalid user admin from 192.0.2.200 port 41756 ssh2"
+ },
+ {
+  "_id": "L0718",
+  "linea": "Mar  7 14:37:55 web-03 sshd[29570]: Invalid user ftp from 203.0.113.44 port 61552"
+ },
+ {
+  "_id": "L0719",
+  "linea": "Mar  7 14:37:55 web-03 sshd[29570]: Failed none for invalid user ftp from 203.0.113.44 port 49809 ssh2"
+ },
+ {
+  "_id": "L0720",
+  "linea": "Mar  7 14:38:04 web-03 sshd[16481]: Invalid user backup from 203.0.113.44 port 52412"
+ },
+ {
+  "_id": "L0721",
+  "linea": "Mar  7 14:38:04 web-03 sshd[16481]: Failed none for invalid user backup from 203.0.113.44 port 46949 ssh2"
+ },
+ {
+  "_id": "L0722",
+  "linea": "Mar  7 14:38:15 web-03 sshd[21843]: Invalid user jenkins from 203.0.113.44 port 62945"
+ },
+ {
+  "_id": "L0723",
+  "linea": "Mar  7 14:38:15 web-03 sshd[21843]: Failed none for invalid user jenkins from 203.0.113.44 port 54081 ssh2"
+ },
+ {
+  "_id": "L0724",
+  "linea": "Mar  7 14:58:57 web-03 sshd[22560]: Invalid user ftp from 203.0.113.91 port 46721"
+ },
+ {
+  "_id": "L0725",
+  "linea": "Mar  7 14:58:57 web-03 sshd[22560]: Failed none for invalid user ftp from 203.0.113.91 port 61846 ssh2"
+ },
+ {
+  "_id": "L0726",
+  "linea": "Mar  7 14:58:59 web-03 sshd[29158]: Invalid user postgres from 203.0.113.91 port 62738"
+ },
+ {
+  "_id": "L0727",
+  "linea": "Mar  7 14:58:59 web-03 sshd[29158]: Failed none for invalid user postgres from 203.0.113.91 port 44123 ssh2"
+ },
+ {
+  "_id": "L0728",
+  "linea": "Mar  7 14:59:22 web-03 sshd[18308]: Failed password for deploy from 203.0.113.91 port 33747 ssh2"
+ },
+ {
+  "_id": "L0729",
+  "linea": "Mar  7 15:50:03 web-03 sshd[13109]: Failed password for deploy from 198.51.100.12 port 42686 ssh2"
+ },
+ {
+  "_id": "L0730",
+  "linea": "Mar  7 16:23:11 web-03 sshd[2756]: Invalid user test from 198.51.100.12 port 34201"
+ },
+ {
+  "_id": "L0731",
+  "linea": "Mar  7 16:23:11 web-03 sshd[2756]: Failed none for invalid user test from 198.51.100.12 port 44771 ssh2"
+ },
+ {
+  "_id": "L0732",
+  "linea": "Mar  7 16:23:27 web-03 sshd[7297]: Invalid user oracle from 198.51.100.12 port 53347"
+ },
+ {
+  "_id": "L0733",
+  "linea": "Mar  7 16:23:27 web-03 sshd[7297]: Failed none for invalid user oracle from 198.51.100.12 port 46995 ssh2"
+ },
+ {
+  "_id": "L0734",
+  "linea": "Mar  7 17:48:30 web-03 sshd[7174]: Invalid user backup from 198.51.100.33 port 50941"
+ },
+ {
+  "_id": "L0735",
+  "linea": "Mar  7 17:48:30 web-03 sshd[7174]: Failed none for invalid user backup from 198.51.100.33 port 46416 ssh2"
+ },
+ {
+  "_id": "L0736",
+  "linea": "Mar  7 17:48:35 web-03 sshd[23189]: Invalid user admin from 198.51.100.33 port 57554"
+ },
+ {
+  "_id": "L0737",
+  "linea": "Mar  7 17:48:35 web-03 sshd[23189]: Failed none for invalid user admin from 198.51.100.33 port 53074 ssh2"
+ },
+ {
+  "_id": "L0738",
+  "linea": "Mar  7 18:20:47 web-03 sshd[30678]: Invalid user postgres from 192.0.2.200 port 58758"
+ },
+ {
+  "_id": "L0739",
+  "linea": "Mar  7 18:20:47 web-03 sshd[30678]: Failed none for invalid user postgres from 192.0.2.200 port 31743 ssh2"
+ },
+ {
+  "_id": "L0740",
+  "linea": "Mar  7 18:21:05 web-03 sshd[25688]: Invalid user postgres from 192.0.2.200 port 63055"
+ },
+ {
+  "_id": "L0741",
+  "linea": "Mar  7 18:21:05 web-03 sshd[25688]: Failed none for invalid user postgres from 192.0.2.200 port 51439 ssh2"
+ },
+ {
+  "_id": "L0742",
+  "linea": "Mar  7 18:42:08 web-03 sshd[20003]: Invalid user backup from 203.0.113.44 port 30297"
+ },
+ {
+  "_id": "L0743",
+  "linea": "Mar  7 18:42:08 web-03 sshd[20003]: Failed none for invalid user backup from 203.0.113.44 port 48365 ssh2"
+ },
+ {
+  "_id": "L0744",
+  "linea": "Mar  7 19:37:17 web-03 sshd[29757]: Invalid user git from 198.51.100.77 port 41594"
+ },
+ {
+  "_id": "L0745",
+  "linea": "Mar  7 19:37:17 web-03 sshd[29757]: Failed none for invalid user git from 198.51.100.77 port 37792 ssh2"
+ },
+ {
+  "_id": "L0746",
+  "linea": "Mar  7 19:37:39 web-03 sshd[5310]: Invalid user administrador from 198.51.100.77 port 56583"
+ },
+ {
+  "_id": "L0747",
+  "linea": "Mar  7 19:37:39 web-03 sshd[5310]: Failed none for invalid user administrador from 198.51.100.77 port 58900 ssh2"
+ },
+ {
+  "_id": "L0748",
+  "linea": "Mar  7 20:22:28 web-03 sshd[29710]: Invalid user git from 203.0.113.210 port 60366"
+ },
+ {
+  "_id": "L0749",
+  "linea": "Mar  7 20:22:28 web-03 sshd[29710]: Failed none for invalid user git from 203.0.113.210 port 36663 ssh2"
+ },
+ {
+  "_id": "L0750",
+  "linea": "Mar  7 20:22:52 web-03 sshd[26568]: Invalid user admin from 203.0.113.210 port 38554"
+ },
+ {
+  "_id": "L0751",
+  "linea": "Mar  7 20:22:52 web-03 sshd[26568]: Failed none for invalid user admin from 203.0.113.210 port 42964 ssh2"
+ },
+ {
+  "_id": "L0752",
+  "linea": "Mar  7 20:23:08 web-03 sshd[8479]: Invalid user admin from 203.0.113.210 port 51399"
+ },
+ {
+  "_id": "L0753",
+  "linea": "Mar  7 20:23:08 web-03 sshd[8479]: Failed none for invalid user admin from 203.0.113.210 port 52559 ssh2"
+ },
+ {
+  "_id": "L0754",
+  "linea": "Mar  7 20:23:09 web-03 sshd[19610]: Failed password for deploy from 203.0.113.210 port 48230 ssh2"
+ },
+ {
+  "_id": "L0755",
+  "linea": "Mar  7 21:21:25 web-03 sshd[29014]: Invalid user administrador from 203.0.113.210 port 49715"
+ },
+ {
+  "_id": "L0756",
+  "linea": "Mar  7 21:21:25 web-03 sshd[29014]: Failed none for invalid user administrador from 203.0.113.210 port 42578 ssh2"
+ },
+ {
+  "_id": "L0757",
+  "linea": "Mar  7 21:21:38 web-03 sshd[16274]: Invalid user oracle from 203.0.113.210 port 44173"
+ },
+ {
+  "_id": "L0758",
+  "linea": "Mar  7 21:21:38 web-03 sshd[16274]: Failed none for invalid user oracle from 203.0.113.210 port 59027 ssh2"
+ },
+ {
+  "_id": "L0759",
+  "linea": "Mar  7 23:37:23 web-03 sshd[22816]: Invalid user jenkins from 203.0.113.165 port 56596"
+ },
+ {
+  "_id": "L0760",
+  "linea": "Mar  7 23:37:23 web-03 sshd[22816]: Failed none for invalid user jenkins from 203.0.113.165 port 63808 ssh2"
+ },
+ {
+  "_id": "L0761",
+  "linea": "Mar  7 23:37:34 web-03 sshd[12084]: Invalid user postgres from 203.0.113.165 port 36431"
+ },
+ {
+  "_id": "L0762",
+  "linea": "Mar  7 23:37:34 web-03 sshd[12084]: Failed none for invalid user postgres from 203.0.113.165 port 40493 ssh2"
+ },
+ {
+  "_id": "L0763",
+  "linea": "Mar  7 23:37:46 web-03 sshd[17996]: Invalid user admin from 203.0.113.165 port 50774"
+ },
+ {
+  "_id": "L0764",
+  "linea": "Mar  7 23:37:46 web-03 sshd[17996]: Failed none for invalid user admin from 203.0.113.165 port 59296 ssh2"
+ },
+ {
+  "_id": "L0765",
+  "linea": "Mar  7 23:38:05 web-03 sshd[1772]: Invalid user postgres from 203.0.113.165 port 53656"
+ },
+ {
+  "_id": "L0766",
+  "linea": "Mar  7 23:38:05 web-03 sshd[1772]: Failed none for invalid user postgres from 203.0.113.165 port 36011 ssh2"
+ },
+ {
+  "_id": "L0767",
+  "linea": "Mar  8 00:10:31 web-03 sshd[2236]: Invalid user jenkins from 203.0.113.7 port 44845"
+ },
+ {
+  "_id": "L0768",
+  "linea": "Mar  8 00:10:31 web-03 sshd[2236]: Failed none for invalid user jenkins from 203.0.113.7 port 44487 ssh2"
+ },
+ {
+  "_id": "L0769",
+  "linea": "Mar  8 01:06:23 web-03 sshd[29805]: Invalid user postgres from 190.210.8.92 port 47486"
+ },
+ {
+  "_id": "L0770",
+  "linea": "Mar  8 01:06:23 web-03 sshd[29805]: Failed none for invalid user postgres from 190.210.8.92 port 31398 ssh2"
+ },
+ {
+  "_id": "L0771",
+  "linea": "Mar  8 01:33:31 web-03 sshd[6065]: Invalid user oracle from 192.0.2.15 port 54730"
+ },
+ {
+  "_id": "L0772",
+  "linea": "Mar  8 01:33:31 web-03 sshd[6065]: Failed none for invalid user oracle from 192.0.2.15 port 41688 ssh2"
+ },
+ {
+  "_id": "L0773",
+  "linea": "Mar  8 01:54:30 web-03 sshd[28527]: Invalid user administrador from 203.0.113.44 port 37733"
+ },
+ {
+  "_id": "L0774",
+  "linea": "Mar  8 01:54:30 web-03 sshd[28527]: Failed none for invalid user administrador from 203.0.113.44 port 64765 ssh2"
+ },
+ {
+  "_id": "L0775",
+  "linea": "Mar  8 02:35:00 web-03 sshd[11847]: Invalid user administrador from 203.0.113.44 port 43359"
+ },
+ {
+  "_id": "L0776",
+  "linea": "Mar  8 02:35:00 web-03 sshd[11847]: Failed none for invalid user administrador from 203.0.113.44 port 50036 ssh2"
+ },
+ {
+  "_id": "L0777",
+  "linea": "Mar  8 02:35:10 web-03 sshd[4819]: Invalid user test from 203.0.113.44 port 63206"
+ },
+ {
+  "_id": "L0778",
+  "linea": "Mar  8 02:35:10 web-03 sshd[4819]: Failed none for invalid user test from 203.0.113.44 port 42347 ssh2"
+ },
+ {
+  "_id": "L0779",
+  "linea": "Mar  8 03:10:34 web-03 sshd[7809]: Invalid user backup from 198.51.100.33 port 32529"
+ },
+ {
+  "_id": "L0780",
+  "linea": "Mar  8 03:10:34 web-03 sshd[7809]: Failed none for invalid user backup from 198.51.100.33 port 38451 ssh2"
+ },
+ {
+  "_id": "L0781",
+  "linea": "Mar  8 03:10:55 web-03 sshd[20510]: Invalid user administrador from 198.51.100.33 port 30870"
+ },
+ {
+  "_id": "L0782",
+  "linea": "Mar  8 03:10:55 web-03 sshd[20510]: Failed none for invalid user administrador from 198.51.100.33 port 47112 ssh2"
+ },
+ {
+  "_id": "L0783",
+  "linea": "Mar  8 03:11:05 web-03 sshd[11589]: Invalid user backup from 198.51.100.33 port 41188"
+ },
+ {
+  "_id": "L0784",
+  "linea": "Mar  8 03:11:05 web-03 sshd[11589]: Failed none for invalid user backup from 198.51.100.33 port 43027 ssh2"
+ },
+ {
+  "_id": "L0785",
+  "linea": "Mar  8 03:11:10 web-03 sshd[18653]: Invalid user admin from 198.51.100.33 port 43422"
+ },
+ {
+  "_id": "L0786",
+  "linea": "Mar  8 03:11:10 web-03 sshd[18653]: Failed none for invalid user admin from 198.51.100.33 port 60122 ssh2"
+ },
+ {
+  "_id": "L0787",
+  "linea": "Mar  8 03:44:17 web-03 sshd[8501]: Invalid user test from 181.47.22.6 port 64228"
+ },
+ {
+  "_id": "L0788",
+  "linea": "Mar  8 03:44:17 web-03 sshd[8501]: Failed none for invalid user test from 181.47.22.6 port 54658 ssh2"
+ },
+ {
+  "_id": "L0789",
+  "linea": "Mar  8 03:44:29 web-03 sshd[4717]: Invalid user git from 181.47.22.6 port 54495"
+ },
+ {
+  "_id": "L0790",
+  "linea": "Mar  8 03:44:29 web-03 sshd[4717]: Failed none for invalid user git from 181.47.22.6 port 37106 ssh2"
+ },
+ {
+  "_id": "L0791",
+  "linea": "Mar  8 04:10:20 web-03 sshd[25378]: Invalid user test from 203.0.113.44 port 47307"
+ },
+ {
+  "_id": "L0792",
+  "linea": "Mar  8 04:10:20 web-03 sshd[25378]: Failed none for invalid user test from 203.0.113.44 port 34695 ssh2"
+ },
+ {
+  "_id": "L0793",
+  "linea": "Mar  8 04:39:18 web-03 sshd[15277]: Invalid user oracle from 203.0.113.7 port 60070"
+ },
+ {
+  "_id": "L0794",
+  "linea": "Mar  8 04:39:18 web-03 sshd[15277]: Failed none for invalid user oracle from 203.0.113.7 port 42567 ssh2"
+ },
+ {
+  "_id": "L0795",
+  "linea": "Mar  8 04:39:40 web-03 sshd[22819]: Invalid user jenkins from 203.0.113.7 port 40807"
+ },
+ {
+  "_id": "L0796",
+  "linea": "Mar  8 04:39:40 web-03 sshd[22819]: Failed none for invalid user jenkins from 203.0.113.7 port 54320 ssh2"
+ },
+ {
+  "_id": "L0797",
+  "linea": "Mar  8 04:39:43 web-03 sshd[1368]: Invalid user administrador from 203.0.113.7 port 54030"
+ },
+ {
+  "_id": "L0798",
+  "linea": "Mar  8 04:39:43 web-03 sshd[1368]: Failed none for invalid user administrador from 203.0.113.7 port 33169 ssh2"
+ },
+ {
+  "_id": "L0799",
+  "linea": "Mar  8 04:40:06 web-03 sshd[26803]: Invalid user git from 203.0.113.7 port 51559"
+ },
+ {
+  "_id": "L0800",
+  "linea": "Mar  8 04:40:06 web-03 sshd[26803]: Failed none for invalid user git from 203.0.113.7 port 64579 ssh2"
+ },
+ {
+  "_id": "L0801",
+  "linea": "Mar  8 05:10:07 web-03 sshd[20944]: Invalid user backup from 198.51.100.12 port 64012"
+ },
+ {
+  "_id": "L0802",
+  "linea": "Mar  8 05:10:07 web-03 sshd[20944]: Failed none for invalid user backup from 198.51.100.12 port 45463 ssh2"
+ },
+ {
+  "_id": "L0803",
+  "linea": "Mar  8 05:10:17 web-03 sshd[19930]: Invalid user administrador from 198.51.100.12 port 42824"
+ },
+ {
+  "_id": "L0804",
+  "linea": "Mar  8 05:10:17 web-03 sshd[19930]: Failed none for invalid user administrador from 198.51.100.12 port 58253 ssh2"
+ },
+ {
+  "_id": "L0805",
+  "linea": "Mar  8 05:10:34 web-03 sshd[14599]: Failed password for deploy from 198.51.100.12 port 59221 ssh2"
+ },
+ {
+  "_id": "L0806",
+  "linea": "Mar  8 05:40:56 web-03 sshd[19535]: Invalid user backup from 203.0.113.44 port 52935"
+ },
+ {
+  "_id": "L0807",
+  "linea": "Mar  8 05:40:56 web-03 sshd[19535]: Failed none for invalid user backup from 203.0.113.44 port 37855 ssh2"
+ },
+ {
+  "_id": "L0808",
+  "linea": "Mar  8 05:41:18 web-03 sshd[25822]: Invalid user administrador from 203.0.113.44 port 36543"
+ },
+ {
+  "_id": "L0809",
+  "linea": "Mar  8 05:41:18 web-03 sshd[25822]: Failed none for invalid user administrador from 203.0.113.44 port 48653 ssh2"
+ },
+ {
+  "_id": "L0810",
+  "linea": "Mar  8 06:09:37 web-03 sshd[25004]: Invalid user postgres from 203.0.113.44 port 45308"
+ },
+ {
+  "_id": "L0811",
+  "linea": "Mar  8 06:09:37 web-03 sshd[25004]: Failed none for invalid user postgres from 203.0.113.44 port 56057 ssh2"
+ },
+ {
+  "_id": "L0812",
+  "linea": "Mar  8 06:09:51 web-03 sshd[1191]: Invalid user oracle from 203.0.113.44 port 49855"
+ },
+ {
+  "_id": "L0813",
+  "linea": "Mar  8 06:09:51 web-03 sshd[1191]: Failed none for invalid user oracle from 203.0.113.44 port 62079 ssh2"
+ },
+ {
+  "_id": "L0814",
+  "linea": "Mar  8 06:10:09 web-03 sshd[2018]: Invalid user postgres from 203.0.113.44 port 49021"
+ },
+ {
+  "_id": "L0815",
+  "linea": "Mar  8 06:10:09 web-03 sshd[2018]: Failed none for invalid user postgres from 203.0.113.44 port 40410 ssh2"
+ },
+ {
+  "_id": "L0816",
+  "linea": "Mar  8 06:49:48 web-03 sshd[5110]: Failed password for deploy from 203.0.113.7 port 38861 ssh2"
+ },
+ {
+  "_id": "L0817",
+  "linea": "Mar  8 06:50:01 web-03 sshd[15559]: Invalid user jenkins from 203.0.113.7 port 57371"
+ },
+ {
+  "_id": "L0818",
+  "linea": "Mar  8 06:50:01 web-03 sshd[15559]: Failed none for invalid user jenkins from 203.0.113.7 port 63260 ssh2"
+ },
+ {
+  "_id": "L0819",
+  "linea": "Mar  8 06:50:14 web-03 sshd[6771]: Invalid user administrador from 203.0.113.7 port 60405"
+ },
+ {
+  "_id": "L0820",
+  "linea": "Mar  8 06:50:14 web-03 sshd[6771]: Failed none for invalid user administrador from 203.0.113.7 port 53718 ssh2"
+ },
+ {
+  "_id": "L0821",
+  "linea": "Mar  8 07:17:18 web-03 sshd[18897]: Invalid user postgres from 203.0.113.7 port 34987"
+ },
+ {
+  "_id": "L0822",
+  "linea": "Mar  8 07:17:18 web-03 sshd[18897]: Failed none for invalid user postgres from 203.0.113.7 port 52738 ssh2"
+ },
+ {
+  "_id": "L0823",
+  "linea": "Mar  8 07:17:20 web-03 sshd[22300]: Invalid user test from 203.0.113.7 port 39323"
+ },
+ {
+  "_id": "L0824",
+  "linea": "Mar  8 07:17:20 web-03 sshd[22300]: Failed none for invalid user test from 203.0.113.7 port 62275 ssh2"
+ },
+ {
+  "_id": "L0825",
+  "linea": "Mar  8 07:50:25 web-03 sshd[8552]: Invalid user jenkins from 203.0.113.210 port 43049"
+ },
+ {
+  "_id": "L0826",
+  "linea": "Mar  8 07:50:25 web-03 sshd[8552]: Failed none for invalid user jenkins from 203.0.113.210 port 35117 ssh2"
+ },
+ {
+  "_id": "L0827",
+  "linea": "Mar  8 07:50:45 web-03 sshd[9335]: Invalid user administrador from 203.0.113.210 port 40108"
+ },
+ {
+  "_id": "L0828",
+  "linea": "Mar  8 07:50:45 web-03 sshd[9335]: Failed none for invalid user administrador from 203.0.113.210 port 46447 ssh2"
+ },
+ {
+  "_id": "L0829",
+  "linea": "Mar  8 07:51:00 web-03 sshd[22334]: Invalid user ftp from 203.0.113.210 port 40486"
+ },
+ {
+  "_id": "L0830",
+  "linea": "Mar  8 07:51:00 web-03 sshd[22334]: Failed none for invalid user ftp from 203.0.113.210 port 50726 ssh2"
+ },
+ {
+  "_id": "L0831",
+  "linea": "Mar  8 07:51:10 web-03 sshd[8001]: Invalid user postgres from 203.0.113.210 port 63765"
+ },
+ {
+  "_id": "L0832",
+  "linea": "Mar  8 07:51:10 web-03 sshd[8001]: Failed none for invalid user postgres from 203.0.113.210 port 59354 ssh2"
+ },
+ {
+  "_id": "L0833",
+  "linea": "Mar  8 08:30:38 web-03 sshd[19782]: Invalid user oracle from 203.0.113.44 port 56092"
+ },
+ {
+  "_id": "L0834",
+  "linea": "Mar  8 08:30:38 web-03 sshd[19782]: Failed none for invalid user oracle from 203.0.113.44 port 46337 ssh2"
+ },
+ {
+  "_id": "L0835",
+  "linea": "Mar  8 08:31:00 web-03 sshd[10880]: Invalid user git from 203.0.113.44 port 42343"
+ },
+ {
+  "_id": "L0836",
+  "linea": "Mar  8 08:31:00 web-03 sshd[10880]: Failed none for invalid user git from 203.0.113.44 port 38589 ssh2"
+ },
+ {
+  "_id": "L0837",
+  "linea": "Mar  8 08:31:16 web-03 sshd[1239]: Invalid user git from 203.0.113.44 port 40147"
+ },
+ {
+  "_id": "L0838",
+  "linea": "Mar  8 08:31:16 web-03 sshd[1239]: Failed none for invalid user git from 203.0.113.44 port 30089 ssh2"
+ },
+ {
+  "_id": "L0839",
+  "linea": "Mar  8 08:31:37 web-03 sshd[31526]: Invalid user oracle from 203.0.113.44 port 62934"
+ },
+ {
+  "_id": "L0840",
+  "linea": "Mar  8 08:31:37 web-03 sshd[31526]: Failed none for invalid user oracle from 203.0.113.44 port 38749 ssh2"
+ },
+ {
+  "_id": "L0841",
+  "linea": "Mar  8 09:04:58 web-03 sshd[24563]: Invalid user backup from 181.47.22.6 port 45538"
+ },
+ {
+  "_id": "L0842",
+  "linea": "Mar  8 09:04:58 web-03 sshd[24563]: Failed none for invalid user backup from 181.47.22.6 port 40045 ssh2"
+ },
+ {
+  "_id": "L0843",
+  "linea": "Mar  8 09:33:02 web-03 sshd[20886]: Failed password for deploy from 203.0.113.44 port 56859 ssh2"
+ },
+ {
+  "_id": "L0844",
+  "linea": "Mar  8 09:33:25 web-03 sshd[25550]: Invalid user git from 203.0.113.44 port 52383"
+ },
+ {
+  "_id": "L0845",
+  "linea": "Mar  8 09:33:25 web-03 sshd[25550]: Failed none for invalid user git from 203.0.113.44 port 51126 ssh2"
+ },
+ {
+  "_id": "L0846",
+  "linea": "Mar  8 09:33:37 web-03 sshd[2057]: Invalid user backup from 203.0.113.44 port 30427"
+ },
+ {
+  "_id": "L0847",
+  "linea": "Mar  8 09:33:37 web-03 sshd[2057]: Failed none for invalid user backup from 203.0.113.44 port 40790 ssh2"
+ },
+ {
+  "_id": "L0848",
+  "linea": "Mar  8 09:33:47 web-03 sshd[23179]: Invalid user administrador from 203.0.113.44 port 39167"
+ },
+ {
+  "_id": "L0849",
+  "linea": "Mar  8 09:33:47 web-03 sshd[23179]: Failed none for invalid user administrador from 203.0.113.44 port 37506 ssh2"
+ },
+ {
+  "_id": "L0850",
+  "linea": "Mar  8 10:01:02 web-03 sshd[29740]: Invalid user postgres from 203.0.113.91 port 52060"
+ },
+ {
+  "_id": "L0851",
+  "linea": "Mar  8 10:01:02 web-03 sshd[29740]: Failed none for invalid user postgres from 203.0.113.91 port 57683 ssh2"
+ },
+ {
+  "_id": "L0852",
+  "linea": "Mar  8 10:01:05 web-03 sshd[4387]: Invalid user postgres from 203.0.113.91 port 55088"
+ },
+ {
+  "_id": "L0853",
+  "linea": "Mar  8 10:01:05 web-03 sshd[4387]: Failed none for invalid user postgres from 203.0.113.91 port 46522 ssh2"
+ },
+ {
+  "_id": "L0854",
+  "linea": "Mar  8 10:01:13 web-03 sshd[8051]: Invalid user git from 203.0.113.91 port 31001"
+ },
+ {
+  "_id": "L0855",
+  "linea": "Mar  8 10:01:13 web-03 sshd[8051]: Failed none for invalid user git from 203.0.113.91 port 39677 ssh2"
+ },
+ {
+  "_id": "L0856",
+  "linea": "Mar  8 10:24:14 web-03 sshd[18348]: Invalid user ftp from 203.0.113.44 port 58791"
+ },
+ {
+  "_id": "L0857",
+  "linea": "Mar  8 10:24:14 web-03 sshd[18348]: Failed none for invalid user ftp from 203.0.113.44 port 53855 ssh2"
+ },
+ {
+  "_id": "L0858",
+  "linea": "Mar  8 10:24:16 web-03 sshd[14394]: Invalid user admin from 203.0.113.44 port 39997"
+ },
+ {
+  "_id": "L0859",
+  "linea": "Mar  8 10:24:16 web-03 sshd[14394]: Failed none for invalid user admin from 203.0.113.44 port 40942 ssh2"
+ },
+ {
+  "_id": "L0860",
+  "linea": "Mar  8 10:24:29 web-03 sshd[22423]: Invalid user ftp from 203.0.113.44 port 44818"
+ },
+ {
+  "_id": "L0861",
+  "linea": "Mar  8 10:24:29 web-03 sshd[22423]: Failed none for invalid user ftp from 203.0.113.44 port 53948 ssh2"
+ },
+ {
+  "_id": "L0862",
+  "linea": "Mar  8 10:24:46 web-03 sshd[29834]: Invalid user postgres from 203.0.113.44 port 56280"
+ },
+ {
+  "_id": "L0863",
+  "linea": "Mar  8 10:24:46 web-03 sshd[29834]: Failed none for invalid user postgres from 203.0.113.44 port 33242 ssh2"
+ },
+ {
+  "_id": "L0864",
+  "linea": "Mar  8 10:58:58 web-03 sshd[22534]: Invalid user postgres from 192.0.2.88 port 30042"
+ },
+ {
+  "_id": "L0865",
+  "linea": "Mar  8 10:58:58 web-03 sshd[22534]: Failed none for invalid user postgres from 192.0.2.88 port 46653 ssh2"
+ },
+ {
+  "_id": "L0866",
+  "linea": "Mar  8 11:32:15 web-03 sshd[11102]: Invalid user test from 198.51.100.33 port 41370"
+ },
+ {
+  "_id": "L0867",
+  "linea": "Mar  8 11:32:15 web-03 sshd[11102]: Failed none for invalid user test from 198.51.100.33 port 50300 ssh2"
+ },
+ {
+  "_id": "L0868",
+  "linea": "Mar  8 11:32:16 web-03 sshd[8661]: Invalid user git from 198.51.100.33 port 46750"
+ },
+ {
+  "_id": "L0869",
+  "linea": "Mar  8 11:32:16 web-03 sshd[8661]: Failed none for invalid user git from 198.51.100.33 port 52045 ssh2"
+ },
+ {
+  "_id": "L0870",
+  "linea": "Mar  8 11:32:35 web-03 sshd[5856]: Invalid user administrador from 198.51.100.33 port 46121"
+ },
+ {
+  "_id": "L0871",
+  "linea": "Mar  8 11:32:35 web-03 sshd[5856]: Failed none for invalid user administrador from 198.51.100.33 port 47462 ssh2"
+ },
+ {
+  "_id": "L0872",
+  "linea": "Mar  8 11:32:36 web-03 sshd[18178]: Invalid user ftp from 198.51.100.33 port 30632"
+ },
+ {
+  "_id": "L0873",
+  "linea": "Mar  8 11:32:36 web-03 sshd[18178]: Failed none for invalid user ftp from 198.51.100.33 port 56044 ssh2"
+ },
+ {
+  "_id": "L0874",
+  "linea": "Mar  8 12:28:46 web-03 sshd[30712]: Invalid user postgres from 192.0.2.88 port 36950"
+ },
+ {
+  "_id": "L0875",
+  "linea": "Mar  8 12:28:46 web-03 sshd[30712]: Failed none for invalid user postgres from 192.0.2.88 port 63523 ssh2"
+ },
+ {
+  "_id": "L0876",
+  "linea": "Mar  8 12:49:40 web-03 sshd[24734]: Invalid user admin from 198.51.100.143 port 48436"
+ },
+ {
+  "_id": "L0877",
+  "linea": "Mar  8 12:49:40 web-03 sshd[24734]: Failed none for invalid user admin from 198.51.100.143 port 40854 ssh2"
+ },
+ {
+  "_id": "L0878",
+  "linea": "Mar  8 13:10:25 web-03 sshd[24520]: Invalid user backup from 200.45.10.18 port 61361"
+ },
+ {
+  "_id": "L0879",
+  "linea": "Mar  8 13:10:25 web-03 sshd[24520]: Failed none for invalid user backup from 200.45.10.18 port 58174 ssh2"
+ },
+ {
+  "_id": "L0880",
+  "linea": "Mar  8 13:10:43 web-03 sshd[12505]: Failed password for deploy from 200.45.10.18 port 30936 ssh2"
+ },
+ {
+  "_id": "L0881",
+  "linea": "Mar  8 13:11:08 web-03 sshd[20882]: Invalid user jenkins from 200.45.10.18 port 42605"
+ },
+ {
+  "_id": "L0882",
+  "linea": "Mar  8 13:11:08 web-03 sshd[20882]: Failed none for invalid user jenkins from 200.45.10.18 port 63080 ssh2"
+ },
+ {
+  "_id": "L0883",
+  "linea": "Mar  8 13:50:34 web-03 sshd[20739]: Invalid user ftp from 198.51.100.77 port 38114"
+ },
+ {
+  "_id": "L0884",
+  "linea": "Mar  8 13:50:34 web-03 sshd[20739]: Failed none for invalid user ftp from 198.51.100.77 port 34141 ssh2"
+ },
+ {
+  "_id": "L0885",
+  "linea": "Mar  8 14:14:26 web-03 sshd[31718]: Invalid user admin from 203.0.113.210 port 42375"
+ },
+ {
+  "_id": "L0886",
+  "linea": "Mar  8 14:14:26 web-03 sshd[31718]: Failed none for invalid user admin from 203.0.113.210 port 33881 ssh2"
+ },
+ {
+  "_id": "L0887",
+  "linea": "Mar  8 14:14:46 web-03 sshd[11302]: Invalid user admin from 203.0.113.210 port 52494"
+ },
+ {
+  "_id": "L0888",
+  "linea": "Mar  8 14:14:46 web-03 sshd[11302]: Failed none for invalid user admin from 203.0.113.210 port 39964 ssh2"
+ },
+ {
+  "_id": "L0889",
+  "linea": "Mar  8 15:11:38 web-03 sshd[15663]: Invalid user ftp from 198.51.100.143 port 32603"
+ },
+ {
+  "_id": "L0890",
+  "linea": "Mar  8 15:11:38 web-03 sshd[15663]: Failed none for invalid user ftp from 198.51.100.143 port 50526 ssh2"
+ },
+ {
+  "_id": "L0891",
+  "linea": "Mar  8 15:11:53 web-03 sshd[20573]: Invalid user jenkins from 198.51.100.143 port 64981"
+ },
+ {
+  "_id": "L0892",
+  "linea": "Mar  8 15:11:53 web-03 sshd[20573]: Failed none for invalid user jenkins from 198.51.100.143 port 59900 ssh2"
+ },
+ {
+  "_id": "L0893",
+  "linea": "Mar  8 15:12:02 web-03 sshd[10799]: Invalid user backup from 198.51.100.143 port 49640"
+ },
+ {
+  "_id": "L0894",
+  "linea": "Mar  8 15:12:02 web-03 sshd[10799]: Failed none for invalid user backup from 198.51.100.143 port 41902 ssh2"
+ },
+ {
+  "_id": "L0895",
+  "linea": "Mar  8 16:02:52 web-03 sshd[29905]: Invalid user ftp from 198.51.100.143 port 64515"
+ },
+ {
+  "_id": "L0896",
+  "linea": "Mar  8 16:02:52 web-03 sshd[29905]: Failed none for invalid user ftp from 198.51.100.143 port 35874 ssh2"
+ },
+ {
+  "_id": "L0897",
+  "linea": "Mar  8 16:28:56 web-03 sshd[20501]: Invalid user backup from 198.51.100.12 port 63795"
+ },
+ {
+  "_id": "L0898",
+  "linea": "Mar  8 16:28:56 web-03 sshd[20501]: Failed none for invalid user backup from 198.51.100.12 port 44626 ssh2"
+ },
+ {
+  "_id": "L0899",
+  "linea": "Mar  8 16:29:03 web-03 sshd[2023]: Invalid user administrador from 198.51.100.12 port 41331"
+ },
+ {
+  "_id": "L0900",
+  "linea": "Mar  8 16:29:03 web-03 sshd[2023]: Failed none for invalid user administrador from 198.51.100.12 port 46142 ssh2"
+ },
+ {
+  "_id": "L0901",
+  "linea": "Mar  8 16:59:23 web-03 sshd[25577]: Invalid user administrador from 198.51.100.143 port 47268"
+ },
+ {
+  "_id": "L0902",
+  "linea": "Mar  8 16:59:23 web-03 sshd[25577]: Failed none for invalid user administrador from 198.51.100.143 port 33462 ssh2"
+ },
+ {
+  "_id": "L0903",
+  "linea": "Mar  8 16:59:39 web-03 sshd[6610]: Invalid user oracle from 198.51.100.143 port 55828"
+ },
+ {
+  "_id": "L0904",
+  "linea": "Mar  8 16:59:39 web-03 sshd[6610]: Failed none for invalid user oracle from 198.51.100.143 port 47011 ssh2"
+ },
+ {
+  "_id": "L0905",
+  "linea": "Mar  8 17:00:03 web-03 sshd[1956]: Failed password for deploy from 198.51.100.143 port 62272 ssh2"
+ },
+ {
+  "_id": "L0906",
+  "linea": "Mar  8 17:35:19 web-03 sshd[3074]: Invalid user postgres from 190.210.8.92 port 48865"
+ },
+ {
+  "_id": "L0907",
+  "linea": "Mar  8 17:35:19 web-03 sshd[3074]: Failed none for invalid user postgres from 190.210.8.92 port 47491 ssh2"
+ },
+ {
+  "_id": "L0908",
+  "linea": "Mar  8 17:35:33 web-03 sshd[30658]: Failed password for deploy from 190.210.8.92 port 40273 ssh2"
+ },
+ {
+  "_id": "L0909",
+  "linea": "Mar  8 17:35:47 web-03 sshd[19464]: Invalid user backup from 190.210.8.92 port 39838"
+ },
+ {
+  "_id": "L0910",
+  "linea": "Mar  8 17:35:47 web-03 sshd[19464]: Failed none for invalid user backup from 190.210.8.92 port 34518 ssh2"
+ },
+ {
+  "_id": "L0911",
+  "linea": "Mar  8 18:13:15 web-03 sshd[24848]: Invalid user jenkins from 192.0.2.200 port 48929"
+ },
+ {
+  "_id": "L0912",
+  "linea": "Mar  8 18:13:15 web-03 sshd[24848]: Failed none for invalid user jenkins from 192.0.2.200 port 64691 ssh2"
+ },
+ {
+  "_id": "L0913",
+  "linea": "Mar  8 18:13:40 web-03 sshd[8462]: Failed password for deploy from 192.0.2.200 port 54290 ssh2"
+ },
+ {
+  "_id": "L0914",
+  "linea": "Mar  8 18:13:41 web-03 sshd[23932]: Invalid user oracle from 192.0.2.200 port 48189"
+ },
+ {
+  "_id": "L0915",
+  "linea": "Mar  8 18:13:41 web-03 sshd[23932]: Failed none for invalid user oracle from 192.0.2.200 port 43169 ssh2"
+ },
+ {
+  "_id": "L0916",
+  "linea": "Mar  8 18:39:33 web-03 sshd[26191]: Invalid user oracle from 192.0.2.200 port 63614"
+ },
+ {
+  "_id": "L0917",
+  "linea": "Mar  8 18:39:33 web-03 sshd[26191]: Failed none for invalid user oracle from 192.0.2.200 port 45724 ssh2"
+ },
+ {
+  "_id": "L0918",
+  "linea": "Mar  8 18:39:53 web-03 sshd[17043]: Invalid user test from 192.0.2.200 port 62423"
+ },
+ {
+  "_id": "L0919",
+  "linea": "Mar  8 18:39:53 web-03 sshd[17043]: Failed none for invalid user test from 192.0.2.200 port 43389 ssh2"
+ },
+ {
+  "_id": "L0920",
+  "linea": "Mar  8 18:39:58 web-03 sshd[12306]: Invalid user test from 192.0.2.200 port 39241"
+ },
+ {
+  "_id": "L0921",
+  "linea": "Mar  8 18:39:58 web-03 sshd[12306]: Failed none for invalid user test from 192.0.2.200 port 50868 ssh2"
+ },
+ {
+  "_id": "L0922",
+  "linea": "Mar  8 18:40:10 web-03 sshd[13880]: Invalid user backup from 192.0.2.200 port 50791"
+ },
+ {
+  "_id": "L0923",
+  "linea": "Mar  8 18:40:10 web-03 sshd[13880]: Failed none for invalid user backup from 192.0.2.200 port 64520 ssh2"
+ },
+ {
+  "_id": "L0924",
+  "linea": "Mar  8 19:15:37 web-03 sshd[13094]: Invalid user test from 203.0.113.7 port 42972"
+ },
+ {
+  "_id": "L0925",
+  "linea": "Mar  8 19:15:37 web-03 sshd[13094]: Failed none for invalid user test from 203.0.113.7 port 59239 ssh2"
+ },
+ {
+  "_id": "L0926",
+  "linea": "Mar  8 19:16:02 web-03 sshd[28779]: Invalid user postgres from 203.0.113.7 port 56695"
+ },
+ {
+  "_id": "L0927",
+  "linea": "Mar  8 19:16:02 web-03 sshd[28779]: Failed none for invalid user postgres from 203.0.113.7 port 59691 ssh2"
+ },
+ {
+  "_id": "L0928",
+  "linea": "Mar  8 19:16:23 web-03 sshd[9937]: Failed password for deploy from 203.0.113.7 port 64668 ssh2"
+ },
+ {
+  "_id": "L0929",
+  "linea": "Mar  8 19:16:36 web-03 sshd[10877]: Invalid user test from 203.0.113.7 port 54802"
+ },
+ {
+  "_id": "L0930",
+  "linea": "Mar  8 19:16:36 web-03 sshd[10877]: Failed none for invalid user test from 203.0.113.7 port 34775 ssh2"
+ },
+ {
+  "_id": "L0931",
+  "linea": "Mar  8 19:38:26 web-03 sshd[20210]: Invalid user jenkins from 198.51.100.12 port 52884"
+ },
+ {
+  "_id": "L0932",
+  "linea": "Mar  8 19:38:26 web-03 sshd[20210]: Failed none for invalid user jenkins from 198.51.100.12 port 34551 ssh2"
+ },
+ {
+  "_id": "L0933",
+  "linea": "Mar  8 20:18:46 web-03 sshd[30538]: Invalid user administrador from 190.210.8.92 port 62090"
+ },
+ {
+  "_id": "L0934",
+  "linea": "Mar  8 20:18:46 web-03 sshd[30538]: Failed none for invalid user administrador from 190.210.8.92 port 50746 ssh2"
+ },
+ {
+  "_id": "L0935",
+  "linea": "Mar  8 20:18:54 web-03 sshd[11487]: Invalid user git from 190.210.8.92 port 42131"
+ },
+ {
+  "_id": "L0936",
+  "linea": "Mar  8 20:18:54 web-03 sshd[11487]: Failed none for invalid user git from 190.210.8.92 port 33432 ssh2"
+ },
+ {
+  "_id": "L0937",
+  "linea": "Mar  8 20:19:05 web-03 sshd[4662]: Failed password for deploy from 190.210.8.92 port 48627 ssh2"
+ },
+ {
+  "_id": "L0938",
+  "linea": "Mar  8 20:19:06 web-03 sshd[24124]: Invalid user administrador from 190.210.8.92 port 34245"
+ },
+ {
+  "_id": "L0939",
+  "linea": "Mar  8 20:19:06 web-03 sshd[24124]: Failed none for invalid user administrador from 190.210.8.92 port 59186 ssh2"
+ },
+ {
+  "_id": "L0940",
+  "linea": "Mar  9 04:25:04 web-03 sshd[27072]: Invalid user test from 192.0.2.15 port 52418"
+ },
+ {
+  "_id": "L0941",
+  "linea": "Mar  9 04:25:04 web-03 sshd[27072]: Failed none for invalid user test from 192.0.2.15 port 31692 ssh2"
+ },
+ {
+  "_id": "L0942",
+  "linea": "Mar  9 04:25:12 web-03 sshd[3631]: Failed password for deploy from 192.0.2.15 port 61427 ssh2"
+ },
+ {
+  "_id": "L0943",
+  "linea": "Mar  9 04:25:22 web-03 sshd[16648]: Invalid user test from 192.0.2.15 port 61107"
+ },
+ {
+  "_id": "L0944",
+  "linea": "Mar  9 04:25:22 web-03 sshd[16648]: Failed none for invalid user test from 192.0.2.15 port 47619 ssh2"
+ },
+ {
+  "_id": "L0945",
+  "linea": "Mar  9 04:25:28 web-03 sshd[30838]: Invalid user test from 192.0.2.15 port 45853"
+ },
+ {
+  "_id": "L0946",
+  "linea": "Mar  9 04:25:28 web-03 sshd[30838]: Failed none for invalid user test from 192.0.2.15 port 58604 ssh2"
+ },
+ {
+  "_id": "L0947",
+  "linea": "Mar  9 05:41:15 web-03 sshd[14791]: Invalid user backup from 198.51.100.143 port 38684"
+ },
+ {
+  "_id": "L0948",
+  "linea": "Mar  9 05:41:15 web-03 sshd[14791]: Failed none for invalid user backup from 198.51.100.143 port 50128 ssh2"
+ },
+ {
+  "_id": "L0949",
+  "linea": "Mar  9 05:41:39 web-03 sshd[14451]: Invalid user test from 198.51.100.143 port 55156"
+ },
+ {
+  "_id": "L0950",
+  "linea": "Mar  9 05:41:39 web-03 sshd[14451]: Failed none for invalid user test from 198.51.100.143 port 37156 ssh2"
+ },
+ {
+  "_id": "L0951",
+  "linea": "Mar  9 05:42:01 web-03 sshd[4874]: Invalid user git from 198.51.100.143 port 54101"
+ },
+ {
+  "_id": "L0952",
+  "linea": "Mar  9 05:42:01 web-03 sshd[4874]: Failed none for invalid user git from 198.51.100.143 port 49022 ssh2"
+ },
+ {
+  "_id": "L0953",
+  "linea": "Mar  9 05:42:06 web-03 sshd[9903]: Invalid user git from 198.51.100.143 port 53639"
+ },
+ {
+  "_id": "L0954",
+  "linea": "Mar  9 05:42:06 web-03 sshd[9903]: Failed none for invalid user git from 198.51.100.143 port 58871 ssh2"
+ },
+ {
+  "_id": "L0955",
+  "linea": "Mar  9 06:24:34 web-03 sshd[1615]: Invalid user ftp from 190.210.8.92 port 64506"
+ },
+ {
+  "_id": "L0956",
+  "linea": "Mar  9 06:24:34 web-03 sshd[1615]: Failed none for invalid user ftp from 190.210.8.92 port 52857 ssh2"
+ },
+ {
+  "_id": "L0957",
+  "linea": "Mar  9 06:50:30 web-03 sshd[15794]: Invalid user jenkins from 203.0.113.91 port 32002"
+ },
+ {
+  "_id": "L0958",
+  "linea": "Mar  9 06:50:30 web-03 sshd[15794]: Failed none for invalid user jenkins from 203.0.113.91 port 32108 ssh2"
+ },
+ {
+  "_id": "L0959",
+  "linea": "Mar  9 07:15:25 web-03 sshd[7165]: Failed password for deploy from 181.47.22.6 port 43008 ssh2"
+ },
+ {
+  "_id": "L0960",
+  "linea": "Mar  9 07:15:33 web-03 sshd[19623]: Failed password for deploy from 181.47.22.6 port 33913 ssh2"
+ },
+ {
+  "_id": "L0961",
+  "linea": "Mar  9 07:44:47 web-03 sshd[24891]: Invalid user backup from 203.0.113.7 port 46356"
+ },
+ {
+  "_id": "L0962",
+  "linea": "Mar  9 07:44:47 web-03 sshd[24891]: Failed none for invalid user backup from 203.0.113.7 port 44331 ssh2"
+ },
+ {
+  "_id": "L0963",
+  "linea": "Mar  9 07:45:01 web-03 sshd[8008]: Invalid user ftp from 203.0.113.7 port 63389"
+ },
+ {
+  "_id": "L0964",
+  "linea": "Mar  9 07:45:01 web-03 sshd[8008]: Failed none for invalid user ftp from 203.0.113.7 port 49154 ssh2"
+ },
+ {
+  "_id": "L0965",
+  "linea": "Mar  9 08:05:43 web-03 sshd[9613]: Invalid user oracle from 198.51.100.143 port 61558"
+ },
+ {
+  "_id": "L0966",
+  "linea": "Mar  9 08:05:43 web-03 sshd[9613]: Failed none for invalid user oracle from 198.51.100.143 port 63330 ssh2"
+ },
+ {
+  "_id": "L0967",
+  "linea": "Mar  9 08:06:06 web-03 sshd[2662]: Failed password for deploy from 198.51.100.143 port 57147 ssh2"
+ },
+ {
+  "_id": "L0968",
+  "linea": "Mar  9 08:32:04 web-03 sshd[8520]: Invalid user administrador from 200.45.10.18 port 51744"
+ },
+ {
+  "_id": "L0969",
+  "linea": "Mar  9 08:32:04 web-03 sshd[8520]: Failed none for invalid user administrador from 200.45.10.18 port 40392 ssh2"
+ },
+ {
+  "_id": "L0970",
+  "linea": "Mar  9 08:32:16 web-03 sshd[20803]: Invalid user postgres from 200.45.10.18 port 40965"
+ },
+ {
+  "_id": "L0971",
+  "linea": "Mar  9 08:32:16 web-03 sshd[20803]: Failed none for invalid user postgres from 200.45.10.18 port 37454 ssh2"
+ },
+ {
+  "_id": "L0972",
+  "linea": "Mar  9 09:00:00 web-03 sshd[17220]: Accepted publickey for deploy from 10.20.4.39 port 59778 ssh2: RSA SHA256:8vN2qLpXeR4kTsYbMwGh"
+ },
+ {
+  "_id": "L0973",
+  "linea": "Mar  9 09:03:00 web-03 sudo[4294]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/systemctl restart api"
+ },
+ {
+  "_id": "L0974",
+  "linea": "Mar  9 09:05:34 web-03 sshd[26588]: Invalid user oracle from 203.0.113.210 port 49163"
+ },
+ {
+  "_id": "L0975",
+  "linea": "Mar  9 09:05:34 web-03 sshd[26588]: Failed none for invalid user oracle from 203.0.113.210 port 36301 ssh2"
+ },
+ {
+  "_id": "L0976",
+  "linea": "Mar  9 09:05:48 web-03 sudo[12976]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/systemctl restart api"
+ },
+ {
+  "_id": "L0977",
+  "linea": "Mar  9 09:34:48 web-03 sshd[17220]: Disconnected from user deploy 10.20.4.39"
+ },
+ {
+  "_id": "L0978",
+  "linea": "Mar  9 10:48:11 web-03 sshd[2590]: Invalid user backup from 181.47.22.6 port 30299"
+ },
+ {
+  "_id": "L0979",
+  "linea": "Mar  9 10:48:11 web-03 sshd[2590]: Failed none for invalid user backup from 181.47.22.6 port 45127 ssh2"
+ },
+ {
+  "_id": "L0980",
+  "linea": "Mar  9 10:48:19 web-03 sshd[3946]: Invalid user jenkins from 181.47.22.6 port 38141"
+ },
+ {
+  "_id": "L0981",
+  "linea": "Mar  9 10:48:19 web-03 sshd[3946]: Failed none for invalid user jenkins from 181.47.22.6 port 47725 ssh2"
+ },
+ {
+  "_id": "L0982",
+  "linea": "Mar  9 10:48:22 web-03 sshd[2982]: Invalid user git from 181.47.22.6 port 42510"
+ },
+ {
+  "_id": "L0983",
+  "linea": "Mar  9 10:48:22 web-03 sshd[2982]: Failed none for invalid user git from 181.47.22.6 port 64580 ssh2"
+ },
+ {
+  "_id": "L0984",
+  "linea": "Mar  9 10:48:36 web-03 sshd[1719]: Invalid user jenkins from 181.47.22.6 port 41144"
+ },
+ {
+  "_id": "L0985",
+  "linea": "Mar  9 10:48:36 web-03 sshd[1719]: Failed none for invalid user jenkins from 181.47.22.6 port 34807 ssh2"
+ },
+ {
+  "_id": "L0986",
+  "linea": "Mar  9 11:10:26 web-03 sshd[28424]: Invalid user postgres from 181.47.22.6 port 37967"
+ },
+ {
+  "_id": "L0987",
+  "linea": "Mar  9 11:10:26 web-03 sshd[28424]: Failed none for invalid user postgres from 181.47.22.6 port 60062 ssh2"
+ },
+ {
+  "_id": "L0988",
+  "linea": "Mar  9 11:10:41 web-03 sshd[31370]: Invalid user postgres from 181.47.22.6 port 32675"
+ },
+ {
+  "_id": "L0989",
+  "linea": "Mar  9 11:10:41 web-03 sshd[31370]: Failed none for invalid user postgres from 181.47.22.6 port 37083 ssh2"
+ },
+ {
+  "_id": "L0990",
+  "linea": "Mar  9 11:39:58 web-03 sshd[11425]: Invalid user admin from 200.45.10.18 port 44719"
+ },
+ {
+  "_id": "L0991",
+  "linea": "Mar  9 11:39:58 web-03 sshd[11425]: Failed none for invalid user admin from 200.45.10.18 port 52859 ssh2"
+ },
+ {
+  "_id": "L0992",
+  "linea": "Mar  9 11:40:10 web-03 sshd[2244]: Invalid user test from 200.45.10.18 port 41612"
+ },
+ {
+  "_id": "L0993",
+  "linea": "Mar  9 11:40:10 web-03 sshd[2244]: Failed none for invalid user test from 200.45.10.18 port 55948 ssh2"
+ },
+ {
+  "_id": "L0994",
+  "linea": "Mar  9 11:40:27 web-03 sshd[17148]: Invalid user git from 200.45.10.18 port 32851"
+ },
+ {
+  "_id": "L0995",
+  "linea": "Mar  9 11:40:27 web-03 sshd[17148]: Failed none for invalid user git from 200.45.10.18 port 46928 ssh2"
+ },
+ {
+  "_id": "L0996",
+  "linea": "Mar  9 12:03:14 web-03 sshd[1369]: Invalid user jenkins from 198.51.100.33 port 45952"
+ },
+ {
+  "_id": "L0997",
+  "linea": "Mar  9 12:03:14 web-03 sshd[1369]: Failed none for invalid user jenkins from 198.51.100.33 port 39147 ssh2"
+ },
+ {
+  "_id": "L0998",
+  "linea": "Mar  9 12:03:27 web-03 sshd[18274]: Invalid user jenkins from 198.51.100.33 port 49263"
+ },
+ {
+  "_id": "L0999",
+  "linea": "Mar  9 12:03:27 web-03 sshd[18274]: Failed none for invalid user jenkins from 198.51.100.33 port 41463 ssh2"
+ },
+ {
+  "_id": "L1000",
+  "linea": "Mar  9 12:41:57 web-03 sshd[23656]: Invalid user backup from 203.0.113.210 port 34808"
+ },
+ {
+  "_id": "L1001",
+  "linea": "Mar  9 12:41:57 web-03 sshd[23656]: Failed none for invalid user backup from 203.0.113.210 port 40879 ssh2"
+ },
+ {
+  "_id": "L1002",
+  "linea": "Mar  9 12:42:02 web-03 sshd[30022]: Invalid user backup from 203.0.113.210 port 34246"
+ },
+ {
+  "_id": "L1003",
+  "linea": "Mar  9 12:42:02 web-03 sshd[30022]: Failed none for invalid user backup from 203.0.113.210 port 51097 ssh2"
+ },
+ {
+  "_id": "L1004",
+  "linea": "Mar  9 13:06:13 web-03 sshd[29539]: Failed password for deploy from 203.0.113.165 port 31039 ssh2"
+ },
+ {
+  "_id": "L1005",
+  "linea": "Mar  9 13:06:18 web-03 sshd[6722]: Invalid user test from 203.0.113.165 port 37179"
+ },
+ {
+  "_id": "L1006",
+  "linea": "Mar  9 13:06:18 web-03 sshd[6722]: Failed none for invalid user test from 203.0.113.165 port 59038 ssh2"
+ },
+ {
+  "_id": "L1007",
+  "linea": "Mar  9 13:30:07 web-03 sshd[14419]: Invalid user backup from 203.0.113.91 port 57842"
+ },
+ {
+  "_id": "L1008",
+  "linea": "Mar  9 13:30:07 web-03 sshd[14419]: Failed none for invalid user backup from 203.0.113.91 port 42439 ssh2"
+ },
+ {
+  "_id": "L1009",
+  "linea": "Mar  9 13:30:24 web-03 sshd[24303]: Invalid user ftp from 203.0.113.91 port 39521"
+ },
+ {
+  "_id": "L1010",
+  "linea": "Mar  9 13:30:24 web-03 sshd[24303]: Failed none for invalid user ftp from 203.0.113.91 port 38611 ssh2"
+ },
+ {
+  "_id": "L1011",
+  "linea": "Mar  9 13:30:30 web-03 sshd[18728]: Invalid user jenkins from 203.0.113.91 port 54998"
+ },
+ {
+  "_id": "L1012",
+  "linea": "Mar  9 13:30:30 web-03 sshd[18728]: Failed none for invalid user jenkins from 203.0.113.91 port 62642 ssh2"
+ },
+ {
+  "_id": "L1013",
+  "linea": "Mar  9 15:27:27 web-03 sshd[24427]: Invalid user test from 181.47.22.6 port 44552"
+ },
+ {
+  "_id": "L1014",
+  "linea": "Mar  9 15:27:27 web-03 sshd[24427]: Failed none for invalid user test from 181.47.22.6 port 43342 ssh2"
+ },
+ {
+  "_id": "L1015",
+  "linea": "Mar  9 15:27:44 web-03 sshd[17539]: Invalid user backup from 181.47.22.6 port 53936"
+ },
+ {
+  "_id": "L1016",
+  "linea": "Mar  9 15:27:44 web-03 sshd[17539]: Failed none for invalid user backup from 181.47.22.6 port 61456 ssh2"
+ },
+ {
+  "_id": "L1017",
+  "linea": "Mar  9 15:28:03 web-03 sshd[5713]: Invalid user administrador from 181.47.22.6 port 57559"
+ },
+ {
+  "_id": "L1018",
+  "linea": "Mar  9 15:28:03 web-03 sshd[5713]: Failed none for invalid user administrador from 181.47.22.6 port 37529 ssh2"
+ },
+ {
+  "_id": "L1019",
+  "linea": "Mar  9 15:55:14 web-03 sshd[11505]: Invalid user postgres from 203.0.113.165 port 53250"
+ },
+ {
+  "_id": "L1020",
+  "linea": "Mar  9 15:55:14 web-03 sshd[11505]: Failed none for invalid user postgres from 203.0.113.165 port 49131 ssh2"
+ },
+ {
+  "_id": "L1021",
+  "linea": "Mar  9 15:55:23 web-03 sshd[4351]: Invalid user admin from 203.0.113.165 port 42524"
+ },
+ {
+  "_id": "L1022",
+  "linea": "Mar  9 15:55:23 web-03 sshd[4351]: Failed none for invalid user admin from 203.0.113.165 port 58197 ssh2"
+ },
+ {
+  "_id": "L1023",
+  "linea": "Mar  9 16:56:26 web-03 sshd[29503]: Invalid user git from 192.0.2.200 port 53333"
+ },
+ {
+  "_id": "L1024",
+  "linea": "Mar  9 16:56:26 web-03 sshd[29503]: Failed none for invalid user git from 192.0.2.200 port 55446 ssh2"
+ },
+ {
+  "_id": "L1025",
+  "linea": "Mar  9 16:56:38 web-03 sshd[18538]: Invalid user oracle from 192.0.2.200 port 43436"
+ },
+ {
+  "_id": "L1026",
+  "linea": "Mar  9 16:56:38 web-03 sshd[18538]: Failed none for invalid user oracle from 192.0.2.200 port 30218 ssh2"
+ },
+ {
+  "_id": "L1027",
+  "linea": "Mar  9 18:21:32 web-03 sshd[22190]: Invalid user admin from 198.51.100.12 port 33297"
+ },
+ {
+  "_id": "L1028",
+  "linea": "Mar  9 18:21:32 web-03 sshd[22190]: Failed none for invalid user admin from 198.51.100.12 port 33079 ssh2"
+ },
+ {
+  "_id": "L1029",
+  "linea": "Mar  9 18:42:20 web-03 sshd[12976]: Invalid user admin from 203.0.113.7 port 46391"
+ },
+ {
+  "_id": "L1030",
+  "linea": "Mar  9 18:42:20 web-03 sshd[12976]: Failed none for invalid user admin from 203.0.113.7 port 58736 ssh2"
+ },
+ {
+  "_id": "L1031",
+  "linea": "Mar  9 18:42:44 web-03 sshd[21541]: Failed password for deploy from 203.0.113.7 port 54208 ssh2"
+ },
+ {
+  "_id": "L1032",
+  "linea": "Mar  9 18:43:09 web-03 sshd[22937]: Invalid user git from 203.0.113.7 port 42233"
+ },
+ {
+  "_id": "L1033",
+  "linea": "Mar  9 18:43:09 web-03 sshd[22937]: Failed none for invalid user git from 203.0.113.7 port 32239 ssh2"
+ },
+ {
+  "_id": "L1034",
+  "linea": "Mar  9 18:43:11 web-03 sshd[6095]: Failed password for deploy from 203.0.113.7 port 52731 ssh2"
+ },
+ {
+  "_id": "L1035",
+  "linea": "Mar  9 19:04:03 web-03 sshd[21519]: Invalid user postgres from 203.0.113.44 port 32548"
+ },
+ {
+  "_id": "L1036",
+  "linea": "Mar  9 19:04:03 web-03 sshd[21519]: Failed none for invalid user postgres from 203.0.113.44 port 33900 ssh2"
+ },
+ {
+  "_id": "L1037",
+  "linea": "Mar  9 19:34:14 web-03 sshd[13935]: Invalid user ftp from 203.0.113.7 port 58090"
+ },
+ {
+  "_id": "L1038",
+  "linea": "Mar  9 19:34:14 web-03 sshd[13935]: Failed none for invalid user ftp from 203.0.113.7 port 34184 ssh2"
+ },
+ {
+  "_id": "L1039",
+  "linea": "Mar  9 19:54:58 web-03 sshd[16539]: Invalid user test from 203.0.113.210 port 54424"
+ },
+ {
+  "_id": "L1040",
+  "linea": "Mar  9 19:54:58 web-03 sshd[16539]: Failed none for invalid user test from 203.0.113.210 port 51762 ssh2"
+ },
+ {
+  "_id": "L1041",
+  "linea": "Mar  9 19:55:17 web-03 sshd[7563]: Invalid user git from 203.0.113.210 port 64542"
+ },
+ {
+  "_id": "L1042",
+  "linea": "Mar  9 19:55:17 web-03 sshd[7563]: Failed none for invalid user git from 203.0.113.210 port 55768 ssh2"
+ },
+ {
+  "_id": "L1043",
+  "linea": "Mar  9 23:02:38 web-03 sshd[27771]: Invalid user oracle from 181.47.22.6 port 38633"
+ },
+ {
+  "_id": "L1044",
+  "linea": "Mar  9 23:02:38 web-03 sshd[27771]: Failed none for invalid user oracle from 181.47.22.6 port 39047 ssh2"
+ },
+ {
+  "_id": "L1045",
+  "linea": "Mar  9 23:02:47 web-03 sshd[19539]: Invalid user oracle from 181.47.22.6 port 30519"
+ },
+ {
+  "_id": "L1046",
+  "linea": "Mar  9 23:02:47 web-03 sshd[19539]: Failed none for invalid user oracle from 181.47.22.6 port 58525 ssh2"
+ },
+ {
+  "_id": "L1047",
+  "linea": "Mar  9 23:02:56 web-03 sshd[15515]: Invalid user postgres from 181.47.22.6 port 48624"
+ },
+ {
+  "_id": "L1048",
+  "linea": "Mar  9 23:02:56 web-03 sshd[15515]: Failed none for invalid user postgres from 181.47.22.6 port 47857 ssh2"
+ },
+ {
+  "_id": "L1049",
+  "linea": "Mar  9 23:37:23 web-03 sshd[13470]: Invalid user postgres from 198.51.100.12 port 35261"
+ },
+ {
+  "_id": "L1050",
+  "linea": "Mar  9 23:37:23 web-03 sshd[13470]: Failed none for invalid user postgres from 198.51.100.12 port 40317 ssh2"
+ },
+ {
+  "_id": "L1051",
+  "linea": "Mar  9 23:37:26 web-03 sshd[30943]: Invalid user backup from 198.51.100.12 port 45191"
+ },
+ {
+  "_id": "L1052",
+  "linea": "Mar  9 23:37:26 web-03 sshd[30943]: Failed none for invalid user backup from 198.51.100.12 port 38567 ssh2"
+ },
+ {
+  "_id": "L1053",
+  "linea": "Mar 10 00:25:00 web-03 sshd[12294]: Accepted publickey for deploy from 10.20.4.37 port 36927 ssh2: RSA SHA256:8vN2qLpXeR4kTsYbMwGh"
+ },
+ {
+  "_id": "L1054",
+  "linea": "Mar 10 00:27:20 web-03 sudo[11124]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/cat /home/deploy/.ssh/authorized_keys"
+ },
+ {
+  "_id": "L1055",
+  "linea": "Mar 10 00:29:56 web-03 sudo[25788]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow"
+ },
+ {
+  "_id": "L1056",
+  "linea": "Mar 10 00:32:44 web-03 sudo[18858]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/tar -czf /tmp/d.tgz /var/lib/app/data"
+ },
+ {
+  "_id": "L1057",
+  "linea": "Mar 10 00:35:44 web-03 sshd[12294]: Disconnected from user deploy 10.20.4.37"
+ },
+ {
+  "_id": "L1058",
+  "linea": "Mar 10 03:43:39 web-03 sshd[2712]: Invalid user test from 203.0.113.44 port 51148"
+ },
+ {
+  "_id": "L1059",
+  "linea": "Mar 10 03:43:39 web-03 sshd[2712]: Failed none for invalid user test from 203.0.113.44 port 55570 ssh2"
+ },
+ {
+  "_id": "L1060",
+  "linea": "Mar 10 03:43:54 web-03 sshd[14083]: Invalid user oracle from 203.0.113.44 port 62371"
+ },
+ {
+  "_id": "L1061",
+  "linea": "Mar 10 03:43:54 web-03 sshd[14083]: Failed none for invalid user oracle from 203.0.113.44 port 33126 ssh2"
+ },
+ {
+  "_id": "L1062",
+  "linea": "Mar 10 03:44:17 web-03 sshd[8720]: Invalid user backup from 203.0.113.44 port 36519"
+ },
+ {
+  "_id": "L1063",
+  "linea": "Mar 10 03:44:17 web-03 sshd[8720]: Failed none for invalid user backup from 203.0.113.44 port 47949 ssh2"
+ },
+ {
+  "_id": "L1064",
+  "linea": "Mar 10 04:08:19 web-03 sshd[23832]: Invalid user administrador from 198.51.100.143 port 33195"
+ },
+ {
+  "_id": "L1065",
+  "linea": "Mar 10 04:08:19 web-03 sshd[23832]: Failed none for invalid user administrador from 198.51.100.143 port 45219 ssh2"
+ },
+ {
+  "_id": "L1066",
+  "linea": "Mar 10 04:08:38 web-03 sshd[12534]: Invalid user backup from 198.51.100.143 port 32212"
+ },
+ {
+  "_id": "L1067",
+  "linea": "Mar 10 04:08:38 web-03 sshd[12534]: Failed none for invalid user backup from 198.51.100.143 port 36438 ssh2"
+ },
+ {
+  "_id": "L1068",
+  "linea": "Mar 10 04:08:58 web-03 sshd[1433]: Invalid user backup from 198.51.100.143 port 40142"
+ },
+ {
+  "_id": "L1069",
+  "linea": "Mar 10 04:08:58 web-03 sshd[1433]: Failed none for invalid user backup from 198.51.100.143 port 44549 ssh2"
+ },
+ {
+  "_id": "L1070",
+  "linea": "Mar 10 04:45:09 web-03 sshd[25042]: Invalid user git from 181.47.22.6 port 59622"
+ },
+ {
+  "_id": "L1071",
+  "linea": "Mar 10 04:45:09 web-03 sshd[25042]: Failed none for invalid user git from 181.47.22.6 port 31951 ssh2"
+ },
+ {
+  "_id": "L1072",
+  "linea": "Mar 10 05:25:38 web-03 sshd[15261]: Invalid user test from 198.51.100.143 port 37670"
+ },
+ {
+  "_id": "L1073",
+  "linea": "Mar 10 05:25:38 web-03 sshd[15261]: Failed none for invalid user test from 198.51.100.143 port 62418 ssh2"
+ },
+ {
+  "_id": "L1074",
+  "linea": "Mar 10 05:56:00 web-03 sshd[19286]: Invalid user administrador from 198.51.100.143 port 47112"
+ },
+ {
+  "_id": "L1075",
+  "linea": "Mar 10 05:56:00 web-03 sshd[19286]: Failed none for invalid user administrador from 198.51.100.143 port 54716 ssh2"
+ },
+ {
+  "_id": "L1076",
+  "linea": "Mar 10 06:58:13 web-03 sshd[2860]: Invalid user git from 203.0.113.210 port 59486"
+ },
+ {
+  "_id": "L1077",
+  "linea": "Mar 10 06:58:13 web-03 sshd[2860]: Failed none for invalid user git from 203.0.113.210 port 49765 ssh2"
+ },
+ {
+  "_id": "L1078",
+  "linea": "Mar 10 06:58:25 web-03 sshd[16557]: Invalid user postgres from 203.0.113.210 port 64298"
+ },
+ {
+  "_id": "L1079",
+  "linea": "Mar 10 06:58:25 web-03 sshd[16557]: Failed none for invalid user postgres from 203.0.113.210 port 61308 ssh2"
+ },
+ {
+  "_id": "L1080",
+  "linea": "Mar 10 06:58:32 web-03 sshd[8197]: Invalid user jenkins from 203.0.113.210 port 39805"
+ },
+ {
+  "_id": "L1081",
+  "linea": "Mar 10 06:58:32 web-03 sshd[8197]: Failed none for invalid user jenkins from 203.0.113.210 port 42008 ssh2"
+ },
+ {
+  "_id": "L1082",
+  "linea": "Mar 10 07:51:24 web-03 sshd[8591]: Invalid user postgres from 190.210.8.92 port 33958"
+ },
+ {
+  "_id": "L1083",
+  "linea": "Mar 10 07:51:24 web-03 sshd[8591]: Failed none for invalid user postgres from 190.210.8.92 port 48584 ssh2"
+ },
+ {
+  "_id": "L1084",
+  "linea": "Mar 10 08:28:54 web-03 sshd[1980]: Invalid user postgres from 203.0.113.210 port 49182"
+ },
+ {
+  "_id": "L1085",
+  "linea": "Mar 10 08:28:54 web-03 sshd[1980]: Failed none for invalid user postgres from 203.0.113.210 port 55502 ssh2"
+ },
+ {
+  "_id": "L1086",
+  "linea": "Mar 10 08:29:14 web-03 sshd[14883]: Invalid user test from 203.0.113.210 port 45196"
+ },
+ {
+  "_id": "L1087",
+  "linea": "Mar 10 08:29:14 web-03 sshd[14883]: Failed none for invalid user test from 203.0.113.210 port 33881 ssh2"
+ },
+ {
+  "_id": "L1088",
+  "linea": "Mar 10 08:29:21 web-03 sshd[29998]: Invalid user postgres from 203.0.113.210 port 55196"
+ },
+ {
+  "_id": "L1089",
+  "linea": "Mar 10 08:29:21 web-03 sshd[29998]: Failed none for invalid user postgres from 203.0.113.210 port 33960 ssh2"
+ },
+ {
+  "_id": "L1090",
+  "linea": "Mar 10 08:29:29 web-03 sshd[15193]: Invalid user backup from 203.0.113.210 port 46772"
+ },
+ {
+  "_id": "L1091",
+  "linea": "Mar 10 08:29:29 web-03 sshd[15193]: Failed none for invalid user backup from 203.0.113.210 port 32107 ssh2"
+ },
+ {
+  "_id": "L1092",
+  "linea": "Mar 10 09:09:55 web-03 sshd[20835]: Invalid user administrador from 190.210.8.92 port 55354"
+ },
+ {
+  "_id": "L1093",
+  "linea": "Mar 10 09:09:55 web-03 sshd[20835]: Failed none for invalid user administrador from 190.210.8.92 port 34896 ssh2"
+ },
+ {
+  "_id": "L1094",
+  "linea": "Mar 10 09:10:16 web-03 sshd[18357]: Invalid user ftp from 190.210.8.92 port 54017"
+ },
+ {
+  "_id": "L1095",
+  "linea": "Mar 10 09:10:16 web-03 sshd[18357]: Failed none for invalid user ftp from 190.210.8.92 port 47485 ssh2"
+ },
+ {
+  "_id": "L1096",
+  "linea": "Mar 10 09:10:28 web-03 sshd[28942]: Invalid user administrador from 190.210.8.92 port 34532"
+ },
+ {
+  "_id": "L1097",
+  "linea": "Mar 10 09:10:28 web-03 sshd[28942]: Failed none for invalid user administrador from 190.210.8.92 port 64214 ssh2"
+ },
+ {
+  "_id": "L1098",
+  "linea": "Mar 10 09:10:33 web-03 sshd[2690]: Failed password for deploy from 190.210.8.92 port 49098 ssh2"
+ },
+ {
+  "_id": "L1099",
+  "linea": "Mar 10 09:48:55 web-03 sshd[30678]: Invalid user admin from 192.0.2.200 port 36666"
+ },
+ {
+  "_id": "L1100",
+  "linea": "Mar 10 09:48:55 web-03 sshd[30678]: Failed none for invalid user admin from 192.0.2.200 port 45776 ssh2"
+ },
+ {
+  "_id": "L1101",
+  "linea": "Mar 10 10:16:12 web-03 sshd[28814]: Invalid user oracle from 192.0.2.88 port 40722"
+ },
+ {
+  "_id": "L1102",
+  "linea": "Mar 10 10:16:12 web-03 sshd[28814]: Failed none for invalid user oracle from 192.0.2.88 port 31516 ssh2"
+ },
+ {
+  "_id": "L1103",
+  "linea": "Mar 10 10:38:09 web-03 sshd[5718]: Failed password for deploy from 203.0.113.91 port 64480 ssh2"
+ },
+ {
+  "_id": "L1104",
+  "linea": "Mar 10 11:00:10 web-03 sshd[23111]: Invalid user test from 192.0.2.15 port 30100"
+ },
+ {
+  "_id": "L1105",
+  "linea": "Mar 10 11:00:10 web-03 sshd[23111]: Failed none for invalid user test from 192.0.2.15 port 39471 ssh2"
+ },
+ {
+  "_id": "L1106",
+  "linea": "Mar 10 11:00:21 web-03 sshd[27938]: Invalid user jenkins from 192.0.2.15 port 41535"
+ },
+ {
+  "_id": "L1107",
+  "linea": "Mar 10 11:00:21 web-03 sshd[27938]: Failed none for invalid user jenkins from 192.0.2.15 port 46083 ssh2"
+ },
+ {
+  "_id": "L1108",
+  "linea": "Mar 10 11:46:02 web-03 sshd[2455]: Invalid user oracle from 190.210.8.92 port 31156"
+ },
+ {
+  "_id": "L1109",
+  "linea": "Mar 10 11:46:02 web-03 sshd[2455]: Failed none for invalid user oracle from 190.210.8.92 port 39510 ssh2"
+ },
+ {
+  "_id": "L1110",
+  "linea": "Mar 10 14:12:56 web-03 sshd[11909]: Invalid user test from 181.47.22.6 port 34524"
+ },
+ {
+  "_id": "L1111",
+  "linea": "Mar 10 14:12:56 web-03 sshd[11909]: Failed none for invalid user test from 181.47.22.6 port 31163 ssh2"
+ },
+ {
+  "_id": "L1112",
+  "linea": "Mar 10 14:13:10 web-03 sshd[22897]: Invalid user git from 181.47.22.6 port 64456"
+ },
+ {
+  "_id": "L1113",
+  "linea": "Mar 10 14:13:10 web-03 sshd[22897]: Failed none for invalid user git from 181.47.22.6 port 63362 ssh2"
+ },
+ {
+  "_id": "L1114",
+  "linea": "Mar 10 14:13:35 web-03 sshd[31616]: Invalid user ftp from 181.47.22.6 port 35571"
+ },
+ {
+  "_id": "L1115",
+  "linea": "Mar 10 14:13:35 web-03 sshd[31616]: Failed none for invalid user ftp from 181.47.22.6 port 42703 ssh2"
+ },
+ {
+  "_id": "L1116",
+  "linea": "Mar 10 15:00:00 web-03 sshd[7075]: Accepted publickey for deploy from 10.20.4.57 port 63359 ssh2: RSA SHA256:8vN2qLpXeR4kTsYbMwGh"
+ },
+ {
+  "_id": "L1117",
+  "linea": "Mar 10 15:03:00 web-03 sudo[18913]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/docker compose up -d"
+ },
+ {
+  "_id": "L1118",
+  "linea": "Mar 10 15:05:00 web-03 sudo[22359]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/docker compose up -d"
+ },
+ {
+  "_id": "L1119",
+  "linea": "Mar 10 15:08:18 web-03 sudo[15018]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/tail -n 200 /var/log/api/app.log"
+ },
+ {
+  "_id": "L1120",
+  "linea": "Mar 10 15:30:18 web-03 sshd[7075]: Disconnected from user deploy 10.20.4.57"
+ },
+ {
+  "_id": "L1121",
+  "linea": "Mar 10 18:15:34 web-03 sshd[27945]: Invalid user git from 198.51.100.33 port 52169"
+ },
+ {
+  "_id": "L1122",
+  "linea": "Mar 10 18:15:34 web-03 sshd[27945]: Failed none for invalid user git from 198.51.100.33 port 55643 ssh2"
+ },
+ {
+  "_id": "L1123",
+  "linea": "Mar 10 19:17:42 web-03 sshd[23315]: Invalid user jenkins from 198.51.100.143 port 34836"
+ },
+ {
+  "_id": "L1124",
+  "linea": "Mar 10 19:17:42 web-03 sshd[23315]: Failed none for invalid user jenkins from 198.51.100.143 port 46850 ssh2"
+ },
+ {
+  "_id": "L1125",
+  "linea": "Mar 10 19:17:55 web-03 sshd[6626]: Invalid user postgres from 198.51.100.143 port 62968"
+ },
+ {
+  "_id": "L1126",
+  "linea": "Mar 10 19:17:55 web-03 sshd[6626]: Failed none for invalid user postgres from 198.51.100.143 port 64673 ssh2"
+ },
+ {
+  "_id": "L1127",
+  "linea": "Mar 10 19:54:18 web-03 sshd[27558]: Invalid user postgres from 192.0.2.88 port 55325"
+ },
+ {
+  "_id": "L1128",
+  "linea": "Mar 10 19:54:18 web-03 sshd[27558]: Failed none for invalid user postgres from 192.0.2.88 port 54320 ssh2"
+ },
+ {
+  "_id": "L1129",
+  "linea": "Mar 10 19:54:24 web-03 sshd[21596]: Invalid user administrador from 192.0.2.88 port 49870"
+ },
+ {
+  "_id": "L1130",
+  "linea": "Mar 10 19:54:24 web-03 sshd[21596]: Failed none for invalid user administrador from 192.0.2.88 port 48336 ssh2"
+ },
+ {
+  "_id": "L1131",
+  "linea": "Mar 10 19:54:49 web-03 sshd[4572]: Invalid user jenkins from 192.0.2.88 port 50229"
+ },
+ {
+  "_id": "L1132",
+  "linea": "Mar 10 19:54:49 web-03 sshd[4572]: Failed none for invalid user jenkins from 192.0.2.88 port 30044 ssh2"
+ },
+ {
+  "_id": "L1133",
+  "linea": "Mar 10 20:49:44 web-03 sshd[5988]: Invalid user administrador from 190.210.8.92 port 63344"
+ },
+ {
+  "_id": "L1134",
+  "linea": "Mar 10 20:49:44 web-03 sshd[5988]: Failed none for invalid user administrador from 190.210.8.92 port 59274 ssh2"
+ },
+ {
+  "_id": "L1135",
+  "linea": "Mar 10 20:50:07 web-03 sshd[24216]: Failed password for deploy from 190.210.8.92 port 62273 ssh2"
+ },
+ {
+  "_id": "L1136",
+  "linea": "Mar 10 21:22:18 web-03 sshd[4127]: Invalid user ftp from 177.54.130.71 port 57512"
+ },
+ {
+  "_id": "L1137",
+  "linea": "Mar 10 21:22:18 web-03 sshd[4127]: Failed none for invalid user ftp from 177.54.130.71 port 64257 ssh2"
+ },
+ {
+  "_id": "L1138",
+  "linea": "Mar 10 21:22:19 web-03 sshd[13059]: Invalid user backup from 177.54.130.71 port 61444"
+ },
+ {
+  "_id": "L1139",
+  "linea": "Mar 10 21:22:19 web-03 sshd[13059]: Failed none for invalid user backup from 177.54.130.71 port 43914 ssh2"
+ },
+ {
+  "_id": "L1140",
+  "linea": "Mar 10 21:22:43 web-03 sshd[12343]: Invalid user postgres from 177.54.130.71 port 40224"
+ },
+ {
+  "_id": "L1141",
+  "linea": "Mar 10 21:22:43 web-03 sshd[12343]: Failed none for invalid user postgres from 177.54.130.71 port 50949 ssh2"
+ },
+ {
+  "_id": "L1142",
+  "linea": "Mar 10 21:22:58 web-03 sshd[25440]: Invalid user backup from 177.54.130.71 port 60362"
+ },
+ {
+  "_id": "L1143",
+  "linea": "Mar 10 21:22:58 web-03 sshd[25440]: Failed none for invalid user backup from 177.54.130.71 port 42998 ssh2"
+ },
+ {
+  "_id": "L1144",
+  "linea": "Mar 10 21:43:58 web-03 sshd[22260]: Invalid user ftp from 203.0.113.91 port 34415"
+ },
+ {
+  "_id": "L1145",
+  "linea": "Mar 10 21:43:58 web-03 sshd[22260]: Failed none for invalid user ftp from 203.0.113.91 port 41451 ssh2"
+ },
+ {
+  "_id": "L1146",
+  "linea": "Mar 10 21:44:21 web-03 sshd[2546]: Failed password for deploy from 203.0.113.91 port 63188 ssh2"
+ },
+ {
+  "_id": "L1147",
+  "linea": "Mar 10 21:44:33 web-03 sshd[11274]: Invalid user admin from 203.0.113.91 port 60095"
+ },
+ {
+  "_id": "L1148",
+  "linea": "Mar 10 21:44:33 web-03 sshd[11274]: Failed none for invalid user admin from 203.0.113.91 port 48368 ssh2"
+ },
+ {
+  "_id": "L1149",
+  "linea": "Mar 10 21:44:36 web-03 sshd[9900]: Invalid user postgres from 203.0.113.91 port 48610"
+ },
+ {
+  "_id": "L1150",
+  "linea": "Mar 10 21:44:36 web-03 sshd[9900]: Failed none for invalid user postgres from 203.0.113.91 port 34628 ssh2"
+ },
+ {
+  "_id": "L1151",
+  "linea": "Mar 10 22:10:38 web-03 sshd[14380]: Invalid user jenkins from 192.0.2.15 port 60687"
+ },
+ {
+  "_id": "L1152",
+  "linea": "Mar 10 22:10:38 web-03 sshd[14380]: Failed none for invalid user jenkins from 192.0.2.15 port 50748 ssh2"
+ },
+ {
+  "_id": "L1153",
+  "linea": "Mar 10 22:38:35 web-03 sshd[11017]: Invalid user jenkins from 203.0.113.91 port 44825"
+ },
+ {
+  "_id": "L1154",
+  "linea": "Mar 10 22:38:35 web-03 sshd[11017]: Failed none for invalid user jenkins from 203.0.113.91 port 48010 ssh2"
+ },
+ {
+  "_id": "L1155",
+  "linea": "Mar 10 22:38:46 web-03 sshd[20184]: Invalid user git from 203.0.113.91 port 41466"
+ },
+ {
+  "_id": "L1156",
+  "linea": "Mar 10 22:38:46 web-03 sshd[20184]: Failed none for invalid user git from 203.0.113.91 port 39636 ssh2"
+ },
+ {
+  "_id": "L1157",
+  "linea": "Mar 10 22:39:00 web-03 sshd[17492]: Invalid user test from 203.0.113.91 port 34983"
+ },
+ {
+  "_id": "L1158",
+  "linea": "Mar 10 22:39:00 web-03 sshd[17492]: Failed none for invalid user test from 203.0.113.91 port 43960 ssh2"
+ },
+ {
+  "_id": "L1159",
+  "linea": "Mar 10 22:39:11 web-03 sshd[25691]: Invalid user jenkins from 203.0.113.91 port 64966"
+ },
+ {
+  "_id": "L1160",
+  "linea": "Mar 10 22:39:11 web-03 sshd[25691]: Failed none for invalid user jenkins from 203.0.113.91 port 59038 ssh2"
+ },
+ {
+  "_id": "L1161",
+  "linea": "Mar 10 23:03:10 web-03 sshd[20699]: Invalid user git from 203.0.113.91 port 33029"
+ },
+ {
+  "_id": "L1162",
+  "linea": "Mar 10 23:03:10 web-03 sshd[20699]: Failed none for invalid user git from 203.0.113.91 port 47755 ssh2"
+ },
+ {
+  "_id": "L1163",
+  "linea": "Mar 10 23:03:28 web-03 sshd[7128]: Invalid user backup from 203.0.113.91 port 51817"
+ },
+ {
+  "_id": "L1164",
+  "linea": "Mar 10 23:03:28 web-03 sshd[7128]: Failed none for invalid user backup from 203.0.113.91 port 60760 ssh2"
+ },
+ {
+  "_id": "L1165",
+  "linea": "Mar 10 23:03:29 web-03 sshd[25300]: Invalid user test from 203.0.113.91 port 47399"
+ },
+ {
+  "_id": "L1166",
+  "linea": "Mar 10 23:03:29 web-03 sshd[25300]: Failed none for invalid user test from 203.0.113.91 port 37249 ssh2"
+ },
+ {
+  "_id": "L1167",
+  "linea": "Mar 10 23:03:51 web-03 sshd[7631]: Invalid user admin from 203.0.113.91 port 54736"
+ },
+ {
+  "_id": "L1168",
+  "linea": "Mar 10 23:03:51 web-03 sshd[7631]: Failed none for invalid user admin from 203.0.113.91 port 48741 ssh2"
+ },
+ {
+  "_id": "L1169",
+  "linea": "Mar 10 23:26:45 web-03 sshd[9026]: Invalid user ftp from 181.47.22.6 port 63311"
+ },
+ {
+  "_id": "L1170",
+  "linea": "Mar 10 23:26:45 web-03 sshd[9026]: Failed none for invalid user ftp from 181.47.22.6 port 40948 ssh2"
+ },
+ {
+  "_id": "L1171",
+  "linea": "Mar 10 23:26:51 web-03 sshd[8167]: Invalid user postgres from 181.47.22.6 port 41167"
+ },
+ {
+  "_id": "L1172",
+  "linea": "Mar 10 23:26:51 web-03 sshd[8167]: Failed none for invalid user postgres from 181.47.22.6 port 60259 ssh2"
+ },
+ {
+  "_id": "L1173",
+  "linea": "Mar 10 23:26:57 web-03 sshd[11693]: Invalid user admin from 181.47.22.6 port 49875"
+ },
+ {
+  "_id": "L1174",
+  "linea": "Mar 10 23:26:57 web-03 sshd[11693]: Failed none for invalid user admin from 181.47.22.6 port 61435 ssh2"
+ },
+ {
+  "_id": "L1175",
+  "linea": "Mar 10 23:49:50 web-03 sshd[6557]: Invalid user backup from 198.51.100.77 port 53280"
+ },
+ {
+  "_id": "L1176",
+  "linea": "Mar 10 23:49:50 web-03 sshd[6557]: Failed none for invalid user backup from 198.51.100.77 port 42123 ssh2"
+ },
+ {
+  "_id": "L1177",
+  "linea": "Mar 11 00:23:13 web-03 sshd[9751]: Invalid user jenkins from 181.47.22.6 port 42100"
+ },
+ {
+  "_id": "L1178",
+  "linea": "Mar 11 00:23:13 web-03 sshd[9751]: Failed none for invalid user jenkins from 181.47.22.6 port 56842 ssh2"
+ },
+ {
+  "_id": "L1179",
+  "linea": "Mar 11 00:23:16 web-03 sshd[15950]: Invalid user admin from 181.47.22.6 port 42318"
+ },
+ {
+  "_id": "L1180",
+  "linea": "Mar 11 00:23:16 web-03 sshd[15950]: Failed none for invalid user admin from 181.47.22.6 port 32700 ssh2"
+ },
+ {
+  "_id": "L1181",
+  "linea": "Mar 11 00:23:26 web-03 sshd[27979]: Invalid user postgres from 181.47.22.6 port 33388"
+ },
+ {
+  "_id": "L1182",
+  "linea": "Mar 11 00:23:26 web-03 sshd[27979]: Failed none for invalid user postgres from 181.47.22.6 port 53019 ssh2"
+ },
+ {
+  "_id": "L1183",
+  "linea": "Mar 11 00:56:55 web-03 sshd[3397]: Failed password for deploy from 190.210.8.92 port 43548 ssh2"
+ },
+ {
+  "_id": "L1184",
+  "linea": "Mar 11 01:18:55 web-03 sshd[13282]: Invalid user oracle from 177.54.130.71 port 53136"
+ },
+ {
+  "_id": "L1185",
+  "linea": "Mar 11 01:18:55 web-03 sshd[13282]: Failed none for invalid user oracle from 177.54.130.71 port 32048 ssh2"
+ },
+ {
+  "_id": "L1186",
+  "linea": "Mar 11 01:42:48 web-03 sshd[26954]: Invalid user oracle from 192.0.2.15 port 52382"
+ },
+ {
+  "_id": "L1187",
+  "linea": "Mar 11 01:42:48 web-03 sshd[26954]: Failed none for invalid user oracle from 192.0.2.15 port 37931 ssh2"
+ },
+ {
+  "_id": "L1188",
+  "linea": "Mar 11 01:43:05 web-03 sshd[28579]: Failed password for deploy from 192.0.2.15 port 55462 ssh2"
+ },
+ {
+  "_id": "L1189",
+  "linea": "Mar 11 01:43:16 web-03 sshd[21752]: Invalid user backup from 192.0.2.15 port 34288"
+ },
+ {
+  "_id": "L1190",
+  "linea": "Mar 11 01:43:16 web-03 sshd[21752]: Failed none for invalid user backup from 192.0.2.15 port 41512 ssh2"
+ },
+ {
+  "_id": "L1191",
+  "linea": "Mar 11 02:43:22 web-03 sshd[7659]: Invalid user administrador from 203.0.113.91 port 43224"
+ },
+ {
+  "_id": "L1192",
+  "linea": "Mar 11 02:43:22 web-03 sshd[7659]: Failed none for invalid user administrador from 203.0.113.91 port 41976 ssh2"
+ },
+ {
+  "_id": "L1193",
+  "linea": "Mar 11 02:43:36 web-03 sshd[3730]: Invalid user backup from 203.0.113.91 port 63979"
+ },
+ {
+  "_id": "L1194",
+  "linea": "Mar 11 02:43:36 web-03 sshd[3730]: Failed none for invalid user backup from 203.0.113.91 port 55815 ssh2"
+ },
+ {
+  "_id": "L1195",
+  "linea": "Mar 11 03:33:29 web-03 sshd[20194]: Invalid user backup from 203.0.113.91 port 44657"
+ },
+ {
+  "_id": "L1196",
+  "linea": "Mar 11 03:33:29 web-03 sshd[20194]: Failed none for invalid user backup from 203.0.113.91 port 51442 ssh2"
+ },
+ {
+  "_id": "L1197",
+  "linea": "Mar 11 03:33:41 web-03 sshd[8363]: Invalid user oracle from 203.0.113.91 port 61097"
+ },
+ {
+  "_id": "L1198",
+  "linea": "Mar 11 03:33:41 web-03 sshd[8363]: Failed none for invalid user oracle from 203.0.113.91 port 58534 ssh2"
+ },
+ {
+  "_id": "L1199",
+  "linea": "Mar 11 03:33:56 web-03 sshd[22485]: Invalid user backup from 203.0.113.91 port 42262"
+ },
+ {
+  "_id": "L1200",
+  "linea": "Mar 11 03:33:56 web-03 sshd[22485]: Failed none for invalid user backup from 203.0.113.91 port 51326 ssh2"
+ },
+ {
+  "_id": "L1201",
+  "linea": "Mar 11 03:34:10 web-03 sshd[21368]: Invalid user backup from 203.0.113.91 port 61462"
+ },
+ {
+  "_id": "L1202",
+  "linea": "Mar 11 03:34:10 web-03 sshd[21368]: Failed none for invalid user backup from 203.0.113.91 port 39494 ssh2"
+ },
+ {
+  "_id": "L1203",
+  "linea": "Mar 11 04:31:24 web-03 sshd[26010]: Invalid user administrador from 198.51.100.33 port 41520"
+ },
+ {
+  "_id": "L1204",
+  "linea": "Mar 11 04:31:24 web-03 sshd[26010]: Failed none for invalid user administrador from 198.51.100.33 port 40463 ssh2"
+ },
+ {
+  "_id": "L1205",
+  "linea": "Mar 11 04:55:22 web-03 sshd[8446]: Invalid user jenkins from 198.51.100.33 port 39233"
+ },
+ {
+  "_id": "L1206",
+  "linea": "Mar 11 04:55:22 web-03 sshd[8446]: Failed none for invalid user jenkins from 198.51.100.33 port 45960 ssh2"
+ },
+ {
+  "_id": "L1207",
+  "linea": "Mar 11 04:55:37 web-03 sshd[18007]: Invalid user backup from 198.51.100.33 port 50613"
+ },
+ {
+  "_id": "L1208",
+  "linea": "Mar 11 04:55:37 web-03 sshd[18007]: Failed none for invalid user backup from 198.51.100.33 port 60447 ssh2"
+ },
+ {
+  "_id": "L1209",
+  "linea": "Mar 11 04:55:45 web-03 sshd[21422]: Invalid user test from 198.51.100.33 port 38733"
+ },
+ {
+  "_id": "L1210",
+  "linea": "Mar 11 04:55:45 web-03 sshd[21422]: Failed none for invalid user test from 198.51.100.33 port 48356 ssh2"
+ },
+ {
+  "_id": "L1211",
+  "linea": "Mar 11 04:56:06 web-03 sshd[27768]: Invalid user administrador from 198.51.100.33 port 53185"
+ },
+ {
+  "_id": "L1212",
+  "linea": "Mar 11 04:56:06 web-03 sshd[27768]: Failed none for invalid user administrador from 198.51.100.33 port 62730 ssh2"
+ },
+ {
+  "_id": "L1213",
+  "linea": "Mar 11 05:37:45 web-03 sshd[4375]: Invalid user test from 203.0.113.44 port 38243"
+ },
+ {
+  "_id": "L1214",
+  "linea": "Mar 11 05:37:45 web-03 sshd[4375]: Failed none for invalid user test from 203.0.113.44 port 36847 ssh2"
+ },
+ {
+  "_id": "L1215",
+  "linea": "Mar 11 05:37:48 web-03 sshd[21491]: Invalid user backup from 203.0.113.44 port 42953"
+ },
+ {
+  "_id": "L1216",
+  "linea": "Mar 11 05:37:48 web-03 sshd[21491]: Failed none for invalid user backup from 203.0.113.44 port 44684 ssh2"
+ },
+ {
+  "_id": "L1217",
+  "linea": "Mar 11 06:10:02 web-03 sshd[2365]: Invalid user oracle from 192.0.2.88 port 31915"
+ },
+ {
+  "_id": "L1218",
+  "linea": "Mar 11 06:10:02 web-03 sshd[2365]: Failed none for invalid user oracle from 192.0.2.88 port 35443 ssh2"
+ },
+ {
+  "_id": "L1219",
+  "linea": "Mar 11 06:10:15 web-03 sshd[15479]: Invalid user ftp from 192.0.2.88 port 54500"
+ },
+ {
+  "_id": "L1220",
+  "linea": "Mar 11 06:10:15 web-03 sshd[15479]: Failed none for invalid user ftp from 192.0.2.88 port 43390 ssh2"
+ },
+ {
+  "_id": "L1221",
+  "linea": "Mar 11 06:53:00 web-03 sshd[24069]: Invalid user jenkins from 198.51.100.77 port 40104"
+ },
+ {
+  "_id": "L1222",
+  "linea": "Mar 11 06:53:00 web-03 sshd[24069]: Failed none for invalid user jenkins from 198.51.100.77 port 32932 ssh2"
+ },
+ {
+  "_id": "L1223",
+  "linea": "Mar 11 06:53:14 web-03 sshd[23855]: Invalid user admin from 198.51.100.77 port 38395"
+ },
+ {
+  "_id": "L1224",
+  "linea": "Mar 11 06:53:14 web-03 sshd[23855]: Failed none for invalid user admin from 198.51.100.77 port 43922 ssh2"
+ },
+ {
+  "_id": "L1225",
+  "linea": "Mar 11 06:53:17 web-03 sshd[10676]: Invalid user backup from 198.51.100.77 port 30532"
+ },
+ {
+  "_id": "L1226",
+  "linea": "Mar 11 06:53:17 web-03 sshd[10676]: Failed none for invalid user backup from 198.51.100.77 port 60771 ssh2"
+ },
+ {
+  "_id": "L1227",
+  "linea": "Mar 11 07:49:10 web-03 sshd[28620]: Invalid user backup from 198.51.100.33 port 49047"
+ },
+ {
+  "_id": "L1228",
+  "linea": "Mar 11 07:49:10 web-03 sshd[28620]: Failed none for invalid user backup from 198.51.100.33 port 37787 ssh2"
+ },
+ {
+  "_id": "L1229",
+  "linea": "Mar 11 08:25:39 web-03 sshd[25886]: Invalid user test from 198.51.100.33 port 60214"
+ },
+ {
+  "_id": "L1230",
+  "linea": "Mar 11 08:25:39 web-03 sshd[25886]: Failed none for invalid user test from 198.51.100.33 port 46744 ssh2"
+ },
+ {
+  "_id": "L1231",
+  "linea": "Mar 11 08:25:44 web-03 sshd[30188]: Invalid user admin from 198.51.100.33 port 32934"
+ },
+ {
+  "_id": "L1232",
+  "linea": "Mar 11 08:25:44 web-03 sshd[30188]: Failed none for invalid user admin from 198.51.100.33 port 40934 ssh2"
+ },
+ {
+  "_id": "L1233",
+  "linea": "Mar 11 08:25:45 web-03 sshd[19040]: Invalid user admin from 198.51.100.33 port 34132"
+ },
+ {
+  "_id": "L1234",
+  "linea": "Mar 11 08:25:45 web-03 sshd[19040]: Failed none for invalid user admin from 198.51.100.33 port 53261 ssh2"
+ },
+ {
+  "_id": "L1235",
+  "linea": "Mar 11 08:25:55 web-03 sshd[26899]: Invalid user administrador from 198.51.100.33 port 47489"
+ },
+ {
+  "_id": "L1236",
+  "linea": "Mar 11 08:25:55 web-03 sshd[26899]: Failed none for invalid user administrador from 198.51.100.33 port 44024 ssh2"
+ },
+ {
+  "_id": "L1237",
+  "linea": "Mar 11 08:49:59 web-03 sshd[14940]: Invalid user postgres from 203.0.113.165 port 54490"
+ },
+ {
+  "_id": "L1238",
+  "linea": "Mar 11 08:49:59 web-03 sshd[14940]: Failed none for invalid user postgres from 203.0.113.165 port 35208 ssh2"
+ },
+ {
+  "_id": "L1239",
+  "linea": "Mar 11 08:50:19 web-03 sshd[1390]: Invalid user backup from 203.0.113.165 port 44607"
+ },
+ {
+  "_id": "L1240",
+  "linea": "Mar 11 08:50:19 web-03 sshd[1390]: Failed none for invalid user backup from 203.0.113.165 port 45878 ssh2"
+ },
+ {
+  "_id": "L1241",
+  "linea": "Mar 11 08:50:21 web-03 sshd[28556]: Invalid user git from 203.0.113.165 port 58961"
+ },
+ {
+  "_id": "L1242",
+  "linea": "Mar 11 08:50:21 web-03 sshd[28556]: Failed none for invalid user git from 203.0.113.165 port 49543 ssh2"
+ },
+ {
+  "_id": "L1243",
+  "linea": "Mar 11 08:50:44 web-03 sshd[14406]: Invalid user oracle from 203.0.113.165 port 51033"
+ },
+ {
+  "_id": "L1244",
+  "linea": "Mar 11 08:50:44 web-03 sshd[14406]: Failed none for invalid user oracle from 203.0.113.165 port 32262 ssh2"
+ },
+ {
+  "_id": "L1245",
+  "linea": "Mar 11 09:22:52 web-03 sshd[4666]: Invalid user administrador from 181.47.22.6 port 58291"
+ },
+ {
+  "_id": "L1246",
+  "linea": "Mar 11 09:22:52 web-03 sshd[4666]: Failed none for invalid user administrador from 181.47.22.6 port 35940 ssh2"
+ },
+ {
+  "_id": "L1247",
+  "linea": "Mar 11 10:35:20 web-03 sshd[28663]: Invalid user administrador from 203.0.113.165 port 63591"
+ },
+ {
+  "_id": "L1248",
+  "linea": "Mar 11 10:35:20 web-03 sshd[28663]: Failed none for invalid user administrador from 203.0.113.165 port 49883 ssh2"
+ },
+ {
+  "_id": "L1249",
+  "linea": "Mar 11 10:35:40 web-03 sshd[20279]: Invalid user backup from 203.0.113.165 port 59372"
+ },
+ {
+  "_id": "L1250",
+  "linea": "Mar 11 10:35:40 web-03 sshd[20279]: Failed none for invalid user backup from 203.0.113.165 port 59727 ssh2"
+ },
+ {
+  "_id": "L1251",
+  "linea": "Mar 11 10:35:50 web-03 sshd[10099]: Invalid user backup from 203.0.113.165 port 46081"
+ },
+ {
+  "_id": "L1252",
+  "linea": "Mar 11 10:35:50 web-03 sshd[10099]: Failed none for invalid user backup from 203.0.113.165 port 58088 ssh2"
+ },
+ {
+  "_id": "L1253",
+  "linea": "Mar 11 11:00:00 web-03 sshd[21768]: Accepted publickey for deploy from 10.20.4.10 port 37039 ssh2: RSA SHA256:8vN2qLpXeR4kTsYbMwGh"
+ },
+ {
+  "_id": "L1254",
+  "linea": "Mar 11 11:07:54 web-03 sudo[29209]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/tail -n 200 /var/log/api/app.log"
+ },
+ {
+  "_id": "L1255",
+  "linea": "Mar 11 11:16:48 web-03 sudo[13282]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/systemctl restart api"
+ },
+ {
+  "_id": "L1256",
+  "linea": "Mar 11 11:19:18 web-03 sudo[4583]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/tail -n 200 /var/log/api/app.log"
+ },
+ {
+  "_id": "L1257",
+  "linea": "Mar 11 11:21:24 web-03 sudo[29537]: deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/usr/bin/systemctl restart api"
+ },
+ {
+  "_id": "L1258",
+  "linea": "Mar 11 11:21:30 web-03 sshd[29694]: Invalid user ftp from 203.0.113.210 port 35127"
+ },
+ {
+  "_id": "L1259",
+  "linea": "Mar 11 11:21:30 web-03 sshd[29694]: Failed none for invalid user ftp from 203.0.113.210 port 63326 ssh2"
+ },
+ {
+  "_id": "L1260",
+  "linea": "Mar 11 11:21:51 web-03 sshd[26855]: Invalid user administrador from 203.0.113.210 port 50639"
+ },
+ {
+  "_id": "L1261",
+  "linea": "Mar 11 11:21:51 web-03 sshd[26855]: Failed none for invalid user administrador from 203.0.113.210 port 55071 ssh2"
+ },
+ {
+  "_id": "L1262",
+  "linea": "Mar 11 11:22:08 web-03 sshd[27663]: Invalid user jenkins from 203.0.113.210 port 52665"
+ },
+ {
+  "_id": "L1263",
+  "linea": "Mar 11 11:22:08 web-03 sshd[27663]: Failed none for invalid user jenkins from 203.0.113.210 port 32569 ssh2"
+ },
+ {
+  "_id": "L1264",
+  "linea": "Mar 11 11:22:15 web-03 sshd[27937]: Invalid user test from 203.0.113.210 port 56172"
+ },
+ {
+  "_id": "L1265",
+  "linea": "Mar 11 11:22:15 web-03 sshd[27937]: Failed none for invalid user test from 203.0.113.210 port 53882 ssh2"
+ },
+ {
+  "_id": "L1266",
+  "linea": "Mar 11 11:33:24 web-03 sshd[21768]: Disconnected from user deploy 10.20.4.10"
+ },
+ {
+  "_id": "L1267",
+  "linea": "Mar 11 11:48:27 web-03 sshd[8221]: Invalid user postgres from 198.51.100.77 port 39635"
+ },
+ {
+  "_id": "L1268",
+  "linea": "Mar 11 11:48:27 web-03 sshd[8221]: Failed none for invalid user postgres from 198.51.100.77 port 45850 ssh2"
+ },
+ {
+  "_id": "L1269",
+  "linea": "Mar 11 14:44:27 web-03 sshd[25246]: Invalid user test from 198.51.100.77 port 42223"
+ },
+ {
+  "_id": "L1270",
+  "linea": "Mar 11 14:44:27 web-03 sshd[25246]: Failed none for invalid user test from 198.51.100.77 port 59662 ssh2"
+ },
+ {
+  "_id": "L1271",
+  "linea": "Mar 11 15:18:50 web-03 sshd[8522]: Invalid user git from 192.0.2.15 port 33656"
+ },
+ {
+  "_id": "L1272",
+  "linea": "Mar 11 15:18:50 web-03 sshd[8522]: Failed none for invalid user git from 192.0.2.15 port 38899 ssh2"
+ },
+ {
+  "_id": "L1273",
+  "linea": "Mar 11 15:18:58 web-03 sshd[18085]: Invalid user ftp from 192.0.2.15 port 40244"
+ },
+ {
+  "_id": "L1274",
+  "linea": "Mar 11 15:18:58 web-03 sshd[18085]: Failed none for invalid user ftp from 192.0.2.15 port 39398 ssh2"
+ },
+ {
+  "_id": "L1275",
+  "linea": "Mar 11 15:19:16 web-03 sshd[26181]: Invalid user test from 192.0.2.15 port 52699"
+ },
+ {
+  "_id": "L1276",
+  "linea": "Mar 11 15:19:16 web-03 sshd[26181]: Failed none for invalid user test from 192.0.2.15 port 64392 ssh2"
+ },
+ {
+  "_id": "L1277",
+  "linea": "Mar 11 15:41:11 web-03 sshd[21926]: Invalid user admin from 192.0.2.88 port 64450"
+ },
+ {
+  "_id": "L1278",
+  "linea": "Mar 11 15:41:11 web-03 sshd[21926]: Failed none for invalid user admin from 192.0.2.88 port 54478 ssh2"
+ },
+ {
+  "_id": "L1279",
+  "linea": "Mar 11 15:41:27 web-03 sshd[1578]: Invalid user backup from 192.0.2.88 port 56436"
+ },
+ {
+  "_id": "L1280",
+  "linea": "Mar 11 15:41:27 web-03 sshd[1578]: Failed none for invalid user backup from 192.0.2.88 port 34528 ssh2"
+ },
+ {
+  "_id": "L1281",
+  "linea": "Mar 11 15:41:40 web-03 sshd[8629]: Invalid user admin from 192.0.2.88 port 49098"
+ },
+ {
+  "_id": "L1282",
+  "linea": "Mar 11 15:41:40 web-03 sshd[8629]: Failed none for invalid user admin from 192.0.2.88 port 30332 ssh2"
+ },
+ {
+  "_id": "L1283",
+  "linea": "Mar 11 16:18:53 web-03 sshd[5263]: Invalid user administrador from 192.0.2.200 port 49536"
+ },
+ {
+  "_id": "L1284",
+  "linea": "Mar 11 16:18:53 web-03 sshd[5263]: Failed none for invalid user administrador from 192.0.2.200 port 48572 ssh2"
+ },
+ {
+  "_id": "L1285",
+  "linea": "Mar 11 17:42:52 web-03 sshd[10641]: Invalid user oracle from 198.51.100.143 port 32473"
+ },
+ {
+  "_id": "L1286",
+  "linea": "Mar 11 17:42:52 web-03 sshd[10641]: Failed none for invalid user oracle from 198.51.100.143 port 63033 ssh2"
+ },
+ {
+  "_id": "L1287",
+  "linea": "Mar 11 18:10:05 web-03 sshd[13116]: Invalid user admin from 181.47.22.6 port 36149"
+ },
+ {
+  "_id": "L1288",
+  "linea": "Mar 11 18:10:05 web-03 sshd[13116]: Failed none for invalid user admin from 181.47.22.6 port 36535 ssh2"
+ },
+ {
+  "_id": "L1289",
+  "linea": "Mar 11 18:10:14 web-03 sshd[28772]: Invalid user admin from 181.47.22.6 port 30361"
+ },
+ {
+  "_id": "L1290",
+  "linea": "Mar 11 18:10:14 web-03 sshd[28772]: Failed none for invalid user admin from 181.47.22.6 port 51609 ssh2"
+ },
+ {
+  "_id": "L1291",
+  "linea": "Mar 11 18:10:36 web-03 sshd[1231]: Invalid user backup from 181.47.22.6 port 43275"
+ },
+ {
+  "_id": "L1292",
+  "linea": "Mar 11 18:10:36 web-03 sshd[1231]: Failed none for invalid user backup from 181.47.22.6 port 36491 ssh2"
+ },
+ {
+  "_id": "L1293",
+  "linea": "Mar 11 18:10:42 web-03 sshd[12503]: Invalid user ftp from 181.47.22.6 port 61552"
+ },
+ {
+  "_id": "L1294",
+  "linea": "Mar 11 18:10:42 web-03 sshd[12503]: Failed none for invalid user ftp from 181.47.22.6 port 52959 ssh2"
+ },
+ {
+  "_id": "L1295",
+  "linea": "Mar 11 18:33:43 web-03 sshd[29312]: Invalid user test from 200.45.10.18 port 54893"
+ },
+ {
+  "_id": "L1296",
+  "linea": "Mar 11 18:33:43 web-03 sshd[29312]: Failed none for invalid user test from 200.45.10.18 port 41886 ssh2"
+ },
+ {
+  "_id": "L1297",
+  "linea": "Mar 11 18:33:46 web-03 sshd[1124]: Invalid user ftp from 200.45.10.18 port 35892"
+ },
+ {
+  "_id": "L1298",
+  "linea": "Mar 11 18:33:46 web-03 sshd[1124]: Failed none for invalid user ftp from 200.45.10.18 port 48235 ssh2"
+ },
+ {
+  "_id": "L1299",
+  "linea": "Mar 11 18:33:52 web-03 sshd[10470]: Invalid user test from 200.45.10.18 port 50251"
+ },
+ {
+  "_id": "L1300",
+  "linea": "Mar 11 18:33:52 web-03 sshd[10470]: Failed none for invalid user test from 200.45.10.18 port 42655 ssh2"
+ },
+ {
+  "_id": "L1301",
+  "linea": "Mar 11 18:34:14 web-03 sshd[28245]: Invalid user test from 200.45.10.18 port 48313"
+ },
+ {
+  "_id": "L1302",
+  "linea": "Mar 11 18:34:14 web-03 sshd[28245]: Failed none for invalid user test from 200.45.10.18 port 52614 ssh2"
+ },
+ {
+  "_id": "L1303",
+  "linea": "Mar 11 18:57:04 web-03 sshd[18852]: Failed password for deploy from 203.0.113.7 port 51658 ssh2"
+ },
+ {
+  "_id": "L1304",
+  "linea": "Mar 11 18:57:05 web-03 sshd[14442]: Invalid user backup from 203.0.113.7 port 41272"
+ },
+ {
+  "_id": "L1305",
+  "linea": "Mar 11 18:57:05 web-03 sshd[14442]: Failed none for invalid user backup from 203.0.113.7 port 58743 ssh2"
+ },
+ {
+  "_id": "L1306",
+  "linea": "Mar 11 18:57:27 web-03 sshd[24903]: Invalid user admin from 203.0.113.7 port 64825"
+ },
+ {
+  "_id": "L1307",
+  "linea": "Mar 11 18:57:27 web-03 sshd[24903]: Failed none for invalid user admin from 203.0.113.7 port 36422 ssh2"
+ },
+ {
+  "_id": "L1308",
+  "linea": "Mar 11 18:57:30 web-03 sshd[13837]: Invalid user postgres from 203.0.113.7 port 47104"
+ },
+ {
+  "_id": "L1309",
+  "linea": "Mar 11 18:57:30 web-03 sshd[13837]: Failed none for invalid user postgres from 203.0.113.7 port 34793 ssh2"
+ },
+ {
+  "_id": "L1310",
+  "linea": "Mar 11 20:22:20 web-03 sshd[21362]: Invalid user admin from 203.0.113.44 port 62980"
+ },
+ {
+  "_id": "L1311",
+  "linea": "Mar 11 20:22:20 web-03 sshd[21362]: Failed none for invalid user admin from 203.0.113.44 port 30201 ssh2"
+ },
+ {
+  "_id": "L1312",
+  "linea": "Mar 11 20:22:28 web-03 sshd[9597]: Invalid user admin from 203.0.113.44 port 53441"
+ },
+ {
+  "_id": "L1313",
+  "linea": "Mar 11 20:22:28 web-03 sshd[9597]: Failed none for invalid user admin from 203.0.113.44 port 62251 ssh2"
+ },
+ {
+  "_id": "L1314",
+  "linea": "Mar 11 20:22:51 web-03 sshd[9455]: Invalid user administrador from 203.0.113.44 port 63961"
+ },
+ {
+  "_id": "L1315",
+  "linea": "Mar 11 20:22:51 web-03 sshd[9455]: Failed none for invalid user administrador from 203.0.113.44 port 33650 ssh2"
+ },
+ {
+  "_id": "L1316",
+  "linea": "Mar 11 20:22:56 web-03 sshd[3405]: Invalid user postgres from 203.0.113.44 port 45540"
+ },
+ {
+  "_id": "L1317",
+  "linea": "Mar 11 20:22:56 web-03 sshd[3405]: Failed none for invalid user postgres from 203.0.113.44 port 45093 ssh2"
+ }
+]

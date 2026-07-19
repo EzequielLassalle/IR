@@ -1,0 +1,28 @@
+{
+ "linea_base": {
+  "windows.json": "d0ddf530e90f725db0a5d9701a9f3f5124883443a809136e7109b4b8360c7975",
+  "cloudtrail.json": "46e8c04e4a4b7aa2f718e146412d7448c06db1bbb31eb73b77570e4e18177d3e",
+  "syslog.json": "c1fa2c87806f5a62ab4e8b8bc43061f8bb94ac33a71b3b7c248532219405d2f6"
+ },
+ "asientos": [
+  {
+   "momento": "2026-07-18T22:56:45Z",
+   "actor": "generador",
+   "accion": "sellado",
+   "detalle": "Linea base establecida sobre 3 fuentes.",
+   "hashes": {
+    "windows.json": "d0ddf530e90f725db0a5d9701a9f3f5124883443a809136e7109b4b8360c7975",
+    "cloudtrail.json": "46e8c04e4a4b7aa2f718e146412d7448c06db1bbb31eb73b77570e4e18177d3e",
+    "syslog.json": "c1fa2c87806f5a62ab4e8b8bc43061f8bb94ac33a71b3b7c248532219405d2f6"
+   }
+  },
+  {
+   "momento": "2026-07-18T22:56:45Z",
+   "actor": "ezequiel",
+   "accion": "adquisicion",
+   "detalle": "Recoleccion de las tres fuentes del caso.",
+   "hashes": {}
+  }
+ ],
+ "decisiones": []
+}
