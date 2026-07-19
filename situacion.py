@@ -122,7 +122,7 @@ def huecos(eventos: list[Evento], sit: Situacion, desde: str, hasta: str) -> lis
                 out.append(Entrada(
                     DESCONOCIDO, f"{fuente}: '{accion}' sin hechos establecidos",
                     motivo="la fuente cubre la ventana y registra esta accion: si hubo "
-                           "algo, esta en la evidencia y nadie lo estableció"))
+                           "algo, esta en la evidencia y nadie lo establecio"))
     return out
 
 

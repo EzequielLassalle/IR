@@ -12,7 +12,7 @@ python main.py entidad <ind>    todo lo que menciona un indicador
 python main.py contar --por ip  agregación sobre lo filtrado
 python main.py base             qué hay en la ventana que no había antes
 python main.py barrido --medir  el detector determinista y su medición
-python main.py custodia         integridad y cadena de custodia
+python main.py respuesta        que acciones ya se aplicaron
 python main.py cobertura        qué se recolectó y qué no
 python main.py observable       si un hecho habría sido visible
 
@@ -21,7 +21,7 @@ python main.py recomendacion    qué acciones están fundadas ahora, y de qué d
 python main.py situacion <arch> hechos, indicios y lo que quedó sin establecer
 python main.py cronologia       las decisiones tomadas y con qué se sabía
 python main.py casos            el catálogo · suite de regresión
-python main.py test             las 35.085 verificaciones
+python main.py test             las 35.093 verificaciones
 ```
 
 El diseño completo —decisiones, descartes y etapas pendientes— está en `DISENO.md`.
@@ -105,7 +105,7 @@ porque el generador dejó una firma.
 
 ## Los invariantes
 
-`tests.py` corre **33.220 verificaciones** sobre la evidencia. La mitad son invariantes del
+`tests.py` corre **35.093 verificaciones** sobre la evidencia. La mitad son invariantes del
 generador —todo 4634 tiene su 4624, ninguna cuenta actúa antes de su 4720, el sello local de
 syslog corresponde al instante real— y la otra mitad verifica que el escenario siga siendo
 un ejercicio: que el ataque sea minoría, que las tres fuentes participen, que haya línea base
@@ -169,7 +169,7 @@ menos eventos, sí.
 
 Construido: generador con invariantes, normalización temporal, consulta, línea base,
 detector determinista con medición, verificador de citas, cobertura de tres valores,
-integridad y custodia, catálogo de acciones con adjudicación, recomendación, situación,
+catálogo de acciones con adjudicación, recomendación, situación,
 cronología y los ocho casos.
 
 **Pendiente:** correr los agentes de investigación contra el escenario. El arnés está escrito
@@ -188,9 +188,9 @@ todavía**, así que hoy la parte agéntica no está respaldada por ningún núm
 | `consulta.py` | Filtrar, contar, pivotear, línea base. |
 | `deteccion.py` | Las ocho reglas y la medición contra la verdad. |
 | `cobertura.py` | Qué se recolectó y qué no. Observabilidad de tres valores. |
-| `custodia.py` | Integridad, cadena de custodia y cronología de decisiones. |
+| `decisiones.py` | Cronología de decisiones, y el estado de la respuesta derivado de ella. |
 | `verificador.py` | Citas, vocabulario cerrado y afirmaciones de ausencia. |
 | `acciones.py` | Catálogo, adjudicación y recomendación. |
 | `situacion.py` | Hechos, indicios y lo que quedó sin establecer. |
 | `casos.py` | Los ocho casos. |
-| `tests.py` | 35.085 verificaciones. Runner propio. |
+| `tests.py` | 35.093 verificaciones. Runner propio. |

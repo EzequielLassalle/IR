@@ -1,0 +1,178 @@
+{
+ "_nota": [
+  "Banco de prueba del verificador. NO son hallazgos del caso: son afirmaciones escritas a",
+  "mano para ejercitar cada forma de rechazo, y la mayoria son deliberadamente falsas.",
+  "",
+  "Las interesantes son las que citan eventos REALES y describen algo que esos eventos no",
+  "dicen. A simple vista se ven impecables -- identificadores validos, prosa razonable -- y",
+  "son exactamente el modo de falla que hace falta atrapar: un agente que cita bien y",
+  "concluye mal. Si el verificador no rechaza esas, no sirve para nada.",
+  "",
+  "Cada entrada declara el veredicto que se espera, y tests.py verifica que coincida."
+ ],
+ "hallazgos": [
+  {
+   "regla": "acceso_remoto_confirmado",
+   "espera": "VERIFICADO",
+   "porque": "afirmacion correcta, cita correcta, ventana correcta",
+   "afirmacion": {
+    "sujeto": "ecarrizo",
+    "accion": "autentico-remoto",
+    "objeto": "WKS-04",
+    "desde": "2026-03-10T00:00:00Z",
+    "hasta": "2026-03-10T01:00:00Z"
+   },
+   "resumen": "La cuenta WKS-04\\ecarrizo autentico por escritorio remoto.",
+   "cita": ["W1497"],
+   "no_prueba": "El veredicto habla de la cuenta, no de la persona que la uso."
+  },
+  {
+   "regla": "atribucion_a_persona",
+   "espera": "FUERA-DE-VOCABULARIO",
+   "porque": "el sujeto no es observable: la cita es real y el termino no",
+   "afirmacion": {
+    "sujeto": "el atacante",
+    "accion": "autentico-remoto",
+    "objeto": "WKS-04",
+    "desde": "2026-03-10T00:00:00Z",
+    "hasta": "2026-03-10T01:00:00Z"
+   },
+   "resumen": "El atacante accedio por RDP a la estacion.",
+   "cita": ["W1497"],
+   "no_prueba": "-"
+  },
+  {
+   "regla": "categoria_de_comportamiento",
+   "espera": "FUERA-DE-VOCABULARIO",
+   "porque": "'movimiento-lateral' es una inferencia sobre un patron, no un evento",
+   "afirmacion": {
+    "sujeto": "ecarrizo",
+    "accion": "movimiento-lateral",
+    "objeto": "web-03",
+    "desde": "2026-03-09T00:00:00Z",
+    "hasta": "2026-03-11T00:00:00Z"
+   },
+   "resumen": "La cuenta ecarrizo se movio lateralmente hacia web-03.",
+   "cita": ["W1497", "W1507"],
+   "no_prueba": "-"
+  },
+  {
+   "regla": "accion_inventada",
+   "espera": "FUERA-DE-VOCABULARIO",
+   "porque": "la accion no pertenece al vocabulario cerrado",
+   "afirmacion": {
+    "sujeto": "ecarrizo",
+    "accion": "descargo-archivos",
+    "objeto": "respaldos-bancoxyz",
+    "desde": "2026-03-09T00:00:00Z",
+    "hasta": "2026-03-11T00:00:00Z"
+   },
+   "resumen": "La cuenta ecarrizo descargo archivos del bucket de respaldos.",
+   "cita": ["C2599"],
+   "no_prueba": "-"
+  },
+  {
+   "regla": "cita_fabricada",
+   "espera": "CITA-INEXISTENTE",
+   "porque": "los identificadores no existen en la evidencia",
+   "afirmacion": {
+    "sujeto": "ecarrizo",
+    "accion": "autentico-remoto",
+    "objeto": "WKS-04",
+    "desde": "2026-03-10T00:00:00Z",
+    "hasta": "2026-03-10T01:00:00Z"
+   },
+   "resumen": "Acceso remoto sostenido por eventos que el agente invento.",
+   "cita": ["W9999", "C8888"],
+   "no_prueba": "-"
+  },
+  {
+   "regla": "sujeto_equivocado",
+   "espera": "CITA-NO-SOSTIENE",
+   "porque": "W1497 existe y es real, pero su sujeto es ecarrizo y no mlopez",
+   "afirmacion": {
+    "sujeto": "mlopez",
+    "accion": "autentico-remoto",
+    "objeto": "WKS-04",
+    "desde": "2026-03-10T00:00:00Z",
+    "hasta": "2026-03-10T01:00:00Z"
+   },
+   "resumen": "La cuenta mlopez accedio por escritorio remoto a la estacion.",
+   "cita": ["W1497"],
+   "no_prueba": "-"
+  },
+  {
+   "regla": "accion_equivocada",
+   "espera": "CITA-NO-SOSTIENE",
+   "porque": "W1497 es una autenticacion, no una ejecucion de proceso",
+   "afirmacion": {
+    "sujeto": "ecarrizo",
+    "accion": "ejecuto-proceso",
+    "objeto": "powershell.exe",
+    "desde": "2026-03-10T00:00:00Z",
+    "hasta": "2026-03-10T01:00:00Z"
+   },
+   "resumen": "La cuenta ecarrizo ejecuto PowerShell.",
+   "cita": ["W1497"],
+   "no_prueba": "-"
+  },
+  {
+   "regla": "ventana_equivocada",
+   "espera": "CITA-NO-SOSTIENE",
+   "porque": "el evento es del 10 de marzo y la ventana declarada es del 5",
+   "afirmacion": {
+    "sujeto": "ecarrizo",
+    "accion": "autentico-remoto",
+    "objeto": "WKS-04",
+    "desde": "2026-03-05T00:00:00Z",
+    "hasta": "2026-03-05T23:59:59Z"
+   },
+   "resumen": "El acceso remoto ocurrio el 5 de marzo.",
+   "cita": ["W1497"],
+   "no_prueba": "-"
+  },
+  {
+   "regla": "sin_respaldo",
+   "espera": "SIN-CITA",
+   "porque": "un hallazgo sin cita no es verificable",
+   "afirmacion": {
+    "sujeto": "AKIA3TBWMZ8FLQDNRV6H",
+    "accion": "llamo-api",
+    "objeto": "iam:CreateAccessKey",
+    "desde": "2026-03-10T00:00:00Z",
+    "hasta": "2026-03-10T03:00:00Z"
+   },
+   "resumen": "Se creo una access key, pero el agente no dijo con que evento.",
+   "cita": [],
+   "no_prueba": "-"
+  },
+  {
+   "regla": "cita_mixta",
+   "espera": "VERIFICADO",
+   "porque": "una cita sostiene y la otra no: el hallazgo entra, con la mala senialada",
+   "afirmacion": {
+    "sujeto": "AKIA3TBWMZ8FLQDNRV6H",
+    "accion": "llamo-api",
+    "objeto": "iam:CreateAccessKey",
+    "desde": "2026-03-10T00:00:00Z",
+    "hasta": "2026-03-10T03:00:00Z"
+   },
+   "resumen": "Creacion de access key, citando ademas la del admin del dia 5.",
+   "cita": ["C2599", "C1106"],
+   "no_prueba": "Crear keys es una operacion administrativa habitual."
+  },
+  {
+   "regla": "afirmacion_incompleta",
+   "espera": "FUERA-DE-VOCABULARIO",
+   "porque": "falta la ventana, que es obligatoria: sin acotar no es falsable",
+   "afirmacion": {
+    "sujeto": "ecarrizo",
+    "accion": "autentico-remoto",
+    "objeto": "WKS-04"
+   },
+   "resumen": "Hubo un acceso remoto en algun momento.",
+   "cita": ["W1497"],
+   "no_prueba": "-"
+  }
+ ]
+}

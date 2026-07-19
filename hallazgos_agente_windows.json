@@ -1,0 +1,66 @@
+{"hallazgos": [
+  {
+   "regla": "enumeracion_cuentas_inexistentes_ip_externa",
+   "severidad": "MEDIA",
+   "afirmacion": {"sujeto": "WKS-04\\administrador", "accion": "fallo-usuario-inexistente", "objeto": "WKS-04", "desde": "2026-03-09T23:10:00Z", "hasta": "2026-03-09T23:13:00Z"},
+   "resumen": "Desde 198.51.100.77 se probaron cuatro nombres de cuenta que no existen en WKS-04 (administrador, backup, deploy, test) por logon type 3, todos con SubStatus 0xC0000064, en 104 segundos.",
+   "cita": ["W1483", "W1484", "W1485", "W1486"],
+   "no_prueba": "No prueba que el origen conociera el entorno: probar nombres genericos inexistentes indica lista prearmada, no reconocimiento previo de WKS-04. Tampoco prueba quien opera la IP."
+  },
+  {
+   "regla": "spray_contra_cuentas_validas_ip_externa",
+   "severidad": "ALTA",
+   "afirmacion": {"sujeto": "WKS-04\\ecarrizo", "accion": "fallo-autenticacion", "objeto": "WKS-04", "desde": "2026-03-09T23:12:00Z", "hasta": "2026-03-09T23:19:00Z"},
+   "resumen": "La misma IP 198.51.100.77 siguio con siete cuentas que SI existen (ecarrizo, mlopez, jperez, rgomez, avarela, dsosa, temporal), un intento por cuenta, en 334 segundos: patron de spray horizontal, no de fuerza bruta vertical.",
+   "cita": ["W1487", "W1488", "W1489", "W1490", "W1491", "W1492", "W1493"],
+   "no_prueba": "No prueba que alguno de esos intentos haya acertado la contrasena: son todos 4625. W1493 (temporal) devolvio 0xC0000072, cuenta existente pero deshabilitada, lo que revela la cuenta al origen pero no le da acceso."
+  },
+  {
+   "regla": "rdp_exitoso_ecarrizo_desde_ip_externa",
+   "severidad": "ALTA",
+   "afirmacion": {"sujeto": "WKS-04\\ecarrizo", "accion": "autentico-remoto", "objeto": "WKS-04", "desde": "2026-03-10T00:16:39Z", "hasta": "2026-03-10T00:23:22Z"},
+   "resumen": "Una hora despues del spray, ecarrizo autentica con exito por RDP (4624 logon type 10, logon_id 0x1A2FEC) desde la misma IP externa 198.51.100.77, unica autenticacion remota exitosa de ese usuario en toda la ventana.",
+   "cita": ["W1497"],
+   "no_prueba": "No prueba que la credencial se haya obtenido en el spray de W1487: entre W1487 y W1497 hay una hora sin eventos que expliquen el acierto, y el origen de la contrasena es indecidible con esta fuente. Tampoco prueba que ecarrizo no haya iniciado la sesion el mismo."
+  },
+  {
+   "regla": "reconocimiento_local_en_sesion_rdp_ecarrizo",
+   "severidad": "ALTA",
+   "afirmacion": {"sujeto": "WKS-04\\ecarrizo", "accion": "ejecuto-proceso", "objeto": "whoami.exe", "desde": "2026-03-10T00:21:00Z", "hasta": "2026-03-10T00:31:00Z"},
+   "resumen": "Dentro del mismo logon_id 0x1A2FEC se ejecutaron en diez minutos whoami.exe, net.exe, net1.exe, tasklist.exe, findstr.exe, nltest.exe, reg.exe y powershell.exe, ocho binarios que no aparecen ni una vez en los 1954 eventos de windows previos.",
+   "cita": ["W1498", "W1499", "W1500", "W1501", "W1502", "W1503", "W1504", "W1505"],
+   "no_prueba": "No prueba QUE hizo cada proceso ni contra que objetivo: la carencia 4688_command_line deja los argumentos indeterminados, no falsos. La ejecucion de powershell.exe no prueba descarga ni ejecucion de codigo remoto."
+  },
+  {
+   "regla": "creacion_cuenta_local_soporte_it",
+   "severidad": "ALTA",
+   "afirmacion": {"sujeto": "WKS-04\\ecarrizo", "accion": "creo-cuenta", "objeto": "soporte_it", "desde": "2026-03-10T00:31:03Z", "hasta": "2026-03-10T00:37:46Z"},
+   "resumen": "Cuatro minutos despues del reconocimiento y bajo el mismo logon_id 0x1A2FEC, la sesion RDP creo la cuenta local soporte_it (4720), unico 4720 de toda la ventana en las tres fuentes.",
+   "cita": ["W1507"],
+   "no_prueba": "No prueba que la cuenta haya recibido privilegios administrativos: no hay 4732 ni 4728 en la evidencia recolectada. Tampoco prueba que ecarrizo como persona haya ejecutado la creacion; solo que se hizo con su token de sesion."
+  },
+  {
+   "regla": "rdp_de_la_cuenta_recien_creada",
+   "severidad": "ALTA",
+   "afirmacion": {"sujeto": "WKS-04\\soporte_it", "accion": "autentico-remoto", "objeto": "WKS-04", "desde": "2026-03-10T03:01:44Z", "hasta": "2026-03-10T03:08:17Z"},
+   "resumen": "Dos horas y media despues de ser creada, soporte_it autentica por RDP (logon type 10, logon_id 0x1A2FF9) desde la misma IP externa 198.51.100.77 que uso la sesion que la creo.",
+   "cita": ["W1515"],
+   "no_prueba": "No prueba persistencia lograda mas alla de esta sesion: soporte_it no vuelve a aparecer despues de las 04:11 del 10-03, y la evidencia llega hasta el 12-03."
+  },
+  {
+   "regla": "actividad_de_persistencia_en_sesion_soporte_it",
+   "severidad": "ALTA",
+   "afirmacion": {"sujeto": "WKS-04\\soporte_it", "accion": "ejecuto-proceso", "objeto": "schtasks.exe", "desde": "2026-03-10T04:00:00Z", "hasta": "2026-03-10T04:12:00Z"},
+   "resumen": "Bajo el logon_id 0x1A2FF9 la cuenta creada ejecuto net.exe, schtasks.exe y sc.exe en once minutos: binarios de manipulacion de cuentas, tareas programadas y servicios, ninguno visto antes en la fuente.",
+   "cita": ["W1518", "W1519", "W1520"],
+   "no_prueba": "No prueba que se haya creado una tarea programada ni un servicio: sin CommandLine no se distingue schtasks /create de schtasks /query. La afirmacion sobre persistencia efectiva es indeterminada, no falsa."
+  },
+  {
+   "regla": "descarte_svc_backup_error_de_configuracion",
+   "severidad": "BAJA",
+   "afirmacion": {"sujeto": "WKS-04\\svc_backup", "accion": "fallo-autenticacion", "objeto": "WKS-04", "desde": "2026-03-02T06:22:00Z", "hasta": "2026-03-11T23:40:00Z"},
+   "resumen": "Los 648 fallos de svc_backup, el 33% de la fuente, son error de configuracion y no ataque: 648/648 con SubStatus 0xC000006A desde una unica IP interna 10.20.4.201, distribucion uniforme en las 24 horas y en los 10 dias (~65/dia, uno cada ~22 min), sin un solo exito y ya en curso en el primer evento del log.",
+   "cita": ["W0001", "W0002", "W0003", "W0004", "W0005", "W0006", "W0007", "W0008", "W0009", "W1954"],
+   "no_prueba": "No prueba que la cuenta este intacta: una credencial vencida en una tarea programada y una credencial rotada por un tercero producen la misma firma. Se citan 10 de 648 eventos como muestra representativa; el patron se sostiene en el conteo agregado, no en esta enumeracion."
+  }
+]}

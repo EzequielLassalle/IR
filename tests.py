@@ -516,6 +516,42 @@ def test_la_evidencia_solo_se_acumula(fuentes, verdad) -> None:
                               f"{fundada_en} y dio '{v.veredicto}' en {momento}")
 
 
+def test_el_recomendador_discrimina_el_ataque(fuentes, verdad) -> None:
+    """Falsificacion: recomendar sobre una ventana ANTERIOR al incidente.
+
+    Es el test que faltaba, y su ausencia dejo pasar el defecto central del proyecto: la
+    primera version de `recomendar()` era `adjudicar()` en un bucle sobre el inventario, y
+    proponia nueve acciones de contencion sobre una ventana donde el ataque todavia no
+    habia ocurrido. Los ocho casos del catalogo pasaban en verde igual, porque los ocho
+    prueban el adjudicador.
+
+    **Un recomendador cuya salida es invariante a que el ataque haya pasado no esta
+    recomendando.** Este test lo mide comparando las dos ventanas, y no hay forma de
+    pasarlo listando el inventario.
+    """
+    from acciones import recomendar
+    from eventos import cargar as cargar_eventos
+
+    eventos = cargar_eventos()
+    limpia = recomendar(eventos, "2026-03-06T00:00:00Z",
+                        "2026-03-02T00:00:00Z", "2026-03-06T00:00:00Z")
+    incidente = recomendar(eventos, "2026-03-10T04:00:00Z",
+                           "2026-03-09T20:00:00Z", "2026-03-10T04:00:00Z")
+
+    verificar(len(incidente) >= 6,
+              f"sobre la ventana del incidente solo propone {len(incidente)} acciones")
+    verificar(len(limpia) * 2 < len(incidente),
+              f"propone {len(limpia)} acciones antes del ataque contra {len(incidente)} "
+              f"durante: la salida es casi invariante al incidente")
+
+    # Toda recomendacion tiene que poder decir que hallazgo trajo a esa entidad. Sin eso
+    # vuelve a ser inventario cruzado con verbos.
+    for r in incidente:
+        verificar(bool(r.senialado_por),
+                  f"la recomendacion {r.accion.nombre} sobre "
+                  f"{r.veredicto.objetivo} no declara que hallazgo la seniala")
+
+
 def test_la_recomendacion_solo_propone_fundadas(fuentes, verdad) -> None:
     """Proponer una accion sin fundamento es lo que hace que un operador deje de leer las
     recomendaciones. Barrido sobre todo lo que devuelve el motor."""

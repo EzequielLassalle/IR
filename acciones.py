@@ -258,7 +258,7 @@ def _menciona_objetivo(eventos: list[Evento], objetivo: str, tipo: str) -> bool:
 
 
 def adjudicar(accion: str, objetivo: str, eventos: list[Evento],
-              en: str, desde: str, hasta: str) -> Veredicto:
+              en: str, desde: str, hasta: str, evid=None) -> Veredicto:
     """¿Esta accion esta fundada en lo que la evidencia sostenia en el instante `en`?
 
     La evidencia se acota a lo anterior a `en`. Adjudicar contra evidencia posterior a la
@@ -274,6 +274,15 @@ def adjudicar(accion: str, objetivo: str, eventos: list[Evento],
         return Veredicto(accion, objetivo, INAPLICABLE,
                          f"'{objetivo}' no aparece en la evidencia: no hay nada sobre lo "
                          f"que actuar")
+
+    # Estado de la respuesta: una accion ya tomada no se vuelve a tomar. Es la otra mitad
+    # de INAPLICABLE, la que su definicion prometia ("o ya esta en ese estado") y que antes
+    # nunca podia devolver porque ejecutar no cambiaba nada.
+    if evid is not None:
+        import decisiones
+        aplicada, motivo = decisiones.ya_aplicada(evid, accion, objetivo, en)
+        if aplicada:
+            return Veredicto(accion, objetivo, INAPLICABLE, motivo)
 
     sostienen: dict[str, list[str]] = {}
     faltan: list[str] = []
@@ -444,7 +453,7 @@ def objetivos_sospechosos(eventos: list[Evento], hallazgos, tipo: str,
 
 
 def recomendar(eventos: list[Evento], en: str, desde: str, hasta: str,
-               hallazgos=None, severidades=("ALTA",)) -> list[Recomendacion]:
+               hallazgos=None, severidades=("ALTA",), evid=None) -> list[Recomendacion]:
     """Que acciones corresponden ahora, con su fundamento y su condicion de falsedad.
 
     **Dos condiciones, y hacen falta las dos.** La entidad tiene que estar senialada por un
@@ -465,7 +474,7 @@ def recomendar(eventos: list[Evento], en: str, desde: str, hasta: str,
         sospechosos = objetivos_sospechosos(eventos, hallazgos, acc.tipo_objetivo,
                                             desde, hasta, severidades)
         for objetivo, reglas in sorted(sospechosos.items()):
-            v = adjudicar(acc.nombre, objetivo, eventos, en, desde, hasta)
+            v = adjudicar(acc.nombre, objetivo, eventos, en, desde, hasta, evid)
             if v.fundada:
                 out.append(Recomendacion(v, acc, senialado_por=reglas))
     return sorted(out, key=lambda r: r.orden)

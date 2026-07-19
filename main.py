@@ -9,7 +9,7 @@
     python main.py base               linea base: que hay en la ventana que no habia antes
     python main.py barrido            el detector deterministico y su medicion
     python main.py verdad             la verdad del escenario (revela el caso)
-    python main.py custodia           integridad y cadena de custodia
+    python main.py respuesta          que acciones ya se aplicaron
     python main.py cobertura          que se recolecto y que no
     python main.py observable <a> <o> si un hecho habria sido visible
     python main.py verificar <arch>   verifica un archivo de hallazgos
@@ -252,9 +252,10 @@ def cmd_verdad(args) -> int:
     return 0
 
 
-def cmd_custodia(args) -> int:
-    import custodia
-    for linea in custodia.resumen(_evid(args)):
+def cmd_respuesta(args) -> int:
+    import decisiones
+    _seccion("ESTADO DE LA RESPUESTA")
+    for linea in decisiones.resumen_estado(_evid(args)):
         print(linea)
     return 0
 
@@ -301,7 +302,7 @@ def cmd_verificar(args) -> int:
 
 
 def cmd_accion(args) -> int:
-    import custodia
+    import decisiones
     from acciones import CATALOGO, adjudicar
 
     if args.accion not in CATALOGO:
@@ -313,7 +314,7 @@ def cmd_accion(args) -> int:
         return 0
 
     v = adjudicar(args.accion, args.objetivo, cargar(_evid(args)),
-                  args.en, args.desde, args.hasta)
+                  args.en, args.desde, args.hasta, _evid(args))
     a = CATALOGO[args.accion]
 
     _seccion("ACCION")
@@ -333,8 +334,8 @@ def cmd_accion(args) -> int:
 
     if args.registrar:
         citas = sorted({c for l in v.sostienen.values() for c in l})
-        custodia.registrar_decision(_evid(args), args.registrar, a.nombre, args.objetivo,
-                                    args.en, v.veredicto, v.motivo, citas, a.costo)
+        decisiones.registrar(_evid(args), args.registrar, a.nombre, args.objetivo,
+                             args.en, v.veredicto, v.motivo, citas, a.costo)
         print(f"\n  Registrada en la cronologia por '{args.registrar}'.")
     return 0
 
@@ -342,7 +343,8 @@ def cmd_accion(args) -> int:
 def cmd_recomendacion(args) -> int:
     from acciones import recomendar
 
-    rs = recomendar(cargar(_evid(args)), args.en, args.desde, args.hasta)
+    rs = recomendar(cargar(_evid(args)), args.en, args.desde, args.hasta,
+                    evid=_evid(args))
     _seccion(f"RECOMENDACION  ({len(rs)} acciones fundadas al {args.en})")
     print("  Ordenadas por lo que preservan y por costo. Solo se proponen las FUNDADAS:")
     print("  una accion sin fundamento no se sugiere 'por las dudas'.\n")
@@ -362,9 +364,9 @@ def cmd_situacion(args) -> int:
 
 
 def cmd_cronologia(args) -> int:
-    import custodia
+    import decisiones
     _seccion("CRONOLOGIA DE DECISIONES")
-    for linea in custodia.cronologia(_evid(args)):
+    for linea in decisiones.cronologia(_evid(args)):
         print(linea)
     return 0
 
@@ -447,7 +449,7 @@ def construir_parser() -> argparse.ArgumentParser:
     sp.add_argument("--si", action="store_true")
     sp.set_defaults(func=cmd_verdad)
 
-    sub.add_parser("custodia").set_defaults(func=cmd_custodia)
+    sub.add_parser("respuesta").set_defaults(func=cmd_respuesta)
     sub.add_parser("cobertura").set_defaults(func=cmd_cobertura)
 
     sp = sub.add_parser("observable")

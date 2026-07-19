@@ -76,13 +76,28 @@ CASOS = [
          "por clave publica. Sin ese acotamiento el DSL matchearia por nombre de host y el "
          "motor recomendaria rotar claves en una maquina que no tiene ninguna."),
 
-    Caso(8, "Revocar la credencial del pipeline esta fundado, y es la trampa",
+    Caso(8, "Adjudicar no es recomendar, y confundirlos costo un motor entero",
          "revocar-credencial", "AKIA7QYCVN4RBUXWK3PD", CIERRE, FUNDADA,
-         "Es la credencial legitima de la automatizacion, con 95 usos en la ventana. El "
-         "requisito -- uso registrado -- se cumple sobradamente. **Fundada y equivocada**: "
-         "el motor dice que la evidencia respalda la accion, no que sea buena idea. Es el "
-         "caso que muestra por que una recomendacion sin su condicion de falsedad es una "
-         "orden disfrazada de consejo."),
+         "Es la credencial legitima de la automatizacion, con 95 usos en la ventana. "
+         "Adjudicar la accion sobre ella da FUNDADA, **y esta bien que lo de**: adjudicar "
+         "responde 'un humano eligio este objetivo, ¿la evidencia respaldaba la accion?', "
+         "y la sospecha la aporto el humano al elegirlo. || Este caso existia antes con "
+         "otro texto, que lo presentaba como una leccion sobre 'fundada no es "
+         "recomendable'. Era una racionalizacion de un defecto: `recomendar()` era "
+         "`adjudicar()` en un bucle sobre el inventario, y por eso proponia revocar esta "
+         "credencial. Al recomendar, **nadie aporta sospecha, asi que la precondicion "
+         "tiene que cargarla**. El caso 9 es el que prueba que se corrigio."),
+
+    Caso(9, "Adjudicable no implica recomendable: la misma credencial no se propone",
+         "revocar-credencial", "AKIA7QYCVN4RBUXWK3PD", CIERRE, FUNDADA,
+         "Mismo veredicto que el caso 8 y distinto comportamiento del recomendador: en la "
+         "ventana del incidente esta credencial **no aparece** entre las acciones "
+         "propuestas, porque ningun hallazgo la seniala. La verificacion de esto no es el "
+         "veredicto sino `test_el_recomendador_discrimina_el_ataque`, que corre el motor "
+         "sobre una ventana anterior al incidente y exige que proponga sustancialmente "
+         "menos que sobre la ventana del incidente. Un recomendador cuya salida es "
+         "invariante a que el ataque haya ocurrido no esta recomendando: esta listando el "
+         "inventario cruzado con verbos."),
 ]
 
 

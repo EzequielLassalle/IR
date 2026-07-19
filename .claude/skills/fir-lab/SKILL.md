@@ -20,18 +20,19 @@ que la evidencia no dijo.
 
 ## Al entrar
 
-1. Correr `python main.py custodia` y leer la linea `INTEGRIDAD`.
-2. Correr `python main.py estado`.
-3. Mostrar el menu con el caso, el conteo y la integridad en la cabecera.
+1. Correr `python main.py estado`.
+2. Correr `python main.py respuesta` y ver si ya hay acciones aplicadas.
+3. Mostrar el menu con el caso, el conteo y las acciones aplicadas en la cabecera.
 
-Si la integridad figura **ALTERADA** y no fue el usuario quien la altero en esta sesion,
-avisarlo antes de cualquier otra cosa. Sobre evidencia alterada no se concluye.
+Si hay acciones aplicadas y no fue el usuario quien las tomo en esta sesion, decirlo antes
+de cualquier otra cosa: el estado de la respuesta condiciona todo lo que el motor va a
+recomendar despues.
 
 ```
 ╭──────────────────────────────────────────────────────────────────────────╮
 │   \ | /                                                                  │
 │  ── * ──   LAB FIR · INC-2026-0051 (BancoXYZ) · escenario A              │
-│   / | \    10 dias · 3 fuentes · 6.532 eventos · integridad: OK          │
+│   / | \    10 dias · 3 fuentes · 6.532 eventos · 0 acciones aplicadas    │
 ├──────────────────────────────────────────────────────────────────────────┤
 │  1) Barrido        detector · agentes sobre los 10 dias · hallazgos      │
 │  2) Consultar      filtrar, contar, agrupar · pivotear un indicador      │
@@ -47,13 +48,14 @@ avisarlo antes de cualquier otra cosa. Sobre evidencia alterada no se concluye.
 ```
 
 **Copiar el cuadro literal, sin re-dibujarlo.** Todas las lineas miden 76 caracteres; los
-unicos campos que cambian son el caso, el escenario, el conteo y la integridad, y hay que
+unicos campos que cambian son el caso, el escenario, el conteo y las acciones
+aplicadas, y hay que
 reemplazarlos respetando el ancho. El asterisco va en ASCII a proposito: los glifos tipo
 `✳` se renderizan con ancho variable y descuadran el marco.
 
-**Las ocho opciones estan construidas.** Lo unico que falta del proyecto es correr los
-agentes de investigacion (opcion 1.2): el arnes existe y nunca se uso, asi que la parte
-agentica todavia no esta respaldada por ningun numero.
+**Las ocho opciones estan construidas**, con una salvedad: la 4.4 (alcance como hechos,
+indicios y desconocidos) existe via `situacion` y necesita un archivo de hallazgos como
+entrada, asi que depende de haber corrido antes la 1.2 o el detector.
 
 **Nunca simular una recomendacion ni un veredicto de accion.** Si un comando falla o falta
 un dato, decirlo. Producir esas salidas escribiendo prosa convincente es exactamente el modo
@@ -117,7 +119,12 @@ perderia la suite de regresion.
 
 **Reglas duras, sin excepcion:**
 
-- El agente trabaja **solo** con `python main.py <consulta>` sobre el escenario indicado.
+- El agente trabaja **solo** con los subcomandos de consulta de `python main.py`:
+  `estado`, `cobertura`, `timeline`, `contar`, `evento`, `entidad`, `base`, `observable`.
+  **Es una lista blanca, no "todo lo que empiece con main.py".**
+- **`python main.py verdad` esta prohibido explicitamente.** Imprime la narrativa completa
+  del incidente: es el solucionario. Decir "solo main.py" sin esta linea autoriza el
+  comando que entrega las respuestas, y cualquier medicion obtenida asi no vale nada.
 - **Tiene prohibido leer `evidencia/generar_evidencia.py`, `modelo.py` y `tests.py`.** Ahi
   esta el plan del atacante escrito en Python. Un agente que los lea produce un informe
   perfecto sin haber investigado, y la medicion pasa a no significar nada. Conviene ademas
@@ -158,6 +165,50 @@ estaria copiando, y el numero no mediria nada.
    un ataque.
 10. **Antes de cerrar, decir que NO se miro.** Que fuente, que ventana, que pregunta quedo
     sin responder.
+
+### La plantilla del encargo
+
+**Pasarla completa.** El protocolo de arriba es el metodo; esto es lo que hace que el agente
+produzca algo verificable. Un encargo sin la lista de comandos y sin el esquema del DSL
+devuelve prosa con citas al pie, que no entra al motor.
+
+```
+Sos analista de seguridad. Investiga el caso <CASO> en C:\Users\Ezela\Desktop\FIR,
+enfocado en <FUENTE O HILO>. Trabajas parado en ese directorio.
+
+REGLAS DURAS
+1. Tu unica herramienta son estos subcomandos: estado, cobertura, timeline, contar,
+   evento, entidad, base, observable. No leas los JSON de evidencia/ a mano.
+2. PROHIBIDO abrir evidencia/generar_evidencia.py, modelo.py, tests.py, casos.py y
+   deteccion.py. PROHIBIDO correr `python main.py verdad`. Ahi esta la respuesta: si los
+   abris, tu informe no vale nada.
+3. Cada afirmacion va con cita a identificadores concretos de evento.
+
+<pegar aca el protocolo de diez puntos>
+
+ENTREGABLE
+Escribi <RUTA>.json:
+{"hallazgos": [{"regla": "...", "severidad": "ALTA|MEDIA|BAJA",
+  "afirmacion": {"sujeto": "...", "accion": "...", "objeto": "...",
+                 "desde": "...Z", "hasta": "...Z"},
+  "resumen": "una frase", "cita": ["W1497"], "no_prueba": "que NO prueba"}]}
+
+`accion` solo puede ser: autentico-remoto, autentico-local, autentico-red,
+fallo-autenticacion, fallo-usuario-inexistente, cerro-sesion, ejecuto-proceso,
+creo-cuenta, ejecuto-comando, llamo-api.
+
+El sujeto lleva su dominio (WKS-04\nombre, web-03:nombre, AKIA...). NO uses "el
+atacante" ni acciones como "movimiento-lateral": el motor las rechaza y con razon.
+
+Un hallazgo por hecho concreto, y CITA TODOS los eventos que lo sostienen, no un
+ejemplo: se mide que proporcion de los eventos del incidente lograste citar.
+
+Al terminar, deci que NO miraste.
+```
+
+**La ultima linea del entregable no es cortesia.** Sin ella el agente cita un ejemplo por
+hallazgo y el recall se desploma sin que nada lo avise: el verificador comprueba lo que se
+afirmo, nunca lo que se callo.
 
 ### Sobre la medicion (1.4)
 
@@ -228,10 +279,10 @@ horas declararia "caida" cualquier actividad rutinaria.
 ╭──────────────────────────────────────────────────────────────────────────╮
 │  4) SITUACION                                                            │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  4.1)  Integridad y cadena de custodia                                   │
+│  4.1)  Estado de la respuesta: que acciones ya se aplicaron              │
 │  4.2)  Cobertura: ventanas, motivos y carencias de auditoria             │
 │  4.3)  ¿Habriamos visto este hecho, de haber ocurrido?                   │
-│  4.4)  Alcance: hechos, indicios y desconocidos          [no construido] │
+│  4.4)  Alcance: hechos, indicios y desconocidos                          │
 │                                                                          │
 │  0)   Volver al menu anterior                                            │
 ╰──────────────────────────────────────────────────────────────────────────╯
@@ -239,14 +290,17 @@ horas declararia "caida" cualquier actividad rutinaria.
 
 | Opcion | Comando |
 |---|---|
-| 4.1 | `python main.py custodia` |
+| 4.1 | `python main.py respuesta` |
 | 4.2 | `python main.py cobertura` |
 | 4.3 | `python main.py observable <accion> <objeto> --desde T --hasta T [--sujeto S]` |
 
-`custodia` emite `INTEGRIDAD` y `CADENA DE CUSTODIA`, y son dos cosas distintas: el hash
-dice que el material no cambio; la custodia dice quien lo tuvo. Presentar las dos, sin
-fundirlas. **Nunca re-sellar con la evidencia alterada**: destruye la unica referencia
-contra la cual detectarlo.
+**El estado de la respuesta no se guarda aparte: se deriva replayando la cronologia.** Una
+sola fuente de verdad, y la respuesta a "¿este host esta aislado?" siempre viene con quien
+lo decidio y cuando.
+
+Ese estado cambia lo que el motor recomienda: una accion ya aplicada devuelve `INAPLICABLE`
+y desaparece de la opcion 6. **Es lo que hace real al lazo** -- ejecutar cambia el mundo, y
+la corrida siguiente lo refleja.
 
 La observabilidad (4.3) tiene **tres valores y el tercero no es un descuido**:
 

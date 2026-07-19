@@ -1,0 +1,66 @@
+{"hallazgos": [
+  {
+   "regla": "credencial_ecarrizo_usada_desde_ip_externa_nueva",
+   "severidad": "ALTA",
+   "afirmacion": {"sujeto": "AKIA3TBWMZ8FLQDNRV6H", "accion": "llamo-api", "objeto": "sts:GetCallerIdentity", "desde": "2026-03-10T01:06:36Z", "hasta": "2026-03-10T01:38:33Z"},
+   "resumen": "La access key de ecarrizo, que en los 7 dias previos solo se uso desde direcciones internas 10.20.4.x en horario 10-17 UTC, emitio 8 llamadas consecutivas desde la IP externa 200.45.10.18 a las 01:06-01:38 UTC.",
+   "cita": ["C2592", "C2593", "C2594", "C2595", "C2596", "C2597", "C2598", "C2599"],
+   "no_prueba": "No prueba que la clave haya sido robada ni como. Un usuario legitimo conectado desde fuera de la red corporativa produciria el mismo registro; cloudtrail no distingue quien tipeo la peticion."
+  },
+  {
+   "regla": "cambio_de_repertorio_de_la_clave_de_ecarrizo",
+   "severidad": "ALTA",
+   "afirmacion": {"sujeto": "AKIA3TBWMZ8FLQDNRV6H", "accion": "llamo-api", "objeto": "iam:ListAttachedUserPolicies", "desde": "2026-03-10T01:06:36Z", "hasta": "2026-03-10T01:38:33Z"},
+   "resumen": "En esa misma sesion la clave ejecuto cuatro operaciones que nunca habia ejecutado en los 70 eventos previos de su historial: sts:GetCallerIdentity, iam:ListAttachedUserPolicies, ec2:DescribeSecurityGroups e iam:CreateAccessKey, todas orientadas a establecer que permisos tiene la propia credencial.",
+   "cita": ["C2592", "C2594", "C2597", "C2599"],
+   "no_prueba": "No prueba intencion maliciosa. Un cambio de repertorio es un cambio de comportamiento, no un delito; el mismo patron lo produce un administrador auditando sus propios permisos por primera vez."
+  },
+  {
+   "regla": "creacion_de_segunda_access_key_para_ecarrizo",
+   "severidad": "ALTA",
+   "afirmacion": {"sujeto": "AKIA3TBWMZ8FLQDNRV6H", "accion": "llamo-api", "objeto": "iam:CreateAccessKey", "desde": "2026-03-10T01:38:32Z", "hasta": "2026-03-10T01:38:33Z"},
+   "resumen": "Al cierre de la sesion externa la clave de ecarrizo creo una segunda access key sobre el propio usuario ecarrizo (requestParameters.resource = ecarrizo), sin la llamada iam:DeleteAccessKey que acompania a una rotacion.",
+   "cita": ["C2599"],
+   "no_prueba": "No prueba que la clave nueva sea la AKIA6WNPXQ4TZBVMH8KR: cloudtrail no registra el identificador de la clave devuelta en la respuesta. La asociacion es temporal y de usuario, no documental."
+  },
+  {
+   "regla": "credencial_nueva_activa_72_segundos_despues",
+   "severidad": "ALTA",
+   "afirmacion": {"sujeto": "AKIA6WNPXQ4TZBVMH8KR", "accion": "llamo-api", "objeto": "sts:GetCallerIdentity", "desde": "2026-03-10T01:39:44Z", "hasta": "2026-03-10T02:57:02Z"},
+   "resumen": "Una access key sin ningun evento previo en toda la ventana aparece por primera vez 72 segundos despues de C2599, atribuida al mismo usuario ecarrizo y emitiendo desde la misma IP externa 200.45.10.18, y concentra 13 llamadas en dos rafagas hasta las 02:57.",
+   "cita": ["C2600", "C2601", "C2602", "C2603", "C2604", "C2605", "C2606", "C2608", "C2611", "C2612", "C2614", "C2615", "C2617"],
+   "no_prueba": "No prueba que esta clave sea producto de C2599. La contiguidad temporal, el usuario y la IP compartida lo sugieren fuertemente pero la evidencia disponible admite que sea una clave preexistente que simplemente no se habia usado desde el 02 de marzo."
+  },
+  {
+   "regla": "intentos_de_escritura_denegados",
+   "severidad": "ALTA",
+   "afirmacion": {"sujeto": "AKIA6WNPXQ4TZBVMH8KR", "accion": "llamo-api", "objeto": "cloudtrail:StopLogging", "desde": "2026-03-10T01:46:22Z", "hasta": "2026-03-10T01:50:09Z"},
+   "resumen": "Las tres unicas operaciones de escritura intentadas por la credencial nueva (detener el registro de cloudtrail, adjuntar una policy a un usuario y lanzar instancias EC2) devolvieron AccessDenied: son los 3 unicos errores en los 3249 eventos de la fuente.",
+   "cita": ["C2603", "C2604", "C2605"],
+   "no_prueba": "No prueba que no haya habido otras escrituras exitosas por otra via, ni que el registro de cloudtrail haya quedado intacto por otros medios. Prueba que estas tres llamadas concretas fallaron, no que la cuenta este indemne."
+  },
+  {
+   "regla": "reconocimiento_multiservicio_con_credencial_nueva",
+   "severidad": "ALTA",
+   "afirmacion": {"sujeto": "AKIA6WNPXQ4TZBVMH8KR", "accion": "llamo-api", "objeto": "secretsmanager:ListSecrets", "desde": "2026-03-10T01:41:52Z", "hasta": "2026-03-10T02:57:02Z"},
+   "resumen": "Tras el fallo de las escrituras la credencial recorrio en lectura seis servicios distintos (S3, EC2 snapshots e imagenes, KMS y Secrets Manager) a razon de una llamada cada dos o tres minutos, un ritmo y una amplitud que ninguna otra credencial de la cuenta presenta.",
+   "cita": ["C2601", "C2602", "C2606", "C2608", "C2611", "C2612", "C2614", "C2615", "C2617"],
+   "no_prueba": "No prueba que se haya obtenido el contenido de ningun secreto, snapshot ni clave KMS: todas estas llamadas son de listado y metadatos. Listar no es leer."
+  },
+  {
+   "regla": "enumeracion_del_bucket_de_respaldos",
+   "severidad": "MEDIA",
+   "afirmacion": {"sujeto": "AKIA6WNPXQ4TZBVMH8KR", "accion": "llamo-api", "objeto": "s3:ListBucket", "desde": "2026-03-10T02:41:05Z", "hasta": "2026-03-10T02:50:32Z"},
+   "resumen": "La credencial nueva enumero dos veces el contenido del bucket respaldos-bancoxyz y consulto su ACL y su policy, concentrando en ese unico bucket todo su interes sobre S3.",
+   "cita": ["C2602", "C2606", "C2608", "C2611"],
+   "no_prueba": "No prueba que se haya descargado un solo objeto. La carencia de auditoria s3_data_events declarada en cobertura implica que GetObject no se registra en este trail: la ausencia de descargas es indeterminada, no negativa. Esta evidencia no puede responder si hubo o no extraccion de datos."
+  },
+  {
+   "regla": "falso_positivo_rotacion_de_clave_de_servicio_por_mrivas",
+   "severidad": "BAJA",
+   "afirmacion": {"sujeto": "AKIA9KLMXP2HTVCJWD5N", "accion": "llamo-api", "objeto": "iam:CreateAccessKey", "desde": "2026-03-05T03:10:00Z", "hasta": "2026-03-05T03:16:01Z"},
+   "resumen": "El otro iam:CreateAccessKey de la ventana se descarta como administracion legitima: la secuencia de mrivas es ListAccessKeys, CreateAccessKey y DeleteAccessKey sobre el usuario svc-pipeline en seis minutos, el patron cerrado de una rotacion, y esta enmarcada por una sesion SSH interactiva del mismo origen que abre a las 02:40 y cierra a las 03:18.",
+   "cita": ["C1105", "C1106", "C1108"],
+   "no_prueba": "No prueba que mrivas sea quien opero. La IP de origen 190.210.8.92 es externa y aparece ademas en decenas de intentos de autenticacion fallidos contra web-03, de modo que un origen compartido con trafico hostil no queda descartado; lo que se descarta es la forma del acto, no la identidad del actor."
+  }
+]}
