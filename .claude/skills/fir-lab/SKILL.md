@@ -461,9 +461,56 @@ motor: parar todo.
 Estan escritas contra el escenario A. **Correrlas contra B no tiene sentido** -- son otro
 incidente.
 
+## 9) Ataque nuevo
+
+```
+╭──────────────────────────────────────────────────────────────────────────╮
+│  9) ATAQUE NUEVO                                                         │
+├──────────────────────────────────────────────────────────────────────────┤
+│  9.1)  Elegir tecnica y generar (agente autor, aislado)                  │
+│  9.2)  Lanzar agentes de investigacion sobre el escenario C              │
+│  9.3)  Medir contra la verdad · contraste con A y B                      │
+│                                                                          │
+│  0)   Volver al menu anterior                                            │
+╰──────────────────────────────────────────────────────────────────────────╯
+```
+
+| Opcion | Comando |
+|---|---|
+| 9.1 | `python main.py --escenario c generar` |
+| 9.2 | igual que 1.2, con `--escenario c` en cada consulta |
+| 9.3 | `python main.py --escenario c barrido --medir`, o `medir <archivo...> --escenario c` |
+
+**Es un tercer escenario, generado igual que A y B** -- misma maquinaria (`ESCENARIOS` en
+`evidencia/generar_evidencia.py`), un plan de ataque nuevo en vez de uno mas de los dos ya
+escritos. Hoy hay uno solo implementado: `atacante_salto_triple` (`INC-2026-0064`, seed
+`20260701`), una cadena de tres saltos -- WKS-04, despues web-03, recien despues AWS -- que
+ni A ni B ponen a prueba. Agregar otro es agregar otra funcion de plan y otra entrada al
+diccionario `ESCENARIOS`, no un mecanismo nuevo.
+
+### 9.1 — El agente que autoria, y por que es el unico caso donde se invierte la regla de 1.2
+
+En 1.2, el agente que **investiga** tiene prohibido leer `generar_evidencia.py` y `modelo.py`
+porque ahi esta el plan del atacante escrito en Python. El agente que **autoria** una tecnica
+nueva es el reves exacto: **necesita** leer y escribir esos mismos archivos, porque tiene que
+agregar una funcion de plan y sumarla a `ESCENARIOS`. Es el unico rol al que esa puerta se le
+abre.
+
+La barrera no esta en que puede leer un agente en abstracto -- esta en que **9.1 y 9.2 nunca
+comparten sesion ni contexto**. Se lanzan por separado: primero 9.1, que termina y deja
+escrita la evidencia nueva; recien despues 9.2, con agentes frescos (misma lista blanca de
+1.2, mismo veto sobre `verdad`) que no tienen memoria de que se eligio ni de que se escribio
+en 9.1. Quien orquesta el orden puede saber que tecnica se corrio -- lo elige a mano en 9.1 --
+pero no debe interpretar ni adelantar nada entre una fase y la otra: el juicio sobre si se
+detecto lo hacen los agentes de 9.2, ciegos, igual que en A y B.
+
+**`verdad` sigue prohibido para 9.2** exactamente por la misma razon que en 1.2: revela la
+narrativa completa, y esta vez tambien revelaria que tecnica se eligio en 9.1.
+
 ## Trampas
 
-- **El escenario B no se tunea.** Se mide.
+- **El escenario B no se tunea.** Se mide. Lo mismo vale para C: si se ajustan reglas o
+  protocolo despues de ver que tecnica se eligio en 9.1, deja de ser una medicion.
 - **Un recall alto en A no dice nada solo.** El detector saca 63,8% en A y 4,3% en B porque
   sus ocho reglas se apoyan en que haya fallos de autenticacion, y en B el atacante nunca
   falla. Ese par de numeros es el resultado, no el primero.
