@@ -107,6 +107,10 @@ def poblar(env: Entorno) -> None:
     env.credencial("AKIA3TBWMZ8FLQDNRV6H", "ecarrizo", INICIO - timedelta(days=90))
     env.credencial("AKIA9KLMXР2HTVCJWD5N".replace("Р", "P"), "mrivas",
                    INICIO - timedelta(days=45))
+    # Embebida en un archivo de configuracion de web-03 para el pipeline de despliegue.
+    # Ningun actor normal la usa: existe para el escenario C, donde la unica senial de que
+    # se uso es que aparece por primera vez, no que su volumen o su origen cambien.
+    env.credencial("AKIA4RXWNPFOZ8GHK6EY", "svc-web03-deploy", INICIO - timedelta(days=120))
 
     # Un unico pool de internet para bots, atacante y accesos remotos legitimos. Que la IP
     # del atacante sea indistinguible del ruido es el punto: se lo encuentra por lo que
@@ -522,6 +526,84 @@ def atacante_credencial_valida(env: Entorno) -> list[str]:
     return narrativa
 
 
+def atacante_salto_triple(env: Entorno) -> list[str]:
+    """Plan C: tres saltos en cadena -- WKS-04, despues web-03, recien despues AWS.
+
+    Ni A ni B ponen a prueba esto. A salta de Windows a AWS directo: la credencial que usa
+    la roba del propio filesystem de WKS-04, un solo salto de dominio. B nunca sale de AWS.
+    Este plan cruza dos fronteras de dominio en cadena, y la credencial que importa no
+    aparece hasta el segundo salto: seguir solo la sesion de Windows no alcanza, hay que
+    seguir la identidad hasta adentro de web-03.
+
+    El acceso a web-03 no deja un solo intento fallido: entra con una clave publica nueva
+    directamente, sin `Invalid user` ni `Failed password` antes. Una regla que busque
+    fuerza bruta contra web-03 no encuentra nada -- el acceso ya viene autorizado por una
+    clave que nadie emitio.
+    """
+    narrativa: list[str] = []
+    ip_a = "203.0.113.91"
+    ip_web03 = "10.20.4.53"
+
+    with env.como(ATAQUE, "atacante") as e:
+        # -- Pocos fallos, despues acceso remoto a WKS-04 --------------------------
+        t = INICIO + timedelta(days=5, hours=22, minutes=50)
+        for _ in range(2):
+            t += timedelta(seconds=e.rng.randint(20, 90))
+            e.logon_windows(t, "mlopez", ip_a, tipo=3, password="Otonio2026!")
+        narrativa.append("Dos intentos fallidos contra mlopez en WKS-04 -- muchos menos que "
+                         "un rociado de contrasenias: la senial de este plan no esta en el "
+                         "volumen de fallos.")
+
+        t += timedelta(seconds=e.rng.randint(30, 120))
+        sesion_win = e.logon_windows(t, "mlopez", ip_a, tipo=10)
+        narrativa.append("Acceso remoto (logon type 10) a WKS-04 como mlopez.")
+
+        if sesion_win:
+            for imagen in ["C:\\Windows\\System32\\whoami.exe",
+                           "C:\\Windows\\System32\\net.exe",
+                           "C:\\Windows\\System32\\findstr.exe"]:
+                t += timedelta(seconds=e.espera() * 2 + 20)
+                e.proceso(t, sesion_win, imagen, padre="C:\\Windows\\System32\\cmd.exe")
+            narrativa.append("Reconocimiento local en WKS-04: whoami, net, findstr.")
+
+        # -- Salto 1 -> 2: de WKS-04 a web-03, sin un solo intento fallido ---------
+        t += timedelta(minutes=e.rng.randint(5, 15))
+        sesion_ssh = e.ssh_intento(t, "deploy", ip_web03, exito=True, metodo="publickey",
+                                   clave="Zt4mKqL8vXpR2wNsHbYc")
+        narrativa.append("Acceso directo a web-03 como deploy con una clave publica nueva, "
+                         "sin ningun intento fallido previo contra ese host.")
+
+        if sesion_ssh:
+            for comando in ["/usr/bin/cat /etc/app/deploy.conf",
+                            "/usr/bin/find /etc -name *.conf -newer /etc/hostname"]:
+                t += timedelta(seconds=e.espera() * 3 + 40)
+                e.sudo(t, sesion_ssh, comando)
+            narrativa.append("Lectura de un archivo de configuracion en web-03 que contiene "
+                             "una credencial de AWS embebida.")
+
+        # -- Salto 2 -> 3: de web-03 a AWS, con una credencial que nunca se uso ----
+        t += timedelta(minutes=e.rng.randint(3, 10))
+        cred = "AKIA4RXWNPFOZ8GHK6EY"
+        for servicio, operacion in [("sts", "GetCallerIdentity"), ("s3", "ListBuckets"),
+                                    ("iam", "ListAccessKeys")]:
+            t += timedelta(seconds=e.espera() * 2 + 25)
+            e.llamada_aws(t, cred, servicio, operacion, ip_web03)
+        narrativa.append("Primera actividad de AKIA4RXWNPFOZ8GHK6EY en toda la ventana: "
+                         "estaba embebida en el archivo de configuracion de web-03 y nunca "
+                         "se habia usado.")
+
+        t += timedelta(minutes=e.rng.randint(2, 6))
+        e.crear_access_key(t, cred, "svc-web03-deploy", ip_web03,
+                           nueva_id="AKIA1QDHXPEC6MYFT39V")
+        narrativa.append("Creacion de una access key nueva a partir de la embebida "
+                         "(persistencia en la nube).")
+
+        if sesion_ssh:
+            e.ssh_cierre(sesion_ssh, t + timedelta(minutes=e.rng.randint(4, 15)))
+
+    return narrativa
+
+
 # --------------------------------------------------------------------------------------
 # Escenarios
 # --------------------------------------------------------------------------------------
@@ -536,6 +618,10 @@ ESCENARIOS = {
           "dir": "evidencia_b",
           "resumen": "Credencial legitima usada por quien no corresponde. Sin un solo "
                      "fallo de autenticacion."},
+    "c": {"seed": 20260701, "plan": "atacante_salto_triple", "caso": "INC-2026-0064",
+          "dir": "evidencia_c",
+          "resumen": "Cadena de tres saltos: WKS-04, web-03, AWS. La credencial que "
+                     "importa no aparece hasta el segundo salto."},
 }
 
 

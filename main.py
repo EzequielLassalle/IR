@@ -34,7 +34,7 @@ from consulta import (  # noqa: E402
 from deteccion import barrer, eventos_perdidos, medir  # noqa: E402
 from eventos import ESTADOS_4625, LOGON_TYPES, cargar, cargar_verdad  # noqa: E402
 
-DIRS = {"a": "evidencia", "b": "evidencia_b"}
+DIRS = {"a": "evidencia", "b": "evidencia_b", "c": "evidencia_c"}
 
 
 def _evid(args) -> Path:
@@ -508,7 +508,8 @@ def cmd_test(args) -> int:
 
 def cmd_generar(args) -> int:
     return subprocess.call([sys.executable,
-                            str(AQUI / "evidencia" / "generar_evidencia.py")])
+                            str(AQUI / "evidencia" / "generar_evidencia.py"),
+                            "--escenario", getattr(args, "escenario", "a")])
 
 
 # --------------------------------------------------------------------------------------
@@ -517,9 +518,10 @@ def cmd_generar(args) -> int:
 def construir_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="main.py", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--escenario", choices=["a", "b"], default="a",
+    p.add_argument("--escenario", choices=["a", "b", "c"], default="a",
                    help="a = INC-2026-0051 (por defecto). b = INC-2026-0058, retenido "
-                        "para validar metodo.")
+                        "para validar metodo. c = INC-2026-0064, cadena de tres saltos, "
+                        "generado bajo demanda (ver `9) Ataque nuevo` en fir-lab).")
     sub = p.add_subparsers(dest="comando")
 
     def con_filtros(sp):

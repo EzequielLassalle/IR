@@ -42,6 +42,7 @@ recomendar despues.
 │  6) Recomendacion  que propone el motor ahora · y de que depende         │
 │  7) Cronologia     lo que decidiste · su veredicto · su costo            │
 │  8) Regresion      la suite del motor · cada prueba con su esperado      │
+│  9) Ataque nuevo   generar escenario C con una tecnica · medir a ciegas  │
 │                                                                          │
 │  0) Salir                                                                │
 ╰──────────────────────────────────────────────────────────────────────────╯
