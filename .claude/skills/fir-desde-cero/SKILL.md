@@ -111,10 +111,8 @@ que falte al vuelo.
 │   7) El motor                 citas, cobertura, adjudicar, recomendar    │
 │   8) El estado                ejecutar tiene que cambiar el mundo        │
 │                                                                          │
-│  LA PRUEBA                                                               │
-│   9) Medir                    recall, precision y la verdad sin archivo  │
-│  10) El escenario B           como se sabe si un metodo transfiere       │
-│  11) El codigo                los modulos y como encajan                 │
+│  EL CODIGO                                                               │
+│   9) El codigo                los modulos y como encajan                 │
 │                                                                          │
 │   0) Salir                                                               │
 ╰──────────────────────────────────────────────────────────────────────────╯
@@ -254,6 +252,29 @@ entienda antes de seguir**. La evidencia tiene cinco clases de actividad convivi
 | `admin-legitimo` | Un administrador creando una credencial de AWS de madrugada desde una IP nueva. Se ve identico a un ataque. No lo es |
 | `sospechoso-no-incidente` | Una aplicacion con la contrasena vencida reintentando sola **648 veces** |
 | `ataque` | El incidente: 69 eventos, 1,1% del total |
+
+Estos numeros salen de correr `python main.py verdad --si`:
+
+```
+ETIQUETAS
+------------------------------------------------------------------------------
+    4512  (69.1%)  normal
+    1271  (19.5%)  ruido-internet
+     648  ( 9.9%)  sospechoso-no-incidente
+      69  ( 1.1%)  ataque
+      32  ( 0.5%)  admin-legitimo
+```
+
+`verdad` esta deliberadamente escondido detras de una confirmacion (`--si`) y prohibido para
+cualquier agente que este investigando (regla dura en `fir-lab`): imprime la narrativa
+completa del incidente, es el solucionario. Ese candado no aplica ahora -- vos escribiste
+este codigo, no estas investigando el caso a ciegas -- pero conviene saber que existe y por
+que, porque en la parte 6 vuelve a aparecer.
+
+Y por que el comando no lee un archivo con las respuestas guardadas: las etiquetas se
+**reconstruyen desde la semilla del generador** cada vez que se corre, no viven en ningun
+lado. Si vivieran al lado de la evidencia, quien investiga -- persona o agente -- las tendria
+a un `Read` de distancia.
 
 **Por que existen las capas 3 y 4.** Si el ataque fuera lo unico raro, encontrar lo raro seria
 encontrar el ataque, y el ejercicio seria un `WHERE`. Con esas dos capas hay que distinguir
@@ -414,7 +435,29 @@ Cinco campos: la misma terna del evento (`sujeto`, `accion`, `objeto`) mas una v
 Un objeto con afirmacion + cita se llama **hallazgo**. Un archivo de hallazgos es la salida de
 investigar: lo produce el detector automatico, o un agente, o una persona.
 
-**La frase que resume el motor entero**, y conviene decirla textual porque las nueve partes
+El detector automatico se corre asi:
+
+```
+python main.py barrido
+```
+```
+BARRIDO DETERMINISTICO  (27 hallazgos)
+------------------------------------------------------------------------------
+
+[ALTA] acceso_tras_fallos
+  web-03:ubuntu autentico con exito desde 198.51.100.77, direccion que acumulaba 18 fallos en las 6 horas previas.
+  cita: L1025, L1001, L1002, L1007, L1008, L1009, L1010, L1011 (+11)
+  no prueba: La correlacion es por direccion IP, que no identifica un equipo ni una persona: NAT, proxies y direcciones reasignadas producen la misma coincidencia.
+```
+
+`barrido` son **ocho reglas escritas a mano** en `deteccion.py`. Una **regla de deteccion** es
+una condicion sobre los eventos que, cuando se cumple, emite un hallazgo con la misma forma
+que acabas de ver arriba -- afirmacion mas cita. Es como funciona un SIEM: el software donde
+una organizacion centraliza sus logs y corre reglas sobre ellos. Notar tambien el campo
+`no prueba`: cada regla declara de antemano que NO demuestra, para no vender una correlacion
+como una certeza.
+
+**La frase que resume el motor entero**, y conviene decirla textual porque las partes
 que siguen son casos de ella:
 
 > Todo FIR es una sola operacion repetida: agarrar una afirmacion, agarrar los eventos que
@@ -629,107 +672,11 @@ justo cuando mas importa.
 
 ---
 
-# LA PRUEBA
+# EL CODIGO
 
-## 9) Medir
+## 9) El codigo
 
-Definir las dos metricas antes de correr nada, sin suponerlas conocidas:
-
-- **recall**: de todos los eventos del ataque, que fraccion encontro. Mide lo que se te
-  escapa.
-- **precision**: de todo lo que reporto, que fraccion era realmente del ataque. Mide cuanto
-  ruido te hace.
-
-Se pueden mover en direcciones opuestas: reportar todo da recall perfecto y precision
-pesima.
-
-Para medir hace falta saber **cual es la respuesta correcta** -- que eventos son del ataque.
-Y aca esta la decision de diseno de la parte:
-
-**La verdad no existe en disco.** Cada evento tiene una etiqueta que dice que capa lo produjo
-(parte 3), pero no esta guardada en ningun archivo: **se regenera desde el seed** en el momento
-de medir, y desaparece. Si viviera al lado de la evidencia, cualquiera que investigue --
-persona o agente -- la abre y saca 100% sin investigar nada.
-
-Hay una guarda: si la evidencia en disco no corresponde al seed, la medicion **se niega a
-correr** en vez de comparar contra otro escenario.
-
-Correr:
-
-```
-python main.py barrido
-```
-
-`barrido` es el **detector deterministico**: ocho reglas escritas a mano en `deteccion.py`.
-Una **regla de deteccion** es una condicion sobre los eventos que, cuando se cumple, emite un
-hallazgo. Es como funciona un SIEM -- el software donde una organizacion centraliza sus logs y
-corre reglas sobre ellos.
-
-Y notar la precision baja: cita ~1.260 eventos para encontrar 44. **Eso no es siempre un
-defecto**: se ahoga en el escaneo de fondo de la capa `ruido-internet`, que es exactamente lo
-que le pasa a una regla basada en volumen en una organizacion real.
-
-**Comprobacion:** preguntarle por que la verdad regenerada desde el seed es mas confiable que
-un archivo de respuestas, si al final es el mismo dato. La respuesta: porque un archivo se
-puede leer durante la investigacion y el seed solo se usa al medir.
-
-## 10) El escenario B
-
-Definir el problema primero, que es un problema de metodo y no de seguridad: **si escribis las
-reglas mirando un caso y despues las medis contra ese mismo caso, la medicion no dice nada.**
-Es sobreajuste, y lo conoce de otros contextos.
-
-La solucion del proyecto: hay **dos incidentes**. `A` es donde se escribieron las reglas. `B`
-esta retenido -- se corre con `--escenario b` -- y **contra B nunca se tunea nada, solo se
-mide**.
-
-Correr los dos:
-
-```
-python main.py medir hallazgos_agente_cloudtrail.json hallazgos_agente_syslog.json hallazgos_agente_windows.json --union
-python main.py --escenario b medir hallazgos_b_cloudtrail.json hallazgos_b_syslog.json hallazgos_b_windows.json --union
-```
-
-| | recall en A | recall en B |
-|---|---|---|
-| detector deterministico | 63,8% | 4,3% |
-| agentes, union | 84,1% | 100% |
-
-**El detector se derrumba y hay que explicar por que exactamente**: sus ocho reglas se apoyan,
-directa o indirectamente, en que **haya intentos de autenticacion fallidos**. En B el atacante
-entra con una credencial legitima y no falla nunca. Es invisible para las ocho. Encuentra 1
-de 23.
-
-Los agentes no se derrumban: sacan 100% en B. Llegaron por un punto del protocolo que dice
-**comparar cada sujeto contra su propio historial, no contra el promedio**. El agente de
-CloudTrail lo resumio solo: *"el caso no esta en el volumen, esta en el repertorio"* -- no
-importa cuanto hizo una credencial, importa si hizo cosas que esa credencial nunca hacia.
-
-**Ese par de numeros es el resultado del proyecto, no el primero solo.** 63,8% contra 4,3% es
-la demostracion de que el detector memorizo un caso.
-
-### Como se sabe que el agente no hizo trampa
-
-Un **agente** aca es un modelo de lenguaje investigando el caso por CLI. Tres restricciones:
-
-- Se lanza **desde el skill, nunca desde el codigo**. Si Python llamara a la API, la suite de
-  regresion dejaria de ser reproducible y correr los tests necesitaria credencial y
-  presupuesto.
-- Investiga con una **lista blanca de subcomandos**, y tiene prohibido leer el generador y los
-  tests -- ahi esta el plan del atacante escrito en Python.
-- Escribe sus hallazgos **al DSL cerrado** de la parte 6. Lo que no entra en el DSL no se
-  verifica, y lo que no se verifica no entra al caso.
-
-Ademas la bitacora registra cada consulta: en la corrida contra B fueron 96, todas dentro de
-la lista blanca, ninguna al comando que revela el caso.
-
-**Comprobacion:** preguntarle por que no se puede simplemente escribir mas reglas mirando B
-para subir el 4,3%. La respuesta: porque en el momento en que lo hacen, B deja de ser
-retenido y no queda con que medir.
-
-## 11) El codigo
-
-Recien aca, y a proposito: con las catorce partes anteriores cada modulo se explica en una
+Recien aca, y a proposito: con las ocho partes anteriores cada modulo se explica en una
 linea porque ya se sabe que problema resuelve. Son ~4.000 lineas de Python puro, sin
 dependencias.
 
@@ -742,10 +689,9 @@ y los logs caen como efecto.
 
 Eso hace la contradiccion **estructuralmente imposible**: no se puede emitir un `Failed
 password` para un usuario que sshd ya declaro inexistente, porque el emisor le pregunta al
-objeto cuenta. Y regala gratis la etiqueta de verdad por evento (parte 9).
+objeto cuenta. Y regala gratis la etiqueta de verdad por evento (parte 3).
 
-`evidencia/generar_evidencia.py` tiene los actores y los planes de atacante (tres hoy: A, B
-y el de escenario C armado en `fir-lab`, opcion 9).
+`evidencia/generar_evidencia.py` tiene los actores y el plan del atacante.
 
 **Entender la evidencia.**
 
@@ -760,7 +706,7 @@ y el de escenario C armado en `fir-lab`, opcion 9).
 
 | modulo | que resuelve | parte |
 |---|---|---|
-| `deteccion.py` | las ocho reglas escritas a mano | 9 |
+| `deteccion.py` | las ocho reglas escritas a mano (`barrido`) | 6 |
 | `verificador.py` | citas y vocabulario | 7 |
 | `acciones.py` | catalogo, adjudicacion, recomendacion | 7 |
 | `decisiones.py` | cronologia y estado derivado | 8 |

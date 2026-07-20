@@ -1,17 +1,12 @@
 ---
 name: fir-lab
-description: Opera el laboratorio FIR del caso INC-2026-0051 - barrido con detector y agentes, consultar los 6.500 eventos, linea base, situacion y cobertura, someter acciones de respuesta al motor, recomendacion con su condicion de falsedad, cronologia de decisiones y los ocho casos. Usar cuando se pida investigar el escenario, consultar la evidencia, buscar el incidente, verificar hallazgos, medir detectores, proponer o evaluar acciones de respuesta, o trabajar con el proyecto FIR.
+description: Opera el laboratorio FIR del caso INC-2026-0051 - barrido con detector y agentes, consultar los 6.500 eventos, linea base, situacion y cobertura, someter acciones de respuesta al motor, recomendacion con su condicion de falsedad, cronologia de decisiones y los ocho casos. Usar cuando se pida investigar el escenario, consultar la evidencia, buscar el incidente, verificar hallazgos, proponer o evaluar acciones de respuesta, o trabajar con el proyecto FIR.
 ---
 
 # Lab FIR
 
 Consola de operacion. El proyecto vive en `C:\Users\Ezela\Desktop\FIR` y los comandos se
 corren parados ahi.
-
-Dos escenarios. **A** (`INC-2026-0051`, por defecto) es donde se escribieron las reglas.
-**B** (`INC-2026-0058`, `--escenario b`) esta retenido para validar metodo, y **no se tunea
-contra el**: se mide y punto. Un metodo que solo funciona en A era la respuesta de A
-disfrazada de metodo.
 
 Este skill **no razona sobre la evidencia: la consulta**. Cuando haya que saber si algo se
 sostiene, correr el comando y leer su salida. Nunca deducir un resultado de cabeza, nunca
@@ -31,7 +26,7 @@ recomendar despues.
 ```
 ╭──────────────────────────────────────────────────────────────────────────╮
 │   \ | /                                                                  │
-│  ── * ──   LAB FIR · INC-2026-0051 (BancoXYZ) · escenario A              │
+│  ── * ──   LAB FIR · INC-2026-0051 (BancoXYZ)                            │
 │   / | \    10 dias · 3 fuentes · 6.532 eventos · 0 acciones aplicadas    │
 ├──────────────────────────────────────────────────────────────────────────┤
 │  1) Barrido        detector · agentes sobre los 10 dias · hallazgos      │
@@ -42,19 +37,18 @@ recomendar despues.
 │  6) Recomendacion  que propone el motor ahora · y de que depende         │
 │  7) Cronologia     lo que decidiste · su veredicto · su costo            │
 │  8) Regresion      la suite del motor · cada prueba con su esperado      │
-│  9) Ataque nuevo   generar escenario C con una tecnica · medir a ciegas  │
+│  9) Otro caso                generar un incidente nuevo para practicar   │
 │                                                                          │
 │  0) Salir                                                                │
 ╰──────────────────────────────────────────────────────────────────────────╯
 ```
 
 **Copiar el cuadro literal, sin re-dibujarlo.** Todas las lineas miden 76 caracteres; los
-unicos campos que cambian son el caso, el escenario, el conteo y las acciones
-aplicadas, y hay que
+unicos campos que cambian son el caso, el conteo y las acciones aplicadas, y hay que
 reemplazarlos respetando el ancho. El asterisco va en ASCII a proposito: los glifos tipo
 `✳` se renderizan con ancho variable y descuadran el marco.
 
-**Las ocho opciones estan construidas**, con una salvedad: la 4.4 (alcance como hechos,
+**Las nueve opciones estan construidas**, con una salvedad: la 4.4 (alcance como hechos,
 indicios y desconocidos) existe via `situacion` y necesita un archivo de hallazgos como
 entrada, asi que depende de haber corrido antes la 1.2 o el detector.
 
@@ -100,7 +94,6 @@ Excepcion: los veredictos (`AUSENCIA-DEMOSTRADA`, `CITA-NO-SOSTIENE`, la observa
 │  1.1)  Detector deterministico (las ocho reglas escritas a mano)         │
 │  1.2)  Lanzar agentes de investigacion                                   │
 │  1.3)  Verificar un archivo de hallazgos                                 │
-│  1.4)  Medir contra la verdad · contraste detector / agente              │
 │                                                                          │
 │  0)   Volver al menu anterior                                            │
 ╰──────────────────────────────────────────────────────────────────────────╯
@@ -110,7 +103,6 @@ Excepcion: los veredictos (`AUSENCIA-DEMOSTRADA`, `CITA-NO-SOSTIENE`, la observa
 |---|---|
 | 1.1 | `python main.py barrido` |
 | 1.3 | `python main.py verificar <archivo.json>` |
-| 1.4 | `python main.py medir <archivo...> [--union] [--perdidos]` |
 
 ### 1.2 — Como se lanzan los agentes
 
@@ -139,14 +131,11 @@ perderia la suite de regresion.
 Conviene lanzar **varios en paralelo con encargos distintos** -- uno por fuente, o uno por
 hilo. Un agente solo se ancla en lo primero que encuentra y despues lo confirma.
 
-**El baseline a batir**: el detector deterministico saca 63,8% de recall en A y 4,3% en B.
-La union de tres agentes saca 84,1% en A. **Contra B nunca se midio**, y es lo que falta.
-
 ### El protocolo que va en el encargo
 
 Es **metodo**, y por eso vale: no nombra ninguna IP, ninguna cuenta, ninguna fecha ni ningun
-hallazgo de ningun escenario. Si nombrara alguno, el agente no estaria investigando --
-estaria copiando, y el numero no mediria nada.
+hallazgo del escenario. Si nombrara alguno, el agente no estaria investigando -- estaria
+copiando.
 
 1. **Verificar integridad antes de mirar nada.**
 2. **Leer la cobertura antes de interpretar cualquier ausencia.** No haber encontrado algo
@@ -203,23 +192,14 @@ El sujeto lleva su dominio (WKS-04\nombre, web-03:nombre, AKIA...). NO uses "el
 atacante" ni acciones como "movimiento-lateral": el motor las rechaza y con razon.
 
 Un hallazgo por hecho concreto, y CITA TODOS los eventos que lo sostienen, no un
-ejemplo: se mide que proporcion de los eventos del incidente lograste citar.
+ejemplo.
 
 Al terminar, deci que NO miraste.
 ```
 
 **La ultima linea del entregable no es cortesia.** Sin ella el agente cita un ejemplo por
-hallazgo y el recall se desploma sin que nada lo avise: el verificador comprueba lo que se
-afirmo, nunca lo que se callo.
-
-### Sobre la medicion (1.4)
-
-**Se corre despues de cerrar el archivo de hallazgos, nunca durante.** Un agente que vea su
-propio recall y vuelva a buscar esta optimizando contra el solucionario.
-
-La verdad no existe en disco: se reconstruye desde el seed al medir y desaparece. Si la
-evidencia fue editada, la medicion se niega a correr -- regenerar con `python main.py
-generar`.
+hallazgo en vez de todos los eventos que lo sostienen, y nadie se entera de cuanto quedo
+afuera: el verificador comprueba lo que se afirmo, nunca lo que se callo.
 
 ## 2) Consultar
 
@@ -464,18 +444,14 @@ Las nueve son decisiones donde **el veredicto no coincide con la intuicion**, y 
 declara su `esperado`. Con la evidencia intacta, una prueba que no coincide es un bug del
 motor: parar todo.
 
-Estan escritas contra el escenario A. **Correrlas contra B no tiene sentido** -- son otro
-incidente.
-
-## 9) Ataque nuevo
+## 9) Otro caso
 
 ```
 ╭──────────────────────────────────────────────────────────────────────────╮
-│  9) ATAQUE NUEVO                                                         │
+│  9) OTRO CASO                                                            │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  9.1)  Elegir tecnica y generar (agente autor, aislado)                  │
-│  9.2)  Lanzar agentes de investigacion sobre el escenario C              │
-│  9.3)  Medir contra la verdad · contraste con A y B                      │
+│  9.1)  Generar un caso nuevo (agente autor, aislado)                     │
+│  9.2)  Investigarlo y responder, a ciegas                                │
 │                                                                          │
 │  0)   Volver al menu anterior                                            │
 ╰──────────────────────────────────────────────────────────────────────────╯
@@ -483,43 +459,26 @@ incidente.
 
 | Opcion | Comando |
 |---|---|
-| 9.1 | `python main.py --escenario c generar` |
-| 9.2 | igual que 1.2, con `--escenario c` en cada consulta |
-| 9.3 | `python main.py --escenario c barrido --medir`, o `medir <archivo...> --escenario c` |
+| 9.1 | `python main.py --caso b generar` |
+| 9.2 | igual que el resto del menu, agregando `--caso b` en cada comando |
 
-**Es un tercer escenario, generado igual que A y B** -- misma maquinaria (`ESCENARIOS` en
-`evidencia/generar_evidencia.py`), un plan de ataque nuevo en vez de uno mas de los dos ya
-escritos. Hoy hay uno solo implementado: `atacante_salto_triple` (`INC-2026-0064`, seed
-`20260701`), una cadena de tres saltos -- WKS-04, despues web-03, recien despues AWS -- que
-ni A ni B ponen a prueba. Agregar otro es agregar otra funcion de plan y otra entrada al
-diccionario `ESCENARIOS`, no un mecanismo nuevo.
+**Es otro incidente para practicar, no para medir nada contra el principal.** No hay
+comparacion de numeros entre casos -- cada uno se investiga y se responde por su cuenta. Hoy
+hay uno solo implementado: `atacante_salto_triple` (`INC-2026-0064`, en `CASOS` dentro de
+`evidencia/generar_evidencia.py`), una cadena de tres saltos -- WKS-04, despues web-03, recien
+despues AWS -- que el caso principal no pone a prueba. Agregar otro es agregar otra funcion
+de plan y otra entrada a `CASOS`, no un mecanismo nuevo.
 
-### 9.1 — El agente que autoria, y por que es el unico caso donde se invierte la regla de 1.2
-
-En 1.2, el agente que **investiga** tiene prohibido leer `generar_evidencia.py` y `modelo.py`
-porque ahi esta el plan del atacante escrito en Python. El agente que **autoria** una tecnica
-nueva es el reves exacto: **necesita** leer y escribir esos mismos archivos, porque tiene que
-agregar una funcion de plan y sumarla a `ESCENARIOS`. Es el unico rol al que esa puerta se le
-abre.
-
-La barrera no esta en que puede leer un agente en abstracto -- esta en que **9.1 y 9.2 nunca
-comparten sesion ni contexto**. Se lanzan por separado: primero 9.1, que termina y deja
-escrita la evidencia nueva; recien despues 9.2, con agentes frescos (misma lista blanca de
-1.2, mismo veto sobre `verdad`) que no tienen memoria de que se eligio ni de que se escribio
-en 9.1. Quien orquesta el orden puede saber que tecnica se corrio -- lo elige a mano en 9.1 --
-pero no debe interpretar ni adelantar nada entre una fase y la otra: el juicio sobre si se
-detecto lo hacen los agentes de 9.2, ciegos, igual que en A y B.
-
-**`verdad` sigue prohibido para 9.2** exactamente por la misma razon que en 1.2: revela la
-narrativa completa, y esta vez tambien revelaria que tecnica se eligio en 9.1.
+**Por que 9.1 y 9.2 conviene que no compartan sesion.** Si elegis la tecnica y despues
+investigas vos mismo en la misma conversacion, ya sabes la respuesta y no practicaste nada.
+Lanzar 9.2 como un agente fresco (misma lista blanca de 1.2, mismo veto sobre `verdad`) que
+no tiene memoria de 9.1 es lo que mantiene el ejercicio siendo investigacion real. Igual que
+en 1.2, mirar `python main.py --caso b verdad --si` antes de cerrar el archivo de hallazgos
+vacia el ejercicio de sentido -- ahi no hay ningun numero que lo delate, asi que la disciplina
+es la unica guarda.
 
 ## Trampas
 
-- **El escenario B no se tunea.** Se mide. Lo mismo vale para C: si se ajustan reglas o
-  protocolo despues de ver que tecnica se eligio en 9.1, deja de ser una medicion.
-- **Un recall alto en A no dice nada solo.** El detector saca 63,8% en A y 4,3% en B porque
-  sus ocho reglas se apoyan en que haya fallos de autenticacion, y en B el atacante nunca
-  falla. Ese par de numeros es el resultado, no el primero.
 - **Precision baja no es siempre un defecto.** El detector cita mas de mil eventos de
   escaneo de fondo: es lo que le pasa a una regla de volumen en un entorno con ruido real.
 - **`CITA-NO-SOSTIENE` es el veredicto importante del verificador.** Son afirmaciones que

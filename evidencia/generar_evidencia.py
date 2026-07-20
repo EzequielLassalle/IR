@@ -24,8 +24,8 @@ ejercicio:
                             algo raro no equivalga a haber encontrado el incidente.
 
 La etiqueta de cada evento se emite sola: la pone el contexto del actor, no una anotacion
-posterior. Es lo que despues permite medir precision y recall de un detector contra la
-verdad, en lugar de contra la impresion del autor.
+posterior. Es lo que permite verificar con un comando real (`python main.py verdad --si`)
+que la historia de las cinco capas es cierta, en vez de tomarla de la palabra del autor.
 """
 
 from __future__ import annotations
@@ -108,8 +108,7 @@ def poblar(env: Entorno) -> None:
     env.credencial("AKIA9KLMXР2HTVCJWD5N".replace("Р", "P"), "mrivas",
                    INICIO - timedelta(days=45))
     # Embebida en un archivo de configuracion de web-03 para el pipeline de despliegue.
-    # Ningun actor normal la usa: existe para el escenario C, donde la unica senial de que
-    # se uso es que aparece por primera vez, no que su volumen o su origen cambien.
+    # Ningun actor normal la usa: solo aparece en el plan de practica "salto-triple".
     env.credencial("AKIA4RXWNPFOZ8GHK6EY", "svc-web03-deploy", INICIO - timedelta(days=120))
 
     # Un unico pool de internet para bots, atacante y accesos remotos legitimos. Que la IP
@@ -440,105 +439,16 @@ def atacante(env: Entorno) -> list[str]:
     return narrativa
 
 
-def atacante_credencial_valida(env: Entorno) -> list[str]:
-    """Plan B: una credencial legitima usada por quien no corresponde. Ningun fallo.
-
-    Existe para responder una pregunta sobre el detector, no sobre el atacante: **un metodo
-    que solo encuentra ataques ruidosos, no es un metodo.** Todo el plan A empieza con
-    fallos de autenticacion, y cualquier regla o agente que se apoye en eso saca un recall
-    alto sin haber entendido nada. Este plan no produce un solo 4625 ni un solo
-    `Failed password`.
-
-    Lo que si deja: actividad de una cuenta de servicio fuera de su horario y su patron,
-    enumeracion lenta repartida en dias para no formar rafaga, y un uso de credencial desde
-    una IP interna -- no de internet -- porque el origen tampoco puede ser la senial.
-
-    Se detecta por desviacion respecto de la linea base del propio sujeto, que es la unica
-    herramienta que sigue sirviendo cuando el atacante no rompe nada.
-    """
-    narrativa: list[str] = []
-    ip_interna_fija = "10.20.4.37"
-
-    with env.como(ATAQUE, "atacante") as e:
-        # -- Dia 6: la cuenta de servicio autentica en horario que nunca uso -------
-        # svc_backup opera de madrugada por diseño, pero SIEMPRE por red (tipo 3) desde la
-        # IP del servidor de backup. Un logon interactivo suyo es la anomalia, y no hay
-        # ningun fallo que lo acompanie.
-        t = INICIO + timedelta(days=5, hours=4, minutes=12)
-        env.cuentas["WKS-04\\svc_backup"].password_valida = "correcta"
-        sesion = e.logon_windows(t, "svc_backup", ip_interna_fija, tipo=10)
-        narrativa.append("La cuenta de servicio svc_backup autentico de forma interactiva "
-                         "remota (tipo 10), cuando su patron historico es solo por red.")
-
-        if sesion:
-            for imagen in ["C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-                           "C:\\Windows\\System32\\net.exe",
-                           "C:\\Windows\\System32\\findstr.exe",
-                           "C:\\Windows\\System32\\reg.exe"]:
-                t += timedelta(seconds=e.espera() * 3 + 45)
-                e.proceso(t, sesion, imagen, padre="C:\\Windows\\System32\\cmd.exe")
-            e.logoff(sesion, t + timedelta(minutes=e.rng.randint(8, 25)))
-            narrativa.append("Reconocimiento local desde esa sesion, sin ningun fallo de "
-                             "autenticacion previo ni posterior.")
-
-        # -- Dias 6 a 9: enumeracion lenta, repartida para no formar rafaga --------
-        cred = "AKIA7QYCVN4RBUXWK3PD"  # la credencial del pipeline, legitima y vigente
-        operaciones = [
-            ("iam", "ListUsers", "us-east-1"), ("iam", "ListRoles", "us-east-1"),
-            ("iam", "GetAccountAuthorizationDetails", "us-east-1"),
-            ("s3", "ListBuckets", "sa-east-1"), ("s3", "GetBucketPolicy", "sa-east-1"),
-            ("s3", "GetBucketAcl", "sa-east-1"), ("ec2", "DescribeSnapshots", "sa-east-1"),
-            ("ec2", "DescribeSecurityGroups", "sa-east-1"),
-            ("rds", "DescribeDBSnapshots", "sa-east-1"),
-            ("kms", "ListKeys", "sa-east-1"), ("secretsmanager", "ListSecrets", "sa-east-1"),
-            ("iam", "ListAccessKeys", "us-east-1"),
-        ]
-        for i, (servicio, operacion, region) in enumerate(operaciones):
-            # Una operacion cada varias horas: nunca hay dos juntas, asi que ninguna
-            # ventana de una hora acumula suficiente para disparar una regla de rafaga.
-            t = (INICIO + timedelta(days=5, hours=6)
-                 + timedelta(hours=i * 7 + e.rng.randint(0, 3)))
-            e.llamada_aws(t, cred, servicio, operacion, ip_interna_fija, region=region)
-        narrativa.append("Enumeracion de IAM, S3 y KMS repartida en cuatro dias, a razon de "
-                         "una operacion cada siete horas: no forma rafaga en ninguna "
-                         "ventana.")
-
-        # La credencial del pipeline nunca habia llamado a IAM: el cambio es de repertorio,
-        # no de volumen ni de origen.
-        narrativa.append("La credencial del pipeline llamo a operaciones de IAM que nunca "
-                         "habia usado en los cinco dias previos. El origen y el volumen no "
-                         "cambiaron: cambio el repertorio.")
-
-        # -- Dia 9: acceso a web-03 con una clave legitima ya autorizada ----------
-        t = INICIO + timedelta(days=8, hours=3, minutes=25)
-        s2 = e.ssh_intento(t, "deploy", ip_interna_fija, exito=True, metodo="publickey",
-                           clave="8vN2qLpXeR4kTsYbMwGh")
-        if s2:
-            for comando in ["/usr/bin/cat /home/deploy/.ssh/authorized_keys",
-                            "/usr/bin/cat /etc/shadow",
-                            "/usr/bin/tar -czf /tmp/d.tgz /var/lib/app/data"]:
-                t += timedelta(seconds=e.espera() * 4 + 60)
-                e.sudo(t, s2, comando)
-            e.ssh_cierre(s2, t + timedelta(minutes=e.rng.randint(3, 15)))
-            narrativa.append("Acceso a web-03 como deploy con la clave publica legitima ya "
-                             "autorizada, a las 03:25, fuera de todo horario de despliegue.")
-
-    return narrativa
-
-
 def atacante_salto_triple(env: Entorno) -> list[str]:
-    """Plan C: tres saltos en cadena -- WKS-04, despues web-03, recien despues AWS.
+    """Plan de practica: tres saltos en cadena -- WKS-04, despues web-03, recien despues AWS.
 
-    Ni A ni B ponen a prueba esto. A salta de Windows a AWS directo: la credencial que usa
-    la roba del propio filesystem de WKS-04, un solo salto de dominio. B nunca sale de AWS.
-    Este plan cruza dos fronteras de dominio en cadena, y la credencial que importa no
-    aparece hasta el segundo salto: seguir solo la sesion de Windows no alcanza, hay que
-    seguir la identidad hasta adentro de web-03.
+    Existe para tener un segundo caso para investigar y responder, distinto del principal:
+    ni un solo salto de dominio (como el plan de arriba) sino dos, y la credencial que
+    importa no aparece hasta adentro de web-03. Seguirla exige seguir la identidad a traves
+    de dos fronteras, no una.
 
     El acceso a web-03 no deja un solo intento fallido: entra con una clave publica nueva
-    directamente, sin `Invalid user` ni `Failed password` antes. Una regla que busque
-    fuerza bruta contra web-03 no encuentra nada -- el acceso ya viene autorizado por una
-    clave que nadie emitio.
+    directamente, sin `Invalid user` ni `Failed password` antes.
     """
     narrativa: list[str] = []
     ip_a = "203.0.113.91"
@@ -551,8 +461,7 @@ def atacante_salto_triple(env: Entorno) -> list[str]:
             t += timedelta(seconds=e.rng.randint(20, 90))
             e.logon_windows(t, "mlopez", ip_a, tipo=3, password="Otonio2026!")
         narrativa.append("Dos intentos fallidos contra mlopez en WKS-04 -- muchos menos que "
-                         "un rociado de contrasenias: la senial de este plan no esta en el "
-                         "volumen de fallos.")
+                         "un rociado de contrasenias.")
 
         t += timedelta(seconds=e.rng.randint(30, 120))
         sesion_win = e.logon_windows(t, "mlopez", ip_a, tipo=10)
@@ -604,22 +513,15 @@ def atacante_salto_triple(env: Entorno) -> list[str]:
     return narrativa
 
 
-# --------------------------------------------------------------------------------------
-# Escenarios
-# --------------------------------------------------------------------------------------
-
-# El plan B existe para validar metodo. Se tunea contra A y se mide contra B: si el numero
-# aguanta, el detector (o el agente) investiga; si se cae, memorizo el caso A.
-ESCENARIOS = {
+# Casos disponibles para investigar y responder. "a" es el caso principal. Los demas son
+# practica: otro ataque, generado con la misma maquinaria, sin relacion de medicion entre
+# ellos -- no se comparan numeros de uno contra otro, cada uno se investiga por su cuenta.
+CASOS = {
     "a": {"seed": SEED, "plan": "atacante", "caso": "INC-2026-0051",
           "dir": "evidencia",
           "resumen": "Intrusion desde internet. Empieza con fallos de autenticacion."},
-    "b": {"seed": 20260419, "plan": "atacante_credencial_valida", "caso": "INC-2026-0058",
+    "b": {"seed": 20260701, "plan": "atacante_salto_triple", "caso": "INC-2026-0064",
           "dir": "evidencia_b",
-          "resumen": "Credencial legitima usada por quien no corresponde. Sin un solo "
-                     "fallo de autenticacion."},
-    "c": {"seed": 20260701, "plan": "atacante_salto_triple", "caso": "INC-2026-0064",
-          "dir": "evidencia_c",
           "resumen": "Cadena de tres saltos: WKS-04, web-03, AWS. La credencial que "
                      "importa no aparece hasta el segundo salto."},
 }
@@ -666,29 +568,28 @@ def generar(seed: int = SEED, plan: str = "atacante") -> dict:
 
 
 def _config(evid: Path) -> dict:
-    """Que escenario corresponde a un directorio de evidencia."""
-    for cfg in ESCENARIOS.values():
+    """Que caso corresponde a un directorio de evidencia."""
+    for cfg in CASOS.values():
         if Path(evid).name == cfg["dir"]:
             return cfg
-    return ESCENARIOS["a"]
+    return CASOS["a"]
 
 
 def verdad(evid: Path = AQUI) -> dict:
-    """La verdad del escenario, reconstruida en memoria.
+    """La verdad del caso, reconstruida en memoria.
 
     **No se persiste a disco, y esa es una decision de disenio, no una omision.** Las
     etiquetas son una funcion del seed: guardarlas al lado de la evidencia duplicaria
     informacion que ya vive en el codigo, y le pondria a cualquiera que investigue -- una
     persona o un agente -- un archivo con todas las respuestas a un `Read` de distancia.
-    Un recall del 100% obtenido leyendo el solucionario no mide nada.
 
     Regenerar cuesta menos de un segundo y elimina el problema de raiz: mientras se
     investiga no hay nada que espiar, porque la verdad no existe en ningun lado.
 
     La guarda de coincidencia es lo que hace confiable el atajo. Si la evidencia en disco
     no corresponde exactamente a este seed -- porque se edito, o se genero con otros
-    parametros -- las etiquetas reconstruidas estarian describiendo otro escenario, y medir
-    contra ellas seria peor que no medir. Ante esa discrepancia se corta.
+    parametros -- las etiquetas reconstruidas estarian describiendo otro caso. Ante esa
+    discrepancia se corta.
     """
     cfg = _config(evid)
     datos = generar(cfg["seed"], cfg["plan"])
@@ -702,8 +603,8 @@ def verdad(evid: Path = AQUI) -> dict:
         if en_disco != [r["_id"] for r in registros]:
             raise RuntimeError(
                 f"{ruta.name} no corresponde al seed {cfg['seed']}: la evidencia en disco fue "
-                f"editada o generada con otros parametros. La medicion seria contra un "
-                f"escenario distinto. Regenerar con `python main.py generar`.")
+                f"editada o generada con otros parametros. Regenerar con "
+                f"`python main.py generar`.")
 
     etiquetas: dict[str, int] = {}
     for v in datos["verdad"].values():
@@ -723,9 +624,9 @@ def verdad(evid: Path = AQUI) -> dict:
     }
 
 
-def escribir(escenario: str = "a") -> dict:
+def escribir(caso: str = "a") -> dict:
     """Proyecta las tres fuentes a disco. La verdad NO se escribe: ver `verdad()`."""
-    cfg = ESCENARIOS[escenario]
+    cfg = CASOS[caso]
     destino = AQUI.parent / cfg["dir"]
     destino.mkdir(exist_ok=True)
     datos = generar(cfg["seed"], cfg["plan"])
@@ -744,11 +645,10 @@ if __name__ == "__main__":
     import argparse
 
     ap = argparse.ArgumentParser()
-    ap.add_argument("--escenario", choices=sorted(ESCENARIOS), default="a")
+    ap.add_argument("--caso", choices=sorted(CASOS), default="a")
     opciones = ap.parse_args()
-    print(f"escenario  : {opciones.escenario} - "
-          f"{ESCENARIOS[opciones.escenario]['resumen']}")
-    resumen = escribir(opciones.escenario)
+    print(f"caso       : {opciones.caso} - {CASOS[opciones.caso]['resumen']}")
+    resumen = escribir(opciones.caso)
     total = sum(resumen["conteo"].values())
     print(f"eventos    : {total}")
     for fuente, n in sorted(resumen["conteo"].items()):

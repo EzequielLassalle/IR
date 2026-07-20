@@ -12,7 +12,6 @@ python main.py entidad <ind>    todo lo que menciona un indicador
 python main.py contar --por ip  agregación sobre lo filtrado
 python main.py base             qué hay en la ventana que no había antes
 python main.py barrido          el detector determinista
-python main.py medir <arch...>  contrasta el detector contra investigaciones
 python main.py respuesta        que acciones ya se aplicaron
 python main.py cobertura        qué se recolectó y qué no
 python main.py observable       si un hecho habría sido visible
@@ -22,7 +21,7 @@ python main.py recomendacion    qué acciones están fundadas ahora [--hallazgos
 python main.py situacion <arch> hechos, indicios y lo que quedó sin establecer
 python main.py cronologia       las decisiones tomadas y con qué se sabía
 python main.py regresion        la suite del motor · cada prueba con su esperado
-python main.py test             las 34.868 verificaciones
+python main.py test             las 34.886 verificaciones
 ```
 
 El diseño completo, con las decisiones cerradas, los descartes y lo que quedó sin
@@ -56,33 +55,17 @@ líneas. La consistencia deja de ser algo que se verifica y pasa a ser algo que 
 violar: no hay forma de emitir un `Failed password` para un usuario que sshd ya declaró
 inexistente, porque el emisor le pregunta a la cuenta.
 
-De ahí sale gratis la **etiqueta de verdad por evento**, que es lo que permite medir un
-detector contra la realidad en vez de contra la impresión del autor.
+De ahí sale gratis la **etiqueta de verdad por evento**, que es lo que permite verificar con
+un comando (`python main.py verdad --si`) que la historia del escenario es cierta, en vez de
+tomarla de la palabra del autor.
 
 **El detector es el grupo de control.** `deteccion.py` son ocho reglas escritas a mano,
-estilo SIEM. Encuentra lo que las reglas fueron escritas para encontrar, ni más ni menos.
+estilo SIEM. Encuentra lo que las reglas fueron escritas para encontrar, ni más ni menos —
+cita más de mil eventos de escaneo de fondo, que es lo que le pasa a una regla de volumen en
+un SOC real.
 
 **Los agentes son el otro analista.** Investigan abierto con los mismos comandos, escriben
-sus hallazgos en el DSL cerrado, y el verificador decide cuáles entran. `medir` los contrasta
-sobre la misma verdad:
-
-```
-$ python main.py medir hallazgos_agente_*.json --union
-
-  analista                            citados   del ataque   precision   recall
-  detector deterministico                1260        44/69       3.5%    63.8%
-  hallazgos_agente_cloudtrail              24        21/69      87.5%    30.4%
-  hallazgos_agente_syslog                  99        51/69      51.5%    73.9%
-  hallazgos_agente_windows                 35        25/69      71.4%    36.2%
-  UNION de las investigaciones            114        58/69      50.9%    84.1%
-```
-
-**Ese contraste es el punto del laboratorio.** El detector se ahoga en el ruido de internet
-—cita 1.260 eventos para encontrar 44— que es lo que le pasa a una regla de volumen en un
-SOC real. Los agentes citan 114 para encontrar 58.
-
-Los números salen del arnés, no de una planilla: `medir` excluye los hallazgos que el
-verificador no admite, así que lo que se mide es investigación sostenida, no prosa.
+sus hallazgos en el DSL cerrado, y el verificador decide cuáles entran.
 
 ## La regla de la tela
 
@@ -115,7 +98,7 @@ porque el generador dejó una firma.
 
 ## Los invariantes
 
-`tests.py` corre **34.868 verificaciones** sobre la evidencia. La mitad son invariantes del
+`tests.py` corre **34.886 verificaciones** sobre la evidencia. La mitad son invariantes del
 generador —todo 4634 tiene su 4624, ninguna cuenta actúa antes de su 4720, el sello local de
 syslog corresponde al instante real— y la otra mitad verifica que el escenario siga siendo
 un ejercicio: que el ataque sea minoría, que las tres fuentes participen, que haya línea base
@@ -196,25 +179,20 @@ menos eventos, sí.
 ## Estado
 
 Construido: generador con invariantes, normalización temporal, consulta, línea base,
-detector determinista con medición, verificador de citas, cobertura de tres valores,
+detector determinista, verificador de citas, cobertura de tres valores,
 catálogo de acciones con adjudicación, recomendación, situación,
 cronología y los ocho casos.
-
-**Pendiente:** correr los agentes contra el escenario **B**, que es el retenido. Hoy el
-método está medido sólo donde se escribió. Si el recall aguanta en B, los agentes investigan;
-si se cae como se cayó el detector (63,8% → 4,3%), el protocolo del skill estaba escrito para
-A. Ver `PENDIENTE.md`.
 
 ## Los módulos
 
 | Archivo | Contenido |
 |---|---|
 | `modelo.py` | Entidades con estado y única puerta de emisión. La consistencia vive acá. |
-| `evidencia/generar_evidencia.py` | Los actores y los planes de atacante (A, B, C). Seed fijo. |
+| `evidencia/generar_evidencia.py` | Los actores y el plan de atacante. Seed fijo. |
 | `tiempo.py` | Normalización de cada fuente a un instante UTC. |
 | `eventos.py` | Vocabulario común y semántica contrastable contra documentación publicada. |
 | `consulta.py` | Filtrar, contar, pivotear, línea base. |
-| `deteccion.py` | Las ocho reglas y la medición contra la verdad. |
+| `deteccion.py` | Las ocho reglas escritas a mano (`barrido`). |
 | `cobertura.py` | Qué se recolectó y qué no. Observabilidad de tres valores. |
 | `decisiones.py` | Cronología de decisiones, y el estado de la respuesta derivado de ella. |
 | `conectores.py` | Conectores simulados que dispara una decisión al registrarse. |
@@ -223,4 +201,4 @@ A. Ver `PENDIENTE.md`.
 | `situacion.py` | Hechos, indicios y lo que quedó sin establecer. |
 | `regresion.py` | Las nueve pruebas del motor. |
 | `bitacora.py` | Registro de lo que se consultó: separa "sin mirar" de "mirado y vacío". |
-| `tests.py` | 34.868 verificaciones. Runner propio. |
+| `tests.py` | 34.886 verificaciones. Runner propio. |

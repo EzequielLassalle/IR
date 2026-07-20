@@ -7,7 +7,7 @@
     python main.py entidad <ind>      todo lo que menciona un indicador
     python main.py contar --por ip    agregacion sobre lo filtrado
     python main.py base               linea base: que hay en la ventana que no habia antes
-    python main.py barrido            el detector deterministico y su medicion
+    python main.py barrido            el detector deterministico, sus hallazgos
     python main.py verdad             la verdad del escenario (revela el caso)
     python main.py respuesta          que acciones ya se aplicaron
     python main.py cobertura          que se recolecto y que no
@@ -31,14 +31,14 @@ sys.path.insert(0, str(AQUI))
 from consulta import (  # noqa: E402
     contar, filtrar, linea_base, perfil_horario, pivotear, primera_y_ultima,
 )
-from deteccion import barrer, eventos_perdidos, medir  # noqa: E402
+from deteccion import barrer  # noqa: E402
 from eventos import ESTADOS_4625, LOGON_TYPES, cargar, cargar_verdad  # noqa: E402
 
-DIRS = {"a": "evidencia", "b": "evidencia_b", "c": "evidencia_c"}
+DIRS = {"a": "evidencia", "b": "evidencia_b"}
 
 
 def _evid(args) -> Path:
-    return AQUI / DIRS[getattr(args, "escenario", "a")]
+    return AQUI / DIRS[getattr(args, "caso", "a")]
 
 
 def _anotar(args, alcanzado=()) -> None:
@@ -212,7 +212,6 @@ def cmd_base(args) -> int:
 
 def cmd_barrido(args) -> int:
     eventos = cargar(_evid(args))
-    verdad = cargar_verdad(_evid(args))
     hallazgos = barrer(eventos)
 
     _seccion(f"BARRIDO DETERMINISTICO  ({len(hallazgos)} hallazgos)")
@@ -220,29 +219,6 @@ def cmd_barrido(args) -> int:
         print(f"\n{h}")
     if len(hallazgos) > args.tope:
         print(f"\n  ... {len(hallazgos) - args.tope} hallazgos mas")
-
-    if not args.medir:
-        print("\n  (agregar --medir para contrastar contra la verdad del escenario)")
-        return 0
-
-    m = medir(hallazgos, verdad)
-    perdidos = eventos_perdidos(hallazgos, verdad)
-
-    _seccion("MEDICION CONTRA LA VERDAD")
-    print(f"  eventos citados      : {m.citados}")
-    print(f"  de ellos, del ataque : {m.de_ataque} de {m.total_ataque}")
-    print(f"  precision            : {m.precision:.1%}")
-    print(f"  recall               : {m.recall:.1%}")
-    print(f"  F1                   : {m.f1:.1%}")
-
-    _seccion("QUE CITO EL DETECTOR, POR ETIQUETA REAL")
-    for etiqueta, n in sorted(m.por_etiqueta.items(), key=lambda x: -x[1]):
-        print(f"  {n:>6}  {etiqueta}")
-
-    _seccion(f"EVENTOS DEL ATAQUE QUE NADIE CITO  ({len(perdidos)})")
-    print("  La mitad silenciosa del error: el verificador comprueba lo que se afirmo,")
-    print("  nunca lo que se callo.\n")
-    print("  " + ", ".join(perdidos) if perdidos else "  (ninguno)")
     return 0
 
 
@@ -455,50 +431,6 @@ def cmd_regresion(args) -> int:
     return 0
 
 
-def cmd_medir(args) -> int:
-    """Contrasta al detector contra una o mas investigaciones, sobre la misma verdad.
-
-    Es el comando que faltaba para que la opcion 1.4 del skill entregue el contraste que
-    promete. Sin el, el unico numero medible era el del detector y cualquier cifra sobre un
-    agente quedaba calculada fuera del arnes -- o sea, sin forma de reproducirla.
-    """
-    from deteccion import barrer, eventos_perdidos, medir
-
-    eventos = cargar(_evid(args))
-    verdad = cargar_verdad(_evid(args))
-
-    corridas = [("detector deterministico", barrer(eventos))]
-    for ruta in args.archivos:
-        admitidos, rechazados = _hallazgos_de(ruta, eventos)
-        corridas.append((Path(ruta).stem, admitidos))
-        if rechazados:
-            print(f"  ({Path(ruta).stem}: {len(rechazados)} hallazgo(s) sin verificar, "
-                  f"excluidos)")
-
-    if args.union and len(args.archivos) > 1:
-        corridas.append(("UNION de las investigaciones",
-                         [h for _, hs in corridas[1:] for h in hs]))
-
-    _seccion("MEDICION CONTRA LA VERDAD")
-    print(f"  {'analista':<34}{'citados':>9}{'del ataque':>13}"
-          f"{'precision':>12}{'recall':>9}")
-    for nombre, hs in corridas:
-        m = medir(hs, verdad)
-        print(f"  {nombre:<34}{m.citados:>9}"
-              f"{f'{m.de_ataque}/{m.total_ataque}':>13}"
-              f"{m.precision:>11.1%}{m.recall:>9.1%}")
-
-    if args.perdidos:
-        _seccion("EVENTOS DEL ATAQUE SIN CITAR, POR CORRIDA")
-        print("  La mitad silenciosa del error: el verificador comprueba lo que se afirmo,")
-        print("  nunca lo que se callo.")
-        for nombre, hs in corridas:
-            faltan = eventos_perdidos(hs, verdad)
-            print(f"\n  {nombre} ({len(faltan)}):")
-            print("  " + (", ".join(faltan) if faltan else "(ninguno)"))
-    return 0
-
-
 def cmd_test(args) -> int:
     return subprocess.call([sys.executable, str(AQUI / "tests.py")])
 
@@ -506,7 +438,7 @@ def cmd_test(args) -> int:
 def cmd_generar(args) -> int:
     return subprocess.call([sys.executable,
                             str(AQUI / "evidencia" / "generar_evidencia.py"),
-                            "--escenario", getattr(args, "escenario", "a")])
+                            "--caso", getattr(args, "caso", "a")])
 
 
 # --------------------------------------------------------------------------------------
@@ -515,10 +447,9 @@ def cmd_generar(args) -> int:
 def construir_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="main.py", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--escenario", choices=["a", "b", "c"], default="a",
-                   help="a = INC-2026-0051 (por defecto). b = INC-2026-0058, retenido "
-                        "para validar metodo. c = INC-2026-0064, cadena de tres saltos, "
-                        "generado bajo demanda (ver `9) Ataque nuevo` en fir-lab).")
+    p.add_argument("--caso", choices=["a", "b"], default="a",
+                   help="a = INC-2026-0051 (por defecto). b = INC-2026-0064, cadena de "
+                        "tres saltos, para practicar con otro incidente.")
     sub = p.add_subparsers(dest="comando")
 
     def con_filtros(sp):
@@ -557,7 +488,6 @@ def construir_parser() -> argparse.ArgumentParser:
     sp.set_defaults(func=cmd_base)
 
     sp = sub.add_parser("barrido")
-    sp.add_argument("--medir", action="store_true")
     sp.add_argument("--tope", type=int, default=12)
     sp.set_defaults(func=cmd_barrido)
 
@@ -616,15 +546,6 @@ def construir_parser() -> argparse.ArgumentParser:
     sp.add_argument("numero", nargs="?", type=int)
     sp.add_argument("--detalle", action="store_true")
     sp.set_defaults(func=cmd_regresion)
-
-    sp = sub.add_parser("medir")
-    sp.add_argument("archivos", nargs="*",
-                    help="archivos de hallazgos a contrastar contra el detector")
-    sp.add_argument("--union", action="store_true",
-                    help="agrega una fila con la union de las investigaciones")
-    sp.add_argument("--perdidos", action="store_true",
-                    help="lista los eventos del ataque que cada corrida no cito")
-    sp.set_defaults(func=cmd_medir)
 
     sub.add_parser("test").set_defaults(func=cmd_test)
     sub.add_parser("generar").set_defaults(func=cmd_generar)

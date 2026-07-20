@@ -15,7 +15,7 @@ una persona, ni la misma persona que entro despues. Sin ese campo el informe pro
 
 from __future__ import annotations
 
-from collections import Counter, defaultdict
+from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import timedelta
 
@@ -308,56 +308,3 @@ def barrer(eventos: list[Evento]) -> list[Hallazgo]:
     orden = {"ALTA": 0, "MEDIA": 1, "BAJA": 2}
     hallazgos = [h for regla in REGLAS for h in regla(eventos)]
     return sorted(hallazgos, key=lambda h: (orden[h.severidad], h.regla))
-
-
-# --------------------------------------------------------------------------------------
-# Medicion contra la verdad
-# --------------------------------------------------------------------------------------
-
-
-@dataclass
-class Medicion:
-    """Precision y recall de un conjunto de hallazgos contra la etiqueta de verdad.
-
-    Es el numero que hace falsable al laboratorio. Sin esto, un detector que encuentra 25 de
-    80 eventos del ataque y los cita impecablemente parece perfecto: el verificador
-    comprueba lo que se afirmo y nunca lo que se callo.
-    """
-
-    citados: int
-    de_ataque: int
-    total_ataque: int
-    por_etiqueta: dict[str, int]
-
-    @property
-    def precision(self) -> float:
-        return self.de_ataque / self.citados if self.citados else 0.0
-
-    @property
-    def recall(self) -> float:
-        return self.de_ataque / self.total_ataque if self.total_ataque else 0.0
-
-    @property
-    def f1(self) -> float:
-        p, r = self.precision, self.recall
-        return 2 * p * r / (p + r) if (p + r) else 0.0
-
-
-def medir(hallazgos: list[Hallazgo], verdad: dict) -> Medicion:
-    citados = {eid for h in hallazgos for eid in h.cita}
-    eventos = verdad["eventos"]
-    etiquetas = Counter(eventos[eid]["etiqueta"] for eid in citados if eid in eventos)
-    total_ataque = sum(1 for v in eventos.values() if v["etiqueta"] == "ataque")
-    return Medicion(
-        citados=len(citados),
-        de_ataque=etiquetas.get("ataque", 0),
-        total_ataque=total_ataque,
-        por_etiqueta=dict(etiquetas),
-    )
-
-
-def eventos_perdidos(hallazgos: list[Hallazgo], verdad: dict) -> list[str]:
-    """Los eventos del ataque que ningun hallazgo cito. Es la mitad silenciosa del error."""
-    citados = {eid for h in hallazgos for eid in h.cita}
-    return sorted(eid for eid, v in verdad["eventos"].items()
-                  if v["etiqueta"] == "ataque" and eid not in citados)
