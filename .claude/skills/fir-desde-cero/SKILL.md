@@ -108,17 +108,13 @@ que falte al vuelo.
 │   6) La afirmacion            el otro objeto, y la cita                  │
 │                                                                          │
 │  EL MOTOR                                                                │
-│   7) Verificar                cuando una cita no sostiene lo que dice    │
-│   8) El vocabulario cerrado   por que 'el atacante' no se puede afirmar  │
-│   9) La cobertura             la diferencia entre no paso y no se sabe   │
-│  10) Adjudicar                juzgar una decision con lo que se sabia    │
-│  11) Recomendar               por que no es lo mismo, y el bug central   │
-│  12) El estado                ejecutar tiene que cambiar el mundo        │
+│   7) El motor                 citas, cobertura, adjudicar, recomendar    │
+│   8) El estado                ejecutar tiene que cambiar el mundo        │
 │                                                                          │
 │  LA PRUEBA                                                               │
-│  13) Medir                    recall, precision y la verdad sin archivo  │
-│  14) El escenario B           como se sabe si un metodo transfiere       │
-│  15) El codigo                los modulos y como encajan                 │
+│   9) Medir                    recall, precision y la verdad sin archivo  │
+│  10) El escenario B           como se sabe si un metodo transfiere       │
+│  11) El codigo                los modulos y como encajan                 │
 │                                                                          │
 │   0) Salir                                                               │
 ╰──────────────────────────────────────────────────────────────────────────╯
@@ -436,22 +432,25 @@ creible**. Si arma una cambiando el sujeto o la accion, la parte 7 ya esta ganad
 
 # EL MOTOR
 
-## 7) Verificar
+## 7) El motor
 
-Correr `python main.py verificar hallazgos_prueba.json`. Pegar la salida completa: son 11
-hallazgos y 2 admitidos.
+Es una sola parte con cinco piezas, todas la misma operacion de la parte 6 (agarrar una
+afirmacion, agarrar lo que cita, decidir si sostiene) aplicada a cinco situaciones distintas:
+verificar una cita, respetar un vocabulario cerrado, leer una ausencia, adjudicar una accion
+ya tomada, y generar una recomendacion nueva. Van en orden porque cada una necesita la
+anterior.
 
-Aclarar primero que **ese archivo no son hallazgos del caso**: es un banco de prueba escrito a
-mano donde casi todo esta mal a proposito, uno por cada forma de estar mal. Su `_nota` lo dice.
+### Verificar
 
-Agrupar los rechazos en tres familias y no perder tiempo en las dos primeras:
+Correr `python main.py verificar hallazgos_prueba.json`. Son 11 hallazgos, 2 admitidos. Ese
+archivo **no son hallazgos del caso**: es un banco de prueba escrito a mano donde casi todo
+esta mal a proposito, uno por cada forma de estar mal (su `_nota` lo dice).
 
-**Cita inexistente.** `C8888`, `W9999` no existen en la evidencia. Trivial de detectar.
+Tres familias de rechazo. Dos triviales: **cita inexistente** (`C8888`, `W9999` no existen en
+la evidencia) y **sin cita** (un hallazgo sin respaldo no es verificable).
 
-**Sin cita.** Un hallazgo sin respaldo no es verificable. Tambien trivial.
-
-**`CITA-NO-SOSTIENE`** -- esta es la que importa. Cita eventos **reales** y afirma algo que
-esos eventos no dicen. Tres variantes, las tres con el mismo `W1497` de por medio:
+La que importa es **`CITA-NO-SOSTIENE`**: cita eventos **reales** y afirma algo que esos
+eventos no dicen. Tres variantes, las tres con `W1497` de por medio:
 
 ```
 mlopez autentico-remoto WKS-04       -> W1497: el sujeto del evento es 'WKS-04\ecarrizo'
@@ -460,23 +459,16 @@ ecarrizo autentico-remoto (dia 5)    -> W1497: el evento cae fuera de la ventana
 ```
 
 Sujeto, accion, ventana: los tres campos que se pueden falsear manteniendo un ID valido al
-lado. **Las tres se ven impecables a simple vista.**
+lado. **Las tres se ven impecables a simple vista**, y ese es el punto: es el modo de falla
+real de un modelo de lenguaje. Inventar identificadores casi no lo hace. Citar bien y concluir
+mal, todo el tiempo. Si el verificador no atrapa esas, no sirve para nada.
 
-Y el punto de por que esto existe: **ese es el modo de falla real de un modelo de lenguaje.**
-Inventar identificadores casi no lo hace. Citar bien y concluir mal, todo el tiempo. Si el
-verificador no atrapa esas, no sirve para nada.
+El hallazgo que sale `VERIFICADO: 1 de 2 citas sostienen` muestra que alcanza con una cita
+buena: la verificacion no es binaria por hallazgo, es por cita.
 
-Notar tambien el hallazgo que sale `VERIFICADO: 1 de 2 citas sostienen`: alcanza con una cita
-buena, y las malas se listan igual con el motivo. La verificacion no es binaria por hallazgo,
-es por cita.
+### Vocabulario cerrado
 
-**Comprobacion:** preguntarle por que `CITA-NO-SOSTIENE` es peor que `CITA-INEXISTENTE`, si
-las dos terminan rechazadas. La respuesta es que la primera pasa cualquier revision humana
-rapida y la segunda no.
-
-## 8) El vocabulario cerrado
-
-Sale de la misma salida de la parte 7, de los tres hallazgos con `FUERA-DE-VOCABULARIO`:
+Misma salida de arriba, los tres hallazgos con `FUERA-DE-VOCABULARIO`:
 
 ```
 'el atacante'          -> no es un sujeto observable: un log registra credenciales,
@@ -489,179 +481,98 @@ Sale de la misma salida de la parte 7, de los tres hallazgos con `FUERA-DE-VOCAB
                           fallo-usuario-inexistente, llamo-api
 ```
 
-Tres rechazos por tres razones distintas y conviene separarlas:
+Tres razones distintas: `el atacante` no es observable (un log registra que `ecarrizo`
+autentico, no **quien** la uso -- el salto de cuenta a persona es atribucion, y ninguna cita
+podria respaldarla). `movimiento-lateral` no es un evento (es una lectura de varios eventos
+juntos, valida como conclusion, no como afirmacion verificable). `descargo-archivos`
+simplemente no esta en las diez acciones validas -- error de tipos, no de epistemologia.
 
-**`el atacante` no es observable.** Un log registra que la cuenta `ecarrizo` autentico. No
-registra **quien** la uso: pudo ser su duena, pudo ser alguien con su contrasena. El salto de
-cuenta a persona es una atribucion, y no hay ningun evento que la sostenga. El motor no la
-prohibe por pedante: la prohibe porque **ninguna cita podria respaldarla**.
+**La regla de diseno:** el vocabulario es cerrado, entonces lo que no se puede verificar no se
+puede ni siquiera escribir. La restriccion esta en la entrada, no en la salida.
 
-**`movimiento-lateral` no es un evento.** Movimiento lateral es "el atacante paso de una
-maquina a otra". Eso es una lectura de varios eventos juntos, no algo que un log escriba.
-Puede ser la conclusion de un caso; no puede ser una afirmacion verificable contra citas.
+### Cobertura
 
-**`descargo-archivos` simplemente no existe.** El vocabulario de acciones tiene diez entradas
-y esa no esta. Es un error de tipos, no de epistemologia.
+Correr `python main.py cobertura`. Esta pieza contesta lo que quedo colgando desde la parte 1:
+**que significa no haber encontrado algo.** Dos cosas incompatibles: *no paso* o *no lo puedo
+saber*, segun si la fuente que lo habria registrado cubria la ventana.
 
-**La regla de diseno:** el vocabulario es cerrado, entonces **lo que no se puede verificar no
-se puede ni siquiera escribir**. La restriccion esta en la entrada, no en la salida. Un agente
-que quiera afirmar "hubo movimiento lateral" tiene que descomponerlo en los eventos concretos
-que lo harian cierto -- y esos si se verifican.
-
-**Comprobacion:** darle una conclusion en prosa (`"la cuenta soporte_it se creo para
-mantener acceso"`) y pedirle que diga que parte es afirmable y que parte no. Afirmable: que
-`ecarrizo` creo la cuenta `soporte_it` en tal ventana. No afirmable: el "para", que es
-intencion.
-
-## 9) La cobertura
-
-Correr primero `python main.py cobertura` y pegar la salida.
-
-Esta parte contesta la pregunta que quedo colgando desde la 1: **que significa no haber
-encontrado algo.** Significa dos cosas incompatibles: *no paso* o *no lo puedo saber*. La
-diferencia depende de si la fuente que lo habria registrado cubria la ventana y registra esa
-clase de hecho.
-
-De la salida importan las `CARENCIAS DE AUDITORIA`, que son agujeros **declarados de
-antemano**:
-
-```
-4688_command_line   El campo CommandLine de los eventos 4688.
-                    Se sabe QUE binario se ejecuto, no CON QUE argumentos.
-s3_data_events      Los eventos de nivel objeto de S3 (GetObject, PutObject...).
-                    La ausencia de GetObject NO es evidencia de que no hubo exfiltracion.
-```
-
-Explicar el segundo, que hace falta contexto: S3 es el almacenamiento de archivos de AWS, y
-un **bucket** es un contenedor de archivos. CloudTrail por defecto registra las operaciones
-*sobre* los buckets (crear, listar, borrar el bucket) pero **no las operaciones sobre los
-archivos adentro** -- esas son los data events, y se activan aparte porque son carisimas en
-volumen. Consecuencia: se ve que alguien listo los buckets, no se ve si bajo algo.
-**Exfiltracion** es justamente sacar datos de la organizacion. O sea: el agujero esta
-exactamente donde mas duele, y eso es realista.
-
-Ahora los dos comandos:
+Las `CARENCIAS DE AUDITORIA` son agujeros **declarados de antemano** -- por ejemplo, CloudTrail
+registra que alguien listo un bucket de S3 pero no si descargo un archivo de adentro (los data
+events se activan aparte, son carisimos en volumen). El agujero esta exactamente donde mas
+duele, y eso es realista.
 
 ```
 python main.py observable llamo-api s3:GetObject --desde 2026-03-10T00:00:00Z --hasta 2026-03-10T06:00:00Z --sujeto AKIA6WNPXQ4TZBVMH8KR
 python main.py observable llamo-api cloudtrail:StopLogging --desde 2026-03-10T00:00:00Z --hasta 2026-03-10T06:00:00Z --sujeto AKIA6WNPXQ4TZBVMH8KR
 ```
 
-Las dos afirmaciones tienen la misma forma -- "X **no** hizo Y" -- y veredictos opuestos:
+Misma forma -- "X **no** hizo Y" -- veredictos opuestos: `NO llamo-api s3:GetObject` sale
+`AUSENCIA-NO-CONCLUYENTE` (no hay eventos, pero no los habria habido igual, por la carencia de
+arriba); `NO llamo-api cloudtrail:StopLogging` sale `DESMENTIDA` (hay 1 evento que la
+contradice -- apagar el propio log de auditoria, y que aparezca es en si mismo el dato). El
+tercer valor, `INDETERMINADO`, es para cuando no se puede afirmar cobertura: lo desconocido
+nunca cae del lado de "si, lo habriamos visto".
 
-| afirmacion | veredicto | por que |
-|---|---|---|
-| `NO llamo-api s3:GetObject` | `AUSENCIA-NO-CONCLUYENTE` | no hay eventos, pero no los habria habido igual |
-| `NO llamo-api cloudtrail:StopLogging` | `DESMENTIDA` | hay 1 evento que la contradice |
-
-`cloudtrail:StopLogging` es apagar el propio log de auditoria, y que aparezca es en si mismo
-el dato.
-
-Y el tercer valor, que no es un descuido: `INDETERMINADO`, para cuando **no se puede afirmar
-cobertura**. Lo desconocido nunca cae del lado de "si, lo habriamos visto".
-
-### Mirado y vacio no es sin mirar
-
-Es la otra mitad de la misma idea. Correr:
-
-```
-python main.py situacion hallazgos_agente_windows.json
-```
-
-Un caso donde nadie miro CloudTrail y uno donde se miro y no habia nada producen **la misma
-lista de hallazgos**. El primero tiene un hueco de investigacion; el segundo, una zona
-descartada. La salida los separa cruzando la cobertura con la bitacora de consultas:
+La otra mitad de la misma idea, con `python main.py situacion hallazgos_agente_windows.json`:
+un caso donde nadie miro CloudTrail y uno donde se miro y no habia nada producen la misma
+lista de hallazgos. La salida los separa cruzando cobertura con la bitacora de consultas:
 
 ```
 [?] cloudtrail: 'llamo-api'    SIN MIRAR
     la fuente cubre la ventana y registra esta accion, y ninguna consulta la alcanzo
 ```
 
-Ese hallazgo lo produjo el agente que solo miro Windows, por eso las seis zonas dan `SIN
-MIRAR`. Si la fuente **no** cubriera, no seria "sin mirar": seria el caso de `observable`.
+`SIN MIRAR` es un hueco de investigacion; si la fuente hubiera sido consultada y no hubiera
+dado nada, seria `MIRADO Y VACIO` -- una zona descartada, no un hueco. Este modulo tiene dos
+versiones falladas en su historia (registraba lo pedido en vez de lo obtenido, y despues daba
+por mirado el producto cartesiano de fuentes por accion) -- contadas en el docstring de
+`bitacora.py`.
 
-Mencionar que este modulo tiene **dos versiones falladas en su historia** -- registraba lo
-pedido en vez de lo obtenido, y despues daba por mirado el producto cartesiano de fuentes por
-acciones. Las dos veces, el modulo cuya razon de ser es distinguir la ausencia fundada de la
-no fundada emitia ausencias falsas. Estan contadas en el docstring de `bitacora.py`.
+### Adjudicar
 
-**Comprobacion:** preguntarle por que `AUSENCIA-NO-CONCLUYENTE` no es lo mismo que `SIN
-MIRAR`. La primera es "mire y no podria haberlo visto aunque hubiera pasado"; la segunda es
-"podria haberlo visto pero no mire".
+Aca arranca la segunda mitad del proyecto: dejar de preguntar *que paso* y empezar a preguntar
+*que hago*. Vocabulario de respuesta nuevo: **contener** es cortarle al atacante la capacidad
+de seguir; **aislar un host** es cortarle la red dejandolo prendido; **deshabilitar una
+cuenta** es que deje de autenticar; **revocar una credencial** es invalidar una access key;
+**capturar memoria** es volcar la RAM, y es **perecedero** -- si la maquina se apaga, se
+pierde. Todas tienen costo real.
 
-## 10) Adjudicar
-
-Aca empieza la segunda mitad del proyecto: dejar de preguntar *que paso* y empezar a preguntar
-*que hago*.
-
-Definir primero el vocabulario de respuesta, que no aparecio hasta ahora:
-
-- **Contener** es cortarle al atacante la capacidad de seguir, sin necesariamente entender
-  todavia todo lo que hizo.
-- **Aislar un host** es cortarle la red a una maquina dejandola prendida.
-- **Deshabilitar una cuenta** es que deje de poder autenticar.
-- **Revocar una credencial** es invalidar una access key.
-- **Capturar memoria** es volcar la RAM a un archivo para analizarla despues. Es **perecedero**:
-  si la maquina se apaga o se reinicia, se pierde.
-
-Todas tienen costo real: si aislas un servidor que presta servicio, el servicio se cae.
-
-**Adjudicar** es lo que hace el motor: se le somete una accion ya elegida y contesta si la
-evidencia la respaldaba. Correr los dos:
+**Adjudicar** somete una accion ya elegida y contesta si la evidencia la respaldaba:
 
 ```
 python main.py accion deshabilitar-cuenta "WKS-04\\soporte_it" --en 2026-03-09T22:00:00Z
 python main.py accion deshabilitar-cuenta "WKS-04\\soporte_it" --en 2026-03-10T04:00:00Z
 ```
 
-`INFUNDADA` y `FUNDADA`. **Lo unico que cambia es `--en`**, el instante en que se toma la
-decision. La cuenta `soporte_it` no existia el dia 9 -- se crea a las 00:31 del dia 10 y
-autentica a las 03:01 (`W1515`). El motor solo mira evidencia **anterior** a `--en`.
+`INFUNDADA` y `FUNDADA`. Lo unico que cambia es `--en`, el instante en que se toma la
+decision -- el motor solo mira evidencia **anterior** a ese instante. Adjudicar contra
+evidencia posterior es juzgar con el diario del lunes.
 
-Ese es el concepto: **una decision se juzga con lo que se sabia cuando se tomo.** Adjudicar
-contra evidencia posterior es juzgar con el diario del lunes, y castiga al analista por no
-haber adivinado.
+El `INFUNDADA` no dice solo "no hay evidencia", dice *"...y la fuente que lo habria
+registrado cubria la ventana"* -- la cobertura de arriba, enganchada aca: el motor distingue
+"no hay" de "no podria saberlo". Y al pie aparece `QUE LA VOLVERIA PREMATURA`: `FUNDADA` no
+quiere decir recomendable -- `apagar-host` sale fundada con los mismos requisitos que aislar,
+y apagar destruye la memoria volatil que capturar-memoria necesitaba.
 
-Notar dos detalles de la salida:
+### Recomendar
 
-El `INFUNDADA` no dice solo "no hay evidencia", dice *"...y la fuente que lo habria registrado
-cubria la ventana"*. Eso es la parte 9 enganchada aca: el motor distingue "no hay" de "no
-podria saberlo".
+**El bug central del proyecto**, y se cuenta como historia. Adjudicar es retrospectivo y **un
+humano ya eligio el objetivo** -- al elegirlo aporto la sospecha, y al motor le alcanza con
+comprobar una precondicion de capacidad. Recomendar es generativo: **nadie aporta sospecha**,
+entonces la precondicion tendria que cargarla entera. La primera version no lo distinguia:
+recorria el inventario entero y proponia contener nueve cosas en una ventana **anterior al
+ataque**, cuando no habia pasado nada.
 
-Y al pie de las dos aparece `QUE LA VOLVERIA PREMATURA`. **`FUNDADA` no quiere decir
-recomendable**: `apagar-host` sale fundada con los mismos requisitos que aislar, y apagar
-destruye la memoria volatil que capturar-memoria necesitaba. Por eso cada accion arrastra su
-propia condicion de falsedad en vez de un semaforo verde.
-
-**Comprobacion:** preguntarle que pasaria si el motor mirara toda la evidencia en vez de solo
-la anterior a `--en`. La respuesta: toda accion contra el atacante saldria fundada siempre,
-incluso decidida antes de que el ataque ocurriera, y el veredicto dejaria de significar nada.
-
-## 11) Recomendar
-
-**Es el bug central del proyecto y se cuenta como historia, no como feature.**
-
-*Adjudicar* (parte 10) es retrospectivo y **un humano ya eligio el objetivo**. Al elegirlo
-aporto la sospecha. Al motor le queda comprobar si la evidencia respaldaba la accion, y ahi
-una precondicion de capacidad -- "el host tuvo un acceso remoto" -- alcanza.
-
-*Recomendar* es generativo: **nadie aporta sospecha**, entonces la precondicion tiene que
-cargarla entera. La primera version no lo distinguia: recorria el inventario y filtraba por la
-misma precondicion de capacidad. Resultado: proponia contener nueve cosas en una ventana
-**anterior al ataque**, cuando no habia pasado nada.
-
-La correccion es que los objetivos ya no salen del inventario, sino de **entidades senaladas
-por un hallazgo**, ademas de cumplir la precondicion. Se demuestra con la falsificacion:
+La correccion: los objetivos salen de **entidades senaladas por un hallazgo**, ademas de
+cumplir la precondicion.
 
 ```
 python main.py recomendacion --en 2026-03-06T00:00:00Z --desde 2026-03-02T00:00:00Z --hasta 2026-03-06T00:00:00Z
 python main.py recomendacion
 ```
 
-**Cero contra once.** En la ventana previa al ataque no hay hallazgos, entonces no hay
-candidatos, entonces la lista es vacia -- que es la respuesta correcta.
-
-En la salida completa senalar el campo que no existia antes de la correccion:
+**Cero contra once.** Sin hallazgos previos al ataque, no hay candidatos -- lista vacia, la
+respuesta correcta. En la salida completa, el campo que no existia antes de la correccion:
 
 ```
 bloquear-ip 198.51.100.77
@@ -671,17 +582,16 @@ bloquear-ip 198.51.100.77
                quien puede autenticarse desde cualquier otro.
 ```
 
-`senialado` es la trazabilidad al hallazgo que puso a esa entidad en la lista.
+`senialado` es la trazabilidad al hallazgo que puso a esa entidad en la lista. Lo encontro una
+auditoria externa corriendo la recomendacion sobre una ventana previa al ataque -- antes de eso
+el comportamiento estaba racionalizado como leccion en un caso de test, en vez de corregido.
 
-**Como se encontro el bug**, y hay que contarlo porque es la mejor parte: lo encontro una
-auditoria externa corriendo la recomendacion sobre una ventana previa al ataque. Antes de eso
-el comportamiento estaba **racionalizado como leccion en un caso de test** -- o sea, el test
-verificaba la excusa en vez del comportamiento correcto.
+**Comprobacion:** por que la misma precondicion de capacidad alcanza para adjudicar y no para
+recomendar, si es la misma condicion. La respuesta esta en quien aporta la sospecha: en
+adjudicar la aporta el humano al elegir el objetivo; en recomendar no la aporta nadie, y por
+eso el hallazgo tiene que hacer ese trabajo.
 
-**Comprobacion:** preguntarle por que la misma precondicion alcanza para adjudicar y no para
-recomendar, si es la misma condicion. La respuesta esta en quien aporta la sospecha.
-
-## 12) El estado
+## 8) El estado
 
 ```
 python main.py accion aislar-host WKS-04 --registrar prueba
@@ -689,9 +599,12 @@ python main.py accion aislar-host WKS-04
 python main.py respuesta
 ```
 
-La primera sale `FUNDADA` y agrega `Registrada en la cronologia por 'prueba'`. La segunda sale
-`INAPLICABLE: 'aislar-host' ya se aplico sobre WKS-04`. La tercera muestra el estado del
-mundo: `host-aislado: WKS-04 desde 2026-03-10T04:00:00Z`.
+La primera sale `FUNDADA` y agrega `Registrada en la cronologia por 'prueba'` -- y despues un
+bloque `CONECTOR` con un ticket (`edr  ticket EDR-395472  [ok]`). Nada de eso llama a un
+sistema real: es un conector simulado (`conectores.py`) que devuelve una respuesta con la
+forma de una real, para que quede registrado que la decision no solo se adjudico, se disparo.
+La segunda sale `INAPLICABLE: 'aislar-host' ya se aplico sobre WKS-04`. La tercera muestra el
+estado del mundo: `host-aislado: WKS-04 desde 2026-03-10T04:00:00Z`.
 
 **Ejecutar cambia el mundo, y el mundo cambiado cambia lo que se recomienda despues.** Sin
 eso, la recomendacion seria una lista estatica de sugerencias que repite lo mismo para siempre.
@@ -718,7 +631,7 @@ justo cuando mas importa.
 
 # LA PRUEBA
 
-## 13) Medir
+## 9) Medir
 
 Definir las dos metricas antes de correr nada, sin suponerlas conocidas:
 
@@ -760,7 +673,7 @@ que le pasa a una regla basada en volumen en una organizacion real.
 un archivo de respuestas, si al final es el mismo dato. La respuesta: porque un archivo se
 puede leer durante la investigacion y el seed solo se usa al medir.
 
-## 14) El escenario B
+## 10) El escenario B
 
 Definir el problema primero, que es un problema de metodo y no de seguridad: **si escribis las
 reglas mirando un caso y despues las medis contra ese mismo caso, la medicion no dice nada.**
@@ -814,7 +727,7 @@ la lista blanca, ninguna al comando que revela el caso.
 para subir el 4,3%. La respuesta: porque en el momento en que lo hacen, B deja de ser
 retenido y no queda con que medir.
 
-## 15) El codigo
+## 11) El codigo
 
 Recien aca, y a proposito: con las catorce partes anteriores cada modulo se explica en una
 linea porque ya se sabe que problema resuelve. Son ~4.000 lineas de Python puro, sin
@@ -829,9 +742,10 @@ y los logs caen como efecto.
 
 Eso hace la contradiccion **estructuralmente imposible**: no se puede emitir un `Failed
 password` para un usuario que sshd ya declaro inexistente, porque el emisor le pregunta al
-objeto cuenta. Y regala gratis la etiqueta de verdad por evento (parte 13).
+objeto cuenta. Y regala gratis la etiqueta de verdad por evento (parte 9).
 
-`evidencia/generar_evidencia.py` tiene los actores y los dos planes de atacante.
+`evidencia/generar_evidencia.py` tiene los actores y los planes de atacante (tres hoy: A, B
+y el de escenario C armado en `fir-lab`, opcion 9).
 
 **Entender la evidencia.**
 
@@ -840,17 +754,18 @@ objeto cuenta. Y regala gratis la etiqueta de verdad por evento (parte 13).
 | `tiempo.py` | normalizacion de cada fuente a un instante UTC | 5 |
 | `eventos.py` | normalizacion y semantica publicada | 4 |
 | `consulta.py` | filtrar, contar, pivotear, linea base | 2 |
-| `cobertura.py` | que se recolecto y que no | 9 |
+| `cobertura.py` | que se recolecto y que no | 7 |
 
 **Decidir.**
 
 | modulo | que resuelve | parte |
 |---|---|---|
-| `deteccion.py` | las ocho reglas escritas a mano | 13 |
-| `verificador.py` | citas y vocabulario | 7, 8 |
-| `acciones.py` | catalogo, adjudicacion, recomendacion | 10, 11 |
-| `decisiones.py` | cronologia y estado derivado | 12 |
-| `situacion.py`, `bitacora.py` | alcance: mirado vs sin mirar | 9 |
+| `deteccion.py` | las ocho reglas escritas a mano | 9 |
+| `verificador.py` | citas y vocabulario | 7 |
+| `acciones.py` | catalogo, adjudicacion, recomendacion | 7 |
+| `decisiones.py` | cronologia y estado derivado | 8 |
+| `conectores.py` | conectores simulados que dispara una decision registrada | 8 |
+| `situacion.py`, `bitacora.py` | alcance: mirado vs sin mirar | 7 |
 
 `main.py` es la CLI y `tests.py` son 34.886 verificaciones.
 
@@ -862,8 +777,8 @@ la evidencia lo respaldaba. Se ve abriendo `CATALOGO` en `acciones.py`.
 
 **Los tests barren el producto completo derivado de las declaraciones del codigo, nunca casos
 elegidos a mano.** Una tabla escrita al lado del test elige justo los casos que no rompen, y
-pasa en verde mientras el defecto sigue ahi -- que es exactamente como sobrevivio el bug de la
-parte 11. Es la leccion que el proyecto anterior pago con cinco auditorias.
+pasa en verde mientras el defecto sigue ahi -- que es exactamente como sobrevivio el bug de
+Recomendar (parte 7). Es la leccion que el proyecto anterior pago con cinco auditorias.
 
 **Comprobacion final:** pedirle que recorra el lazo completo sin mirar el skill:
 

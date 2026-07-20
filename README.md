@@ -210,13 +210,14 @@ A. Ver `PENDIENTE.md`.
 | Archivo | Contenido |
 |---|---|
 | `modelo.py` | Entidades con estado y única puerta de emisión. La consistencia vive acá. |
-| `evidencia/generar_evidencia.py` | Los actores y los dos planes de atacante. Seed fijo. |
+| `evidencia/generar_evidencia.py` | Los actores y los planes de atacante (A, B, C). Seed fijo. |
 | `tiempo.py` | Normalización de cada fuente a un instante UTC. |
 | `eventos.py` | Vocabulario común y semántica contrastable contra documentación publicada. |
 | `consulta.py` | Filtrar, contar, pivotear, línea base. |
 | `deteccion.py` | Las ocho reglas y la medición contra la verdad. |
 | `cobertura.py` | Qué se recolectó y qué no. Observabilidad de tres valores. |
 | `decisiones.py` | Cronología de decisiones, y el estado de la respuesta derivado de ella. |
+| `conectores.py` | Conectores simulados que dispara una decisión al registrarse. |
 | `verificador.py` | Citas, vocabulario cerrado y afirmaciones de ausencia. |
 | `acciones.py` | Catálogo, adjudicación y recomendación. |
 | `situacion.py` | Hechos, indicios y lo que quedó sin establecer. |

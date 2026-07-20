@@ -78,7 +78,15 @@ def registrar(evid: Path, actor: str, accion: str, objetivo: str, en: str,
     Los asientos no se editan ni se borran. Un registro de decisiones que se puede reescribir
     despues de conocer el resultado no sirve para lo unico que sirve un registro de
     decisiones.
+
+    Registrar una decision es ejecutarla: por eso, ademas de asentarla, se dispara el
+    conector simulado que corresponde (`conectores.py`) y su respuesta queda en el mismo
+    asiento. El veredicto no decide si se llama al conector -- lo decide el acto, igual que
+    decide el estado (ver `estado()` abajo): un override tambien se dispara.
     """
+    import conectores
+    respuesta = conectores.llamar(accion, objetivo)
+
     entrada = {
         "registrado": _ahora(),
         "actor": actor,
@@ -92,6 +100,10 @@ def registrar(evid: Path, actor: str, accion: str, objetivo: str, en: str,
         "efecto": EFECTOS.get(accion),
         # Ejecutada pese a que el motor no la fundo. No la invalida -- la marca.
         "override": veredicto != "FUNDADA",
+        "conector": respuesta.conector,
+        "ticket_id": respuesta.ticket_id,
+        "status_conector": respuesta.status,
+        "detalle_conector": respuesta.detalle,
     }
     registro = cargar(evid)
     registro.append(entrada)
@@ -167,6 +179,9 @@ def cronologia(evid: Path) -> list[str]:
         lineas.append(f"    se sabia  : {muestra or '(nada citado)'}")
         lineas.append(f"    motivo    : {d['motivo']}")
         lineas.append(f"    decidio   : {d['actor']}  (registrado {d['registrado']})")
+        if d.get("conector"):
+            lineas.append(f"    conector  : {d['conector']}  ticket {d['ticket_id']}  "
+                          f"[{d['status_conector']}]  {d['detalle_conector']}")
         lineas.append("")
     return lineas
 

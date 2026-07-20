@@ -361,6 +361,11 @@ secciones siempre**, no solo el veredicto.
 **`NO-ADJUDICABLE` no es un error del motor.** Es la negativa a condenar una decision por no
 haber mirado donde no habia nada que mirar.
 
+**Registrar (5.3) dispara ademas un conector simulado** (`conectores.py`): ningun sistema real
+recibe nada, pero la salida trae un ticket y un `status` con la forma de una respuesta real, y
+ese ticket queda en el mismo asiento de la cronologia. Se dispara **con cualquier veredicto**,
+incluido un override -- el conector ejecuta el acto, no juzga si estaba fundado.
+
 ## 6) Recomendacion
 
 ```
@@ -428,7 +433,8 @@ custodia de decisiones: lo que responde en el post-mortem cuando preguntan por q
 el servidor, y lo que permite defender una decision que salio mal y estaba fundada -- que es
 distinto de una mal tomada.
 
-Los asientos se agregan con `accion --registrar <actor>` y **no se editan ni se borran**.
+Los asientos se agregan con `accion --registrar <actor>` y **no se editan ni se borran**. Cada
+uno trae ademas el ticket del conector simulado que se disparo (linea `conector`).
 
 ## 8) Regresion
 

@@ -354,9 +354,13 @@ def cmd_accion(args) -> int:
 
     if args.registrar:
         citas = sorted({c for l in v.sostienen.values() for c in l})
-        decisiones.registrar(_evid(args), args.registrar, a.nombre, args.objetivo,
-                             args.en, v.veredicto, v.motivo, citas, a.costo)
+        entrada = decisiones.registrar(_evid(args), args.registrar, a.nombre, args.objetivo,
+                                       args.en, v.veredicto, v.motivo, citas, a.costo)
         print(f"\n  Registrada en la cronologia por '{args.registrar}'.")
+        _seccion("CONECTOR")
+        print(f"  {entrada['conector']}  ticket {entrada['ticket_id']}  "
+              f"[{entrada['status_conector']}]")
+        print(f"  {entrada['detalle_conector']}")
     return 0
 
 
