@@ -51,13 +51,13 @@ ella hay que distinguir entre lo raro y lo peligroso, que es el trabajo.
 
 **El generador no escribe logs, escribe comportamiento.** `modelo.py` define entidades con
 estado —cuentas que existen o no, sesiones que se abren y se cierran, credenciales con
-ventana de validez, hosts con su reloj— y cada transición emite sus líneas. La consistencia
-deja de ser algo que se verifica y pasa a ser algo que no se puede violar: no hay forma de
-emitir un `Failed password` para un usuario que sshd ya declaró inexistente, porque el
-emisor le pregunta a la cuenta.
+ventana de validez, hosts que dejan de emitir si se los aísla— y cada transición emite sus
+líneas. La consistencia deja de ser algo que se verifica y pasa a ser algo que no se puede
+violar: no hay forma de emitir un `Failed password` para un usuario que sshd ya declaró
+inexistente, porque el emisor le pregunta a la cuenta.
 
-De ahí salen gratis dos cosas: la **etiqueta de verdad por evento**, que es lo que permite
-medir un detector contra la realidad, y la deriva de reloj aplicada de forma consistente.
+De ahí sale gratis la **etiqueta de verdad por evento**, que es lo que permite medir un
+detector contra la realidad en vez de contra la impresión del autor.
 
 **El detector es el grupo de control.** `deteccion.py` son ocho reglas escritas a mano,
 estilo SIEM. Encuentra lo que las reglas fueron escritas para encontrar, ni más ni menos.
@@ -111,9 +111,6 @@ porque el generador dejó una firma.
 - **El syslog fecha en hora local** (`-03`) y sin año. Los eventos del ataque de las 02:31
   UTC aparecen en el crudo como del día **anterior**. El timeline lo normaliza; el registro
   crudo no.
-- **La deriva del reloj de WKS-04 es una tasa, no un offset.** La medición se tomó en la
-  recolección; la incertidumbre crece con la distancia a ese momento. Un evento del día 8
-  arrastra ±200s, no los ±90s de la medición.
 - **Rotar la credencial robada no alcanza**: el atacante creó una propia, y vuelve con ella.
 
 ## Los invariantes
@@ -214,7 +211,7 @@ A. Ver `PENDIENTE.md`.
 |---|---|
 | `modelo.py` | Entidades con estado y única puerta de emisión. La consistencia vive acá. |
 | `evidencia/generar_evidencia.py` | Los actores y los dos planes de atacante. Seed fijo. |
-| `tiempo.py` | Normalización temporal e incertidumbre partida en propia y sistemática. |
+| `tiempo.py` | Normalización de cada fuente a un instante UTC. |
 | `eventos.py` | Vocabulario común y semántica contrastable contra documentación publicada. |
 | `consulta.py` | Filtrar, contar, pivotear, línea base. |
 | `deteccion.py` | Las ocho reglas y la medición contra la verdad. |

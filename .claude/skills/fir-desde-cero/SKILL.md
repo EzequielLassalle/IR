@@ -104,7 +104,7 @@ que falte al vuelo.
 │                                                                          │
 │  LOS DATOS                                                               │
 │   4) El evento                crudo, normalizado, y por que dos capas    │
-│   5) El tiempo                por que un instante no es un numero        │
+│   5) El tiempo                un timestamp no siempre alcanza solo       │
 │   6) La afirmacion            el otro objeto, y la cita                  │
 │                                                                          │
 │  EL MOTOR                                                                │
@@ -332,72 +332,66 @@ descubra el antes de que se lo cuenten.
 
 ## 5) El tiempo
 
-Volver a la salida de `evento W1497` que ya esta pegada, al bloque `INCERTIDUMBRE`:
+Correr `python main.py evento L0337` y pegar la salida completa.
 
 ```
-propia       : -0s / +1s
-sistematica  : +/-201s  (compartida con el resto de windows)
-intervalo    : 2026-03-10T00:16:39Z .. 2026-03-10T00:23:22Z
+EVENTO
+------------------------------------------------------------------------------
+  id        : L0337
+  instante  : 2026-03-05T02:40:00Z
+  fuente    : syslog
+  sujeto    : web-03:ubuntu
+  accion    : autentico-remoto
+  objeto    : web-03
+
+ATRIBUTOS
+------------------------------------------------------------------------------
+  ip          : 190.210.8.92
+  metodo      : publickey
+  clave       : Qw7ZmT1yBnKe5RfPcHdL
+
+REGISTRO CRUDO
+------------------------------------------------------------------------------
+  Mar  4 23:40:00 web-03 sshd[24402]: Accepted publickey for ubuntu from 190.210.8.92 port 47587 ssh2: RSA SHA256:Qw7ZmT1yBnKe5RfPcHdL
+
+  El sello de syslog esta en hora local del host (-03) y sin anio: la
+  fecha del crudo puede ser el dia anterior al instante real en UTC.
 ```
 
-**El punto de la parte:** en este proyecto un instante no es un `datetime`, es un intervalo.
+**El punto de la parte:** el `REGISTRO CRUDO` dice `Mar 4 23:40:00`. El `instante` normalizado
+dice `2026-03-05T02:40:00Z`. Mismo evento, **dos fechas distintas** -- el 4 y el 5 de marzo.
+No es un error: es lo que pasa cuando un formato de timestamp no trae, en el texto mismo, dos
+datos que hacen falta para ubicarlo en el tiempo sin ambiguedad.
 
-Antes de justificarlo hay que anticipar la objecion, porque es la que se hace sola: *¿por que
-no suponer que los relojes estan en hora?* Se contesta abriendo `eventos.py:121`:
+Abrir `tiempo.py` y ver `desde_syslog()`:
 
 ```python
-"windows": Reloj(fuente="windows", deriva_seg=0, error_deriva_seg=90,
-                 medida_en=RECOLECCION, error_tasa_seg_h=1.8, precision_seg=1),
+def desde_syslog(ts: str, zona_offset_h: int, recoleccion: datetime) -> datetime:
+    """Timestamp RFC 3164 ("Mar 11 02:04:37"): sin anio y sin zona en el propio texto.
+
+    El anio se infiere como el mas reciente que no deje la fecha en el futuro respecto de
+    la recoleccion. La zona se conoce fuera de banda, de la adquisicion, y se aplica aca.
+    """
 ```
 
-`deriva_seg=0`. **El desfasaje ya esta supuesto cero** y el intervalo sigue existiendo. Son
-dos numeros distintos:
+RFC 3164 es el formato clasico de syslog: `"Mar 11 02:04:37"`. Notar lo que falta ahi --
+**no hay año, y no hay zona horaria**. Son dos datos que hay que conseguir de otro lado:
 
-| campo | que es | valor |
-|---|---|---|
-| `deriva_seg` | cuanto esta corrido el reloj | 0 |
-| `error_deriva_seg` | con cuanta precision se sabe que esta en 0 | 90s |
-| `error_tasa_seg_h` | cuanto se degrada esa precision por hora | 1,8 s/h |
+- **El año** se infiere: `_inferir_anio()` prueba el año de la recoleccion y, si eso deja el
+  evento en el futuro, el anterior. Es una heuristica, no un dato -- si el log tuviera mas de
+  un año de antiguedad, se fecharia mal y nada en el propio log lo delataria.
+- **La zona** (`zona_offset_h=-3` para `web-03`, definido en `eventos.py`) se capturo en la
+  adquisicion. Sin ese numero, `Mar 4 23:40:00` no se puede llevar a UTC en absoluto.
 
-El primero es un hecho sobre el mundo. Los otros dos son hechos **sobre el conocimiento**. Un
-reloj se puede corregir; el error de la medicion con que lo corregiste, no.
+`L0337` es exactamente el caso limite: son las 23:40 en hora local, que ya es la madrugada
+siguiente en UTC (-3 se resta, el reloj UTC va **adelante** del local). Por eso el crudo queda
+fechado un dia antes del instante real -- y por eso el timeline (que ordena por el instante
+normalizado) y el registro crudo (que nunca se toca) pueden discrepar en la fecha sin que haya
+ningun error de por medio.
 
-El 201 se deriva y conviene hacer la cuenta en vivo: la deriva se midio en la adquisicion
-(`2026-03-12T14:00Z`), `W1497` es de `2026-03-10T00:20Z`, o sea **61,7 horas antes**.
-
-```
-90 + (61,7 x 1,8) = 201s
-```
-
-Que es exactamente lo que imprime el comando. Crece hacia atras porque verificaste el reloj el
-dia de la adquisicion: que estuviera en hora ese dia no autoriza a afirmar que lo estaba dos
-dias y medio antes.
-
-### Por que la incertidumbre va partida en dos
-
-Es la decision de diseno de la parte y esta explicada en el docstring de `tiempo.py:85`.
-
-La deriva es **compartida por todos los eventos de la misma fuente**: si `W1497` esta corrido
-201s, `W1498` tambien, porque los escribio el mismo reloj. Entonces al preguntar *"¿W1498 fue
-despues que W1497?"* la deriva **se cancela** -- los dos se mueven juntos. Solo compite la
-incertidumbre propia (±1s) y el orden es decidible.
-
-Si los 201s estuvieran en una sola bolsa, cada evento tendria ±3m independientes, todos se
-solaparian contra todos, y **el orden dentro de un mismo log seria indecidible**. Eso es falso
-y ademas inutil: si todo es indecidible, decir "indecidible" no informa nada.
-
-Entre fuentes distintas no se cancela: son relojes distintos, y ahi la comparacion carga los
-201s enteros.
-
-**Por que no ignorarlo y listo.** Se podria, y la mayoria de las herramientas lo hace. Lo que
-producis cuando lo haces son afirmaciones de orden que se ven exactas y **no se pueden
-falsar**: "el logon fue 40s antes de la llamada a la API" sostiene una conclusion entera, y si
-los relojes estan corridos 90s es al reves y nadie se entera. No arrastrar la incertidumbre no
-la elimina: la vuelve invisible.
-
-**Comprobacion:** preguntarle cual de estas dos comparaciones es decidible y cual no: (a) dos
-eventos de Windows separados por 30 segundos, (b) un evento de Windows y uno de CloudTrail
-separados por 30 segundos. La (a) si -- misma fuente, la deriva se cancela. La (b) no.
+**Comprobacion:** si `zona_offset_h` estuviera mal capturado en la adquisicion -- fuera `-4` en
+vez de `-3` -- ¿que le pasaria al instante normalizado de `L0337`? ¿Se movio adentro del mismo
+dia o cambiaria de dia otra vez?
 
 ## 6) La afirmacion
 
@@ -430,9 +424,10 @@ que siguen son casos de ella:
 > Todo FIR es una sola operacion repetida: agarrar una afirmacion, agarrar los eventos que
 > cita, y decidir si esos eventos la sostienen.
 
-La ventana no es decorativa: `W1497` cae en `00:16:39 .. 00:23:22` (parte 5), y la afirmacion
-declara `00:00 .. 01:00`. La cita sostiene solo si los intervalos se cruzan. Por eso el tiempo
-venia antes que esto.
+La ventana no es decorativa: `W1497` cae en `2026-03-10T00:20:00Z`, y la afirmacion declara
+`00:00 .. 01:00` de ese mismo dia. La cita sostiene solo si el instante del evento cae adentro
+de la ventana declarada. Por eso el tiempo venia antes que esto -- si `tiempo.py` normalizara
+mal una fecha (parte 5), la verificacion entera se apoyaria en un instante equivocado.
 
 **Comprobacion:** pedirle que arme una afirmacion falsa que cite `W1497` y que **igual se vea
 creible**. Si arma una cambiando el sujeto o la accion, la parte 7 ya esta ganada.
@@ -828,9 +823,9 @@ dependencias.
 **Generar la evidencia.**
 
 `modelo.py` define entidades con estado -- cuentas que existen o no, sesiones con su
-`LogonId`, credenciales con ventana de validez, hosts con su reloj -- y **cada transicion
-emite sus lineas de log**. No se escriben logs: se escribe comportamiento, y los logs caen
-como efecto.
+`LogonId`, credenciales con ventana de validez, hosts que dejan de emitir si se los aisla --
+y **cada transicion emite sus lineas de log**. No se escriben logs: se escribe comportamiento,
+y los logs caen como efecto.
 
 Eso hace la contradiccion **estructuralmente imposible**: no se puede emitir un `Failed
 password` para un usuario que sshd ya declaro inexistente, porque el emisor le pregunta al
@@ -842,7 +837,7 @@ objeto cuenta. Y regala gratis la etiqueta de verdad por evento (parte 13).
 
 | modulo | que resuelve | parte |
 |---|---|---|
-| `tiempo.py` | instantes con incertidumbre | 5 |
+| `tiempo.py` | normalizacion de cada fuente a un instante UTC | 5 |
 | `eventos.py` | normalizacion y semantica publicada | 4 |
 | `consulta.py` | filtrar, contar, pivotear, linea base | 2 |
 | `cobertura.py` | que se recolecto y que no | 9 |

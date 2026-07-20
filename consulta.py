@@ -40,9 +40,9 @@ def filtrar(eventos: list[Evento], desde=None, hasta=None, fuente=None, sujeto=N
     desde, hasta = _t(desde), _t(hasta)
     out = []
     for e in eventos:
-        if desde and e.instante.fin < desde:
+        if desde and e.instante < desde:
             continue
-        if hasta and e.instante.inicio > hasta:
+        if hasta and e.instante > hasta:
             continue
         if fuente and e.fuente != fuente:
             continue
@@ -70,8 +70,8 @@ def contar(eventos: list[Evento], por: str, tope: int = 20) -> list[tuple[str, i
         "sujeto": lambda e: e.sujeto,
         "objeto": lambda e: e.objeto,
         "ip": lambda e: e.ip or "(sin ip)",
-        "hora": lambda e: e.instante.utc.strftime("%H"),
-        "dia": lambda e: e.instante.utc.strftime("%Y-%m-%d"),
+        "hora": lambda e: e.instante.strftime("%H"),
+        "dia": lambda e: e.instante.strftime("%Y-%m-%d"),
         "region": lambda e: e.atributos.get("region", "-"),
         "error": lambda e: e.atributos.get("error") or "(ninguno)",
         "logon_type": lambda e: str(e.atributos.get("logon_type", "-")),
@@ -135,9 +135,9 @@ def linea_base(eventos: list[Evento], desde_ventana, hasta_ventana,
     de volumen.
     """
     desde_ventana, hasta_ventana = _t(desde_ventana), _t(hasta_ventana)
-    base = [e for e in eventos if e.instante.utc < desde_ventana]
+    base = [e for e in eventos if e.instante < desde_ventana]
     ventana = [e for e in eventos
-               if desde_ventana <= e.instante.utc <= hasta_ventana]
+               if desde_ventana <= e.instante <= hasta_ventana]
 
     extractor = {
         "sujeto": lambda e: e.sujeto,
@@ -161,7 +161,7 @@ def perfil_horario(eventos: list[Evento], sujeto: str) -> dict[int, int]:
     """Distribucion horaria de un sujeto. Sirve para decidir si un horario es anomalo
     PARA ESE SUJETO, que no es lo mismo que anomalo en general."""
     return dict(sorted(Counter(
-        e.instante.utc.hour for e in eventos if e.sujeto == sujeto).items()))
+        e.instante.hour for e in eventos if e.sujeto == sujeto).items()))
 
 
 def primera_y_ultima(eventos: list[Evento], indicador: str) -> tuple[Evento, Evento] | None:
@@ -170,5 +170,5 @@ def primera_y_ultima(eventos: list[Evento], indicador: str) -> tuple[Evento, Eve
     encontrados = [e for lista in pivotear(eventos, indicador).values() for e in lista]
     if not encontrados:
         return None
-    encontrados.sort(key=lambda e: e.instante.utc)
+    encontrados.sort(key=lambda e: e.instante)
     return encontrados[0], encontrados[-1]

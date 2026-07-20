@@ -295,7 +295,7 @@ def adjudicar(accion: str, objetivo: str, eventos: list[Evento],
             citas = [e.id for e in eventos
                      if (e.ip or "").lower() == objetivo.lower()
                      and e.accion in req.acciones_desde_ip
-                     and e.instante.utc <= _iso(en)]
+                     and e.instante <= _iso(en)]
             if citas:
                 sostienen[req.descripcion] = citas
             else:
@@ -436,7 +436,7 @@ def objetivos_sospechosos(eventos: list[Evento], hallazgos, tipo: str,
         if h.severidad not in severidades:
             continue
         eventos_h = [indice[c] for c in h.cita if c in indice]
-        if not any(ini <= e.instante.utc <= fin for e in eventos_h):
+        if not any(ini <= e.instante <= fin for e in eventos_h):
             continue  # el hallazgo no cae en la ventana que se esta evaluando
 
         for e in eventos_h:

@@ -125,18 +125,11 @@ def cmd_evento(args) -> int:
     _anotar(args, [e])
     _seccion("EVENTO")
     print(f"  id        : {e.id}")
-    print(f"  instante  : {e.instante}")
+    print(f"  instante  : {e.instante:%Y-%m-%dT%H:%M:%SZ}")
     print(f"  fuente    : {e.fuente}")
     print(f"  sujeto    : {e.sujeto}")
     print(f"  accion    : {e.accion}")
     print(f"  objeto    : {e.objeto}")
-
-    _seccion("INCERTIDUMBRE")
-    print(f"  propia       : -{e.instante.propio_menos}s / +{e.instante.propio_mas}s")
-    print(f"  sistematica  : +/-{e.instante.sistematico}s  (compartida con el resto de "
-          f"{e.fuente})")
-    print(f"  intervalo    : {e.instante.inicio:%Y-%m-%dT%H:%M:%SZ} .. "
-          f"{e.instante.fin:%Y-%m-%dT%H:%M:%SZ}")
 
     if e.atributos:
         _seccion("ATRIBUTOS")
@@ -186,8 +179,8 @@ def cmd_entidad(args) -> int:
         return 0
 
     rango = primera_y_ultima(eventos, args.indicador)
-    print(f"  primera : {rango[0].instante}  {rango[0].id}")
-    print(f"  ultima  : {rango[1].instante}  {rango[1].id}")
+    print(f"  primera : {rango[0].instante:%Y-%m-%dT%H:%M:%SZ}  {rango[0].id}")
+    print(f"  ultima  : {rango[1].instante:%Y-%m-%dT%H:%M:%SZ}  {rango[1].id}")
 
     for fuente, evs in sorted(grupos.items()):
         _seccion(f"EN {fuente.upper()}  ({len(evs)})")

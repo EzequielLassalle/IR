@@ -24,7 +24,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 
-from tiempo import Instante, Reloj, desde_cloudtrail, desde_evtx, desde_syslog
+from tiempo import desde_cloudtrail, desde_evtx, desde_syslog
 
 EVID = Path(__file__).resolve().parent / "evidencia"
 
@@ -113,23 +113,13 @@ def clase_operacion(servicio: str, operacion: str) -> str:
 
 
 # --------------------------------------------------------------------------------------
-# Relojes
+# Tiempo
 # --------------------------------------------------------------------------------------
 
 RECOLECCION = datetime(2026, 3, 12, 14, 0, 0, tzinfo=timezone.utc)
 
-RELOJES = {
-    # WKS-04 derivo respecto del DC. La medicion se tomo en la adquisicion; la
-    # incertidumbre crece con la distancia a ese momento.
-    "windows": Reloj(fuente="windows", deriva_seg=0, error_deriva_seg=90,
-                     medida_en=RECOLECCION, error_tasa_seg_h=1.8, precision_seg=1),
-    # eventTime lo genera el servicio: no interviene ningun reloj nuestro.
-    "cloudtrail": Reloj(fuente="cloudtrail", precision_seg=1),
-    # web-03 escribe en hora local y la zona se capturo en la adquisicion.
-    "syslog": Reloj(fuente="syslog", deriva_seg=0, error_deriva_seg=60,
-                    medida_en=RECOLECCION, error_tasa_seg_h=1.2, precision_seg=1,
-                    zona_offset_h=-3),
-}
+# web-03 escribe en hora local (-03) y sin anio; la zona se conoce de la adquisicion.
+ZONA_SYSLOG_H = -3
 
 
 # --------------------------------------------------------------------------------------
@@ -140,7 +130,7 @@ RELOJES = {
 @dataclass(frozen=True)
 class Evento:
     id: str
-    instante: Instante
+    instante: datetime
     fuente: str
     accion: str
     sujeto: str
@@ -153,7 +143,7 @@ class Evento:
         return self.atributos.get("ip")
 
     def __str__(self) -> str:
-        return (f"{self.id}  {self.instante}  {self.fuente:<11} "
+        return (f"{self.id}  {self.instante:%Y-%m-%dT%H:%M:%SZ}  {self.fuente:<11} "
                 f"{self.sujeto:<28} {self.accion:<26} {self.objeto}")
 
 
@@ -163,8 +153,7 @@ class Evento:
 
 
 def _windows(r: dict) -> Evento | None:
-    reloj = RELOJES["windows"]
-    inst = desde_evtx(r["SystemTime"], reloj)
+    inst = desde_evtx(r["SystemTime"])
     host = r["Computer"]
     eid = r["EventID"]
 
@@ -214,7 +203,7 @@ def _syslog(r: dict) -> Evento | None:
     m = _RE_SSH.match(r["linea"])
     if not m:
         return None
-    inst = desde_syslog(m["sello"], RELOJES["syslog"], RECOLECCION)
+    inst = desde_syslog(m["sello"], ZONA_SYSLOG_H, RECOLECCION)
     host, msg = m["host"], m["msg"]
 
     if m["prog"] == "sudo":
@@ -258,7 +247,7 @@ def _syslog(r: dict) -> Evento | None:
 
 
 def _cloudtrail(r: dict) -> Evento:
-    inst = desde_cloudtrail(r["eventTime"], RELOJES["cloudtrail"])
+    inst = desde_cloudtrail(r["eventTime"])
     servicio = r["eventSource"].split(".")[0]
     return Evento(r["_id"], inst, "cloudtrail", "llamo-api",
                   r["userIdentity"]["accessKeyId"],
@@ -280,7 +269,7 @@ def cargar(evid: Path = EVID) -> list[Evento]:
             eventos.append(e)
     for r in json.loads((evid / "cloudtrail.json").read_text(encoding="utf-8")):
         eventos.append(_cloudtrail(r))
-    return sorted(eventos, key=lambda e: (e.instante.utc, e.fuente, e.id))
+    return sorted(eventos, key=lambda e: (e.instante, e.fuente, e.id))
 
 
 def cargar_verdad(evid: Path = EVID) -> dict:

@@ -82,8 +82,8 @@ plausibles obligan a descartar con evidencia, que es el trabajo real.
 **No se generan logs. Se genera comportamiento, y las líneas son su proyección.**
 
 Se modelan entidades con estado — cuenta que existe o no, sesión que se abre y se cierra,
-credencial con fecha de creación y revocación, host con su reloj y su deriva — y cada
-transición de estado *emite* sus líneas.
+credencial con fecha de creación y revocación, host que deja de emitir si se lo aísla — y
+cada transición de estado *emite* sus líneas.
 
 La consistencia deja de ser algo que se verifica y pasa a ser algo que no se puede violar:
 

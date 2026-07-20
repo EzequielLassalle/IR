@@ -93,10 +93,10 @@ def regla_rociado_de_contrasenias(eventos: list[Evento]) -> list[Hallazgo]:
 
     out = []
     for ip, evs in sorted(por_ip.items()):
-        evs.sort(key=lambda e: e.instante.utc)
+        evs.sort(key=lambda e: e.instante)
         for i, ancla in enumerate(evs):
             ventana = [e for e in evs[i:]
-                       if e.instante.utc - ancla.instante.utc <= VENTANA_RAFAGA]
+                       if e.instante - ancla.instante <= VENTANA_RAFAGA]
             cuentas = {e.sujeto for e in ventana}
             if len(cuentas) < MIN_CUENTAS_SPRAY:
                 continue
@@ -127,14 +127,14 @@ def regla_acceso_tras_fallos(eventos: list[Evento]) -> list[Hallazgo]:
     """
     fallos: dict[str, list[Evento]] = defaultdict(list)
     out = []
-    for e in sorted(eventos, key=lambda x: x.instante.utc):
+    for e in sorted(eventos, key=lambda x: x.instante):
         if not e.ip:
             continue
         if e.accion in ("fallo-autenticacion", "fallo-usuario-inexistente"):
             fallos[e.ip].append(e)
         elif e.accion.startswith("autentico-"):
             previos = [f for f in fallos[e.ip]
-                       if e.instante.utc - f.instante.utc <= timedelta(hours=6)]
+                       if e.instante - f.instante <= timedelta(hours=6)]
             if len(previos) >= 3:
                 out.append(Hallazgo(
                     regla="acceso_tras_fallos",
@@ -194,7 +194,7 @@ def regla_origen_nuevo_de_credencial(eventos: list[Evento]) -> list[Hallazgo]:
     """
     vistas: dict[str, set[str]] = defaultdict(set)
     out = []
-    for e in sorted(eventos, key=lambda x: x.instante.utc):
+    for e in sorted(eventos, key=lambda x: x.instante):
         if e.fuente != "cloudtrail" or not e.ip:
             continue
         cred, red = e.sujeto, _red(e.ip)
@@ -275,7 +275,7 @@ def regla_reconocimiento_local(eventos: list[Evento]) -> list[Hallazgo]:
     for logon_id, evs in sorted(por_sesion.items()):
         if len({e.objeto for e in evs}) < 4:
             continue
-        span = max(e.instante.utc for e in evs) - min(e.instante.utc for e in evs)
+        span = max(e.instante for e in evs) - min(e.instante for e in evs)
         if span > timedelta(hours=2):
             continue
         out.append(Hallazgo(

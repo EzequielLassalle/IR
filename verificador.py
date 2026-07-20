@@ -129,10 +129,8 @@ def _coincide(e: Evento, a: Afirmacion) -> str | None:
         return f"la accion del evento es '{e.accion}'"
     if a.objeto.lower() not in e.objeto.lower():
         return f"el objeto del evento es '{e.objeto}'"
-    # La ventana se evalua contra el intervalo de posibilidad completo, no contra la mejor
-    # estimacion puntual: un evento cuyo intervalo toca la ventana pudo haber caido adentro.
-    if e.instante.fin < _t(a.desde) or e.instante.inicio > _t(a.hasta):
-        return f"el evento cae fuera de la ventana ({e.instante})"
+    if e.instante < _t(a.desde) or e.instante > _t(a.hasta):
+        return f"el evento cae fuera de la ventana ({e.instante:%Y-%m-%dT%H:%M:%SZ})"
     return None
 
 
@@ -206,7 +204,7 @@ def sostiene(afirmacion: Afirmacion, eventos: list[Evento],
     limite = _t(antes_de) if antes_de else None
     out = []
     for e in eventos:
-        if limite is not None and e.instante.utc > limite:
+        if limite is not None and e.instante > limite:
             continue
         if _coincide(e, afirmacion) is None:
             out.append(e)

@@ -248,9 +248,9 @@ Identificadores: `W####` (windows), `C####` (cloudtrail), `L####` (syslog).
 Campos de `contar`: `fuente`, `accion`, `sujeto`, `objeto`, `ip`, `hora`, `dia`, `region`,
 `error`, `logon_type`, `substatus`.
 
-`evento` emite `EVENTO`, `INCERTIDUMBRE`, `ATRIBUTOS`, `SEMANTICA` (solo Windows) y
-`REGISTRO CRUDO`. La seccion `SEMANTICA` sale del catalogo de `eventos.py`, que es la capa
-contrastable contra documentacion publicada: pegarla textual, sin ampliarla.
+`evento` emite `EVENTO`, `ATRIBUTOS`, `SEMANTICA` (solo Windows) y `REGISTRO CRUDO`. La
+seccion `SEMANTICA` sale del catalogo de `eventos.py`, que es la capa contrastable contra
+documentacion publicada: pegarla textual, sin ampliarla.
 
 ## 3) Linea base
 
