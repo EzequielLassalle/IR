@@ -1,0 +1,228 @@
+{
+  "hallazgos": [
+    {
+      "regla": "acceso-ssh-exitoso-ip-hostil",
+      "severidad": "ALTA",
+      "afirmacion": {
+        "sujeto": "web-03:ubuntu",
+        "accion": "autentico-remoto",
+        "objeto": "web-03",
+        "desde": "2026-03-09T22:18:14Z",
+        "hasta": "2026-03-09T22:18:14Z"
+      },
+      "resumen": "La misma IP 198.51.100.77 logro un acceso SSH exitoso (publickey) como ubuntu en web-03 dos horas antes del RDP a WKS-04.",
+      "cita": ["L1025"],
+      "no_prueba": "Es la misma IP de origen, pero no prueba que sea el mismo operador que despues alcanza WKS-04, ni que web-03 haya sido el pivote hacia WKS-04. La aceptacion por publickey implica que ya poseia una clave, cuyo origen no consta."
+    },
+    {
+      "regla": "credencial-valida-atacada-desde-ip-hostil",
+      "severidad": "ALTA",
+      "afirmacion": {
+        "sujeto": "WKS-04\\ecarrizo",
+        "accion": "fallo-autenticacion",
+        "objeto": "WKS-04",
+        "desde": "2026-03-09T23:12:54Z",
+        "hasta": "2026-03-09T23:12:54Z"
+      },
+      "resumen": "La cuenta ecarrizo recibio un intento fallido de logon de red (substatus 0xC000006A, contrasenia incorrecta) desde 198.51.100.77, confirmando que la cuenta es valida, ~1h antes del acceso exitoso.",
+      "cita": ["W1487"],
+      "no_prueba": "Un solo intento fallido no prueba fuerza bruta exitosa; no prueba que el acceso posterior (W1497) haya usado una contrasenia obtenida asi versus una credencial ya conocida o cambiada."
+    },
+    {
+      "regla": "logon-remoto-fuera-de-repertorio",
+      "severidad": "ALTA",
+      "afirmacion": {
+        "sujeto": "WKS-04\\ecarrizo",
+        "accion": "autentico-remoto",
+        "objeto": "WKS-04",
+        "desde": "2026-03-10T00:20:00Z",
+        "hasta": "2026-03-10T00:20:00Z"
+      },
+      "resumen": "Logon RDP exitoso (4624 tipo 10, RemoteInteractive) como ecarrizo desde 198.51.100.77 a las 00:20, unico acceso remoto de esta cuenta: su patron historico es autentico-local en horario laboral (W0040, W1535, W1746).",
+      "cita": ["W1497"],
+      "no_prueba": "Prueba que se establecio una sesion RDP autenticada como ecarrizo desde esa IP; no prueba que quien la abrio fuera el empleado legitimo ni como se obtuvo la credencial. Sin CommandLine no se ve el contenido de la sesion."
+    },
+    {
+      "regla": "reconocimiento-post-acceso",
+      "severidad": "MEDIA",
+      "afirmacion": {
+        "sujeto": "WKS-04\\ecarrizo",
+        "accion": "ejecuto-proceso",
+        "objeto": "whoami.exe",
+        "desde": "2026-03-10T00:21:05Z",
+        "hasta": "2026-03-10T00:21:05Z"
+      },
+      "resumen": "Dentro de la misma sesion RDP (logon_id 0x1A2FEC) ecarrizo ejecuto whoami.exe un minuto despues del logon.",
+      "cita": ["W1498"],
+      "no_prueba": "El 4688 no trae CommandLine: se sabe que corrio el binario, no con que argumentos ni que devolvio."
+    },
+    {
+      "regla": "reconocimiento-post-acceso",
+      "severidad": "MEDIA",
+      "afirmacion": {
+        "sujeto": "WKS-04\\ecarrizo",
+        "accion": "ejecuto-proceso",
+        "objeto": "net.exe",
+        "desde": "2026-03-10T00:22:32Z",
+        "hasta": "2026-03-10T00:22:32Z"
+      },
+      "resumen": "En la sesion RDP (0x1A2FEC) ecarrizo ejecuto net.exe, binario tipico de enumeracion de usuarios/grupos/recursos.",
+      "cita": ["W1499"],
+      "no_prueba": "Sin CommandLine no consta que subcomando de net se uso (user, group, share, etc.)."
+    },
+    {
+      "regla": "reconocimiento-post-acceso",
+      "severidad": "MEDIA",
+      "afirmacion": {
+        "sujeto": "WKS-04\\ecarrizo",
+        "accion": "ejecuto-proceso",
+        "objeto": "net1.exe",
+        "desde": "2026-03-10T00:23:37Z",
+        "hasta": "2026-03-10T00:23:37Z"
+      },
+      "resumen": "En la sesion RDP (0x1A2FEC) ecarrizo ejecuto net1.exe, continuacion de la enumeracion iniciada con net.exe.",
+      "cita": ["W1500"],
+      "no_prueba": "Sin CommandLine no consta el subcomando invocado."
+    },
+    {
+      "regla": "reconocimiento-post-acceso",
+      "severidad": "MEDIA",
+      "afirmacion": {
+        "sujeto": "WKS-04\\ecarrizo",
+        "accion": "ejecuto-proceso",
+        "objeto": "tasklist.exe",
+        "desde": "2026-03-10T00:25:46Z",
+        "hasta": "2026-03-10T00:25:46Z"
+      },
+      "resumen": "En la sesion RDP (0x1A2FEC) ecarrizo ejecuto tasklist.exe, enumeracion de procesos.",
+      "cita": ["W1501"],
+      "no_prueba": "Sin CommandLine no consta que se filtro ni que devolvio."
+    },
+    {
+      "regla": "reconocimiento-post-acceso",
+      "severidad": "MEDIA",
+      "afirmacion": {
+        "sujeto": "WKS-04\\ecarrizo",
+        "accion": "ejecuto-proceso",
+        "objeto": "findstr.exe",
+        "desde": "2026-03-10T00:26:57Z",
+        "hasta": "2026-03-10T00:26:57Z"
+      },
+      "resumen": "En la sesion RDP (0x1A2FEC) ecarrizo ejecuto findstr.exe.",
+      "cita": ["W1502"],
+      "no_prueba": "Sin CommandLine no consta que patron se busco ni sobre que entrada."
+    },
+    {
+      "regla": "reconocimiento-post-acceso",
+      "severidad": "MEDIA",
+      "afirmacion": {
+        "sujeto": "WKS-04\\ecarrizo",
+        "accion": "ejecuto-proceso",
+        "objeto": "nltest.exe",
+        "desde": "2026-03-10T00:28:08Z",
+        "hasta": "2026-03-10T00:28:08Z"
+      },
+      "resumen": "En la sesion RDP (0x1A2FEC) ecarrizo ejecuto nltest.exe, enumeracion de dominio/relaciones de confianza.",
+      "cita": ["W1503"],
+      "no_prueba": "Sin CommandLine no consta que consulta de dominio se realizo."
+    },
+    {
+      "regla": "reconocimiento-post-acceso",
+      "severidad": "MEDIA",
+      "afirmacion": {
+        "sujeto": "WKS-04\\ecarrizo",
+        "accion": "ejecuto-proceso",
+        "objeto": "reg.exe",
+        "desde": "2026-03-10T00:29:19Z",
+        "hasta": "2026-03-10T00:29:19Z"
+      },
+      "resumen": "En la sesion RDP (0x1A2FEC) ecarrizo ejecuto reg.exe, acceso al registro.",
+      "cita": ["W1504"],
+      "no_prueba": "Sin CommandLine no consta que clave se leyo o escribio; no se puede afirmar que fue query vs modificacion."
+    },
+    {
+      "regla": "reconocimiento-post-acceso",
+      "severidad": "MEDIA",
+      "afirmacion": {
+        "sujeto": "WKS-04\\ecarrizo",
+        "accion": "ejecuto-proceso",
+        "objeto": "powershell.exe",
+        "desde": "2026-03-10T00:30:24Z",
+        "hasta": "2026-03-10T00:30:24Z"
+      },
+      "resumen": "En la sesion RDP (0x1A2FEC) ecarrizo ejecuto powershell.exe cerrando la secuencia de reconocimiento previa a la creacion de cuenta.",
+      "cita": ["W1505"],
+      "no_prueba": "Sin CommandLine no consta el script ni los comandos ejecutados en PowerShell."
+    },
+    {
+      "regla": "creacion-cuenta-persistencia",
+      "severidad": "ALTA",
+      "afirmacion": {
+        "sujeto": "WKS-04\\ecarrizo",
+        "accion": "creo-cuenta",
+        "objeto": "soporte_it",
+        "desde": "2026-03-10T00:34:24Z",
+        "hasta": "2026-03-10T00:34:24Z"
+      },
+      "resumen": "En la misma sesion RDP (SubjectLogonId 0x1A2FEC) ecarrizo creo la cuenta local soporte_it (4720), nombre no visto antes en el entorno.",
+      "cita": ["W1507"],
+      "no_prueba": "Prueba la creacion de la cuenta local; no consta en un evento citado que privilegios o grupos se le asignaron ni con que fin declarado."
+    },
+    {
+      "regla": "uso-cuenta-backdoor-desde-ip-hostil",
+      "severidad": "ALTA",
+      "afirmacion": {
+        "sujeto": "WKS-04\\soporte_it",
+        "accion": "autentico-remoto",
+        "objeto": "WKS-04",
+        "desde": "2026-03-10T03:05:00Z",
+        "hasta": "2026-03-10T03:05:00Z"
+      },
+      "resumen": "La cuenta recien creada soporte_it inicio sesion RDP (4624 tipo 10) desde la misma IP 198.51.100.77 a las 03:05, ~2.5h despues de su creacion.",
+      "cita": ["W1515"],
+      "no_prueba": "Misma IP de origen; no prueba por si solo que sea el mismo operador humano que uso la sesion de ecarrizo."
+    },
+    {
+      "regla": "reconocimiento-cuenta-backdoor",
+      "severidad": "MEDIA",
+      "afirmacion": {
+        "sujeto": "WKS-04\\soporte_it",
+        "accion": "ejecuto-proceso",
+        "objeto": "net.exe",
+        "desde": "2026-03-10T04:00:36Z",
+        "hasta": "2026-03-10T04:00:36Z"
+      },
+      "resumen": "La cuenta soporte_it ejecuto net.exe en su sesion, repitiendo el patron de enumeracion.",
+      "cita": ["W1518"],
+      "no_prueba": "Sin CommandLine no consta el subcomando."
+    },
+    {
+      "regla": "persistencia-tarea-programada",
+      "severidad": "ALTA",
+      "afirmacion": {
+        "sujeto": "WKS-04\\soporte_it",
+        "accion": "ejecuto-proceso",
+        "objeto": "schtasks.exe",
+        "desde": "2026-03-10T04:09:20Z",
+        "hasta": "2026-03-10T04:09:20Z"
+      },
+      "resumen": "La cuenta soporte_it ejecuto schtasks.exe, binario de creacion/gestion de tareas programadas usado tipicamente para persistencia.",
+      "cita": ["W1519"],
+      "no_prueba": "Sin CommandLine no consta que se haya creado efectivamente una tarea, su nombre ni su accion; podria ser consulta (/query)."
+    },
+    {
+      "regla": "persistencia-servicio",
+      "severidad": "ALTA",
+      "afirmacion": {
+        "sujeto": "WKS-04\\soporte_it",
+        "accion": "ejecuto-proceso",
+        "objeto": "sc.exe",
+        "desde": "2026-03-10T04:11:06Z",
+        "hasta": "2026-03-10T04:11:06Z"
+      },
+      "resumen": "La cuenta soporte_it ejecuto sc.exe, control de servicios, tambien via de persistencia, cerrando la actividad de esa cuenta.",
+      "cita": ["W1520"],
+      "no_prueba": "Sin CommandLine no consta que se haya creado o modificado un servicio ni cual; podria ser consulta."
+    }
+  ]
+}
