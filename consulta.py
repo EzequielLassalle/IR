@@ -110,6 +110,7 @@ class Diferencia:
     valor: str
     en_base: int
     en_ventana: int
+    primera: datetime | None = None  # primera aparicion en la ventana (solo los nuevos)
 
     @property
     def nuevo(self) -> bool:
@@ -119,10 +120,14 @@ class Diferencia:
     def desaparecido(self) -> bool:
         return self.en_ventana == 0
 
-    def __str__(self) -> str:
-        marca = "NUEVO " if self.nuevo else ("AUSENTE" if self.desaparecido else "      ")
-        return (f"  {marca} {self.campo:<10} {self.valor:<44} "
-                f"base:{self.en_base:>6}  ventana:{self.en_ventana:>5}")
+
+# Silencio: solo tiene sentido para quien se supone que emite (un sujeto, un tipo de accion).
+# Que una IP o un objeto puntual no reaparezca es ruido, no una senial.
+CAMPOS_SILENCIO = ("sujeto", "accion")
+# Un valor "se apago" si por su ritmo en la base esperabamos verlo >= esto y hubo cero. La
+# expectativa (no un umbral crudo) es lo que hace que ande igual en una ventana de 1 hora que
+# de 7 dias: en una hora casi nada tiene expectativa alta, asi que no marca falsos apagados.
+EXPECTATIVA_SILENCIO = 3.0
 
 
 def linea_base(eventos: list[Evento], desde_ventana, hasta_ventana,
@@ -136,8 +141,9 @@ def linea_base(eventos: list[Evento], desde_ventana, hasta_ventana,
     """
     desde_ventana, hasta_ventana = _t(desde_ventana), _t(hasta_ventana)
     base = [e for e in eventos if e.instante < desde_ventana]
-    ventana = [e for e in eventos
-               if desde_ventana <= e.instante <= hasta_ventana]
+    ventana = sorted((e for e in eventos
+                      if desde_ventana <= e.instante <= hasta_ventana),
+                     key=lambda e: e.instante)
 
     extractor = {
         "sujeto": lambda e: e.sujeto,
@@ -146,15 +152,39 @@ def linea_base(eventos: list[Evento], desde_ventana, hasta_ventana,
         "objeto": lambda e: e.objeto,
     }
 
+    # Factor de expectativa: que fraccion de un ritmo de base cabe en la ventana. Se usa para
+    # decidir si un valor ausente "se apago" o simplemente no tocaba verlo en un tramo corto.
+    factor = 0.0
+    if base:
+        dur_base = (desde_ventana - min(e.instante for e in base)).total_seconds()
+        dur_vent = (hasta_ventana - desde_ventana).total_seconds()
+        factor = (dur_vent / dur_base) if dur_base > 0 else 0.0
+
     diffs: list[Diferencia] = []
     for campo in campos:
         f = extractor[campo]
         c_base = Counter(f(e) for e in base if f(e))
-        c_vent = Counter(f(e) for e in ventana if f(e))
-        for valor in c_vent:
+        c_vent: Counter = Counter()
+        primera: dict = {}
+        for e in ventana:
+            v = f(e)
+            if not v:
+                continue
+            c_vent[v] += 1
+            primera.setdefault(v, e.instante)
+
+        # Aparecio: valor en la ventana que no existia en la base, con su primera aparicion.
+        for valor, cnt in c_vent.items():
             if valor not in c_base:
-                diffs.append(Diferencia(campo, valor, 0, c_vent[valor]))
-    return sorted(diffs, key=lambda d: (-d.en_ventana, d.campo, d.valor))
+                diffs.append(Diferencia(campo, valor, 0, cnt, primera[valor]))
+
+        # Se apago: valor regular en la base que dejo de emitir, medido por expectativa.
+        if campo in CAMPOS_SILENCIO and factor > 0:
+            for valor, cnt in c_base.items():
+                if valor not in c_vent and cnt * factor >= EXPECTATIVA_SILENCIO:
+                    diffs.append(Diferencia(campo, valor, cnt, 0, None))
+
+    return diffs
 
 
 def perfil_horario(eventos: list[Evento], sujeto: str) -> dict[int, int]:

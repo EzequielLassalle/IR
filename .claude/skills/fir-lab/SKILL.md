@@ -29,18 +29,18 @@ recomendar despues.
 │  ── * ──   LAB FIR · INC-2026-0051 (BancoXYZ)                            │
 │   / | \    10 dias · 3 fuentes · 6.532 eventos · 0 acciones aplicadas    │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  1) Barrido                                                              │
-│  2) Consultar                                                            │
-│  3) Linea base                                                           │
-│  4) Situacion                                                            │
-│  5) Evaluar                                                              │
-│  6) Respuesta                                                            │
-│  7) Cronologia                                                           │
-│  8) Regresion                                                            │
-│  9) Otro caso                                                            │
-│ 10) Borrar hallazgos                                                     │
+│  1)  Barrido                                                             │
+│  2)  Consultar                                                           │
+│  3)  Linea base                                                          │
+│  4)  Situacion                                                           │
+│  5)  Evaluar                                                             │
+│  6)  Respuesta                                                           │
+│  7)  Cronologia                                                          │
+│  8)  Regresion                                                           │
+│  9)  Otro caso                                                           │
+│  10) Borrar hallazgos                                                    │
 │                                                                          │
-│  0) Salir                                                                │
+│  0)  Salir                                                               │
 ╰──────────────────────────────────────────────────────────────────────────╯
 ```
 
@@ -55,6 +55,12 @@ opciones para que ocupen menos. El menu principal tiene diez opciones mas `0) Sa
 las once en once lineas, siempre igual. Una version compacta rompe la consistencia y
 confunde: el usuario aprende la forma del menu y espera verla identica cada vez. Vale para
 todos los menus y submenus, no solo el principal.
+
+**Alineacion con la opcion de dos digitos.** En el menu principal `10)` desalinea si se lo
+deja al ras: los numeros arrancan todos en la misma columna (el `1` de `10` justo debajo del
+`1`..`9`) y los rotulos tambien. Se logra con **dos espacios despues del `)` en las opciones
+de un digito y uno en la de dos** (`  1)  Barrido` / `  10) Borrar hallazgos`). Copiar la
+caja tal cual: ya viene alineada.
 
 **La mayoria de las opciones son comandos de `python main.py`**, con dos que no: **5
 (Evaluar)** orquesta agentes (evaluador, auditor, informe) sobre los hallazgos ya
@@ -74,7 +80,7 @@ Aceptar tanto el numero como la intencion en lenguaje natural.
 **Una opcion del menu principal (1 a 10) SIEMPRE abre primero el submenu de esa seccion.
 Nunca dispara un comando directo.** El menu principal elige seccion; el comando se corre
 recien cuando el usuario elige una opcion del submenu (`1.1`, `4.3`, etc.). Tocar `1` abre
-el submenu de Barrido y ahi se espera `1.1`/`1.2`/`1.3` -- no se corre el detector de una.
+el submenu de Barrido y ahi se espera `1.1`/`1.2` -- no se corre el detector de una.
 Saltarse ese paso, aunque la seccion tenga una opcion "obvia", es un error de navegacion:
 el usuario perdio la posibilidad de elegir. La unica excepcion es `0) Salir`.
 
@@ -136,7 +142,6 @@ Excepcion: los veredictos (`AUSENCIA-DEMOSTRADA`, `CITA-NO-SOSTIENE`, la observa
 ├──────────────────────────────────────────────────────────────────────────┤
 │  1.1)  Correr el detector automatico (8 reglas escritas a mano)          │
 │  1.2)  Mandar agentes a investigar por su cuenta                         │
-│  1.3)  Revisar un archivo de hallazgos que ya tengas                     │
 │                                                                          │
 │  0)   Volver al menu anterior                                            │
 ╰──────────────────────────────────────────────────────────────────────────╯
@@ -145,7 +150,6 @@ Excepcion: los veredictos (`AUSENCIA-DEMOSTRADA`, `CITA-NO-SOSTIENE`, la observa
 | Opcion | Comando |
 |---|---|
 | 1.1 | `python main.py barrido --salida hallazgos_detector.json` |
-| 1.3 | `python main.py verificar <archivo.json>` |
 
 **1.1 SIEMPRE persiste su salida a `hallazgos_detector.json`** (nombre fijo, se sobrescribe en
 cada corrida, con `origen: "detector"` en cada hallazgo). "Ver" y "guardar" son lo mismo: no
@@ -327,9 +331,9 @@ reglas que lleva el encargo es ruido: el usuario quiere saber que se investiga, 
 instrumentado.
 
 **Al terminar, decir SIEMPRE el archivo de hallazgos que genero**, con su ruta y su nombre,
-y cuantos hallazgos por severidad. Ese archivo es lo que despues alimenta al verificador
-(1.3) y a la recomendacion (6.4 con `--hallazgos`); sin su nombre el usuario no puede seguir
-el circuito. Es el dato mas importante del cierre, no un detalle.
+y cuantos hallazgos por severidad. Ese archivo es lo que despues alimenta la evaluacion (5) y
+la recomendacion (6.4 con `--hallazgos`); sin su nombre el usuario no puede seguir el
+circuito. Es el dato mas importante del cierre, no un detalle.
 
 ## 2) Consultar
 
@@ -514,6 +518,12 @@ Es la etapa que le da sentido a lo crudo, entre investigar (1) y responder (6): 
 la accion. No es un comando del proyecto: son agentes que se lanzan desde aca, con la misma
 lista blanca y los mismos vetos que 1.2 (nada de `verdad`, ni leer generador/modelo/tests).
 
+**Al correr cualquier opcion de Evaluar, explicar antes en una o dos lineas que hace** -- que
+primero se chequean las citas (determinista), despues un agente concluye y otro audita ese
+juicio, y que el veredicto final lo pone el usuario. Es la unica seccion cuyo mecanismo no es
+obvio por el rotulo, asi que una linea de contexto evita que el usuario lea la salida sin
+saber de donde sale.
+
 ```
 ╭──────────────────────────────────────────────────────────────────────────╮
 │  5) EVALUAR   ·  juzgar, auditar y consolidar el caso                    │
@@ -542,6 +552,20 @@ porque un analista de triage no evalua un informe aislado, mira todo lo que hay.
 - **Cada hallazgo lleva su `origen`** (detector / agente-X) y el evaluador lo usa como
   **contexto, no como medicion**: no pesa igual una regla de volumen que cito mil eventos de
   escaneo que un hallazgo puntual de un agente.
+
+### Paso 1: el verificador determinista (corre solo, antes que los agentes)
+
+**Antes de que ningun agente juzgue, se corre `python main.py verificar <archivo>` sobre cada
+JSON de hallazgos.** Es el chequeo mecanico de citas: para cada afirmacion, ¿el evento citado
+existe y sostiene lo que dice? Devuelve `VERIFICADO` / `CITA-NO-SOSTIENE` / `CITA-INEXISTENTE`
+por hallazgo. Es barato, deterministico y no opina -- por eso va primero: filtra las citas
+rotas antes de gastar un agente en razonar sobre ellas.
+
+Antes esto era una opcion suelta (la vieja 1.3); se pliego aca porque su lugar natural es el
+arranque de la evaluacion. **Es distinto del auditor (5.2):** el verificador comprueba que la
+*cita* se sostenga; el auditor juzga que la *inferencia* se siga. El verificador nunca valida
+el salto de citas correctas a una conclusion falsa -- ese hueco lo cubre el auditor. Las dos
+guardas, en orden: mecanica primero, de criterio despues.
 
 ### 5.1 — El evaluador
 

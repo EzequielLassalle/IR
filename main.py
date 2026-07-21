@@ -196,17 +196,27 @@ def cmd_base(args) -> int:
     diffs = linea_base(eventos, args.desde, args.hasta)
     _anotar(args, filtrar(eventos, desde=args.desde, hasta=args.hasta))
 
-    _seccion(f"LINEA BASE  (base: antes de {args.desde} | ventana: {args.desde} .. "
-             f"{args.hasta})")
-    print("  Solo lo categoricamente nuevo: valores que aparecen en la ventana y no")
-    print("  existian antes. La variacion de volumen no se reporta.\n")
-    if not diffs:
-        print("  Nada nuevo en la ventana.")
+    nuevos = sorted((d for d in diffs if d.nuevo), key=lambda d: d.primera)
+    apagados = sorted((d for d in diffs if d.desaparecido), key=lambda d: -d.en_base)
+
+    _seccion(f"LINEA BASE  (ventana: {args.desde} .. {args.hasta})")
+    if not nuevos and not apagados:
+        print("  Sin cambios respecto de antes: nada aparecio ni se apago en la ventana.")
         return 0
-    for d in diffs[:args.tope]:
-        print(d)
-    if len(diffs) > args.tope:
-        print(f"\n  ... {len(diffs) - args.tope} mas")
+
+    if nuevos:
+        print(f"  APARECIO  ({len(nuevos)})  ·  no existia antes, en orden de aparicion\n")
+        for d in nuevos[:args.tope]:
+            cuando = d.primera.strftime("%Y-%m-%d %H:%M")
+            print(f"    {cuando}  {d.campo:<8} {d.valor:<44} x{d.en_ventana}")
+        if len(nuevos) > args.tope:
+            print(f"    ... {len(nuevos) - args.tope} mas")
+
+    if apagados:
+        print(f"\n  SE APAGO  ({len(apagados)})  ·  emitia regularmente antes, cero ahora\n")
+        for d in apagados[:args.tope]:
+            print(f"    {d.campo:<8} {d.valor:<44} antes x{d.en_base}")
+
     return 0
 
 
