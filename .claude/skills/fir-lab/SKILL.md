@@ -26,7 +26,7 @@ recomendar despues.
 ```
 ╭──────────────────────────────────────────────────────────────────────────╮
 │   \ | /                                                                  │
-│  ── * ──   LAB FIR · INC-2026-0051 (BancoXYZ)                            │
+│  ── * ──   LAB FIR · BANCO                                               │
 │   / | \    10 dias · 3 fuentes · 6.532 eventos · 0 acciones aplicadas    │
 ├──────────────────────────────────────────────────────────────────────────┤
 │  1)  Barrido                                                             │
@@ -44,10 +44,11 @@ recomendar despues.
 ╰──────────────────────────────────────────────────────────────────────────╯
 ```
 
-**Copiar el cuadro literal, sin re-dibujarlo.** Todas las lineas miden 76 caracteres; los
-unicos campos que cambian son el caso, el conteo y las acciones aplicadas, y hay que
-reemplazarlos respetando el ancho. El asterisco va en ASCII a proposito: los glifos tipo
-`✳` se renderizan con ancho variable y descuadran el marco.
+**Copiar el cuadro literal, sin re-dibujarlo.** Todas las lineas miden 76 caracteres. El
+encabezado dice **`LAB FIR · BANCO`** fijo -- no el id del caso (ese vive en `panorama` y
+`estado`). Los unicos campos que cambian son el conteo de eventos y las acciones aplicadas
+(tercera linea), y hay que reemplazarlos respetando el ancho. El asterisco va en ASCII a
+proposito: los glifos tipo `✳` se renderizan con ancho variable y descuadran el marco.
 
 **Todo menu se imprime SIEMPRE completo, una opcion por linea, en su caja.** Nunca
 comprimirlo en dos columnas, ni en una version "compacta" o "resumida", ni reordenar las
