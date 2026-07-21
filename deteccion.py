@@ -30,6 +30,7 @@ class Hallazgo:
     cita: list[str]
     no_prueba: str
     atributos: dict = field(default_factory=dict)
+    origen: str = "detector"  # de donde vino el hallazgo: contexto para el evaluador, no medicion
 
     def __str__(self) -> str:
         cita = ", ".join(self.cita[:8]) + (f" (+{len(self.cita) - 8})"

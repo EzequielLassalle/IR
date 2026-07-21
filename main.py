@@ -211,8 +211,19 @@ def cmd_base(args) -> int:
 
 
 def cmd_barrido(args) -> int:
+    from dataclasses import asdict
+
     eventos = cargar(_evid(args))
     hallazgos = barrer(eventos)
+
+    if getattr(args, "salida", None):
+        destino = Path(args.salida)
+        payload = {"hallazgos": [asdict(h) for h in hallazgos]}
+        destino.write_text(json.dumps(payload, ensure_ascii=False, indent=2),
+                           encoding="utf-8")
+        print(f"{len(hallazgos)} hallazgos escritos en {destino} "
+              f"(origen: detector)")
+        return 0
 
     _seccion(f"BARRIDO DETERMINISTICO  ({len(hallazgos)} hallazgos)")
     for h in hallazgos[:args.tope]:
@@ -489,6 +500,7 @@ def construir_parser() -> argparse.ArgumentParser:
 
     sp = sub.add_parser("barrido")
     sp.add_argument("--tope", type=int, default=12)
+    sp.add_argument("--salida", help="escribir los hallazgos a un JSON en vez de imprimirlos")
     sp.set_defaults(func=cmd_barrido)
 
     sp = sub.add_parser("verdad")

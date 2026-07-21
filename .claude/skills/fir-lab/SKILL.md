@@ -33,11 +33,12 @@ recomendar despues.
 │  2) Consultar                                                            │
 │  3) Linea base                                                           │
 │  4) Situacion                                                            │
-│  5) Respuesta                                                            │
-│  6) Cronologia                                                           │
-│  7) Regresion                                                            │
-│  8) Otro caso                                                            │
-│  9) Borrar hallazgos                                                     │
+│  5) Evaluar                                                              │
+│  6) Respuesta                                                            │
+│  7) Cronologia                                                           │
+│  8) Regresion                                                            │
+│  9) Otro caso                                                            │
+│ 10) Borrar hallazgos                                                     │
 │                                                                          │
 │  0) Salir                                                                │
 ╰──────────────────────────────────────────────────────────────────────────╯
@@ -48,21 +49,29 @@ unicos campos que cambian son el caso, el conteo y las acciones aplicadas, y hay
 reemplazarlos respetando el ancho. El asterisco va en ASCII a proposito: los glifos tipo
 `✳` se renderizan con ancho variable y descuadran el marco.
 
-**Las opciones 1 a 8 estan construidas sobre comandos**, con una salvedad: la 4.4 (alcance
-como hechos, indicios y desconocidos) existe via `situacion` y necesita un archivo de
-hallazgos como entrada, asi que depende de haber corrido antes la 1.2 o el detector. La
-opcion **9 (borrar hallazgos)** no es un comando del proyecto: es housekeeping sobre los
-`.json` del directorio -- ver su seccion al final.
+**Todo menu se imprime SIEMPRE completo, una opcion por linea, en su caja.** Nunca
+comprimirlo en dos columnas, ni en una version "compacta" o "resumida", ni reordenar las
+opciones para que ocupen menos. El menu principal tiene diez opciones mas `0) Salir`, y van
+las once en once lineas, siempre igual. Una version compacta rompe la consistencia y
+confunde: el usuario aprende la forma del menu y espera verla identica cada vez. Vale para
+todos los menus y submenus, no solo el principal.
+
+**La mayoria de las opciones son comandos de `python main.py`**, con dos que no: **5
+(Evaluar)** orquesta agentes (evaluador, auditor, informe) sobre los hallazgos ya
+producidos, y **10 (borrar hallazgos)** es housekeeping sobre los `.json` del directorio.
+Una salvedad mas: la 4.4 (alcance como hechos, indicios y desconocidos) existe via
+`situacion` y necesita un archivo de hallazgos como entrada, asi que depende de haber
+corrido antes la 1.2, el detector, o la evaluacion.
 
 **Nunca simular una recomendacion ni un veredicto de accion.** Si un comando falla o falta
 un dato, decirlo. Producir esas salidas escribiendo prosa convincente es exactamente el modo
-de falla que el laboratorio existe para medir.
+de falla que el laboratorio existe para no cometer.
 
 Aceptar tanto el numero como la intencion en lenguaje natural.
 
 ## Navegacion
 
-**Una opcion del menu principal (1 a 9) SIEMPRE abre primero el submenu de esa seccion.
+**Una opcion del menu principal (1 a 10) SIEMPRE abre primero el submenu de esa seccion.
 Nunca dispara un comando directo.** El menu principal elige seccion; el comando se corre
 recien cuando el usuario elige una opcion del submenu (`1.1`, `4.3`, etc.). Tocar `1` abre
 el submenu de Barrido y ahi se espera `1.1`/`1.2`/`1.3` -- no se corre el detector de una.
@@ -107,7 +116,7 @@ el resultado deja al usuario con la pantalla vacia.
 mencionar el incidente, su dia, el atacante, "el ataque", o sugerir que una ventana, un
 filtro o una accion "lo agarra" / "lo cubre" / "se queda corta". Eso es filtrar el
 solucionario disfrazado de ayuda: convierte al operador en alguien a quien le soplan la
-respuesta, y arruina la medicion. Si una ventana no devuelve nada, se dice "nada nuevo en la
+respuesta, y arruina el ejercicio. Si una ventana no devuelve nada, se dice "nada nuevo en la
 ventana" y se ofrece el menu de vuelta -- nunca "para agarrar el incidente ampliala". El
 analista decide cuanto mirar; el skill le da la herramienta, no la pista. Vale para toda
 opcion, no solo para la linea base.
@@ -135,8 +144,16 @@ Excepcion: los veredictos (`AUSENCIA-DEMOSTRADA`, `CITA-NO-SOSTIENE`, la observa
 
 | Opcion | Comando |
 |---|---|
-| 1.1 | `python main.py barrido` |
+| 1.1 | `python main.py barrido --salida hallazgos_detector.json` |
 | 1.3 | `python main.py verificar <archivo.json>` |
+
+**1.1 SIEMPRE persiste su salida a `hallazgos_detector.json`** (nombre fijo, se sobrescribe en
+cada corrida, con `origen: "detector"` en cada hallazgo). "Ver" y "guardar" son lo mismo: no
+hay una corrida del detector que no deje su archivo. Consecuencia buena: el resultado aparece
+como archivo de trabajo en la opcion 10 (borrar hallazgos) y queda listo para la evaluacion
+(5) sin un paso extra. La lista agrupada que se le muestra al usuario **se arma leyendo ese
+JSON** (tiene `severidad`, `resumen`, `cita`), no parseando texto -- una sola corrida del
+detector, persistida y renderizada.
 
 ### 1.1 — El detector: primero que busca, despues que encontro
 
@@ -217,10 +234,10 @@ perderia la suite de regresion.
   **Es una lista blanca, no "todo lo que empiece con main.py".**
 - **`python main.py verdad` esta prohibido explicitamente.** Imprime la narrativa completa
   del incidente: es el solucionario. Decir "solo main.py" sin esta linea autoriza el
-  comando que entrega las respuestas, y cualquier medicion obtenida asi no vale nada.
+  comando que entrega las respuestas, y cualquier resultado obtenido asi no vale nada.
 - **Tiene prohibido leer `evidencia/generar_evidencia.py`, `modelo.py` y `tests.py`.** Ahi
   esta el plan del atacante escrito en Python. Un agente que los lea produce un informe
-  perfecto sin haber investigado, y la medicion pasa a no significar nada. Conviene ademas
+  perfecto sin haber investigado, y el ejercicio pasa a no significar nada. Conviene ademas
   confirmar despues que archivos abrio.
 - Cada afirmacion va con **cita a identificadores concretos** y expresada en el DSL de
   cuatro campos (`sujeto`, `accion`, `objeto`, `desde`, `hasta`). Lo que no entra en el DSL
@@ -311,7 +328,7 @@ instrumentado.
 
 **Al terminar, decir SIEMPRE el archivo de hallazgos que genero**, con su ruta y su nombre,
 y cuantos hallazgos por severidad. Ese archivo es lo que despues alimenta al verificador
-(1.3) y a la recomendacion (5.4 con `--hallazgos`); sin su nombre el usuario no puede seguir
+(1.3) y a la recomendacion (6.4 con `--hallazgos`); sin su nombre el usuario no puede seguir
 el circuito. Es el dato mas importante del cierre, no un detalle.
 
 ## 2) Consultar
@@ -465,7 +482,7 @@ sola fuente de verdad, y la respuesta a "¿este host esta aislado?" siempre vien
 lo decidio y cuando.
 
 Ese estado cambia lo que el motor recomienda: una accion ya aplicada devuelve `INAPLICABLE`
-y desaparece de la recomendacion (5.4). **Es lo que hace real al lazo** -- ejecutar cambia el mundo, y
+y desaparece de la recomendacion (6.4). **Es lo que hace real al lazo** -- ejecutar cambia el mundo, y
 la corrida siguiente lo refleja.
 
 La observabilidad (4.3) tiene **tres valores y el tercero no es un descuido**:
@@ -489,7 +506,96 @@ prematura**, asi que no se resume: se pega entera. Toma `--desde/--hasta` y **po
 juzga solo la ventana del incidente** (8 horas) -- si no se pasan, el operador ve los huecos
 de ese tramo y de ningun otro, y hay que decirlo o pasar la ventana que corresponda.
 
-## 5) Respuesta
+## 5) Evaluar
+
+Es la etapa que le da sentido a lo crudo, entre investigar (1) y responder (6): un agente
+**juzga** los hallazgos, un segundo agente **audita** ese juicio, y opcionalmente se
+**consolida** el caso en un informe. Es la capa de triage que un SOC hace entre la alerta y
+la accion. No es un comando del proyecto: son agentes que se lanzan desde aca, con la misma
+lista blanca y los mismos vetos que 1.2 (nada de `verdad`, ni leer generador/modelo/tests).
+
+```
+╭──────────────────────────────────────────────────────────────────────────╮
+│  5) EVALUAR   ·  juzgar, auditar y consolidar el caso                    │
+├──────────────────────────────────────────────────────────────────────────┤
+│  5.1)  Un agente concluye sobre los hallazgos (evaluador)                │
+│  5.2)  Un segundo agente revisa esa conclusion (auditor)                 │
+│  5.3)  Correr los dos en cadena                                          │
+│  5.4)  Armar el informe de incidente consolidado                         │
+│                                                                          │
+│  0)   Volver al menu anterior                                            │
+╰──────────────────────────────────────────────────────────────────────────╯
+```
+
+### Sobre que hallazgos trabaja
+
+La evaluacion mira **todo el tablero a la vez**, no un archivo suelto: consume **todos los
+`.json` de hallazgos reales** del directorio -- los del detector y los de los agentes --,
+porque un analista de triage no evalua un informe aislado, mira todo lo que hay.
+
+- **El detector no es un JSON hasta que se lo pide.** Correr `python main.py barrido --salida
+  hallazgos_detector.json` para persistirlo antes de evaluar, si no existe ya. Cada hallazgo
+  sale con `origen: "detector"`.
+- **Se excluyen dos archivos de andamiaje**, que no son hallazgos reales del caso:
+  `hallazgos_prueba.json` (fixture de tests) y `hallazgos_agente_windows.json` (ejemplo de las
+  docs). La regla es "solo hallazgos reales de esta corrida".
+- **Cada hallazgo lleva su `origen`** (detector / agente-X) y el evaluador lo usa como
+  **contexto, no como medicion**: no pesa igual una regla de volumen que cito mil eventos de
+  escaneo que un hallazgo puntual de un agente.
+
+### 5.1 — El evaluador
+
+Un agente lee los hallazgos consolidados y **concluye**, pero con transparencia total: su
+valor no es el veredicto, es el razonamiento auditable que lo sostiene. El entregable no es
+prosa suelta -- es una evaluacion falsable:
+
+- **Hipotesis** — que habria pasado, en una frase.
+- **A favor** — cada punto con su **cita** a identificadores de evento reales.
+- **En contra** — lo que la debilita, tambien citado. Si no busco contra-evidencia, no evaluo.
+- **Confianza** — alta / media / baja, y por que.
+- **Que la cambiaria** — la condicion de falsedad. Sin esto es un dictamen, no una evaluacion.
+- **Sin mirar** — que fuente, ventana o pregunta quedo afuera (cruzar con cobertura: una
+  ausencia sin cobertura no prueba nada).
+
+Escribe eso a un JSON (p. ej. `evaluacion.json`). Misma lista blanca y vetos que 1.2; puede
+concluir, pero cada hecho que use va citado a eventos que existen.
+
+### 5.2 — El auditor
+
+Un **segundo agente**, fresco, revisa la evaluacion del 5.1: no re-investiga el caso, audita
+el razonamiento. Su trabajo es exactamente el hueco que el verificador automatico no cubre
+-- **la inferencia que encadena citas correctas en una conclusion que no se sigue**. Para
+cada afirmacion de la evaluacion:
+
+- ¿La cita **existe** y **sostiene** lo que la afirmacion dice? (puede chequearlo con la lista
+  blanca -- `evento`, `entidad`, `timeline`).
+- ¿La conclusion **se sigue** de sus premisas, o hay un salto? (`CITA-NO-SOSTIENE` de nivel
+  inferencia).
+- ¿La confianza declarada esta calibrada con lo que la evidencia realmente da?
+- ¿Que se callo -- contra-evidencia o cobertura faltante que la evaluacion no menciono?
+
+Entregable: por afirmacion, `SOSTENIDA` / `SOBREPASA` / `SIN COBERTURA`, con el motivo; y un
+juicio global de que tan solida es la evaluacion. El auditor tiene los mismos vetos: no lee el
+solucionario, audita con evidencia.
+
+### 5.3 — Los dos en cadena
+
+Correr 5.1 y despues 5.2 sobre su salida, y presentar **las dos cosas juntas**: la
+evaluacion y su auditoria al lado. Es lo que hace honesto al juicio -- una conclusion viene
+siempre con su revision. Lanzar el auditor como agente fresco (sin la memoria del evaluador)
+es lo que evita que se autoconfirme.
+
+### 5.4 — El informe consolidado
+
+Un agente **compone** un informe de incidente a partir de piezas que **ya existen y ya estan
+ancladas**: barrido (1), situacion y cobertura (4), evaluacion y auditoria (5.1/5.2),
+cronologia de decisiones (7). **No inventa estado ni conclusiones nuevas: ensambla
+artefactos que ya pasaron por su control.** Si algo no esta en esas piezas, no entra al
+informe. Entregable: un informe en markdown -- que se sabe, con que confianza, que se
+decidio, y que quedo sin resolver. Es el cierre del caso, no una fuente de afirmaciones
+nuevas.
+
+## 6) Respuesta
 
 Es la mitad de respuesta entera: proponer acciones, ver si la evidencia las respalda,
 aplicarlas, y que el motor -- o un agente -- recomiende. Antes vivia partida en dos menus
@@ -497,13 +603,13 @@ aplicarlas, y que el motor -- o un agente -- recomiende. Antes vivia partida en 
 
 ```
 ╭──────────────────────────────────────────────────────────────────────────╮
-│  5) RESPUESTA   ·  que hacer, y si la evidencia lo respalda              │
+│  6) RESPUESTA   ·  que hacer, y si la evidencia lo respalda              │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  5.1)  Ver el catalogo de acciones                                       │
-│  5.2)  Someter una accion al motor                                       │
-│  5.3)  Someterla y registrarla en la cronologia                          │
-│  5.4)  Recomendacion del motor                                           │
-│  5.5)  Un agente propone acciones                                        │
+│  6.1)  Ver el catalogo de acciones                                       │
+│  6.2)  Someter una accion al motor                                       │
+│  6.3)  Someterla y registrarla en la cronologia                          │
+│  6.4)  Recomendacion del motor                                           │
+│  6.5)  Un agente propone acciones                                        │
 │                                                                          │
 │  0)   Volver al menu anterior                                            │
 ╰──────────────────────────────────────────────────────────────────────────╯
@@ -511,11 +617,11 @@ aplicarlas, y que el motor -- o un agente -- recomiende. Antes vivia partida en 
 
 | Opcion | Comando |
 |---|---|
-| 5.1 | `python main.py accion` |
-| 5.2 | `python main.py accion <accion> <objetivo> [--en T]` |
-| 5.3 | idem + `--registrar <actor>` |
-| 5.4 | `python main.py recomendacion [--hallazgos ARCHIVO] [--en T]` |
-| 5.5 | un agente propone (ver abajo) + `python main.py accion` por cada propuesta |
+| 6.1 | `python main.py accion` |
+| 6.2 | `python main.py accion <accion> <objetivo> [--en T]` |
+| 6.3 | idem + `--registrar <actor>` |
+| 6.4 | `python main.py recomendacion [--hallazgos ARCHIVO] [--en T]` |
+| 6.5 | un agente propone (ver abajo) + `python main.py accion` por cada propuesta |
 
 **`--en` es el parametro que hace al modulo**, y conviene explicarlo si el usuario no lo
 pasa: es el instante de la decision, y la evidencia se acota a lo anterior. Adjudicar contra
@@ -538,16 +644,16 @@ secciones siempre**, no solo el veredicto.
 **`NO-ADJUDICABLE` no es un error del motor.** Es la negativa a condenar una decision por no
 haber mirado donde no habia nada que mirar.
 
-**Registrar (5.3) dispara ademas un conector simulado** (`conectores.py`): ningun sistema real
+**Registrar (6.3) dispara ademas un conector simulado** (`conectores.py`): ningun sistema real
 recibe nada, pero la salida trae un ticket y un `status` con la forma de una respuesta real, y
 ese ticket queda en el mismo asiento de la cronologia. Se dispara **con cualquier veredicto**,
 incluido un override -- el conector ejecuta el acto, no juzga si estaba fundado.
 
-### 5.4 — Recomendacion del motor
+### 6.4 — Recomendacion del motor
 
-Es el grupo de control de la mitad de respuesta: el motor deriva que acciones estan
-fundadas ahora, deterministicamente. El equivalente al detector (1.1) en la mitad de
-investigacion.
+Es la via determinista de la mitad de respuesta: el motor deriva que acciones estan fundadas
+ahora, sin agente de por medio. La contraparte determinista de 6.5, igual que el detector
+(1.1) es la contraparte determinista de los agentes (1.2).
 
 **Con `--hallazgos` la recomendacion sale de una investigacion en vez del detector.** Es el
 circuito agentico completo: el agente investiga (1.2), escribe su archivo, el verificador
@@ -567,9 +673,9 @@ de falsedad es una orden disfrazada de consejo. Pegarla siempre.
 El orden lo pone el motor -- primero lo que preserva evidencia, despues por costo -- y **no
 se altera**.
 
-### 5.5 — Un agente propone acciones
+### 6.5 — Un agente propone acciones
 
-Es la contraparte abierta de 5.4, la misma simetria que hay en la mitad de investigacion
+Es la contraparte abierta de 6.4, la misma simetria que hay en la mitad de investigacion
 entre el detector (1.1) y los agentes (1.2). Un agente lee el estado del caso -- hallazgos,
 situacion, cobertura -- y **propone** acciones de respuesta con su fundamento.
 
@@ -582,16 +688,16 @@ poder de decidir la respuesta sin adjudicacion seria justo la prosa que el proye
 
 El encargo del agente usa **la misma lista blanca y los mismos vetos que el de 1.2** (nada de
 `verdad`, ni leer el generador/modelo/tests/detector). Cambia el entregable: en vez de
-hallazgos, una lista de acciones propuestas del catalogo (5.1) con objetivo y fundamento,
+hallazgos, una lista de acciones propuestas del catalogo (6.1) con objetivo y fundamento,
 cada una para pasar por el motor. Nunca inventar una accion fuera del catalogo.
 
-## 6) Cronologia
+## 7) Cronologia
 
 ```
 ╭──────────────────────────────────────────────────────────────────────────╮
-│  6) CRONOLOGIA   ·  que se decidio y por que                             │
+│  7) CRONOLOGIA   ·  que se decidio y por que                             │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  6.1)  Las decisiones tomadas y con que se sabia en cada una             │
+│  7.1)  Las decisiones tomadas y con que se sabia en cada una             │
 │                                                                          │
 │  0)   Volver al menu anterior                                            │
 ╰──────────────────────────────────────────────────────────────────────────╯
@@ -599,7 +705,7 @@ cada una para pasar por el motor. Nunca inventar una accion fuera del catalogo.
 
 | Opcion | Comando |
 |---|---|
-| 6.1 | `python main.py cronologia` |
+| 7.1 | `python main.py cronologia` |
 
 Cada asiento guarda **lo que se sabia en el momento de decidir**, con cita. Es cadena de
 custodia de decisiones: lo que responde en el post-mortem cuando preguntan por que se apago
@@ -609,15 +715,15 @@ distinto de una mal tomada.
 Los asientos se agregan con `accion --registrar <actor>` y **no se editan ni se borran**. Cada
 uno trae ademas el ticket del conector simulado que se disparo (linea `conector`).
 
-## 7) Regresion
+## 8) Regresion
 
 ```
 ╭──────────────────────────────────────────────────────────────────────────╮
-│  7) REGRESION   ·  poner a prueba el motor                               │
+│  8) REGRESION   ·  poner a prueba el motor                               │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  7.1)  Correr las nueve pruebas del motor                                │
-│  7.2)  Correr una sola, con su explicacion                               │
-│  7.3)  Correr la suite completa de verificaciones                        │
+│  8.1)  Correr las nueve pruebas del motor                                │
+│  8.2)  Correr una sola, con su explicacion                               │
+│  8.3)  Correr la suite completa de verificaciones                        │
 │                                                                          │
 │  0)   Volver al menu anterior                                            │
 ╰──────────────────────────────────────────────────────────────────────────╯
@@ -625,9 +731,9 @@ uno trae ademas el ticket del conector simulado que se disparo (linea `conector`
 
 | Opcion | Comando |
 |---|---|
-| 7.1 | `python main.py regresion [--detalle]` |
-| 7.2 | `python main.py regresion <N>` |
-| 7.3 | `python main.py test` |
+| 8.1 | `python main.py regresion [--detalle]` |
+| 8.2 | `python main.py regresion <N>` |
+| 8.3 | `python main.py test` |
 
 **No se llama "Casos" a proposito.** En respuesta a incidentes un caso es la unidad de
 trabajo -- con duenio, severidad y estado -- y usar la palabra para una suite de tests
@@ -637,14 +743,14 @@ Las nueve son decisiones donde **el veredicto no coincide con la intuicion**, y 
 declara su `esperado`. Con la evidencia intacta, una prueba que no coincide es un bug del
 motor: parar todo.
 
-## 8) Otro caso
+## 9) Otro caso
 
 ```
 ╭──────────────────────────────────────────────────────────────────────────╮
-│  8) OTRO CASO   ·  practicar con un incidente nuevo                      │
+│  9) OTRO CASO   ·  practicar con un incidente nuevo                      │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  8.1)  Generar un caso nuevo (agente autor, aislado)                     │
-│  8.2)  Investigarlo y responderlo a ciegas                               │
+│  9.1)  Generar un caso nuevo (agente autor, aislado)                     │
+│  9.2)  Investigarlo y responderlo a ciegas                               │
 │                                                                          │
 │  0)   Volver al menu anterior                                            │
 ╰──────────────────────────────────────────────────────────────────────────╯
@@ -652,8 +758,8 @@ motor: parar todo.
 
 | Opcion | Comando |
 |---|---|
-| 8.1 | `python main.py --caso b generar` |
-| 8.2 | igual que el resto del menu, agregando `--caso b` en cada comando |
+| 9.1 | `python main.py --caso b generar` |
+| 9.2 | igual que el resto del menu, agregando `--caso b` en cada comando |
 
 **Es otro incidente para practicar, no para medir nada contra el principal.** No hay
 comparacion de numeros entre casos -- cada uno se investiga y se responde por su cuenta. Hoy
@@ -662,15 +768,15 @@ hay uno solo implementado: `atacante_salto_triple` (`INC-2026-0064`, en `CASOS` 
 despues AWS -- que el caso principal no pone a prueba. Agregar otro es agregar otra funcion
 de plan y otra entrada a `CASOS`, no un mecanismo nuevo.
 
-**Por que 8.1 y 8.2 conviene que no compartan sesion.** Si elegis la tecnica y despues
+**Por que 9.1 y 9.2 conviene que no compartan sesion.** Si elegis la tecnica y despues
 investigas vos mismo en la misma conversacion, ya sabes la respuesta y no practicaste nada.
-Lanzar 8.2 como un agente fresco (misma lista blanca de 1.2, mismo veto sobre `verdad`) que
-no tiene memoria de 8.1 es lo que mantiene el ejercicio siendo investigacion real. Igual que
+Lanzar 9.2 como un agente fresco (misma lista blanca de 1.2, mismo veto sobre `verdad`) que
+no tiene memoria de 9.1 es lo que mantiene el ejercicio siendo investigacion real. Igual que
 en 1.2, mirar `python main.py --caso b verdad --si` antes de cerrar el archivo de hallazgos
 vacia el ejercicio de sentido -- ahi no hay ningun numero que lo delate, asi que la disciplina
 es la unica guarda.
 
-## 9) Borrar hallazgos
+## 10) Borrar hallazgos
 
 Housekeeping: descarta los `.json` de hallazgos **de trabajo** del directorio del proyecto,
 para arrancar el lab limpio o tirar el resultado de una investigacion que no sirvio.
@@ -678,7 +784,7 @@ para arrancar el lab limpio o tirar el resultado de una investigacion que no sir
 **Borra solo los archivos de trabajo. Nunca toca dos que estan protegidos:**
 
 - **`hallazgos_prueba.json` — lo usa `tests.py`.** Es el fixture del test del verificador: si
-  se borra, `python main.py test` (7.3) falla. No se borra nunca por esta opcion.
+  se borra, `python main.py test` (8.3) falla. No se borra nunca por esta opcion.
 - **`hallazgos_agente_windows.json` — es el ejemplo que citan las docs.** Material de
   referencia del repo. Tampoco se borra por esta opcion.
 
