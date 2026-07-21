@@ -32,7 +32,7 @@ recomendar despues.
 │  1)  Barrido                                                             │
 │  2)  Consultar                                                           │
 │  3)  Linea base                                                          │
-│  4)  Situacion                                                           │
+│  4)  Panorama                                                            │
 │  5)  Evaluar                                                             │
 │  6)  Respuesta                                                           │
 │  7)  Cronologia                                                          │
@@ -65,9 +65,9 @@ caja tal cual: ya viene alineada.
 **La mayoria de las opciones son comandos de `python main.py`**, con dos que no: **5
 (Evaluar)** orquesta agentes (evaluador, auditor, informe) sobre los hallazgos ya
 producidos, y **10 (borrar hallazgos)** es housekeeping sobre los `.json` del directorio.
-Una salvedad mas: la 4.4 (alcance como hechos, indicios y desconocidos) existe via
-`situacion` y necesita un archivo de hallazgos como entrada, asi que depende de haber
-corrido antes la 1.2, el detector, o la evaluacion.
+Una salvedad mas: el drill-down **Alcance** de Panorama (4) existe via `situacion` y necesita
+un archivo de hallazgos como entrada, asi que depende de haber corrido antes la 1.2, el
+detector, o la evaluacion.
 
 **Nunca simular una recomendacion ni un veredicto de accion.** Si un comando falla o falta
 un dato, decirlo. Producir esas salidas escribiendo prosa convincente es exactamente el modo
@@ -79,10 +79,15 @@ Aceptar tanto el numero como la intencion en lenguaje natural.
 
 **Una opcion del menu principal (1 a 10) SIEMPRE abre primero el submenu de esa seccion.
 Nunca dispara un comando directo.** El menu principal elige seccion; el comando se corre
-recien cuando el usuario elige una opcion del submenu (`1.1`, `4.3`, etc.). Tocar `1` abre
+recien cuando el usuario elige una opcion del submenu (`1.1`, `2.3`, etc.). Tocar `1` abre
 el submenu de Barrido y ahi se espera `1.1`/`1.2` -- no se corre el detector de una.
 Saltarse ese paso, aunque la seccion tenga una opcion "obvia", es un error de navegacion:
-el usuario perdio la posibilidad de elegir. La unica excepcion es `0) Salir`.
+el usuario perdio la posibilidad de elegir.
+
+**Excepciones (corren directo, sin submenu):** `0) Salir`, y `4) Panorama` -- que es una sola
+accion de mostrar (corre `panorama` y recien despues ofrece los drill-downs). Una seccion
+corre directo solo si es un unico comando sin opciones que elegir; si hay mas de una cosa que
+se podria querer, va submenu.
 
 Todo submenu termina con `0) Volver al menu anterior`. Despues de ejecutar una accion y
 presentar el resultado, volver a ofrecer el submenu donde estaba el usuario.
@@ -415,7 +420,7 @@ como atajo antes de pedir que escriba uno. Nunca fabricar un ID que no se haya v
 
 ```
 ╭──────────────────────────────────────────────────────────────────────────╮
-│  3) LINEA BASE   ·  que es nuevo respecto de antes                       │
+│  3) LINEA BASE   ·  que cambio respecto de antes                         │
 ├──────────────────────────────────────────────────────────────────────────┤
 │  1) La ultima hora                                                       │
 │  2) Las ultimas 12 horas                                                 │
@@ -451,45 +456,73 @@ El offset se resta del `entrada` que reporte `estado` en cada caso -- si se oper
 tomar su propio `entrada`, no hardcodear el del principal. Los 30 dias exceden la ventana de
 datos (10 dias) y el comando la recorta solo; no es un error.
 
-**Reporta solo lo categoricamente nuevo:** valores que aparecen en la ventana y no existian
-antes. La variacion de volumen no se reporta a proposito -- comparar totales entre una base
-de siete dias y una ventana de seis horas declararia "caida" cualquier actividad rutinaria.
-La primera y ultima aparicion de un indicador puntual ya la da `entidad` (2.3), por eso aca
-no hay una opcion aparte para eso.
+**Reporta dos cosas, las dos categoricas (no variacion de volumen):**
 
-## 4) Situacion
+- **APARECIO** — valores que aparecen en la ventana y **no existian antes**, en **orden de
+  primera aparicion** (con su timestamp). Ordenado asi, se lee como una linea de tiempo de
+  "primeras veces", no como una lista suelta. Cada linea es `cuando · tipo · valor · xN`; ya
+  **no** trae el `NUEVO` ni la columna `base: 0` (eran siempre lo mismo, no informaban).
+- **SE APAGO** — sujetos o acciones que **emitian regularmente antes y dejaron de emitir** en
+  la ventana. Una fuente que se calla es senial de manipulacion o aislamiento. Se mide por
+  **expectativa** (cuanto se esperaria ver por el ritmo en la base): por eso no floodea en
+  ventanas cortas -- en una hora casi nada tiene expectativa alta. Solo aplica a `sujeto` y
+  `accion`: que una IP o un objeto puntual no reaparezca es ruido, no silencio.
 
-```
-╭──────────────────────────────────────────────────────────────────────────╮
-│  4) SITUACION   ·  que se sabe y que falta                               │
-├──────────────────────────────────────────────────────────────────────────┤
-│  4.1)  Que acciones de respuesta ya se aplicaron                         │
-│  4.2)  Cobertura                                                         │
-│  4.3)  ¿Habriamos visto este hecho, de haber pasado?                     │
-│  4.4)  Alcance                                                           │
-│  4.5)  Que zonas de la evidencia ya se tocaron                           │
-│                                                                          │
-│  0)   Volver al menu anterior                                            │
-╰──────────────────────────────────────────────────────────────────────────╯
-```
+`--tope` es 100 por defecto; no preguntar "¿subo el tope?". Si no hay ni apariciones ni
+silencios, la salida lo dice y se vuelve al menu. La variacion de volumen sigue sin
+reportarse a proposito. La primera y ultima aparicion de un indicador **puntual** la da
+`entidad` (2.3); aca es el panorama de toda la ventana.
+
+## 4) Panorama
+
+**Tocar 4 corre `python main.py panorama` y muestra el tablero de una: no hay submenu, no
+pide nada.** Es la foto de orientacion -- de que tamanio es el caso y en que punto de tu
+trabajo estas. **Agrega, no interpreta:** cada numero sale de un comando que ya existe
+(`estado`, `cobertura`, `respuesta`, `consultas`, `contar`), junta todo en una pantalla.
 
 | Opcion | Comando |
 |---|---|
-| 4.1 | `python main.py respuesta` |
-| 4.2 | `python main.py cobertura` |
-| 4.3 | `python main.py observable <accion> <objeto> --desde T --hasta T [--sujeto S]` |
-| 4.4 | `python main.py situacion <archivo_hallazgos.json> [--desde T] [--hasta T]` |
-| 4.5 | `python main.py consultas` |
+| 4 | `python main.py panorama` |
 
-**El estado de la respuesta no se guarda aparte: se deriva replayando la cronologia.** Una
-sola fuente de verdad, y la respuesta a "¿este host esta aislado?" siempre viene con quien
-lo decidio y cuando.
+Que muestra, todo pegado textual:
 
-Ese estado cambia lo que el motor recomienda: una accion ya aplicada devuelve `INAPLICABLE`
-y desaparece de la recomendacion (6.4). **Es lo que hace real al lazo** -- ejecutar cambia el mundo, y
-la corrida siguiente lo refleja.
+- **Ventana y volumen** — el tramo, y eventos por fuente.
+- **ACTORES MAS ACTIVOS** — top sujetos **por volumen**. El rotulo dice "(por volumen)" a
+  proposito: es conteo, **no** acusacion. No agregar "el sospechoso es..." -- ver "el skill
+  no conoce la verdad".
+- **TIPOS DE ACTIVIDAD** — top acciones por volumen.
+- **DONDE ESTAS PARADO** — cobertura, respuesta e investigacion, una linea cada una: en que
+  punto del trabajo estas, no que encontraste.
 
-La observabilidad (4.3) tiene **tres valores y el tercero no es un descuido**:
+**Despues del panorama, ofrecer los detalles como menu de seguimiento.** El tablero resume;
+los drill-downs profundizan. No es obligatorio pasar por ellos -- es la diferencia con el
+viejo submenu de "Situacion", que forzaba a elegir antes de ver nada:
+
+```
+╭──────────────────────────────────────────────────────────────────────────╮
+│  ¿Ver algo en detalle?                                                   │
+├──────────────────────────────────────────────────────────────────────────┤
+│  1)  Cobertura: fuentes y carencias                                      │
+│  2)  ¿Habriamos visto un hecho? (observabilidad)                         │
+│  3)  Alcance sobre un archivo de hallazgos                               │
+│  4)  Que zonas de la evidencia ya se tocaron                             │
+│                                                                          │
+│  0)  Volver al menu principal                                            │
+╰──────────────────────────────────────────────────────────────────────────╯
+```
+
+| Detalle | Comando |
+|---|---|
+| Cobertura | `python main.py cobertura` |
+| Observabilidad | `python main.py observable <accion> <objeto> --desde T --hasta T [--sujeto S]` |
+| Alcance | `python main.py situacion <archivo_hallazgos.json> [--desde T] [--hasta T]` |
+| Zonas tocadas | `python main.py consultas` |
+
+El estado **detallado** de la respuesta vive en Respuesta (6); el panorama solo dice cuantas
+acciones hay aplicadas. Ese estado no se guarda aparte: se deriva replayando la cronologia, y
+una accion ya aplicada devuelve `INAPLICABLE` y desaparece de la recomendacion (6.4).
+
+**La observabilidad tiene tres valores y el tercero no es un descuido:**
 
 - `SI` — la fuente cubre la ventana y registra esa clase de hecho. Solo aca una ausencia
   informa.
@@ -502,13 +535,14 @@ Con `--sujeto` se somete la afirmacion de ausencia completa y devuelve `DESMENTI
 la mas cara del oficio**: no haber encontrado `GetObject` no prueba que no hubo descargas,
 prueba que el trail no registra data events de S3.
 
-En `situacion` (4.4), las tres secciones se presentan completas. `SIN ESTABLECER` es la que
-mas cuesta y la que mas vale, y distingue dos cosas que se ven iguales en cualquier informe:
-**SIN MIRAR** es un hueco de investigacion, **MIRADO Y VACIO** es una zona descartada. Sale
-de cruzar la cobertura con el registro de consultas. **Es lo que decide si una contencion es
-prematura**, asi que no se resume: se pega entera. Toma `--desde/--hasta` y **por defecto
-juzga solo la ventana del incidente** (8 horas) -- si no se pasan, el operador ve los huecos
-de ese tramo y de ningun otro, y hay que decirlo o pasar la ventana que corresponda.
+En `situacion` (Alcance), las tres secciones se presentan completas. `SIN ESTABLECER` es la
+que mas cuesta y la que mas vale, y distingue dos cosas que se ven iguales en cualquier
+informe: **SIN MIRAR** es un hueco de investigacion, **MIRADO Y VACIO** es una zona
+descartada. Sale de cruzar la cobertura con el registro de consultas. **Es lo que decide si
+una contencion es prematura**, asi que no se resume: se pega entera. Toma `--desde/--hasta` y
+**por defecto juzga solo la ventana del incidente** (8 horas) -- si no se pasan, el operador
+ve los huecos de ese tramo y de ningun otro, y hay que decirlo o pasar la ventana que
+corresponda.
 
 ## 5) Evaluar
 

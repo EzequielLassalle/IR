@@ -2,6 +2,7 @@
 
     python main.py                    comandos disponibles
     python main.py estado             el escenario y su forma
+    python main.py panorama           tablero de orientacion del caso
     python main.py timeline           el timeline, con filtros
     python main.py evento <ID>        un evento: normalizado y crudo
     python main.py entidad <ind>      todo lo que menciona un indicador
@@ -22,7 +23,7 @@ import argparse
 import json
 import subprocess
 import sys
-from datetime import timedelta
+from datetime import datetime, timedelta
 from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
@@ -84,6 +85,56 @@ def cmd_estado(args) -> int:
     _seccion("ACCIONES")
     for valor, n in contar(eventos, "accion", tope=12):
         print(f"  {n:>6}  {valor}")
+    return 0
+
+
+def _mil(n: int) -> str:
+    return f"{n:,}".replace(",", ".")
+
+
+def cmd_panorama(args) -> int:
+    """Tablero de orientacion: de que tamanio es el caso y en que punto del trabajo estas.
+    Agrega, no interpreta: cada numero sale de un comando que ya existe."""
+    import cobertura
+    import decisiones
+
+    evid = _evid(args)
+    eventos = cargar(evid)
+    verdad = cargar_verdad(evid)
+
+    desde, hasta = verdad["ventana"]["desde"], verdad["ventana"]["hasta"]
+    dias = (datetime.fromisoformat(hasta.replace("Z", "+00:00"))
+            - datetime.fromisoformat(desde.replace("Z", "+00:00"))).days
+    total = sum(verdad["conteo"].values())
+    fuentes_txt = "  ".join(f"{f} {_mil(n)}"
+                             for f, n in sorted(verdad["conteo"].items(), key=lambda x: -x[1]))
+
+    n_acc = len(decisiones.cargar(evid))
+    protegidos = {"hallazgos_prueba.json", "hallazgos_agente_windows.json"}
+    trabajo = [p for p in AQUI.glob("hallazgos_*.json") if p.name not in protegidos]
+    detector = "persistido" if (AQUI / "hallazgos_detector.json").exists() else "sin persistir"
+    activas = sum(1 for f in cobertura.FUENTES.values() if f.activa)
+
+    print(f"PANORAMA  {verdad['caso']}")
+    print("=" * 70)
+    print(f"Ventana        {desde[:10]}  ->  {hasta[:16].replace('T', ' ')} UTC   ({dias} dias)")
+    print(f"Eventos        {_mil(total):<9} {fuentes_txt}")
+
+    _seccion("ACTORES MAS ACTIVOS   (por volumen)")
+    top = contar(eventos, "sujeto", tope=6)
+    for i in range(0, len(top), 2):
+        fila = "".join(f"   {_mil(n):>6}  {v:<28}" for v, n in top[i:i + 2])
+        print(fila)
+
+    _seccion("TIPOS DE ACTIVIDAD")
+    for v, n in contar(eventos, "accion", tope=6):
+        print(f"   {_mil(n):>6}  {v}")
+
+    _seccion("DONDE ESTAS PARADO")
+    print(f"   Cobertura       {activas} fuentes activas, ventana completa")
+    print(f"   Respuesta       {n_acc} acciones aplicadas")
+    print(f"   Investigacion   {len(trabajo)} hallazgos de "
+          f"trabajo  |  detector {detector}")
     return 0
 
 
@@ -205,7 +256,7 @@ def cmd_base(args) -> int:
         return 0
 
     if nuevos:
-        print(f"  APARECIO  ({len(nuevos)})  ·  no existia antes, en orden de aparicion\n")
+        print(f"  APARECIO  ({len(nuevos)})  --  no existia antes, en orden de aparicion\n")
         for d in nuevos[:args.tope]:
             cuando = d.primera.strftime("%Y-%m-%d %H:%M")
             print(f"    {cuando}  {d.campo:<8} {d.valor:<44} x{d.en_ventana}")
@@ -213,7 +264,7 @@ def cmd_base(args) -> int:
             print(f"    ... {len(nuevos) - args.tope} mas")
 
     if apagados:
-        print(f"\n  SE APAGO  ({len(apagados)})  ·  emitia regularmente antes, cero ahora\n")
+        print(f"\n  SE APAGO  ({len(apagados)})  --  emitia regularmente antes, cero ahora\n")
         for d in apagados[:args.tope]:
             print(f"    {d.campo:<8} {d.valor:<44} antes x{d.en_base}")
 
@@ -502,10 +553,13 @@ def construir_parser() -> argparse.ArgumentParser:
     sp.add_argument("--tope", type=int, default=25)
     sp.set_defaults(func=cmd_entidad)
 
+    sp = sub.add_parser("panorama")
+    sp.set_defaults(func=cmd_panorama)
+
     sp = sub.add_parser("base")
     sp.add_argument("--desde", default="2026-03-09T20:00:00Z")
     sp.add_argument("--hasta", default="2026-03-10T04:00:00Z")
-    sp.add_argument("--tope", type=int, default=40)
+    sp.add_argument("--tope", type=int, default=100)
     sp.set_defaults(func=cmd_base)
 
     sp = sub.add_parser("barrido")
