@@ -66,9 +66,6 @@ caja tal cual: ya viene alineada.
 **La mayoria de las opciones son comandos de `python main.py`**, con dos que no: **5
 (Evaluar)** orquesta agentes (evaluador, auditor, informe) sobre los hallazgos ya
 producidos, y **10 (borrar hallazgos)** es housekeeping sobre los `.json` del directorio.
-Una salvedad mas: el drill-down **Alcance** de Panorama (4) existe via `situacion` y necesita
-un archivo de hallazgos como entrada, asi que depende de haber corrido antes la 1.2, el
-detector, o la evaluacion.
 
 **Nunca simular una recomendacion ni un veredicto de accion.** Si un comando falla o falta
 un dato, decirlo. Producir esas salidas escribiendo prosa convincente es exactamente el modo
@@ -86,7 +83,7 @@ Saltarse ese paso, aunque la seccion tenga una opcion "obvia", es un error de na
 el usuario perdio la posibilidad de elegir.
 
 **Excepciones (corren directo, sin submenu):** `0) Salir`, y `4) Panorama` -- que es una sola
-accion de mostrar (corre `panorama` y recien despues ofrece los drill-downs). Una seccion
+accion de mostrar: corre `panorama` y vuelve al menu principal. Una seccion
 corre directo solo si es un unico comando sin opciones que elegir; si hay mas de una cosa que
 se podria querer, va submenu.
 
@@ -231,7 +228,79 @@ Si elige 1, se arma un encargo de agente (el de 1.2, con toda su lista blanca y 
 detector senialo. Apuntar al lead no es copiar la respuesta: el detector no dice si es
 ataque, solo dice donde mirar.
 
-### 1.2 — Como se lanzan los agentes
+### 1.2 — Primero como trabajan, despues el reparto
+
+**Al tocar 1.2, antes de cualquier otra cosa, mostrar el bloque de abajo.** Es la contraparte
+de las ocho reglas que se listan en 1.1, y por la misma razon: el usuario tiene que saber que
+va a hacer la herramienta antes de leer lo que devuelve. La diferencia es que el detector se
+describe por lo que busca -- una lista cerrada -- y los agentes no se pueden describir asi,
+porque lo que vayan a encontrar no esta acotado de antemano. Lo que si es fijo es el metodo,
+y es lo que se muestra.
+
+Va **literal**, sin reescribirlo ni resumirlo:
+
+```
+El detector tiene una lista de patrones. Los agentes no: tienen un metodo.
+Consultan los logs con los mismos comandos que tenes vos en el menu, y no
+ven el codigo que genero el escenario.
+
+ 1. Arranca estableciendo con que esta trabajando: cuantos eventos hay, que
+    tramo de fechas cubren y de que sistemas vienen. Es lo que le avisa si
+    le falta un pedazo, antes de sacar cualquier conclusion sobre lo que no
+    aparece.
+
+ 2. Despues pregunta que se estaba registrando y que no. Hay huecos
+    declarados -- por ejemplo, los eventos de Windows guardan que programa se
+    ejecuto pero no con que argumentos. No encontrar algo donde nadie estaba
+    mirando no prueba que no haya pasado.
+
+ 3. Antes de buscar nada raro, mira como es un dia cualquiera aca: que
+    cuentas trabajan, a que horas, desde que direcciones, con que programas.
+    Sin eso no tiene contra que comparar.
+
+ 4. Busca lo que aparece por primera vez, no lo que aparece mucho. Un patron
+    que se repite miles de veces suele ser un proceso automatico; algo que
+    ocurre una sola vez en diez dias, no.
+
+ 5. Compara cada cuenta, host o credencial contra su propio pasado, no contra
+    el promedio del resto. Que otros hagan lo mismo no la limpia si ella
+    nunca lo habia hecho.
+
+ 6. Cuando encuentra un dato concreto -- una direccion IP, una cuenta, una
+    credencial -- lo busca en las tres fuentes, no solo en la que salto.
+
+ 7. El mismo nombre de usuario en dos sistemas distintos no es
+    necesariamente la misma persona. Lo toma como pista, y no lo da por
+    hecho hasta que haya un evento que los una.
+
+ 8. De cada cosa que encuentra mira que paso antes y que paso despues. Lo
+    anterior dice como se llego ahi; lo posterior, hasta donde siguio.
+
+ 9. Antes de reportar algo como sospechoso busca la explicacion aburrida:
+    mantenimiento, una automatizacion mal configurada, una contrasenia
+    vencida. Y la descarta mostrando evidencia, no opinando -- el trabajo
+    administrativo legitimo deja las mismas huellas que un ataque.
+
+10. Al cerrar declara que NO miro: que fuente, que franja de tiempo, que
+    pregunta quedo sin responder. Un informe sin esa lista se lee mas solido
+    de lo que es.
+```
+
+Recien despues del bloque, el menu de reparto:
+
+```
+╭──────────────────────────────────────────────────────────────────────────╮
+│  1.2) MANDAR AGENTES   ·  ¿como reparto el trabajo?                      │
+├──────────────────────────────────────────────────────────────────────────┤
+│  1) Tres agentes, uno por fuente (windows, cloudtrail, syslog)           │
+│  2) Un solo agente sobre toda la evidencia                               │
+│  3) Yo escribo el hilo a investigar                                      │
+│                                                                          │
+│  0) Volver al menu de Barrido                                            │
+╰──────────────────────────────────────────────────────────────────────────╯
+```
+
+### Como se lanzan
 
 Se lanzan **desde aca**, con la herramienta de subagentes. Nunca desde el codigo del
 proyecto: si Python llamara a la API, el catalogo de casos dejaria de ser reproducible y se
@@ -495,22 +564,40 @@ Que muestra, todo pegado textual:
 - **DONDE ESTAS PARADO** — cobertura, respuesta e investigacion, una linea cada una: en que
   punto del trabajo estas, no que encontraste.
 
-**Despues del panorama, ofrecer los detalles como menu de seguimiento.** El tablero resume;
-los drill-downs profundizan. No es obligatorio pasar por ellos -- es la diferencia con el
-viejo submenu de "Situacion", que forzaba a elegir antes de ver nada:
+**El panorama termina ahi: no hay menu de seguimiento ni drill-downs colgando.** Es una sola
+pantalla de orientacion. Pero **tampoco se vuelve solo al menu principal**: despues del
+tablero va esta caja, y se espera que el usuario elija. Reimprimir el menu principal de una
+le saca el tablero de la pantalla antes de que termine de leerlo.
 
 ```
 ╭──────────────────────────────────────────────────────────────────────────╮
-│  ¿Ver algo en detalle?                                                   │
+│  4) PANORAMA   ·  la foto de orientacion                                 │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  1)  Cobertura: fuentes y carencias                                      │
-│  2)  ¿Habriamos visto un hecho? (observabilidad)                         │
-│  3)  Alcance sobre un archivo de hallazgos                               │
-│  4)  Que zonas de la evidencia ya se tocaron                             │
+│  1)  Explicar como se genera este tablero                                │
 │                                                                          │
 │  0)  Volver al menu principal                                            │
 ╰──────────────────────────────────────────────────────────────────────────╯
 ```
+
+### La opcion 1: de donde sale cada numero
+
+Ningun numero del tablero esta escrito a mano: todos se calculan al correr el comando, asi
+que si cambia la evidencia cambia la pantalla. Eso es lo que hay que poder mostrar, y sale
+de `cmd_panorama` (`main.py`):
+
+| Bloque | De donde sale |
+|---|---|
+| Ventana y volumen | el archivo de verdad del caso (`caso`, `ventana`, `conteo`); los dias se calculan restando las dos fechas |
+| ACTORES MAS ACTIVOS | `contar(eventos, "sujeto", tope=6)` sobre los eventos cargados |
+| TIPOS DE ACTIVIDAD | `contar(eventos, "accion", tope=6)` |
+| Cobertura | cuantas `cobertura.FUENTES` tienen `activa=True` |
+| Respuesta | `len(decisiones.cargar(evid))` -- los asientos de la cronologia (7) |
+| Investigacion | un glob de `hallazgos_*.json` del directorio menos los dos protegidos, y si existe `hallazgos_detector.json` |
+
+**Una salvedad que hay que decir al explicarlo:** en la linea de Cobertura el numero de
+fuentes se calcula, pero **`"ventana completa"` es texto fijo**. `cobertura.Fuente` tiene un
+metodo `cubre(desde, hasta)` que contesta exactamente eso y el panorama no lo usa, asi que si
+una fuente dejara de cubrir el tramo el tablero lo seguiria afirmando igual.
 
 | Detalle | Comando |
 |---|---|
@@ -565,12 +652,29 @@ saber de donde sale.
 ├──────────────────────────────────────────────────────────────────────────┤
 │  5.1)  Un agente concluye sobre los hallazgos (evaluador)                │
 │  5.2)  Un segundo agente revisa esa conclusion (auditor)                 │
-│  5.3)  Correr los dos en cadena                                          │
-│  5.4)  Armar el informe de incidente consolidado                         │
+│  5.3)  Armar el informe de incidente consolidado                         │
 │                                                                          │
 │  0)   Volver al menu anterior                                            │
 ╰──────────────────────────────────────────────────────────────────────────╯
 ```
+
+### Precondiciones: cada opcion se niega a correr sin su insumo
+
+Las tres opciones consumen la salida del paso anterior. **Si el insumo no esta, se dice y no
+se lanza ningun agente** -- ni se produce el paso previo por cuenta propia para poder seguir.
+Una evaluacion sobre nada, o una auditoria de una conclusion que no existe, es prosa
+inventada con formato de resultado: exactamente el modo de falla que este laboratorio existe
+para no cometer.
+
+| Opcion | Necesita | Si falta |
+|---|---|---|
+| 5.1 | al menos un `.json` de hallazgos reales | **"no hay hallazgos que evaluar"** y de donde salen (1.1 o 1.2) |
+| 5.2 | la evaluacion de 5.1 (`evaluacion.json`) | **"no hay conclusion que auditar"**, hay que correr 5.1 primero |
+| 5.3 | las piezas que ensambla | decir cuales faltan y no completarlas |
+
+**No correr el detector solo para que 5.1 tenga con que trabajar.** Que el tablero este vacio
+es informacion sobre el estado de la investigacion, y el que decide si barre es el analista.
+El aviso va con el menu de vuelta, no con un comando ya ejecutado.
 
 ### Sobre que hallazgos trabaja
 
@@ -578,9 +682,9 @@ La evaluacion mira **todo el tablero a la vez**, no un archivo suelto: consume *
 `.json` de hallazgos reales** del directorio -- los del detector y los de los agentes --,
 porque un analista de triage no evalua un informe aislado, mira todo lo que hay.
 
-- **El detector no es un JSON hasta que se lo pide.** Correr `python main.py barrido --salida
-  hallazgos_detector.json` para persistirlo antes de evaluar, si no existe ya. Cada hallazgo
-  sale con `origen: "detector"`.
+- **El detector no es un JSON hasta que se lo pide.** Su salida entra a la evaluacion solo si
+  se corrio la 1.1, que persiste `hallazgos_detector.json` con `origen: "detector"` en cada
+  hallazgo. Si no se corrio, la evaluacion trabaja sin el -- no se lo corre desde aca.
 - **Se excluyen dos archivos de andamiaje**, que no son hallazgos reales del caso:
   `hallazgos_prueba.json` (fixture de tests) y `hallazgos_agente_windows.json` (ejemplo de las
   docs). La regla es "solo hallazgos reales de esta corrida".
@@ -637,14 +741,10 @@ Entregable: por afirmacion, `SOSTENIDA` / `SOBREPASA` / `SIN COBERTURA`, con el 
 juicio global de que tan solida es la evaluacion. El auditor tiene los mismos vetos: no lee el
 solucionario, audita con evidencia.
 
-### 5.3 — Los dos en cadena
+**Se lanza como agente fresco, sin la memoria del evaluador.** Un auditor que arrastra el
+razonamiento que va a auditar se autoconfirma, y la revision deja de valer.
 
-Correr 5.1 y despues 5.2 sobre su salida, y presentar **las dos cosas juntas**: la
-evaluacion y su auditoria al lado. Es lo que hace honesto al juicio -- una conclusion viene
-siempre con su revision. Lanzar el auditor como agente fresco (sin la memoria del evaluador)
-es lo que evita que se autoconfirme.
-
-### 5.4 — El informe consolidado
+### 5.3 — El informe consolidado
 
 Un agente **compone** un informe de incidente a partir de piezas que **ya existen y ya estan
 ancladas**: barrido (1), situacion y cobertura (4), evaluacion y auditoria (5.1/5.2),
