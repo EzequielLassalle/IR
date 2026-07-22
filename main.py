@@ -113,7 +113,11 @@ def cmd_panorama(args) -> int:
     protegidos = {"hallazgos_prueba.json", "hallazgos_agente_windows.json"}
     trabajo = [p for p in AQUI.glob("hallazgos_*.json") if p.name not in protegidos]
     detector = "persistido" if (AQUI / "hallazgos_detector.json").exists() else "sin persistir"
+    # "activa" y "cubre la ventana" son afirmaciones distintas: una fuente que recolecta
+    # puede arrancar tarde porque el log rotó. Afirmar la segunda contando la primera es
+    # justo lo que esta pantalla existe para no hacer.
     activas = sum(1 for f in cobertura.FUENTES.values() if f.activa)
+    cubren = sum(1 for f in cobertura.FUENTES.values() if f.cubre(desde, hasta))
 
     print(f"PANORAMA  {verdad['caso']}")
     print("=" * 70)
@@ -131,7 +135,8 @@ def cmd_panorama(args) -> int:
         print(f"   {_mil(n):>6}  {v}")
 
     _seccion("DONDE ESTAS PARADO")
-    print(f"   Cobertura       {activas} fuentes activas, ventana completa")
+    tramo = "ventana completa" if cubren == activas else f"{cubren} cubren la ventana"
+    print(f"   Cobertura       {activas} fuentes activas, {tramo}")
     print(f"   Respuesta       {n_acc} acciones aplicadas")
     print(f"   Investigacion   {len(trabajo)} hallazgos de "
           f"trabajo  |  detector {detector}")
@@ -415,9 +420,19 @@ def cmd_accion(args) -> int:
 def _hallazgos_de(ruta, eventos):
     """Convierte un archivo de hallazgos en insumo del recomendador.
 
-    **Solo entran los que el verificador admite.** Un hallazgo cuya cita no sostiene lo que
-    afirma no puede fundar una accion de contencion: seria recomendar sobre prosa. Los
-    rechazados se informan con su motivo en vez de descartarse en silencio.
+    **Un hallazgo escrito por un agente solo entra si el verificador lo admite.** El agente
+    redacta la afirmacion con sus palabras y elige a mano que identificadores poner al lado,
+    asi que la cita puede no decir lo que la afirmacion asegura. Fundar una contencion en eso
+    seria recomendar sobre prosa. Los rechazados se informan con su motivo, nunca en silencio.
+
+    **Los del detector entran sin verificar, y no es un privilegio.** No hay nada que
+    comprobar: la cita no la eligio nadie, es el resultado del filtro que produjo el hallazgo.
+    Verificarla seria comprobar que el mismo codigo que acaba de recorrer los eventos los
+    recorrio bien -- verdadero por construccion. Exigirles ademas el DSL los descartaba a
+    todos y dejaba a la mitad determinista sin poder fundar una sola accion.
+
+    La marca es el campo `origen` que escribe `barrido`. Es una frontera de confianza: un
+    archivo editado a mano que se declare del detector se saltea el chequeo.
     """
     from deteccion import Hallazgo
     from verificador import Afirmacion, verificar
@@ -425,8 +440,17 @@ def _hallazgos_de(ruta, eventos):
     datos = json.loads(Path(ruta).read_text(encoding="utf-8"))
     crudos = datos["hallazgos"] if isinstance(datos, dict) else datos
 
+    def admitir(h):
+        return Hallazgo(
+            regla=h.get("regla", "?"), severidad=h.get("severidad", "MEDIA"),
+            resumen=h.get("resumen", ""), cita=h.get("cita", []),
+            no_prueba=h.get("no_prueba", ""))
+
     admitidos, rechazados = [], []
     for h in crudos:
+        if h.get("origen") == "detector":
+            admitidos.append(admitir(h))
+            continue
         try:
             af = Afirmacion.desde_dict(h.get("afirmacion", {}))
         except (ValueError, TypeError) as err:
@@ -434,10 +458,7 @@ def _hallazgos_de(ruta, eventos):
             continue
         r = verificar(af, h.get("cita", []), eventos)
         if r.admitido:
-            admitidos.append(Hallazgo(
-                regla=h.get("regla", "?"), severidad=h.get("severidad", "MEDIA"),
-                resumen=h.get("resumen", ""), cita=h.get("cita", []),
-                no_prueba=h.get("no_prueba", "")))
+            admitidos.append(admitir(h))
         else:
             rechazados.append((h.get("regla", "?"), f"{r.veredicto}: {r.motivo}"))
     return admitidos, rechazados
@@ -452,8 +473,10 @@ def cmd_recomendacion(args) -> int:
         hallazgos, rechazados = _hallazgos_de(args.hallazgos, eventos)
         _seccion(f"HALLAZGOS ADMITIDOS  ({len(hallazgos)} de "
                  f"{len(hallazgos) + len(rechazados)})")
-        print("  Solo los verificados fundan acciones: recomendar sobre una afirmacion que")
-        print("  su cita no sostiene es recomendar sobre prosa.")
+        print("  Lo escrito por un agente funda acciones solo si su cita lo sostiene:")
+        print("  recomendar sobre una afirmacion que su cita no sostiene es recomendar")
+        print("  sobre prosa. Lo del detector entra sin verificar -- su cita no la eligio")
+        print("  nadie, es el filtro que produjo el hallazgo.")
         print()
         for regla, motivo in rechazados:
             print(f"  [--] {regla}: {motivo}")

@@ -26,7 +26,7 @@ recomendar despues.
 ```
 ╭──────────────────────────────────────────────────────────────────────────╮
 │   \ | /                                                                  │
-│  ── * ──   LAB FIR · BANCO                                               │
+│  ── * ──   FIR · RESPUESTA A INCIDENTES                                  │
 │   / | \    10 dias · 3 fuentes · 6.532 eventos · 0 acciones aplicadas    │
 ├──────────────────────────────────────────────────────────────────────────┤
 │  1)  Barrido                                                             │
@@ -45,8 +45,8 @@ recomendar despues.
 ```
 
 **Copiar el cuadro literal, sin re-dibujarlo.** Todas las lineas miden 76 caracteres. El
-encabezado dice **`LAB FIR · BANCO`** fijo -- no el id del caso (ese vive en `panorama` y
-`estado`). Los unicos campos que cambian son el conteo de eventos y las acciones aplicadas
+encabezado dice **`FIR · RESPUESTA A INCIDENTES`** fijo -- no el id del caso (ese vive en
+`panorama` y `estado`). Los unicos campos que cambian son el conteo de eventos y las acciones aplicadas
 (tercera linea), y hay que reemplazarlos respetando el ancho. El asterisco va en ASCII a
 proposito: los glifos tipo `✳` se renderizan con ancho variable y descuadran el marco.
 
@@ -594,10 +594,11 @@ de `cmd_panorama` (`main.py`):
 | Respuesta | `len(decisiones.cargar(evid))` -- los asientos de la cronologia (7) |
 | Investigacion | un glob de `hallazgos_*.json` del directorio menos los dos protegidos, y si existe `hallazgos_detector.json` |
 
-**Una salvedad que hay que decir al explicarlo:** en la linea de Cobertura el numero de
-fuentes se calcula, pero **`"ventana completa"` es texto fijo**. `cobertura.Fuente` tiene un
-metodo `cubre(desde, hasta)` que contesta exactamente eso y el panorama no lo usa, asi que si
-una fuente dejara de cubrir el tramo el tablero lo seguiria afirmando igual.
+**La linea de Cobertura lleva dos cuentas, no una.** `activas` son las fuentes que
+recolectan; `cubren` son las que ademas contienen el tramo del caso, via
+`cobertura.Fuente.cubre(desde, hasta)`. Son afirmaciones distintas -- una fuente que
+recolecta puede arrancar tarde porque el log roto -- y por eso el tablero solo dice "ventana
+completa" cuando las dos cuentas coinciden; si no, dice cuantas cubren.
 
 | Detalle | Comando |
 |---|---|
@@ -641,10 +642,10 @@ la accion. No es un comando del proyecto: son agentes que se lanzan desde aca, c
 lista blanca y los mismos vetos que 1.2 (nada de `verdad`, ni leer generador/modelo/tests).
 
 **Al correr cualquier opcion de Evaluar, explicar antes en una o dos lineas que hace** -- que
-primero se chequean las citas (determinista), despues un agente concluye y otro audita ese
-juicio, y que el veredicto final lo pone el usuario. Es la unica seccion cuyo mecanismo no es
-obvio por el rotulo, asi que una linea de contexto evita que el usuario lea la salida sin
-saber de donde sale.
+primero se chequean las citas de lo que escribieron los agentes (determinista), despues un
+agente concluye y otro audita ese juicio, y que el veredicto final lo pone el usuario. Es la
+unica seccion cuyo mecanismo no es obvio por el rotulo, asi que una linea de contexto evita
+que el usuario lea la salida sin saber de donde sale.
 
 ```
 ╭──────────────────────────────────────────────────────────────────────────╮
@@ -692,54 +693,194 @@ porque un analista de triage no evalua un informe aislado, mira todo lo que hay.
   **contexto, no como medicion**: no pesa igual una regla de volumen que cito mil eventos de
   escaneo que un hallazgo puntual de un agente.
 
-### Paso 1: el verificador determinista (corre solo, antes que los agentes)
+### Paso 1: verificar lo que escribio un agente, y solo eso
 
-**Antes de que ningun agente juzgue, se corre `python main.py verificar <archivo>` sobre cada
-JSON de hallazgos.** Es el chequeo mecanico de citas: para cada afirmacion, ¿el evento citado
-existe y sostiene lo que dice? Devuelve `VERIFICADO` / `CITA-NO-SOSTIENE` / `CITA-INEXISTENTE`
-por hallazgo. Es barato, deterministico y no opina -- por eso va primero: filtra las citas
-rotas antes de gastar un agente en razonar sobre ellas.
+**Antes de que ningun agente juzgue, se corre `python main.py verificar <archivo>` sobre los
+archivos de agentes.** Es el chequeo mecanico de citas: para cada afirmacion, ¿el evento
+citado existe y sostiene lo que dice? Devuelve `VERIFICADO` / `CITA-NO-SOSTIENE` /
+`CITA-INEXISTENTE`. Es barato, deterministico y no opina.
 
-Antes esto era una opcion suelta (la vieja 1.3); se pliego aca porque su lugar natural es el
-arranque de la evaluacion. **Es distinto del auditor (5.2):** el verificador comprueba que la
-*cita* se sostenga; el auditor juzga que la *inferencia* se siga. El verificador nunca valida
-el salto de citas correctas a una conclusion falsa -- ese hueco lo cubre el auditor. Las dos
-guardas, en orden: mecanica primero, de criterio despues.
+**Sobre los del detector no se corre.** No hay nada que comprobar: el agente redacta la
+afirmacion y elige a mano que identificadores poner al lado, y ahi la cita puede no decir lo
+que la afirmacion asegura; la cita del detector no la eligio nadie, **es el resultado del
+filtro que produjo el hallazgo**. Verificarla seria comprobar que el mismo codigo que acaba
+de recorrer los eventos los recorrio bien -- verdadero por construccion.
+
+No es que el detector tenga un privilegio: es la misma vara -- que una afirmacion se sostenga
+en la evidencia -- aplicada a como se produjo cada una. Un hallazgo de agente verificado vale
+exactamente lo mismo que uno del detector.
+
+Correrlo igual sobre el detector devuelve `FUERA-DE-VOCABULARIO` en todos, porque sus
+hallazgos no traen el bloque `afirmacion` (guardan su contexto en `atributos`). **Eso no es un
+hallazgo malo ni un error del verificador**, y presentarlo como si lo fuera confunde: el
+motor ya no lo hace -- `_hallazgos_de` (`main.py`) admite por `origen == "detector"` sin
+verificar, asi que 6.4 los toma.
+
+**Es distinto del auditor (5.2):** el verificador comprueba que la *cita* se sostenga; el
+auditor juzga que la *inferencia* se siga. El verificador nunca valida el salto de citas
+correctas a una conclusion falsa. Las dos guardas, en orden: mecanica primero, de criterio
+despues.
 
 ### 5.1 — El evaluador
 
 Un agente lee los hallazgos consolidados y **concluye**, pero con transparencia total: su
-valor no es el veredicto, es el razonamiento auditable que lo sostiene. El entregable no es
-prosa suelta -- es una evaluacion falsable:
+valor no es el veredicto, es el razonamiento auditable que lo sostiene. Escribe
+`evaluacion.json`. Misma lista blanca y vetos que 1.2; puede concluir, pero cada hecho que use
+va citado a eventos que existen.
 
-- **Hipotesis** — que habria pasado, en una frase.
-- **A favor** — cada punto con su **cita** a identificadores de evento reales.
-- **En contra** — lo que la debilita, tambien citado. Si no busco contra-evidencia, no evaluo.
-- **Confianza** — alta / media / baja, y por que.
-- **Que la cambiaria** — la condicion de falsedad. Sin esto es un dictamen, no una evaluacion.
-- **Sin mirar** — que fuente, ventana o pregunta quedo afuera (cruzar con cobertura: una
-  ausencia sin cobertura no prueba nada).
+**El JSON lleva seis campos; en pantalla se muestran cuatro.** `que_la_cambiaria` y
+`sin_mirar` se escriben siempre y no se imprimen: sin la condicion de falsedad esto es un
+dictamen y no una evaluacion, y **sin la lista de huecos el auditor de 5.2 no puede emitir
+`SIN COBERTURA`**. Estan en el archivo para quien los necesita; la pantalla es para operar.
 
-Escribe eso a un JSON (p. ej. `evaluacion.json`). Misma lista blanca y vetos que 1.2; puede
-concluir, pero cada hecho que use va citado a eventos que existen.
+| Campo | Va al JSON | Va a pantalla |
+|---|---|---|
+| `riesgo` + los cinco ejes | si | si |
+| `hipotesis` | si | si |
+| `a_favor` (cada punto con su cita) | si | si |
+| `en_contra` (cada punto con su cita) | si | si |
+| `que_la_cambiaria` | si | no |
+| `sin_mirar` | si | no |
+
+**La hipotesis es un parrafo narrativo, no un rotulo.** Tiene que poder leerse sola y contar
+la secuencia completa -- que paso, en que orden, con que identidades y sobre que sistemas.
+Una linea del tipo "posible compromiso de credenciales" no sirve: el que la lee tiene que
+poder actuar sin abrir el resto.
+
+#### El riesgo: cinco ejes, cada uno con su cita
+
+**No es un puntaje con pesos.** Un numero compuesto con pesos elegidos por el autor es una
+opinion con formato de metrica -- el proyecto ya lo descarto para las acciones
+(`acciones.py`). Aca la banda (`BAJO` / `MEDIO` / `ALTO` / `CRITICO`) se sostiene en cinco
+ejes declarados, y **cada eje va con los eventos que lo prueban**:
+
+| Eje | Que contesta |
+|---|---|
+| alcance | cuantos sistemas e identidades distintas toca |
+| profundidad | hasta donde llego: intento, acceso conseguido, control |
+| persistencia | queda algo instalado que no se cae solo |
+| actividad | ¿hay evidencia de que termino, o el silencio es ambiguo? |
+| reversible | que se deshace y que no |
+
+**Los cinco son agnosticos de la amenaza a proposito.** No dicen "rociado" ni "AWS": los
+mismos cinco sirven para ransomware, para un insider, para una configuracion expuesta o para
+un phishing. Un modelo de riesgo atado a una tecnica no se puede reusar, y este laboratorio
+va a ver muchas.
+
+**Un eje que no se puede probar se declara asi**, con un guion en la cita. No cuenta como
+cero: no saber si el acceso termino no es lo mismo que saber que termino. Y **el techo lo
+pone la cobertura**: donde no hay fuente que registre esa clase de hecho, el eje queda
+indeterminado y la banda no puede apoyarse en el -- es la misma regla que `observable` aplica
+con `AUSENCIA-NO-CONCLUYENTE`.
+
+```
+══════════════════════════════════════════════════════════════════════════
+ EVALUACION · <CASO>                                   <N> hallazgos leidos
+══════════════════════════════════════════════════════════════════════════
+
+ RIESGO   ALTO
+
+   alcance         3 sistemas, 2 dominios de identidad      L1025 W1497 C2592
+   profundidad     acceso conseguido, no solo intentado     W1497 L1025
+   persistencia    queda algo instalado que no se cae solo  W1507 C2599
+   actividad       sin evidencia de que haya terminado      -
+   reversible      no: la cuenta y la clave siguen vivas    W1507 C2599
+
+
+ HIPOTESIS
+
+   <parrafo narrativo: que paso, en que orden, con que identidades y sobre
+   que sistemas -- varias lineas, no un rotulo>
+
+
+ A FAVOR
+
+   1  <punto>                                               W1483 ... W1497
+   2  <punto>                                               L1016 L1025
+
+
+ EN CONTRA
+
+   1  <punto>                                               W1497 C2592
+   2  <punto>                                               L1028 C2534
+```
+
+**`en_contra` no puede quedar vacio.** Si no busco contra-evidencia, no evaluo. Va citado
+igual que `a_favor`.
 
 ### 5.2 — El auditor
 
-Un **segundo agente**, fresco, revisa la evaluacion del 5.1: no re-investiga el caso, audita
-el razonamiento. Su trabajo es exactamente el hueco que el verificador automatico no cubre
--- **la inferencia que encadena citas correctas en una conclusion que no se sigue**. Para
-cada afirmacion de la evaluacion:
+Un **segundo agente**, fresco, revisa la evaluacion del 5.1. **Va a la evidencia: abre con
+`evento`, `timeline` y `entidad` los eventos que cada punto cita, y decide si dicen lo que el
+punto asegura.** No re-investiga el caso ni busca hechos nuevos -- audita lo afirmado contra
+los registros que se invocaron para afirmarlo.
 
-- ¿La cita **existe** y **sostiene** lo que la afirmacion dice? (puede chequearlo con la lista
-  blanca -- `evento`, `entidad`, `timeline`).
-- ¿La conclusion **se sigue** de sus premisas, o hay un salto? (`CITA-NO-SOSTIENE` de nivel
-  inferencia).
-- ¿La confianza declarada esta calibrada con lo que la evidencia realmente da?
-- ¿Que se callo -- contra-evidencia o cobertura faltante que la evaluacion no menciono?
+Son **dos trabajos, en este orden, y pueden discrepar**:
 
-Entregable: por afirmacion, `SOSTENIDA` / `SOBREPASA` / `SIN COBERTURA`, con el motivo; y un
-juicio global de que tan solida es la evaluacion. El auditor tiene los mismos vetos: no lee el
-solucionario, audita con evidencia.
+1. **Punto por punto.** Los puntos de `a_favor` son prosa que el evaluador redacto con sus
+   palabras: **nunca pasaron por el verificador**, que solo chequea afirmaciones en el DSL de
+   cinco campos. Este es el unico control que reciben.
+2. **El salto a la hipotesis.** Aunque los ocho puntos resulten ciertos, la hipotesis suele
+   afirmar mas que la suma de ellos -- un solo actor, una secuencia encadenada, un proposito.
+   Eso es inferencia y ningun evento la contiene. Un auditor que solo chequee citas la deja
+   pasar entera.
+
+Por eso todos los puntos pueden dar `SOSTIENE` y el veredicto global no ser
+`AMENAZA CONFIRMADA`.
+
+**Los tres valores del veredicto**, y el tercero no es un descuido:
+
+| Veredicto | Cuando |
+|---|---|
+| `AMENAZA CONFIRMADA` | la evidencia citada sostiene la hipotesis |
+| `AMENAZA NO CONFIRMADA` | la evidencia citada NO la sostiene, **y** se puede demostrar que la fuente que haria falta estaba mirando |
+| `NO CONCLUYENTE` | falta cobertura: no alcanza para ninguna de las dos |
+
+Sin el tercero, un caso al que le falta la fuente que ataria los tramos obliga a elegir mal, y
+`NO CONFIRMADA` se lee como "no paso nada" -- el peor mensaje posible. Es el mismo patron de
+tres valores que ya usan `observable` (`SI`/`NO`/`INDETERMINADO`), las ausencias
+(`AUSENCIA-DEMOSTRADA`/`AUSENCIA-NO-CONCLUYENTE`) y el adjudicador (`NO-ADJUDICABLE`).
+
+Por punto: `SOSTIENE` / `SOBREPASA` / `SIN COBERTURA`, con el motivo. **`SOBREPASA` es el
+hallazgo caro** -- cita correcta, conclusion estirada: los eventos prueban que algo se
+ejecuto, el punto afirma con que proposito. `SIN COBERTURA` sale de cruzar contra el
+`sin_mirar` de la evaluacion.
+
+**Ademas ratifica o corrige la banda de riesgo, con motivo.** Si un punto se cae, puede caerse
+un eje entero.
+
+```
+══════════════════════════════════════════════════════════════════════════
+ AUDITORIA · <CASO>
+══════════════════════════════════════════════════════════════════════════
+
+ VEREDICTO   AMENAZA CONFIRMADA
+
+ RIESGO      ALTO   ratificado
+
+
+ HIPOTESIS AUDITADA
+
+   <el mismo parrafo narrativo de la evaluacion, textual>
+
+
+ PUNTO POR PUNTO
+
+   1  SOSTIENE       los 12 eventos dicen lo que el punto afirma
+   2  SOSTIENE       -
+   3  SOBREPASA      los eventos prueban ejecucion, no proposito
+   4  SIN COBERTURA  la fuente no registra esa clase de hecho
+
+
+ EL SALTO A LA HIPOTESIS
+
+   <se sigue de los puntos que sostienen, o no, y por que>
+```
+
+**La hipotesis se repone textual arriba del punto por punto.** Sin ella se leen veredictos
+sueltos sin saber sobre que. Se copia de la evaluacion, no se reescribe.
+
+El auditor tiene los mismos vetos: no lee el solucionario, audita con evidencia.
 
 **Se lanza como agente fresco, sin la memoria del evaluador.** Un auditor que arrastra el
 razonamiento que va a auditar se autoconfirma, y la revision deja de valer.
