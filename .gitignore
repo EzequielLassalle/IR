@@ -7,5 +7,11 @@ evidencia/.consultas.json
 evidencia_b/.decisiones.json
 evidencia_b/.consultas.json
 
+# Hallazgos: son la salida de cada corrida, no el proyecto. Se exceptuan los dos que si
+# forman parte del repo -- el fixture de tests.py y el ejemplo que citan las docs.
+hallazgos_*.json
+!hallazgos_prueba.json
+!hallazgos_agente_windows.json
+
 # Material de estudio, no parte del proyecto.
 .claude/skills/fir-conceptos/
